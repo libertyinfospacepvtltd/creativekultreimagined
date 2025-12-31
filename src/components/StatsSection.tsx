@@ -23,7 +23,7 @@ const StatsSection = () => {
   ];
 
   return (
-    <section className="bg-card border-y border-border/30">
+    <section className="relative z-20 bg-background border-y border-border/30">
       <div className="container-luxury">
         <div className="grid grid-cols-2 md:grid-cols-4 divide-x divide-border/30">
           {stats.map((stat, index) => (
