@@ -132,22 +132,29 @@ const HeroSection = () => {
           </motion.div>
         </div>
 
-        {/* Reveal Text - "Cultivating Digital Legacies" */}
+        {/* Reveal Text - "Cultivating Digital Legacies" - with solid background */}
         <motion.div 
-          className="absolute inset-0 flex items-center justify-center pointer-events-none"
+          className="absolute inset-0 flex items-center justify-center pointer-events-none z-30"
           style={{
             opacity: textOpacity,
-            y: textY,
           }}
         >
-          <div className="text-center px-4">
+          {/* Solid background layer that covers hero content */}
+          <motion.div 
+            className="absolute inset-0 bg-background"
+            style={{ opacity: textOpacity }}
+          />
+          <motion.div 
+            className="relative text-center px-4"
+            style={{ y: textY }}
+          >
             <h1 className="font-serif text-4xl md:text-6xl lg:text-8xl text-foreground tracking-tight">
               Cultivating Digital
             </h1>
             <h1 className="font-serif text-4xl md:text-6xl lg:text-8xl text-primary italic mt-2">
               Legacies.
             </h1>
-          </div>
+          </motion.div>
         </motion.div>
 
         {/* Bottom CTAs */}

@@ -56,7 +56,7 @@ const Navbar = () => {
 
         {/* Mobile Navigation */}
         {isOpen && (
-          <div className="md:hidden fixed inset-0 top-20 bg-background z-40 animate-fade-in">
+          <div className="md:hidden fixed inset-0 top-16 bg-background z-40 animate-fade-in">
             <ul className="flex flex-col items-center justify-center h-full gap-8">
               {navLinks.map((link) => (
                 <li key={link.href}>
