@@ -1,7 +1,7 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, Suspense } from "react";
 import { Link } from "react-router-dom";
 import { motion, useScroll, useTransform } from "framer-motion";
-import logo from "@/assets/creative-kult-logo.png";
+import Spline from "@splinetool/react-spline";
 import heroImage from "@/assets/victoria-memorial-hero.jpg";
 
 const HeroSection = () => {
@@ -105,7 +105,7 @@ const HeroSection = () => {
           ))}
         </motion.div>
 
-        {/* Center Logo with Scroll Animation */}
+        {/* Center Spline 3D Logo with Scroll Animation */}
         <div className="absolute inset-0 flex items-center justify-center">
           <motion.div 
             className="relative text-center"
@@ -116,12 +116,16 @@ const HeroSection = () => {
               x: mousePosition.x * 10,
             }}
           >
-            <img
-              src={logo}
-              alt="Creative Kult"
-              className="w-64 md:w-80 lg:w-[420px] h-auto mx-auto"
-            />
-            <div className="mt-8 space-y-3">
+            <div className="w-[300px] h-[300px] md:w-[450px] md:h-[450px] lg:w-[550px] lg:h-[550px] mx-auto">
+              <Suspense fallback={
+                <div className="w-full h-full flex items-center justify-center">
+                  <div className="w-16 h-16 border-2 border-primary border-t-transparent rounded-full animate-spin" />
+                </div>
+              }>
+                <Spline scene="https://prod.spline.design/HREubTvflvWN9xJV/scene.splinecode" />
+              </Suspense>
+            </div>
+            <div className="mt-4 space-y-3">
               <p className="text-foreground/90 font-serif text-xl md:text-2xl lg:text-3xl italic tracking-wide">
                 Where Brands Break the Mold
               </p>
