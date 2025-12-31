@@ -78,10 +78,10 @@ const HeroSection = () => {
         ))}
       </div>
 
-      {/* Center Logo */}
+      {/* Center Logo & Tagline */}
       <div className="absolute inset-0 flex items-center justify-center">
         <div 
-          className="relative transition-transform duration-300 ease-out"
+          className="relative transition-transform duration-300 ease-out text-center"
           style={{
             transform: `translate(${mousePosition.x * 10}px, ${mousePosition.y * 10}px)`,
           }}
@@ -89,8 +89,16 @@ const HeroSection = () => {
           <img
             src={logo}
             alt="Creative Kult"
-            className="w-48 md:w-64 lg:w-80 h-auto animate-float"
+            className="w-64 md:w-80 lg:w-[420px] h-auto animate-float mx-auto"
           />
+          <div className="mt-8 space-y-3">
+            <p className="text-foreground/90 font-serif text-xl md:text-2xl lg:text-3xl italic tracking-wide">
+              Where Brands Break the Mold
+            </p>
+            <p className="text-muted-foreground font-sans text-sm md:text-base tracking-widest uppercase">
+              Strategy • Rebellion • Results
+            </p>
+          </div>
         </div>
       </div>
 
