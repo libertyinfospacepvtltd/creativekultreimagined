@@ -18,11 +18,11 @@ const HeroSection = () => {
   const backgroundScale = useTransform(scrollYProgress, [0, 0.5], [1.1, 1.8]);
   const logoScale = useTransform(scrollYProgress, [0, 0.3], [1, 1.4]);
   const logoY = useTransform(scrollYProgress, [0, 0.5], ["0%", "-120%"]);
-  const logoOpacity = useTransform(scrollYProgress, [0.3, 0.5], [1, 0]);
+  const logoOpacity = useTransform(scrollYProgress, [0, 0.05, 0.3, 0.5], [1, 0.8, 0.5, 0]);
   const textOpacity = useTransform(scrollYProgress, [0.15, 0.35], [0, 1]);
   const textY = useTransform(scrollYProgress, [0.15, 0.35], ["30px", "0px"]);
-  const ctaOpacity = useTransform(scrollYProgress, [0, 0.15], [1, 0]);
-  const radarOpacity = useTransform(scrollYProgress, [0, 0.3], [1, 0]);
+  const ctaOpacity = useTransform(scrollYProgress, [0, 0.05], [1, 0]);
+  const radarOpacity = useTransform(scrollYProgress, [0, 0.1], [1, 0]);
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -45,10 +45,10 @@ const HeroSection = () => {
   return (
     <section 
       ref={containerRef}
-      className="relative h-[200vh] w-full bg-background"
+      className="relative h-[200vh] w-full bg-background z-10"
     >
       {/* Sticky Container */}
-      <div className="sticky top-0 h-screen w-full overflow-hidden">
+      <div className="sticky top-0 h-screen w-full overflow-hidden z-10">
         {/* Background Image with Parallax + Scroll Zoom */}
         <motion.div 
           className="absolute inset-0 transition-transform duration-300 ease-out origin-center"

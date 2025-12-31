@@ -16,8 +16,8 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border/30">
-      <nav className="container-luxury flex items-center justify-between h-20">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-background/50 backdrop-blur-md border-b border-border/20">
+      <nav className="container-luxury flex items-center justify-between h-16">
         {/* Logo */}
         <Link to="/" className="relative z-10">
           <img 
