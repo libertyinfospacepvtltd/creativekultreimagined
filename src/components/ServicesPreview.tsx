@@ -162,40 +162,40 @@ const ServicesPreview = () => {
     offset: ["start start", "end end"]
   });
 
-  // Transform for scatter animation - completes by 60% of shorter 180vh track
-  const scatterProgress = useTransform(scrollYProgress, [0, 0.55], [0, 1]);
-  const deckOpacity = useTransform(scrollYProgress, [0, 0.45], [1, 0]);
+  // Transform for scatter animation - completes by 50% of 140vh track
+  const scatterProgress = useTransform(scrollYProgress, [0, 0.5], [0, 1]);
+  const deckOpacity = useTransform(scrollYProgress, [0, 0.4], [1, 0]);
   
-  // Grid fades in from 15% to 50% scroll
-  const gridOpacity = useTransform(scrollYProgress, [0.15, 0.5], [0, 1]);
-  const gridScale = useTransform(scrollYProgress, [0.15, 0.5], [0.9, 1]);
+  // Grid fades in from 10% to 45% scroll
+  const gridOpacity = useTransform(scrollYProgress, [0.1, 0.45], [0, 1]);
+  const gridScale = useTransform(scrollYProgress, [0.1, 0.45], [0.9, 1]);
 
   return (
-    <section ref={containerRef} className="relative h-[180vh] bg-background">
-      {/* Static Header - Always visible above the animation */}
-      <div className="sticky top-0 z-50 bg-background pt-20 md:pt-24 pb-6">
-        <div className="container-luxury text-center">
-          <span className="text-primary font-sans text-sm uppercase tracking-widest mb-4 block">
-            Our Services
-          </span>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif text-foreground mb-4">
-            From Strategy to Execution
-          </h2>
-          <p className="text-muted-foreground font-sans max-w-2xl mx-auto text-sm">
-            Scroll to discover our comprehensive creative solutions
-          </p>
-        </div>
-      </div>
-
-      {/* Scroll Animation Container - Pinned below header with proper gap */}
-      <div className="sticky top-32 md:top-36 h-[60vh] w-full overflow-hidden flex items-center justify-center">
+    <section ref={containerRef} className="relative h-[140vh] bg-background">
+      {/* Main Sticky Wrapper - Contains everything and stays pinned */}
+      <div className="sticky top-0 h-screen w-full overflow-hidden flex flex-col">
         
-        {/* Animation Layers Container */}
-        <div className="relative w-full h-full flex items-center justify-center">
+        {/* Static Header - Always visible at top, NO animation */}
+        <div className="relative z-50 bg-background pt-20 md:pt-24 pb-6 flex-shrink-0">
+          <div className="container-luxury text-center">
+            <span className="text-primary font-sans text-sm uppercase tracking-widest mb-4 block">
+              Our Services
+            </span>
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif text-foreground mb-4">
+              From Strategy to Execution
+            </h2>
+            <p className="text-muted-foreground font-sans max-w-2xl mx-auto text-sm">
+              Scroll to discover our comprehensive creative solutions
+            </p>
+          </div>
+        </div>
+
+        {/* Animation Area - Below header */}
+        <div className="relative flex-1 w-full flex items-center justify-center">
           
-          {/* Layer A: Services Grid (revealed) - z-10 for lower stacking */}
+          {/* Layer A: Services Grid (revealed) - z-30 */}
           <motion.div 
-            className="absolute inset-0 flex items-center justify-center z-10"
+            className="absolute inset-0 flex items-center justify-center z-30 pt-4"
             style={{
               opacity: gridOpacity,
               scale: gridScale,
@@ -225,12 +225,12 @@ const ServicesPreview = () => {
             </div>
           </motion.div>
 
-          {/* Layer B: Scatter Deck (covers grid initially) - z-50 for top stacking */}
+          {/* Layer B: Scatter Deck (covers grid initially) - z-40 */}
           <motion.div 
             className="absolute inset-0 flex items-center justify-center pointer-events-none z-40"
             style={{ opacity: deckOpacity }}
           >
-            <div className="relative w-64 h-80 md:w-80 md:h-96">
+            <div className="relative w-64 h-72 md:w-80 md:h-80">
               {scatterCards.map((card, index) => (
                 <motion.div
                   key={index}
