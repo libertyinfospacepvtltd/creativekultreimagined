@@ -158,7 +158,7 @@ const Contact = () => {
                         key={service}
                         type="button"
                         onClick={() => handleServiceToggle(service)}
-                        className={`px-4 py-2 text-xs font-sans transition-all duration-300 ${
+                        className={`px-4 py-2 rounded-full text-xs font-sans transition-all duration-300 ${
                           formData.services.includes(service)
                             ? "bg-primary text-primary-foreground"
                             : "bg-background border border-border/50 text-muted-foreground hover:border-primary hover:text-primary"
@@ -204,7 +204,7 @@ const Contact = () => {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full px-8 py-4 bg-primary text-primary-foreground font-sans text-sm uppercase tracking-widest hover:bg-primary/90 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="w-full px-8 py-4 rounded-full bg-primary text-primary-foreground font-sans text-sm uppercase tracking-widest hover:bg-primary/90 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {isSubmitting ? "Sending..." : "Send Message"}
                 </button>

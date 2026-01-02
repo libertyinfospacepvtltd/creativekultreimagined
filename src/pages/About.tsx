@@ -191,7 +191,7 @@ const About = () => {
           </p>
           <Link
             to="/contact"
-            className="inline-block px-10 py-4 bg-primary text-primary-foreground font-sans text-sm uppercase tracking-widest hover:bg-primary/90 transition-all duration-300"
+            className="inline-block px-10 py-4 rounded-full bg-primary text-primary-foreground font-sans text-sm uppercase tracking-widest hover:bg-primary/90 transition-all duration-300"
           >
             Get in Touch
           </Link>
