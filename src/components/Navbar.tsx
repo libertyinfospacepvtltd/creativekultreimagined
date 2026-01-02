@@ -22,13 +22,12 @@ const Navbar = ({ showNavbar = true }: NavbarProps) => {
   const isHomePage = location.pathname === "/";
 
   // Scroll progress for navbar reveal (only on home page)
-  // Use scrollY in pixels to sync with DockingLogo (docks at 500px)
-  const { scrollY } = useScroll();
+  const { scrollYProgress } = useScroll();
   
-  // Navbar background and links fade in only after logo has docked (at 500px scroll)
-  // Slight delay after dock (520-600px) for smooth transition
-  const navOpacity = useTransform(scrollY, [520, 600], [0, 1]);
-  const navBgOpacity = useTransform(scrollY, [520, 600], [0, 1]);
+  // Navbar background and links fade in only after logo has docked (at scroll 0.15)
+  // Slight delay after dock (0.16 - 0.22) for smooth transition
+  const navOpacity = useTransform(scrollYProgress, [0.16, 0.22], [0, 1]);
+  const navBgOpacity = useTransform(scrollYProgress, [0.16, 0.22], [0, 1]);
 
   // For non-home pages, always show full navbar
   if (!isHomePage) {

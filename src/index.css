@@ -78,14 +78,12 @@
 
   html {
     scroll-behavior: smooth;
-    background-color: #121212; /* Prevent white flash */
   }
 
   body {
     @apply bg-background text-foreground antialiased;
     font-family: var(--font-sans);
     cursor: none;
-    background-color: #121212; /* Prevent white flash */
   }
 
   a, button, input, textarea, select, [role="button"] {
