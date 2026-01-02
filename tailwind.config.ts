@@ -109,7 +109,7 @@ export default {
         marquee: "marquee 30s linear infinite",
         float: "float 6s ease-in-out infinite",
         pulse: "pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite",
-        "spin-slow-3d": "spin-slow-3d 18s linear infinite",
+        "spin-slow-3d": "spin-slow-3d 50s linear infinite",
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
