@@ -131,7 +131,7 @@ const Contact = () => {
                       value={formData.mobile}
                       onChange={(e) => setFormData({ ...formData, mobile: e.target.value })}
                       className="w-full bg-background border border-border/50 px-4 py-3 text-foreground font-sans text-sm focus:outline-none focus:border-primary transition-colors"
-                      placeholder="+91 98765 43210"
+                      placeholder="Your Number"
                     />
                   </div>
                   <div>
@@ -314,7 +314,7 @@ const Contact = () => {
                   src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3685.8247772568364!2d88.33875!3d22.517897!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a0277c8a4a45c2f%3A0xe9e6e9e9e9e9e9e9!2sSagar%20Trade%20Cube!5e0!3m2!1sen!2sin!4v1234567890"
                   width="100%"
                   height="100%"
-                  style={{ border: 0, filter: "grayscale(100%) invert(92%) contrast(83%)" }}
+                  style={{ border: 0 }}
                   allowFullScreen
                   loading="lazy"
                   referrerPolicy="no-referrer-when-downgrade"

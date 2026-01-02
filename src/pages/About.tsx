@@ -91,7 +91,7 @@ const About = () => {
               <img
                 src="https://canvas-kolkata-vibe.lovable.app/assets/creative-kult-story-logo-BWnpSHrr.png"
                 alt="Creative Kult Logo"
-                className="w-48 md:w-64 h-auto opacity-80"
+                className="w-72 md:w-96 lg:w-[480px] h-auto opacity-90"
               />
             </div>
           </div>
