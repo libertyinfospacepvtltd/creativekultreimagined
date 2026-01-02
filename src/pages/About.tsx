@@ -1,5 +1,7 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Heart, Users, Award, MapPin } from "lucide-react";
+import { motion } from "framer-motion";
 import Layout from "@/components/Layout";
 
 const values = [
@@ -135,13 +137,16 @@ const About = () => {
       </section>
 
       {/* Team Section */}
-      <section className="section-padding bg-card border-t border-border/30">
-        <div className="container-luxury">
+      <section className="section-padding bg-[hsl(220,15%,8%)] border-t border-border/30 relative overflow-hidden">
+        {/* Ambient glow */}
+        <div className="absolute inset-0 bg-gradient-to-b from-primary/5 via-transparent to-transparent pointer-events-none" />
+        
+        <div className="container-luxury relative z-10">
           <div className="text-center mb-16">
-            <span className="text-primary font-sans text-sm uppercase tracking-widest mb-4 block">
+            <span className="text-primary font-sans text-sm uppercase tracking-[0.3em] mb-4 block">
               The Team
             </span>
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif text-foreground mb-4">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif text-foreground mb-4 tracking-wide">
               Creative Minds United
             </h2>
             <p className="text-muted-foreground font-sans max-w-xl mx-auto">
@@ -149,31 +154,56 @@ const About = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
             {team.map((member, index) => (
-              <div 
+              <motion.div
                 key={index}
-                className="bg-background border border-border/30 overflow-hidden group"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: index * 0.15 }}
+                viewport={{ once: true }}
+                className="group relative"
               >
-                <div className="h-56 overflow-hidden">
-                  <img
-                    src={member.image}
-                    alt={member.name}
-                    className="w-full h-full object-cover object-top grayscale group-hover:grayscale-0 transition-all duration-700"
-                  />
+                <div className="relative h-80 lg:h-96 overflow-hidden rounded-sm border border-foreground/10 bg-[hsl(220,15%,6%)] backdrop-blur-sm transition-all duration-500 ease-out group-hover:scale-[1.02] group-hover:border-primary/50 group-hover:shadow-[0_0_40px_rgba(212,175,55,0.15)]">
+                  {/* Portrait image - hidden by default, reveals on hover */}
+                  <div className="absolute inset-0 overflow-hidden">
+                    <img
+                      src={member.image}
+                      alt={member.name}
+                      className="w-full h-full object-cover object-top opacity-0 blur-sm scale-105 transition-all duration-700 ease-out group-hover:opacity-40 group-hover:blur-0 group-hover:scale-100"
+                    />
+                    {/* Gradient overlay for text readability */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-[hsl(220,15%,6%)] via-[hsl(220,15%,6%)]/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  </div>
+
+                  {/* Glassmorphism inner border */}
+                  <div className="absolute inset-[1px] rounded-sm border border-foreground/5 pointer-events-none" />
+
+                  {/* Text content */}
+                  <div className="absolute inset-0 flex flex-col justify-center items-center p-8 text-center transition-all duration-500 ease-out group-hover:justify-end group-hover:pb-12">
+                    {/* Specialty label */}
+                    <span className="text-primary/80 font-sans text-[10px] uppercase tracking-[0.25em] mb-3 transition-all duration-500 group-hover:text-primary group-hover:drop-shadow-[0_0_10px_rgba(212,175,55,0.5)]">
+                      {member.specialty}
+                    </span>
+                    
+                    {/* Name */}
+                    <h3 className="text-xl lg:text-2xl font-serif text-foreground mb-2 tracking-wide transition-all duration-500">
+                      {member.name}
+                    </h3>
+                    
+                    {/* Role */}
+                    <p className="text-muted-foreground font-sans text-sm tracking-wide">
+                      {member.role}
+                    </p>
+                  </div>
+
+                  {/* Subtle corner accents */}
+                  <div className="absolute top-3 left-3 w-4 h-4 border-l border-t border-foreground/10 transition-colors duration-500 group-hover:border-primary/40" />
+                  <div className="absolute top-3 right-3 w-4 h-4 border-r border-t border-foreground/10 transition-colors duration-500 group-hover:border-primary/40" />
+                  <div className="absolute bottom-3 left-3 w-4 h-4 border-l border-b border-foreground/10 transition-colors duration-500 group-hover:border-primary/40" />
+                  <div className="absolute bottom-3 right-3 w-4 h-4 border-r border-b border-foreground/10 transition-colors duration-500 group-hover:border-primary/40" />
                 </div>
-                <div className="p-4">
-                  <span className="text-primary font-sans text-[10px] uppercase tracking-widest block mb-1">
-                    {member.specialty}
-                  </span>
-                  <h3 className="text-base font-serif text-foreground mb-0.5">
-                    {member.name}
-                  </h3>
-                  <p className="text-muted-foreground font-sans text-xs">
-                    {member.role}
-                  </p>
-                </div>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
