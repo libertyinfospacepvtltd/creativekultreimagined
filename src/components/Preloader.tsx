@@ -31,9 +31,10 @@ const Preloader = ({ onComplete }: PreloaderProps) => {
           exit={{ opacity: 0 }}
           transition={{ duration: 0.5, ease: "easeInOut" }}
         >
-          {/* Logo with mask reveal animation */}
+          {/* Logo with mask reveal animation - shares layoutId with DockingLogo */}
           <div className="relative flex items-center justify-center">
             <motion.div
+              layoutId="creative-kult-logo"
               className="relative overflow-hidden"
               initial={{ clipPath: "inset(0 100% 0 0)" }}
               animate={{ 
@@ -42,9 +43,15 @@ const Preloader = ({ onComplete }: PreloaderProps) => {
                   : "inset(0 0% 0 0)"
               }}
               transition={{
-                duration: 2,
-                ease: [0.25, 0.1, 0.25, 1],
-                times: [0, 0.15, 1], // Slow start on "K", then smooth reveal
+                clipPath: {
+                  duration: 2,
+                  ease: [0.25, 0.1, 0.25, 1],
+                  times: [0, 0.15, 1],
+                },
+                layout: {
+                  duration: 0.5,
+                  ease: [0.4, 0, 0.2, 1],
+                }
               }}
             >
               <img

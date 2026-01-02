@@ -94,10 +94,17 @@ const DockingLogo = ({ onDockComplete }: DockingLogoProps) => {
       }}
     >
       <Link to="/" className="pointer-events-auto block">
-        <img
+        <motion.img
+          layoutId="creative-kult-logo"
           src={logo}
           alt="Creative Kult"
           className="w-64 md:w-80 lg:w-[420px] h-auto"
+          transition={{
+            layout: {
+              duration: 0.5,
+              ease: [0.4, 0, 0.2, 1],
+            }
+          }}
         />
       </Link>
     </motion.div>
