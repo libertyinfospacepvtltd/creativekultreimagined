@@ -49,18 +49,21 @@ const DivisionsSection = () => {
               key={index}
               className="group bg-background border border-border/30 p-8 text-center hover:border-primary/30 transition-all duration-500"
             >
-              <a 
-                href={division.website} 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="block"
-              >
-                <img
-                  src={division.logo}
-                  alt={division.name}
-                  className="w-24 h-24 object-contain mx-auto mb-6 grayscale-hover"
-                />
-              </a>
+              {/* White logo container */}
+              <div className="bg-white rounded-xl p-6 mb-6">
+                <a 
+                  href={division.website} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="block"
+                >
+                  <img
+                    src={division.logo}
+                    alt={division.name}
+                    className="w-24 h-24 object-contain mx-auto"
+                  />
+                </a>
+              </div>
               <h3 className="text-xl font-serif text-foreground mb-2">
                 {division.name}
               </h3>
