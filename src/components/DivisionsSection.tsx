@@ -50,7 +50,9 @@ const DivisionsSection = () => {
               className="group bg-background border border-border/30 p-8 text-center hover:border-primary/30 transition-all duration-500"
             >
               {/* Circular white logo container */}
-              <div className="bg-white rounded-full w-32 h-32 mx-auto mb-6 flex items-center justify-center p-6">
+              <div className={`bg-white rounded-full w-32 h-32 mx-auto mb-6 flex items-center justify-center overflow-hidden ${
+                division.name === "12thPass.ai" ? "p-0" : "p-6"
+              }`}>
                 <a 
                   href={division.website} 
                   target="_blank" 
@@ -60,7 +62,9 @@ const DivisionsSection = () => {
                   <img
                     src={division.logo}
                     alt={division.name}
-                    className="w-full h-full object-contain"
+                    className={`object-contain ${
+                      division.name === "12thPass.ai" ? "w-full h-full" : "w-full h-full"
+                    }`}
                   />
                 </a>
               </div>
