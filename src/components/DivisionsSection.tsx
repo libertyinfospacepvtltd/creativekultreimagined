@@ -49,18 +49,18 @@ const DivisionsSection = () => {
               key={index}
               className="group bg-background border border-border/30 p-8 text-center hover:border-primary/30 transition-all duration-500"
             >
-              {/* White logo container */}
-              <div className="bg-white rounded-xl p-6 mb-6">
+              {/* Circular white logo container */}
+              <div className="bg-white rounded-full w-32 h-32 mx-auto mb-6 flex items-center justify-center p-6">
                 <a 
                   href={division.website} 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="block"
+                  className="block w-full h-full flex items-center justify-center"
                 >
                   <img
                     src={division.logo}
                     alt={division.name}
-                    className="w-24 h-24 object-contain mx-auto"
+                    className="w-full h-full object-contain"
                   />
                 </a>
               </div>
