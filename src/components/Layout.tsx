@@ -46,7 +46,7 @@ const Layout = ({ children }: LayoutProps) => {
       )}
       
       <Navbar showNavbar={preloaderComplete} />
-      <main>{children}</main>
+      <main className="pt-14 sm:pt-16 md:pt-0">{children}</main>
       <Footer />
       <ScrollToTop />
       <ScrollToTopOnRouteChange />

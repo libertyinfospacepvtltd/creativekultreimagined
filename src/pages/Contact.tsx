@@ -309,11 +309,10 @@ const Contact = () => {
               </div>
 
               {/* Google Map Embed with overlay for cursor */}
-              <div className="mt-12 aspect-video bg-card border border-border/30 overflow-hidden relative">
+              <div className="mt-12 w-full min-h-[300px] sm:min-h-[350px] lg:min-h-[400px] bg-card border border-border/30 overflow-hidden relative">
                 <iframe
                   src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3685.8247772568364!2d88.33875!3d22.517897!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a0277c8a4a45c2f%3A0xe9e6e9e9e9e9e9e9!2sSagar%20Trade%20Cube!5e0!3m2!1sen!2sin!4v1234567890"
-                  width="100%"
-                  height="100%"
+                  className="absolute inset-0 w-full h-full"
                   style={{ border: 0 }}
                   allowFullScreen
                   loading="lazy"
