@@ -87,12 +87,15 @@ const About = () => {
                 </p>
               </div>
             </div>
-            <div className="flex justify-center lg:justify-end">
-              <img
-                src="https://canvas-kolkata-vibe.lovable.app/assets/creative-kult-story-logo-BWnpSHrr.png"
-                alt="Creative Kult Logo"
-                className="w-72 md:w-96 lg:w-[480px] h-auto opacity-90"
-              />
+            <div className="flex justify-center lg:justify-end" style={{ perspective: "1000px" }}>
+              <div className="p-8 group">
+                <img
+                  src="https://canvas-kolkata-vibe.lovable.app/assets/creative-kult-story-logo-BWnpSHrr.png"
+                  alt="Creative Kult Logo"
+                  className="w-72 md:w-96 lg:w-[480px] h-auto opacity-90 animate-spin-slow-3d group-hover:[animation-play-state:paused] group-hover:scale-105 transition-transform duration-300"
+                  style={{ transformStyle: "preserve-3d" }}
+                />
+              </div>
             </div>
           </div>
         </div>
@@ -147,31 +150,28 @@ const About = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {team.map((member, index) => (
               <div 
                 key={index}
                 className="bg-background border border-border/30 overflow-hidden group"
               >
-                <div className="aspect-[4/5] overflow-hidden">
+                <div className="h-56 overflow-hidden">
                   <img
                     src={member.image}
                     alt={member.name}
-                    className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
+                    className="w-full h-full object-cover object-top grayscale group-hover:grayscale-0 transition-all duration-700"
                   />
                 </div>
-                <div className="p-6">
-                  <span className="text-primary font-sans text-xs uppercase tracking-widest block mb-2">
+                <div className="p-4">
+                  <span className="text-primary font-sans text-[10px] uppercase tracking-widest block mb-1">
                     {member.specialty}
                   </span>
-                  <h3 className="text-xl font-serif text-foreground mb-1">
+                  <h3 className="text-base font-serif text-foreground mb-0.5">
                     {member.name}
                   </h3>
-                  <p className="text-muted-foreground font-sans text-sm mb-3">
+                  <p className="text-muted-foreground font-sans text-xs">
                     {member.role}
-                  </p>
-                  <p className="text-muted-foreground/70 font-sans text-xs leading-relaxed">
-                    {member.description}
                   </p>
                 </div>
               </div>
