@@ -1,8 +1,10 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { 
   Megaphone, Target, Palette, Camera, Lightbulb, 
-  Newspaper, PenTool, FileText
+  Newspaper, PenTool, FileText, Check
 } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 import Layout from "@/components/Layout";
 
 const services = [
@@ -10,41 +12,97 @@ const services = [
     id: "social-media",
     icon: Megaphone,
     title: "Social Media Marketing",
+    description: "Crafting scroll-stopping content and strategies that grow your brand and engage your audience where it matters most.",
+    features: [
+      "Content Strategy & Calendar",
+      "Community Management",
+      "Influencer Partnerships",
+      "Platform-Specific Optimization"
+    ]
   },
   {
     id: "performance",
     icon: Target,
     title: "Performance Marketing",
+    description: "Data-driven campaigns that maximize ROI through targeted advertising and continuous optimization across all digital channels.",
+    features: [
+      "PPC Campaign Management",
+      "Conversion Rate Optimization",
+      "A/B Testing & Analytics",
+      "Retargeting Strategies"
+    ]
   },
   {
     id: "branding",
     icon: Palette,
     title: "Offline Branding",
+    description: "Tangible brand experiences through print, signage, and environmental design that leave lasting impressions.",
+    features: [
+      "Print Collateral Design",
+      "Signage & Environmental Graphics",
+      "Packaging Design",
+      "Exhibition & Event Branding"
+    ]
   },
   {
     id: "photography",
     icon: Camera,
     title: "Photoshoot & Videography",
+    description: "Professional visual content creation that captures your brand's essence and tells compelling stories.",
+    features: [
+      "Product Photography",
+      "Corporate Video Production",
+      "Social Media Content",
+      "Event Coverage"
+    ]
   },
   {
     id: "strategy",
     icon: Lightbulb,
     title: "Brand Strategy",
+    description: "Comprehensive brand positioning and identity development that differentiates you in the marketplace.",
+    features: [
+      "Brand Audit & Research",
+      "Positioning & Messaging",
+      "Visual Identity Systems",
+      "Brand Guidelines"
+    ]
   },
   {
     id: "pr",
     icon: Newspaper,
     title: "Public Relations",
+    description: "Strategic communications that build credibility, manage reputation, and secure meaningful media coverage.",
+    features: [
+      "Media Relations & Outreach",
+      "Press Release Writing",
+      "Crisis Communications",
+      "Thought Leadership"
+    ]
   },
   {
     id: "design",
     icon: PenTool,
     title: "Creative Design",
+    description: "Visually stunning designs that communicate your brand message and captivate your target audience.",
+    features: [
+      "Graphic Design",
+      "UI/UX Design",
+      "Motion Graphics",
+      "Illustration"
+    ]
   },
   {
     id: "content",
     icon: FileText,
     title: "Content Production",
+    description: "Compelling content that educates, entertains, and converts across all platforms and formats.",
+    features: [
+      "Copywriting & Editing",
+      "Blog & Article Writing",
+      "Script Writing",
+      "Content Strategy"
+    ]
   },
 ];
 
@@ -56,6 +114,8 @@ const processSteps = [
 ];
 
 const Services = () => {
+  const [activeService, setActiveService] = useState(services[0]);
+
   return (
     <Layout>
       {/* Page Header */}
@@ -77,29 +137,84 @@ const Services = () => {
       <section className="bg-background">
         <div className="container-luxury">
           <div className="grid grid-cols-2 lg:grid-cols-4 border-t border-l border-foreground/10">
-            {services.map((service) => (
-              <div
-                key={service.id}
-                className="group flex flex-col items-center justify-center py-12 px-6 border-r border-b border-foreground/10 transition-all duration-300 hover:bg-foreground/5"
-              >
-                {/* Icon */}
-                <service.icon 
-                  className="w-8 h-8 text-muted-foreground transition-colors duration-300 group-hover:text-primary mb-4"
-                  strokeWidth={1.5}
-                />
-                
-                {/* Title */}
-                <h3 className="text-foreground text-center font-serif text-base md:text-lg font-medium transition-colors duration-300 group-hover:text-primary">
-                  {service.title}
-                </h3>
-              </div>
-            ))}
+            {services.map((service) => {
+              const isActive = activeService.id === service.id;
+              return (
+                <button
+                  key={service.id}
+                  onClick={() => setActiveService(service)}
+                  className={`group flex flex-col items-center justify-center py-12 px-6 border-r border-b border-foreground/10 transition-all duration-300 hover:bg-foreground/5 cursor-pointer ${
+                    isActive ? "border-b-2 border-b-primary bg-foreground/5" : ""
+                  }`}
+                >
+                  {/* Icon */}
+                  <service.icon 
+                    className={`w-8 h-8 transition-colors duration-300 mb-4 ${
+                      isActive ? "text-primary" : "text-muted-foreground group-hover:text-primary"
+                    }`}
+                    strokeWidth={1.5}
+                  />
+                  
+                  {/* Title */}
+                  <h3 className={`text-center font-serif text-base md:text-lg font-medium transition-colors duration-300 ${
+                    isActive ? "text-primary" : "text-foreground group-hover:text-primary"
+                  }`}>
+                    {service.title}
+                  </h3>
+                </button>
+              );
+            })}
           </div>
         </div>
       </section>
 
+      {/* Service Details Section */}
+      <section className="bg-background py-16 md:py-24">
+        <div className="container-luxury">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={activeService.id}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.4, ease: "easeOut" }}
+              className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16"
+            >
+              {/* Left Column - Description */}
+              <div className="flex flex-col">
+                <activeService.icon 
+                  className="w-12 h-12 text-primary mb-6"
+                  strokeWidth={1.5}
+                />
+                <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif text-foreground mb-6">
+                  {activeService.title}
+                </h2>
+                <p className="text-muted-foreground font-sans text-lg leading-relaxed">
+                  {activeService.description}
+                </p>
+              </div>
+
+              {/* Right Column - What's Included */}
+              <div className="flex flex-col">
+                <span className="text-primary font-sans text-sm uppercase tracking-widest mb-6">
+                  What's Included
+                </span>
+                <ul className="space-y-4">
+                  {activeService.features.map((feature, index) => (
+                    <li key={index} className="flex items-center gap-4">
+                      <Check className="w-5 h-5 text-primary flex-shrink-0" strokeWidth={2} />
+                      <span className="text-foreground font-sans text-lg">{feature}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </motion.div>
+          </AnimatePresence>
+        </div>
+      </section>
+
       {/* Process Section */}
-      <section className="section-padding bg-card border-t border-border/30 mt-16">
+      <section className="section-padding bg-card border-t border-border/30">
         <div className="container-luxury">
           <div className="text-center mb-16">
             <span className="text-primary font-sans text-sm uppercase tracking-widest mb-4 block">
