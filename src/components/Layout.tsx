@@ -3,6 +3,7 @@ import { useLocation } from "react-router-dom";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import ScrollToTop from "./ScrollToTop";
+import ScrollToTopOnRouteChange from "./ScrollToTopOnRouteChange";
 import CustomCursor from "./CustomCursor";
 import Preloader from "./Preloader";
 import DockingLogo from "./DockingLogo";
@@ -49,6 +50,7 @@ const Layout = ({ children }: LayoutProps) => {
       <main>{children}</main>
       <Footer />
       <ScrollToTop />
+      <ScrollToTopOnRouteChange />
       <CustomCursor />
     </div>
   );
