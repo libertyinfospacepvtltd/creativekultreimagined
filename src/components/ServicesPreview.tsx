@@ -65,52 +65,42 @@ const services = [
   },
 ];
 
-// Scatter deck cards data
+// Scatter deck cards with service headings
 const scatterCards = [
   {
-    image: "https://canvas-kolkata-vibe.lovable.app/assets/12thpass-logo-DhXy1KrN.png",
-    label: "12thPass.ai",
+    label: "Brand Strategy",
+    serviceNumber: "01",
     rotation: -4,
-    scatterX: -120,
-    scatterY: -80,
-  },
-  {
-    image: "https://canvas-kolkata-vibe.lovable.app/assets/easydo365-logo-CI69kmpV.png",
-    label: "EasyDo 365",
-    rotation: 3,
-    scatterX: 150,
-    scatterY: -60,
-  },
-  {
-    image: "https://canvas-kolkata-vibe.lovable.app/assets/majorcolours-logo-C9dMwmvs.png",
-    label: "Major Colors",
-    rotation: -2,
     scatterX: -180,
-    scatterY: 100,
+    scatterY: -120,
   },
   {
-    image: null, // Abstract card
-    label: "Strategy",
-    rotation: 5,
+    label: "Performance Marketing",
+    serviceNumber: "02",
+    rotation: 3,
     scatterX: 200,
-    scatterY: 120,
-    gradient: "from-primary/20 to-primary/5",
+    scatterY: -100,
   },
   {
-    image: null,
-    label: "Creative",
+    label: "Creative Design",
+    serviceNumber: "03",
+    rotation: -2,
+    scatterX: -220,
+    scatterY: 140,
+  },
+  {
+    label: "Social Media",
+    serviceNumber: "04",
+    rotation: 5,
+    scatterX: 250,
+    scatterY: 160,
+  },
+  {
+    label: "Content Production",
+    serviceNumber: "05",
     rotation: -3,
     scatterX: 0,
-    scatterY: -140,
-    gradient: "from-foreground/10 to-foreground/5",
-  },
-  {
-    image: null,
-    label: "Results",
-    rotation: 4,
-    scatterX: -100,
-    scatterY: 150,
-    gradient: "from-primary/15 to-transparent",
+    scatterY: -180,
   },
 ];
 
@@ -170,39 +160,45 @@ const ServicesPreview = () => {
   
   const { scrollYProgress } = useScroll({
     target: containerRef,
-    offset: ["start start", "end start"]
+    offset: ["start start", "end end"]
   });
 
-  // Transform for scatter animation (0-0.5 of scroll = scatter happens)
-  const scatterProgress = useTransform(scrollYProgress, [0, 0.4], [0, 1]);
-  const deckOpacity = useTransform(scrollYProgress, [0.25, 0.4], [1, 0]);
-  const gridOpacity = useTransform(scrollYProgress, [0.3, 0.45], [0, 1]);
+  // Transform for scatter animation - slower progression over 300vh
+  const scatterProgress = useTransform(scrollYProgress, [0.1, 0.6], [0, 1]);
+  const deckOpacity = useTransform(scrollYProgress, [0.4, 0.6], [1, 0]);
+  const gridOpacity = useTransform(scrollYProgress, [0.45, 0.65], [0, 1]);
+  const gridScale = useTransform(scrollYProgress, [0.45, 0.65], [0.9, 1]);
 
   return (
-    <section ref={containerRef} className="relative h-[200vh] bg-background">
-      {/* Header - Static at top */}
-      <div className="sticky top-0 pt-20 md:pt-24 z-10 bg-background">
-        <div className="container-luxury text-center pb-8 md:pb-12">
-          <span className="text-primary font-sans text-sm uppercase tracking-widest mb-4 block">
-            Our Services
-          </span>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif text-foreground mb-6">
-            From Strategy to Execution
-          </h2>
-          <p className="text-muted-foreground font-sans max-w-2xl mx-auto">
-            Scroll to discover our comprehensive creative solutions
-          </p>
+    <section ref={containerRef} className="relative h-[300vh] bg-background">
+      {/* Sticky Container - Pins content to center during scroll */}
+      <div className="sticky top-0 h-screen w-full overflow-hidden flex flex-col items-center justify-center">
+        
+        {/* Header */}
+        <div className="absolute top-20 md:top-24 left-0 right-0 z-20">
+          <div className="container-luxury text-center">
+            <span className="text-primary font-sans text-sm uppercase tracking-widest mb-4 block">
+              Our Services
+            </span>
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif text-foreground mb-4">
+              From Strategy to Execution
+            </h2>
+            <p className="text-muted-foreground font-sans max-w-2xl mx-auto text-sm">
+              Scroll to discover our comprehensive creative solutions
+            </p>
+          </div>
         </div>
-      </div>
 
-      {/* Animation Container */}
-      <div className="sticky top-32 md:top-40 h-[60vh] md:h-[70vh] overflow-hidden">
-        <div className="container-luxury relative h-full">
+        {/* Animation Layers Container */}
+        <div className="relative w-full h-full flex items-center justify-center pt-32">
           
           {/* Layer A: Services Grid (revealed) */}
           <motion.div 
-            className="absolute inset-0 flex items-center justify-center"
-            style={{ opacity: gridOpacity }}
+            className="absolute inset-0 flex items-center justify-center pt-20"
+            style={{ 
+              opacity: gridOpacity,
+              scale: gridScale,
+            }}
           >
             <div className="w-full max-w-5xl mx-auto px-4">
               <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
@@ -230,40 +226,36 @@ const ServicesPreview = () => {
 
           {/* Layer B: Scatter Deck (covers grid initially) */}
           <motion.div 
-            className="absolute inset-0 flex items-center justify-center pointer-events-none"
+            className="absolute inset-0 flex items-center justify-center pointer-events-none pt-20"
             style={{ opacity: deckOpacity }}
           >
             <div className="relative w-72 h-96 md:w-96 md:h-[28rem]">
               {scatterCards.map((card, index) => (
                 <motion.div
                   key={index}
-                  className="absolute inset-0 rounded-2xl overflow-hidden border border-foreground/10 shadow-2xl"
+                  className="absolute inset-0 rounded-xl overflow-hidden border border-foreground/20 shadow-2xl bg-background"
                   style={{
                     rotate: card.rotation,
-                    x: useTransform(scatterProgress, [0, 1], [0, card.scatterX * 3]),
-                    y: useTransform(scatterProgress, [0, 1], [0, card.scatterY * 3]),
-                    scale: useTransform(scatterProgress, [0, 0.5, 1], [1, 1.1, 1.3]),
+                    x: useTransform(scatterProgress, [0, 1], [0, card.scatterX * 4]),
+                    y: useTransform(scatterProgress, [0, 1], [0, card.scatterY * 4]),
+                    scale: useTransform(scatterProgress, [0, 0.5, 1], [1, 1.15, 1.4]),
                     zIndex: scatterCards.length - index,
                   }}
                 >
-                  {card.image ? (
-                    <div className="w-full h-full bg-white flex items-center justify-center p-12">
-                      <img 
-                        src={card.image} 
-                        alt={card.label}
-                        className="w-full h-full object-contain"
-                      />
-                    </div>
-                  ) : (
-                    <div className={`w-full h-full bg-gradient-to-br ${card.gradient} backdrop-blur-sm flex items-center justify-center`}>
-                      <span className="text-foreground/60 font-serif text-2xl md:text-3xl">
-                        {card.label}
-                      </span>
-                    </div>
-                  )}
+                  {/* Dark premium card background */}
+                  <div className="w-full h-full bg-gradient-to-br from-foreground/95 to-foreground/80 flex flex-col items-center justify-center p-8">
+                    {/* Service label */}
+                    <span className="text-background/50 font-sans text-xs uppercase tracking-[0.3em] mb-4">
+                      Service {card.serviceNumber}
+                    </span>
+                    {/* Service title */}
+                    <h3 className="text-background font-serif text-xl md:text-2xl lg:text-3xl text-center leading-tight">
+                      {card.label}
+                    </h3>
+                  </div>
                   
-                  {/* Glassmorphism overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-background/20 to-transparent" />
+                  {/* Subtle gradient overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-background/10 to-transparent pointer-events-none" />
                 </motion.div>
               ))}
             </div>
