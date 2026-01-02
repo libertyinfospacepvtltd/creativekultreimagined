@@ -24,9 +24,10 @@ const Navbar = ({ showNavbar = true }: NavbarProps) => {
   // Scroll progress for navbar reveal (only on home page)
   const { scrollYProgress } = useScroll();
   
-  // Navbar background and links fade in only after logo has almost docked (90% of animation)
-  const navOpacity = useTransform(scrollYProgress, [0.22, 0.28], [0, 1]);
-  const navBgOpacity = useTransform(scrollYProgress, [0.22, 0.28], [0, 1]);
+  // Navbar background and links fade in only after logo has docked (at scroll 0.15)
+  // Slight delay after dock (0.16 - 0.22) for smooth transition
+  const navOpacity = useTransform(scrollYProgress, [0.16, 0.22], [0, 1]);
+  const navBgOpacity = useTransform(scrollYProgress, [0.16, 0.22], [0, 1]);
 
   // For non-home pages, always show full navbar
   if (!isHomePage) {
