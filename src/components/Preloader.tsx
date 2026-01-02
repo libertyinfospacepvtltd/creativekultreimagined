@@ -26,16 +26,28 @@ const Preloader = ({ onComplete }: PreloaderProps) => {
     <AnimatePresence onExitComplete={onComplete}>
       {phase !== "exit" && (
         <motion.div
-          className="fixed inset-0 z-[9999] flex items-center justify-center overflow-hidden bg-background"
+          className="fixed inset-0 flex items-center justify-center overflow-hidden bg-background"
+          style={{ zIndex: 10000 }}
           initial={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.5, ease: "easeInOut" }}
         >
-          {/* Logo with mask reveal animation - shares layoutId with DockingLogo */}
-          <div className="relative flex items-center justify-center">
+          {/* Logo container - fixed center position matching DockingLogo start */}
+          <motion.div
+            className="fixed"
+            style={{
+              left: "50%",
+              top: "50%",
+              translateX: "-50%",
+              translateY: "-50%",
+              zIndex: 10001,
+            }}
+          >
+            {/* Logo with mask reveal animation - shares layoutId with DockingLogo */}
             <motion.div
               layoutId="creative-kult-logo"
-              className="relative overflow-hidden"
+              className="relative"
+              style={{ overflow: "hidden" }}
               initial={{ clipPath: "inset(0 100% 0 0)" }}
               animate={{ 
                 clipPath: phase === "reveal" 
@@ -60,17 +72,17 @@ const Preloader = ({ onComplete }: PreloaderProps) => {
                 className="w-64 md:w-80 lg:w-[420px] h-auto"
               />
             </motion.div>
-            
-            {/* Subtle glow effect behind logo */}
-            <motion.div
-              className="absolute inset-0 -z-10 blur-3xl"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: phase === "hold" ? 0.15 : 0 }}
-              transition={{ duration: 0.8 }}
-            >
-              <div className="w-full h-full bg-primary/30 rounded-full scale-150" />
-            </motion.div>
-          </div>
+          </motion.div>
+          
+          {/* Subtle glow effect behind logo */}
+          <motion.div
+            className="absolute inset-0 -z-10 blur-3xl flex items-center justify-center"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: phase === "hold" ? 0.15 : 0 }}
+            transition={{ duration: 0.8 }}
+          >
+            <div className="w-96 h-96 bg-primary/30 rounded-full" />
+          </motion.div>
         </motion.div>
       )}
     </AnimatePresence>

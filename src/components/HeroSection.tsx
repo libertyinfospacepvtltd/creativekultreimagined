@@ -11,27 +11,24 @@ const HeroSection = ({ preloaderComplete = true }: HeroSectionProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
-  // Scroll-linked animation
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end start"],
-  });
+  // Scroll-linked animation using pixels to sync with DockingLogo
+  const { scrollY } = useScroll();
 
-  // Transform values based on scroll progress
-  const backgroundScale = useTransform(scrollYProgress, [0, 0.5], [1.1, 1.8]);
+  // Transform values based on scroll pixels
+  const backgroundScale = useTransform(scrollY, [0, 500], [1.1, 1.8]);
   
   // Tagline opacity - fades out as scroll begins
-  const taglineOpacity = useTransform(scrollYProgress, [0, 0.1], [1, 0]);
+  const taglineOpacity = useTransform(scrollY, [0, 100], [1, 0]);
   
-  // Reveal text - only appears AFTER logo has docked (scroll > 0.15)
-  // Phase 2: Gap (0.15 - 0.22), Phase 3: Text reveal (0.22 - 0.35)
-  const textOpacity = useTransform(scrollYProgress, [0.22, 0.35], [0, 1]);
-  const textY = useTransform(scrollYProgress, [0.22, 0.35], ["50px", "0px"]);
-  const textScale = useTransform(scrollYProgress, [0.22, 0.35], [0.9, 1]);
+  // Reveal text - only appears AFTER logo has docked (scroll > 500px)
+  // Phase 2: Gap (500 - 600px), Phase 3: Text reveal (600 - 800px)
+  const textOpacity = useTransform(scrollY, [600, 800], [0, 1]);
+  const textY = useTransform(scrollY, [600, 800], [50, 0]);
+  const textScale = useTransform(scrollY, [600, 800], [0.9, 1]);
   
   // CTAs and radar
-  const ctaOpacity = useTransform(scrollYProgress, [0, 0.05], [1, 0]);
-  const radarOpacity = useTransform(scrollYProgress, [0, 0.1], [1, 0]);
+  const ctaOpacity = useTransform(scrollY, [0, 50], [1, 0]);
+  const radarOpacity = useTransform(scrollY, [0, 100], [1, 0]);
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {

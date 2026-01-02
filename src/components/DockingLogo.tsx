@@ -23,7 +23,7 @@ const DockingLogo = ({ onDockComplete }: DockingLogoProps) => {
     return () => window.removeEventListener("resize", updateSize);
   }, []);
 
-  const { scrollYProgress } = useScroll();
+  const { scrollY } = useScroll();
 
   // Calculate positions
   const isMobile = windowSize.width < 768;
@@ -39,7 +39,7 @@ const DockingLogo = ({ onDockComplete }: DockingLogoProps) => {
   // Scale factor
   const scaleFactor = navLogoWidth / heroLogoWidth;
 
-  // Center position (hero state)
+  // Center position (hero state) - using fixed pixel values
   const centerX = windowSize.width / 2;
   const centerY = windowSize.height / 2;
 
@@ -48,31 +48,33 @@ const DockingLogo = ({ onDockComplete }: DockingLogoProps) => {
   const navbarX = navPadding + (navLogoWidth / 2);
   const navbarY = 32; // Center of 64px navbar
 
-  // Scroll-linked transforms - animation completes at ~20% scroll progress for smoother transition
-  const x = useTransform(
-    scrollYProgress, 
-    [0, 0.15], 
-    [centerX, navbarX]
-  );
-  
+  // Arc motion: Y moves UP first (0-300px), X moves LEFT after (100-500px)
+  // This creates a smooth arc trajectory
   const y = useTransform(
-    scrollYProgress, 
-    [0, 0.15], 
+    scrollY, 
+    [0, 300], 
     [centerY, navbarY]
   );
   
+  const x = useTransform(
+    scrollY, 
+    [100, 500], 
+    [centerX, navbarX]
+  );
+  
+  // Scale shrinks continuously throughout
   const scale = useTransform(
-    scrollYProgress, 
-    [0, 0.15], 
+    scrollY, 
+    [0, 500], 
     [1, scaleFactor]
   );
 
-  // Track when docking completes
-  useMotionValueEvent(scrollYProgress, "change", useCallback((latest: number) => {
-    if (latest >= 0.15 && !hasDocked) {
+  // Track when docking completes (at 500px scroll)
+  useMotionValueEvent(scrollY, "change", useCallback((latest: number) => {
+    if (latest >= 500 && !hasDocked) {
       setHasDocked(true);
       onDockComplete?.();
-    } else if (latest < 0.15 && hasDocked) {
+    } else if (latest < 500 && hasDocked) {
       setHasDocked(false);
     }
   }, [hasDocked, onDockComplete]));
@@ -84,13 +86,14 @@ const DockingLogo = ({ onDockComplete }: DockingLogoProps) => {
 
   return (
     <motion.div
-      className="fixed z-50 pointer-events-none"
+      className="fixed pointer-events-none"
       style={{
         x,
         y,
         scale,
         translateX: "-50%",
         translateY: "-50%",
+        zIndex: 9999, // Very high z-index to stay above navbar
       }}
     >
       <Link to="/" className="pointer-events-auto block">
