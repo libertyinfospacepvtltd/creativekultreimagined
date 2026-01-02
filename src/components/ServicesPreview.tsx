@@ -162,16 +162,16 @@ const ServicesPreview = () => {
     offset: ["start start", "end end"]
   });
 
-  // Transform for scatter animation - slower progression over 300vh
-  const scatterProgress = useTransform(scrollYProgress, [0, 0.6], [0, 1]);
-  const deckOpacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
+  // Transform for scatter animation - completes by 60% of shorter 180vh track
+  const scatterProgress = useTransform(scrollYProgress, [0, 0.55], [0, 1]);
+  const deckOpacity = useTransform(scrollYProgress, [0, 0.45], [1, 0]);
   
-  // Grid fades in from 20% to 60% scroll
-  const gridOpacity = useTransform(scrollYProgress, [0.2, 0.6], [0, 1]);
-  const gridScale = useTransform(scrollYProgress, [0.2, 0.6], [0.9, 1]);
+  // Grid fades in from 15% to 50% scroll
+  const gridOpacity = useTransform(scrollYProgress, [0.15, 0.5], [0, 1]);
+  const gridScale = useTransform(scrollYProgress, [0.15, 0.5], [0.9, 1]);
 
   return (
-    <section ref={containerRef} className="relative h-[300vh] bg-background">
+    <section ref={containerRef} className="relative h-[180vh] bg-background">
       {/* Static Header - Always visible above the animation */}
       <div className="sticky top-0 z-50 bg-background pt-20 md:pt-24 pb-6">
         <div className="container-luxury text-center">
@@ -187,8 +187,8 @@ const ServicesPreview = () => {
         </div>
       </div>
 
-      {/* Scroll Animation Container - Below the header */}
-      <div className="sticky top-[20%] h-[70vh] w-full overflow-hidden flex items-center justify-center">
+      {/* Scroll Animation Container - Pinned below header with proper gap */}
+      <div className="sticky top-32 md:top-36 h-[60vh] w-full overflow-hidden flex items-center justify-center">
         
         {/* Animation Layers Container */}
         <div className="relative w-full h-full flex items-center justify-center">
