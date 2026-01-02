@@ -1,4 +1,4 @@
-import { ReactNode, useState } from "react";
+import { ReactNode, useState, useCallback } from "react";
 import { useLocation } from "react-router-dom";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
@@ -14,14 +14,20 @@ interface LayoutProps {
 const Layout = ({ children }: LayoutProps) => {
   const location = useLocation();
   const isHomePage = location.pathname === "/";
+  const [preloaderVisible, setPreloaderVisible] = useState(isHomePage);
   const [preloaderComplete, setPreloaderComplete] = useState(!isHomePage);
+
+  // Called when logo reveal animation finishes - fade out black overlay
+  const handleRevealComplete = useCallback(() => {
+    setPreloaderVisible(false);
+    // Small delay to ensure overlay fade completes before enabling scroll docking
+    setTimeout(() => setPreloaderComplete(true), 100);
+  }, []);
 
   return (
     <div className="min-h-screen bg-background relative">
-      {/* Preloader - only on home page */}
-      {isHomePage && !preloaderComplete && (
-        <Preloader onComplete={() => setPreloaderComplete(true)} />
-      )}
+      {/* Black Overlay - Middle Layer (z-40) */}
+      <Preloader isVisible={preloaderVisible} />
       
       {/* Film grain overlay */}
       <div 
@@ -31,8 +37,13 @@ const Layout = ({ children }: LayoutProps) => {
         }}
       />
       
-      {/* Docking Logo - single element that transitions from hero center to navbar */}
-      {preloaderComplete && <DockingLogo />}
+      {/* Docking Logo - Top Layer (z-50) - Always present on homepage, handles both preloader animation and scroll docking */}
+      {isHomePage && (
+        <DockingLogo 
+          isPreloading={!preloaderComplete}
+          onRevealComplete={handleRevealComplete}
+        />
+      )}
       
       <Navbar showNavbar={preloaderComplete} />
       <main>{children}</main>

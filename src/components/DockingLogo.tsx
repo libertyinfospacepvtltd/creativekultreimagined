@@ -5,13 +5,18 @@ import logo from "@/assets/creative-kult-logo.png";
 
 interface DockingLogoProps {
   onDockComplete?: () => void;
+  isPreloading?: boolean;
+  onRevealComplete?: () => void;
 }
 
-const DockingLogo = ({ onDockComplete }: DockingLogoProps) => {
+const DockingLogo = ({ onDockComplete, isPreloading = false, onRevealComplete }: DockingLogoProps) => {
   const location = useLocation();
   const isHomePage = location.pathname === "/";
   const [windowSize, setWindowSize] = useState({ width: 0, height: 0 });
   const [hasDocked, setHasDocked] = useState(false);
+  const [revealPhase, setRevealPhase] = useState<"reveal" | "hold" | "complete">(
+    isPreloading ? "reveal" : "complete"
+  );
 
   // Track window size for accurate positioning
   useEffect(() => {
@@ -22,6 +27,21 @@ const DockingLogo = ({ onDockComplete }: DockingLogoProps) => {
     window.addEventListener("resize", updateSize);
     return () => window.removeEventListener("resize", updateSize);
   }, []);
+
+  // Handle preloader animation phases
+  useEffect(() => {
+    if (!isPreloading || revealPhase === "complete") return;
+
+    const timers = [
+      setTimeout(() => setRevealPhase("hold"), 2000),
+      setTimeout(() => {
+        setRevealPhase("complete");
+        onRevealComplete?.();
+      }, 2800),
+    ];
+
+    return () => timers.forEach(clearTimeout);
+  }, [isPreloading, revealPhase, onRevealComplete]);
 
   const { scrollYProgress } = useScroll();
 
@@ -48,7 +68,7 @@ const DockingLogo = ({ onDockComplete }: DockingLogoProps) => {
   const navbarX = navPadding + (navLogoWidth / 2);
   const navbarY = 32; // Center of 64px navbar
 
-  // Scroll-linked transforms - animation completes at ~20% scroll progress for smoother transition
+  // Scroll-linked transforms - animation completes at ~15% scroll progress
   const x = useTransform(
     scrollYProgress, 
     [0, 0.15], 
@@ -82,23 +102,42 @@ const DockingLogo = ({ onDockComplete }: DockingLogoProps) => {
     return null;
   }
 
+  // During preloading, disable scroll-linked transforms
+  const isAnimatingPreloader = revealPhase !== "complete";
+
   return (
     <motion.div
       className="fixed z-50 pointer-events-none"
       style={{
-        x,
-        y,
-        scale,
+        x: isAnimatingPreloader ? centerX : x,
+        y: isAnimatingPreloader ? centerY : y,
+        scale: isAnimatingPreloader ? 1 : scale,
         translateX: "-50%",
         translateY: "-50%",
       }}
     >
       <Link to="/" className="pointer-events-auto block">
-        <img
-          src={logo}
-          alt="Creative Kult"
-          className="w-64 md:w-80 lg:w-[420px] h-auto"
-        />
+        {/* Logo with mask reveal animation during preload */}
+        <motion.div
+          className="relative overflow-hidden"
+          initial={isPreloading ? { clipPath: "inset(0 100% 0 0)" } : { clipPath: "inset(0 0% 0 0)" }}
+          animate={{ 
+            clipPath: revealPhase === "reveal" 
+              ? ["inset(0 100% 0 0)", "inset(0 85% 0 0)", "inset(0 0% 0 0)"]
+              : "inset(0 0% 0 0)"
+          }}
+          transition={{
+            duration: isPreloading && revealPhase === "reveal" ? 2 : 0,
+            ease: [0.25, 0.1, 0.25, 1],
+            times: [0, 0.15, 1], // Slow start on "K", then smooth reveal
+          }}
+        >
+          <img
+            src={logo}
+            alt="Creative Kult"
+            className="w-64 md:w-80 lg:w-[420px] h-auto"
+          />
+        </motion.div>
       </Link>
     </motion.div>
   );
