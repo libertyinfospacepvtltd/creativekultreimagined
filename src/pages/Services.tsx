@@ -1,11 +1,12 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import { 
   Megaphone, Target, Palette, Camera, Lightbulb, 
   Newspaper, PenTool, FileText, Check
 } from "lucide-react";
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import Layout from "@/components/Layout";
+import CardScatterSection from "@/components/CardScatterSection";
 
 const services = [
   {
@@ -192,21 +193,32 @@ const Services = () => {
         </div>
       </section>
 
-      {/* Premium Hover-Reveal Grid */}
-      <section className="bg-background pb-16 md:pb-24">
-        <div className="container-luxury">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5">
-            {services.map((service) => (
-              <ServiceCard 
-                key={service.id} 
-                service={service}
-                isExpanded={expandedId === service.id}
-                onToggle={() => handleToggle(service.id)}
-              />
-            ))}
+      {/* Card Scatter Section with Services Grid */}
+      <CardScatterSection>
+        <div className="h-screen flex flex-col items-center justify-center bg-background px-4 md:px-8">
+          <div className="text-center mb-8 md:mb-12">
+            <span className="text-primary font-sans text-sm uppercase tracking-widest mb-4 block">
+              Our Expertise
+            </span>
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif text-foreground">
+              From Strategy to Execution
+            </h2>
+          </div>
+          
+          <div className="container-luxury max-w-7xl">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
+              {services.map((service) => (
+                <ServiceCard 
+                  key={service.id} 
+                  service={service}
+                  isExpanded={expandedId === service.id}
+                  onToggle={() => handleToggle(service.id)}
+                />
+              ))}
+            </div>
           </div>
         </div>
-      </section>
+      </CardScatterSection>
 
       {/* Process Section */}
       <section className="section-padding bg-card border-t border-border/30">
