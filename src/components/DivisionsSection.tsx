@@ -30,28 +30,28 @@ const DivisionsSection = () => {
     <section className="section-padding bg-card">
       <div className="container-luxury">
         {/* Header */}
-        <div className="text-center mb-16 md:mb-20">
-          <span className="text-primary font-sans text-sm uppercase tracking-widest mb-4 block">
+        <div className="text-center mb-10 sm:mb-12 md:mb-16 lg:mb-20">
+          <span className="text-primary font-sans text-xs sm:text-sm uppercase tracking-widest mb-3 sm:mb-4 block">
             Our Portfolio
           </span>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif text-foreground mb-6">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-serif text-foreground mb-4 sm:mb-6">
             Divisions We Power
           </h2>
-          <p className="text-muted-foreground font-sans max-w-2xl mx-auto">
+          <p className="text-muted-foreground font-sans max-w-2xl mx-auto text-sm sm:text-base">
             We drive the creative vision for Liberty Infospace's innovative digital products.
           </p>
         </div>
 
         {/* Divisions Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
           {divisions.map((division, index) => (
             <div 
               key={index}
-              className="group bg-background border border-border/30 p-8 text-center hover:border-primary/30 transition-all duration-500"
+              className="group bg-background border border-border/30 p-6 sm:p-8 text-center hover:border-primary/30 transition-all duration-500"
             >
               {/* Circular white logo container */}
-              <div className={`bg-white rounded-full w-32 h-32 mx-auto mb-6 flex items-center justify-center overflow-hidden ${
-                division.name === "12thPass.ai" ? "p-0" : "p-6"
+              <div className={`bg-white rounded-full w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 mx-auto mb-4 sm:mb-6 flex items-center justify-center overflow-hidden ${
+                division.name === "12thPass.ai" ? "p-0" : "p-4 sm:p-6"
               }`}>
                 <a 
                   href={division.website} 
@@ -68,19 +68,19 @@ const DivisionsSection = () => {
                   />
                 </a>
               </div>
-              <h3 className="text-xl font-serif text-foreground mb-2">
+              <h3 className="text-lg sm:text-xl font-serif text-foreground mb-2">
                 {division.name}
               </h3>
-              <p className="text-muted-foreground font-sans text-sm mb-6">
+              <p className="text-muted-foreground font-sans text-xs sm:text-sm mb-4 sm:mb-6">
                 {division.description}
               </p>
-              <div className="flex items-center justify-center gap-4">
+              <div className="flex items-center justify-center gap-3 sm:gap-4">
                 {division.website && (
                   <a
                     href={division.website}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-muted-foreground hover:text-primary transition-colors"
+                    className="text-muted-foreground hover:text-primary transition-colors p-2 min-h-[44px] min-w-[44px] flex items-center justify-center"
                     aria-label={`Visit ${division.name} website`}
                   >
                     <Globe size={18} />
@@ -91,7 +91,7 @@ const DivisionsSection = () => {
                     href={division.instagram}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-muted-foreground hover:text-primary transition-colors"
+                    className="text-muted-foreground hover:text-primary transition-colors p-2 min-h-[44px] min-w-[44px] flex items-center justify-center"
                     aria-label={`Visit ${division.name} Instagram`}
                   >
                     <Instagram size={18} />
@@ -102,7 +102,7 @@ const DivisionsSection = () => {
                     href={division.facebook}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-muted-foreground hover:text-primary transition-colors"
+                    className="text-muted-foreground hover:text-primary transition-colors p-2 min-h-[44px] min-w-[44px] flex items-center justify-center"
                     aria-label={`Visit ${division.name} Facebook`}
                   >
                     <Facebook size={18} />

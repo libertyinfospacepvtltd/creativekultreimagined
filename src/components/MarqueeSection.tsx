@@ -5,13 +5,13 @@ const MarqueeSection = () => {
   const repeatedText = text.repeat(10);
 
   return (
-    <section className="py-6 bg-card border-y border-border/30 overflow-hidden">
+    <section className="py-4 sm:py-6 bg-card border-y border-border/30 overflow-hidden">
       <Link to="/contact" className="block">
         <div className="animate-marquee whitespace-nowrap">
-          <span className="text-primary font-serif text-xl md:text-2xl tracking-wider inline-block">
+          <span className="text-primary font-serif text-base sm:text-xl md:text-2xl tracking-wider inline-block">
             {repeatedText}
           </span>
-          <span className="text-primary font-serif text-xl md:text-2xl tracking-wider inline-block">
+          <span className="text-primary font-serif text-base sm:text-xl md:text-2xl tracking-wider inline-block">
             {repeatedText}
           </span>
         </div>
