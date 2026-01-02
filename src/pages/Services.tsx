@@ -134,21 +134,21 @@ const Services = () => {
       </section>
 
       {/* Service Tabs */}
-      <section className="py-4 bg-card border-y border-border/30 overflow-x-auto scrollbar-hide">
+      <section className="py-4 bg-card border-y border-border/30">
         <div className="container-luxury">
-          <div className="flex items-center gap-6 min-w-max">
+          <div className="flex flex-wrap items-center justify-center gap-4 md:gap-6">
             {services.map((service) => (
               <button
                 key={service.id}
                 onClick={() => setActiveService(service.id)}
-                className={`flex items-center gap-2 py-4 px-3 font-sans text-sm transition-all duration-300 border-b-2 ${
+                className={`flex items-center gap-2 py-3 px-4 font-sans text-sm transition-all duration-300 border-b-2 ${
                   activeService === service.id
                     ? "text-primary border-primary"
                     : "text-muted-foreground border-transparent hover:text-foreground"
                 }`}
               >
                 <service.icon size={18} />
-                <span className="hidden sm:inline">{service.title}</span>
+                <span>{service.title}</span>
               </button>
             ))}
           </div>
