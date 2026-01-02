@@ -4,7 +4,7 @@ import {
   Megaphone, Target, Palette, Camera, Lightbulb, 
   Newspaper, PenTool, FileText, Check
 } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import Layout from "@/components/Layout";
 
 const services = [
@@ -12,96 +12,88 @@ const services = [
     id: "social-media",
     icon: Megaphone,
     title: "Social Media Marketing",
-    description: "Crafting scroll-stopping content and strategies that grow your brand and engage your audience where it matters most.",
+    description: "Crafting scroll-stopping content and strategies that grow your brand.",
     features: [
       "Content Strategy & Calendar",
       "Community Management",
-      "Influencer Partnerships",
-      "Platform-Specific Optimization"
+      "Influencer Partnerships"
     ]
   },
   {
     id: "performance",
     icon: Target,
     title: "Performance Marketing",
-    description: "Data-driven campaigns that maximize ROI through targeted advertising and continuous optimization across all digital channels.",
+    description: "Data-driven campaigns that maximize ROI through targeted advertising.",
     features: [
       "PPC Campaign Management",
       "Conversion Rate Optimization",
-      "A/B Testing & Analytics",
-      "Retargeting Strategies"
+      "A/B Testing & Analytics"
     ]
   },
   {
     id: "branding",
     icon: Palette,
     title: "Offline Branding",
-    description: "Tangible brand experiences through print, signage, and environmental design that leave lasting impressions.",
+    description: "Tangible brand experiences through print, signage, and environmental design.",
     features: [
       "Print Collateral Design",
       "Signage & Environmental Graphics",
-      "Packaging Design",
-      "Exhibition & Event Branding"
+      "Packaging Design"
     ]
   },
   {
     id: "photography",
     icon: Camera,
     title: "Photoshoot & Videography",
-    description: "Professional visual content creation that captures your brand's essence and tells compelling stories.",
+    description: "Professional visual content that captures your brand's essence.",
     features: [
       "Product Photography",
       "Corporate Video Production",
-      "Social Media Content",
-      "Event Coverage"
+      "Social Media Content"
     ]
   },
   {
     id: "strategy",
     icon: Lightbulb,
     title: "Brand Strategy",
-    description: "Comprehensive brand positioning and identity development that differentiates you in the marketplace.",
+    description: "Comprehensive brand positioning that differentiates you in the marketplace.",
     features: [
       "Brand Audit & Research",
       "Positioning & Messaging",
-      "Visual Identity Systems",
-      "Brand Guidelines"
+      "Visual Identity Systems"
     ]
   },
   {
     id: "pr",
     icon: Newspaper,
     title: "Public Relations",
-    description: "Strategic communications that build credibility, manage reputation, and secure meaningful media coverage.",
+    description: "Strategic communications that build credibility and secure media coverage.",
     features: [
       "Media Relations & Outreach",
       "Press Release Writing",
-      "Crisis Communications",
-      "Thought Leadership"
+      "Crisis Communications"
     ]
   },
   {
     id: "design",
     icon: PenTool,
     title: "Creative Design",
-    description: "Visually stunning designs that communicate your brand message and captivate your target audience.",
+    description: "Visually stunning designs that communicate your brand message.",
     features: [
       "Graphic Design",
       "UI/UX Design",
-      "Motion Graphics",
-      "Illustration"
+      "Motion Graphics"
     ]
   },
   {
     id: "content",
     icon: FileText,
     title: "Content Production",
-    description: "Compelling content that educates, entertains, and converts across all platforms and formats.",
+    description: "Compelling content that educates, entertains, and converts.",
     features: [
       "Copywriting & Editing",
       "Blog & Article Writing",
-      "Script Writing",
-      "Content Strategy"
+      "Script Writing"
     ]
   },
 ];
@@ -113,13 +105,80 @@ const processSteps = [
   { number: "04", title: "Optimize", description: "Continuous improvement based on real data" },
 ];
 
+// Service Card Component with hover reveal
+const ServiceCard = ({ service, isExpanded, onToggle }: { 
+  service: typeof services[0]; 
+  isExpanded: boolean;
+  onToggle: () => void;
+}) => {
+  const Icon = service.icon;
+  
+  return (
+    <motion.div
+      className={`group relative flex flex-col border border-foreground/10 bg-background transition-all duration-500 overflow-hidden cursor-pointer
+        ${isExpanded ? 'border-primary bg-foreground/5' : 'hover:border-primary hover:bg-foreground/5'}
+      `}
+      style={{ aspectRatio: '3/4' }}
+      onClick={onToggle}
+    >
+      {/* Default State Content - Icon & Title centered */}
+      <div className={`absolute inset-0 flex flex-col items-center justify-center p-6 transition-all duration-500 ease-out
+        ${isExpanded ? 'opacity-0 -translate-y-full' : 'group-hover:opacity-0 group-hover:-translate-y-full md:opacity-100 md:translate-y-0'}
+      `}>
+        <Icon 
+          className="w-10 h-10 text-muted-foreground transition-colors duration-300 group-hover:text-primary mb-4"
+          strokeWidth={1.5}
+        />
+        <h3 className="text-foreground text-center font-serif text-base md:text-lg font-medium transition-colors duration-300 group-hover:text-primary">
+          {service.title}
+        </h3>
+      </div>
+
+      {/* Hover/Expanded State Content - Full details */}
+      <div className={`absolute inset-0 flex flex-col p-5 transition-all duration-500 ease-out
+        ${isExpanded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8 group-hover:opacity-100 group-hover:translate-y-0'}
+      `}>
+        {/* Icon & Title at top */}
+        <div className="flex items-center gap-3 mb-4">
+          <Icon 
+            className="w-6 h-6 text-primary flex-shrink-0"
+            strokeWidth={1.5}
+          />
+          <h3 className="text-primary font-serif text-sm md:text-base font-medium leading-tight">
+            {service.title}
+          </h3>
+        </div>
+
+        {/* Description */}
+        <p className="text-muted-foreground font-sans text-xs md:text-sm leading-relaxed mb-4 line-clamp-2">
+          {service.description}
+        </p>
+
+        {/* Features List */}
+        <ul className="space-y-2 mt-auto">
+          {service.features.map((feature, index) => (
+            <li key={index} className="flex items-start gap-2">
+              <Check className="w-3.5 h-3.5 text-primary flex-shrink-0 mt-0.5" strokeWidth={2.5} />
+              <span className="text-foreground font-sans text-xs leading-tight">{feature}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </motion.div>
+  );
+};
+
 const Services = () => {
-  const [activeService, setActiveService] = useState(services[0]);
+  const [expandedId, setExpandedId] = useState<string | null>(null);
+
+  const handleToggle = (id: string) => {
+    setExpandedId(expandedId === id ? null : id);
+  };
 
   return (
     <Layout>
       {/* Page Header */}
-      <section className="pt-32 pb-16 md:pt-40 md:pb-20 bg-background">
+      <section className="pt-32 pb-12 md:pt-40 md:pb-16 bg-background">
         <div className="container-luxury">
           <span className="text-primary font-sans text-sm uppercase tracking-widest mb-4 block">
             What We Do
@@ -128,88 +187,24 @@ const Services = () => {
             Services Crafted for Impact
           </h1>
           <p className="text-muted-foreground font-sans max-w-2xl text-lg">
-            From strategy to execution, we deliver comprehensive creative solutions that transform brands and drive measurable business results.
+            From strategy to execution, we deliver comprehensive creative solutions that transform brands.
           </p>
         </div>
       </section>
 
-      {/* Premium Editorial Grid */}
-      <section className="bg-background">
+      {/* Premium Hover-Reveal Grid */}
+      <section className="bg-background pb-16 md:pb-24">
         <div className="container-luxury">
-          <div className="grid grid-cols-2 lg:grid-cols-4 border-t border-l border-foreground/10">
-            {services.map((service) => {
-              const isActive = activeService.id === service.id;
-              return (
-                <button
-                  key={service.id}
-                  onClick={() => setActiveService(service)}
-                  className={`group flex flex-col items-center justify-center py-12 px-6 border-r border-b border-foreground/10 transition-all duration-300 hover:bg-foreground/5 cursor-pointer ${
-                    isActive ? "border-b-2 border-b-primary bg-foreground/5" : ""
-                  }`}
-                >
-                  {/* Icon */}
-                  <service.icon 
-                    className={`w-8 h-8 transition-colors duration-300 mb-4 ${
-                      isActive ? "text-primary" : "text-muted-foreground group-hover:text-primary"
-                    }`}
-                    strokeWidth={1.5}
-                  />
-                  
-                  {/* Title */}
-                  <h3 className={`text-center font-serif text-base md:text-lg font-medium transition-colors duration-300 ${
-                    isActive ? "text-primary" : "text-foreground group-hover:text-primary"
-                  }`}>
-                    {service.title}
-                  </h3>
-                </button>
-              );
-            })}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5">
+            {services.map((service) => (
+              <ServiceCard 
+                key={service.id} 
+                service={service}
+                isExpanded={expandedId === service.id}
+                onToggle={() => handleToggle(service.id)}
+              />
+            ))}
           </div>
-        </div>
-      </section>
-
-      {/* Service Details Section */}
-      <section className="bg-background py-16 md:py-24">
-        <div className="container-luxury">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={activeService.id}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.4, ease: "easeOut" }}
-              className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16"
-            >
-              {/* Left Column - Description */}
-              <div className="flex flex-col">
-                <activeService.icon 
-                  className="w-12 h-12 text-primary mb-6"
-                  strokeWidth={1.5}
-                />
-                <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif text-foreground mb-6">
-                  {activeService.title}
-                </h2>
-                <p className="text-muted-foreground font-sans text-lg leading-relaxed">
-                  {activeService.description}
-                </p>
-              </div>
-
-              {/* Right Column - What's Included */}
-              <div className="flex flex-col">
-                <span className="text-primary font-sans text-sm uppercase tracking-widest mb-6">
-                  What's Included
-                </span>
-                <ul className="space-y-4">
-                  {activeService.features.map((feature, index) => (
-                    <li key={index} className="flex items-center gap-4">
-                      <Check className="w-5 h-5 text-primary flex-shrink-0" strokeWidth={2} />
-                      <span className="text-foreground font-sans text-lg">{feature}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </motion.div>
-          </AnimatePresence>
         </div>
       </section>
 
