@@ -87,13 +87,12 @@ const About = () => {
                 </p>
               </div>
             </div>
-            <div className="flex justify-center lg:justify-end" style={{ perspective: "1000px" }}>
-              <div className="p-8 group">
+            <div className="flex justify-center lg:justify-end">
+              <div className="p-8 group overflow-hidden">
                 <img
                   src="https://canvas-kolkata-vibe.lovable.app/assets/creative-kult-story-logo-BWnpSHrr.png"
                   alt="Creative Kult Logo"
-                  className="w-72 md:w-96 lg:w-[480px] h-auto opacity-90 animate-spin-slow-3d group-hover:[animation-play-state:paused] group-hover:scale-105 transition-transform duration-300"
-                  style={{ transformStyle: "preserve-3d" }}
+                  className="w-72 md:w-96 lg:w-[480px] h-auto opacity-90 transition-all duration-500 ease-out group-hover:scale-105 group-hover:drop-shadow-[0_0_30px_rgba(212,175,55,0.4)]"
                 />
               </div>
             </div>
