@@ -76,11 +76,11 @@ const Services = () => {
       {/* Premium Editorial Grid */}
       <section className="bg-background">
         <div className="container-luxury">
-          <div className="grid grid-cols-2 lg:grid-cols-4">
+          <div className="grid grid-cols-2 lg:grid-cols-4 border-t border-l border-foreground/10">
             {services.map((service) => (
               <div
                 key={service.id}
-                className="group relative flex flex-col items-center justify-center py-10 px-6 border border-foreground/10 transition-all duration-300 hover:bg-foreground/5"
+                className="group flex flex-col items-center justify-center py-12 px-6 border-r border-b border-foreground/10 transition-all duration-300 hover:bg-foreground/5"
               >
                 {/* Icon */}
                 <service.icon 
