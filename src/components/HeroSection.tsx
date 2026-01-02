@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { motion, useScroll, useTransform } from "framer-motion";
-import logo from "@/assets/creative-kult-logo.png";
 import heroImage from "@/assets/victoria-memorial-hero.jpg";
 
 interface HeroSectionProps {
@@ -20,18 +19,6 @@ const HeroSection = ({ preloaderComplete = true }: HeroSectionProps) => {
 
   // Transform values based on scroll progress
   const backgroundScale = useTransform(scrollYProgress, [0, 0.5], [1.1, 1.8]);
-  
-  // Logo docking animation - from center to top-left navbar position
-  // Scale: starts at 1, shrinks to navbar size (roughly 0.15 of original)
-  const logoScale = useTransform(scrollYProgress, [0, 0.25], [1, 0.15]);
-  
-  // Position: move from center (0,0) to top-left corner
-  // We need to calculate the exact positions
-  const logoX = useTransform(scrollYProgress, [0, 0.25], ["0%", "-42vw"]);
-  const logoY = useTransform(scrollYProgress, [0, 0.25], ["0%", "-42vh"]);
-  
-  // Logo opacity - fade out after docking to let navbar logo take over
-  const logoOpacity = useTransform(scrollYProgress, [0.2, 0.28], [1, 0]);
   
   // Tagline opacity - fades out as scroll begins
   const taglineOpacity = useTransform(scrollYProgress, [0, 0.1], [1, 0]);
@@ -125,37 +112,20 @@ const HeroSection = ({ preloaderComplete = true }: HeroSectionProps) => {
           ))}
         </motion.div>
 
-        {/* Center Logo with Docking Animation */}
-        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-          <motion.div 
-            className="relative text-center"
-            style={{
-              scale: logoScale,
-              x: logoX,
-              y: logoY,
-              opacity: logoOpacity,
-            }}
-            initial={{ opacity: preloaderComplete ? 1 : 0 }}
-          >
-            <img
-              src={logo}
-              alt="Creative Kult"
-              className="w-64 md:w-80 lg:w-[420px] h-auto mx-auto"
-            />
-            {/* Tagline - fades out quickly */}
-            <motion.div 
-              className="mt-8 space-y-3"
-              style={{ opacity: taglineOpacity }}
-            >
-              <p className="text-foreground/90 font-serif text-xl md:text-2xl lg:text-3xl italic tracking-wide">
-                Where Brands Break the Mold
-              </p>
-              <p className="text-muted-foreground font-sans text-sm md:text-base tracking-widest uppercase">
-                Strategy • Rebellion • Results
-              </p>
-            </motion.div>
-          </motion.div>
-        </div>
+        {/* Center Tagline (below the docking logo) */}
+        <motion.div 
+          className="absolute inset-0 flex items-center justify-center pointer-events-none"
+          style={{ opacity: taglineOpacity }}
+        >
+          <div className="text-center mt-40 md:mt-48 lg:mt-56">
+            <p className="text-foreground/90 font-serif text-xl md:text-2xl lg:text-3xl italic tracking-wide">
+              Where Brands Break the Mold
+            </p>
+            <p className="text-muted-foreground font-sans text-sm md:text-base tracking-widest uppercase mt-3">
+              Strategy • Rebellion • Results
+            </p>
+          </div>
+        </motion.div>
 
         {/* Reveal Text - "Cultivating Digital Legacies" - with solid background */}
         <motion.div 

@@ -1,5 +1,5 @@
 import { Link, useLocation } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import logo from "@/assets/creative-kult-logo.png";
@@ -24,9 +24,9 @@ const Navbar = ({ showNavbar = true }: NavbarProps) => {
   // Scroll progress for navbar reveal (only on home page)
   const { scrollYProgress } = useScroll();
   
-  // Navbar background and links fade in after hero scroll (around 50% of hero)
-  const navOpacity = useTransform(scrollYProgress, [0.15, 0.25], [0, 1]);
-  const navBgOpacity = useTransform(scrollYProgress, [0.15, 0.25], [0, 1]);
+  // Navbar background and links fade in only after logo has almost docked (90% of animation)
+  const navOpacity = useTransform(scrollYProgress, [0.22, 0.28], [0, 1]);
+  const navBgOpacity = useTransform(scrollYProgress, [0.22, 0.28], [0, 1]);
 
   // For non-home pages, always show full navbar
   if (!isHomePage) {
@@ -97,9 +97,10 @@ const Navbar = ({ showNavbar = true }: NavbarProps) => {
   }
 
   // Home page - animated navbar that reveals after hero scroll
+  // Note: Logo is handled by the DockingLogo component, not here
   return (
     <motion.header 
-      className="fixed top-0 left-0 right-0 z-50 border-b border-border/20"
+      className="fixed top-0 left-0 right-0 z-40 border-b border-border/20"
       style={{
         pointerEvents: showNavbar ? "auto" : "none",
       }}
@@ -110,19 +111,17 @@ const Navbar = ({ showNavbar = true }: NavbarProps) => {
         style={{ opacity: navBgOpacity }}
       />
       
+      {/* Border that fades in */}
+      <motion.div 
+        className="absolute bottom-0 left-0 right-0 h-px bg-border/20"
+        style={{ opacity: navBgOpacity }}
+      />
+      
       <nav className="container-luxury flex items-center justify-between h-16 relative">
-        {/* Logo - fades in after hero scroll */}
-        <motion.div style={{ opacity: navOpacity }}>
-          <Link to="/" className="relative z-10">
-            <img 
-              src={logo} 
-              alt="Creative Kult" 
-              className="h-10 md:h-12 w-auto"
-            />
-          </Link>
-        </motion.div>
+        {/* Empty space for logo - the DockingLogo component handles this */}
+        <div className="h-10 md:h-12 w-32 md:w-40" />
 
-        {/* Desktop Navigation - fades in after hero scroll */}
+        {/* Desktop Navigation - fades in after logo docks */}
         <motion.ul 
           className="hidden md:flex items-center gap-8"
           style={{ opacity: navOpacity }}
@@ -143,7 +142,7 @@ const Navbar = ({ showNavbar = true }: NavbarProps) => {
           ))}
         </motion.ul>
 
-        {/* Mobile Menu Button - fades in after hero scroll */}
+        {/* Mobile Menu Button - fades in after logo docks */}
         <motion.button
           onClick={() => setIsOpen(!isOpen)}
           className="md:hidden relative z-10 p-2 text-foreground"
