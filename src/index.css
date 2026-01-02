@@ -6,8 +6,8 @@
 
 @layer base {
   :root {
-    /* Core Colors - Pure Black & White with Gold Accent */
-    --background: 0 0% 0%;
+    /* Core Colors - Rich Dark Charcoal & White with Gold Accent */
+    --background: 0 0% 7%;
     --foreground: 0 0% 100%;
 
     --card: 0 0% 3%;
@@ -66,7 +66,7 @@
   }
 
   .dark {
-    --background: 0 0% 0%;
+    --background: 0 0% 7%;
     --foreground: 0 0% 100%;
   }
 }
@@ -83,6 +83,11 @@
   body {
     @apply bg-background text-foreground antialiased;
     font-family: var(--font-sans);
+    cursor: none;
+  }
+
+  a, button, input, textarea, select, [role="button"] {
+    cursor: none;
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -146,9 +151,9 @@
     animation: radar-pulse 8s linear infinite;
   }
 
-  /* Section padding */
+  /* Section padding - reduced by 50% */
   .section-padding {
-    @apply py-20 md:py-32 lg:py-40;
+    @apply py-10 md:py-16 lg:py-20;
   }
 
   /* Container max width */
