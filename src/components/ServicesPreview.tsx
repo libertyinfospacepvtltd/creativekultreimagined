@@ -104,7 +104,7 @@ const scatterCards = [
   },
 ];
 
-// Service Card Component
+// Service Card Component - Compact version
 const ServiceCard = ({ service, isExpanded, onToggle }: { 
   service: typeof services[0]; 
   isExpanded: boolean;
@@ -114,38 +114,37 @@ const ServiceCard = ({ service, isExpanded, onToggle }: {
   
   return (
     <motion.div
-      className={`group relative flex flex-col border border-foreground/10 bg-background transition-all duration-500 overflow-hidden cursor-pointer
+      className={`group relative flex flex-col border border-foreground/10 bg-background transition-all duration-500 overflow-hidden cursor-pointer min-h-[120px] md:min-h-[140px]
         ${isExpanded ? 'border-primary bg-foreground/5' : 'hover:border-primary hover:bg-foreground/5'}
       `}
-      style={{ aspectRatio: '3/4' }}
       onClick={onToggle}
     >
       {/* Default State */}
-      <div className={`absolute inset-0 flex flex-col items-center justify-center p-4 transition-all duration-500 ease-out
+      <div className={`absolute inset-0 flex flex-col items-center justify-center p-3 transition-all duration-500 ease-out
         ${isExpanded ? 'opacity-0 -translate-y-full' : 'group-hover:opacity-0 group-hover:-translate-y-full md:opacity-100 md:translate-y-0'}
       `}>
-        <Icon className="w-8 h-8 text-muted-foreground transition-colors duration-300 group-hover:text-primary mb-3" strokeWidth={1.5} />
-        <h3 className="text-foreground text-center font-serif text-sm md:text-base font-medium transition-colors duration-300 group-hover:text-primary">
+        <Icon className="w-6 h-6 text-muted-foreground transition-colors duration-300 group-hover:text-primary mb-2" strokeWidth={1.5} />
+        <h3 className="text-foreground text-center font-serif text-xs md:text-sm font-medium transition-colors duration-300 group-hover:text-primary">
           {service.title}
         </h3>
       </div>
 
       {/* Expanded State */}
-      <div className={`absolute inset-0 flex flex-col p-4 transition-all duration-500 ease-out
+      <div className={`absolute inset-0 flex flex-col p-3 transition-all duration-500 ease-out
         ${isExpanded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8 group-hover:opacity-100 group-hover:translate-y-0'}
       `}>
-        <div className="flex items-center gap-2 mb-3">
-          <Icon className="w-5 h-5 text-primary flex-shrink-0" strokeWidth={1.5} />
-          <h3 className="text-primary font-serif text-xs md:text-sm font-medium leading-tight">{service.title}</h3>
+        <div className="flex items-center gap-1.5 mb-2">
+          <Icon className="w-4 h-4 text-primary flex-shrink-0" strokeWidth={1.5} />
+          <h3 className="text-primary font-serif text-[10px] md:text-xs font-medium leading-tight">{service.title}</h3>
         </div>
-        <p className="text-muted-foreground font-sans text-[10px] md:text-xs leading-relaxed mb-3 line-clamp-2">
+        <p className="text-muted-foreground font-sans text-[9px] md:text-[10px] leading-relaxed mb-2 line-clamp-2">
           {service.description}
         </p>
-        <ul className="space-y-1.5 mt-auto">
+        <ul className="space-y-1 mt-auto">
           {service.features.map((feature, index) => (
-            <li key={index} className="flex items-start gap-1.5">
-              <Check className="w-3 h-3 text-primary flex-shrink-0 mt-0.5" strokeWidth={2.5} />
-              <span className="text-foreground font-sans text-[10px] leading-tight">{feature}</span>
+            <li key={index} className="flex items-start gap-1">
+              <Check className="w-2.5 h-2.5 text-primary flex-shrink-0 mt-0.5" strokeWidth={2.5} />
+              <span className="text-foreground font-sans text-[9px] leading-tight">{feature}</span>
             </li>
           ))}
         </ul>
@@ -167,47 +166,43 @@ const ServicesPreview = () => {
   const scatterProgress = useTransform(scrollYProgress, [0, 0.6], [0, 1]);
   const deckOpacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
   
-  // Background content starts hidden, fades in from 20% to 60% scroll
-  const headerOpacity = useTransform(scrollYProgress, [0.2, 0.6], [0, 1]);
+  // Grid fades in from 20% to 60% scroll
   const gridOpacity = useTransform(scrollYProgress, [0.2, 0.6], [0, 1]);
   const gridScale = useTransform(scrollYProgress, [0.2, 0.6], [0.9, 1]);
 
   return (
     <section ref={containerRef} className="relative h-[300vh] bg-background">
-      {/* Sticky Container - Pins content to center during scroll */}
-      <div className="sticky top-0 h-screen w-full overflow-hidden flex flex-col items-center justify-center">
-        
-        {/* Header - starts hidden, fades in with scroll */}
-        <motion.div 
-          className="absolute top-20 md:top-24 left-0 right-0 z-10"
-          style={{ opacity: headerOpacity }}
-        >
-          <div className="container-luxury text-center">
-            <span className="text-primary font-sans text-sm uppercase tracking-widest mb-4 block">
-              Our Services
-            </span>
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif text-foreground mb-4">
-              From Strategy to Execution
-            </h2>
-            <p className="text-muted-foreground font-sans max-w-2xl mx-auto text-sm">
-              Scroll to discover our comprehensive creative solutions
-            </p>
-          </div>
-        </motion.div>
+      {/* Static Header - Always visible above the animation */}
+      <div className="sticky top-0 z-50 bg-background pt-20 md:pt-24 pb-6">
+        <div className="container-luxury text-center">
+          <span className="text-primary font-sans text-sm uppercase tracking-widest mb-4 block">
+            Our Services
+          </span>
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif text-foreground mb-4">
+            From Strategy to Execution
+          </h2>
+          <p className="text-muted-foreground font-sans max-w-2xl mx-auto text-sm">
+            Scroll to discover our comprehensive creative solutions
+          </p>
+        </div>
+      </div>
 
+      {/* Scroll Animation Container - Below the header */}
+      <div className="sticky top-[20%] h-[70vh] w-full overflow-hidden flex items-center justify-center">
+        
         {/* Animation Layers Container */}
-        <div className="relative w-full h-full flex items-center justify-center pt-32">
+        <div className="relative w-full h-full flex items-center justify-center">
           
           {/* Layer A: Services Grid (revealed) - z-10 for lower stacking */}
           <motion.div 
-            className="absolute inset-0 flex items-center justify-center pt-20 z-10"
+            className="absolute inset-0 flex items-center justify-center z-10"
             style={{
               opacity: gridOpacity,
               scale: gridScale,
             }}
           >
-            <div className="w-full max-w-5xl mx-auto px-4">
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
+            <div className="w-full max-w-4xl mx-auto px-4">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-3">
                 {services.map((service) => (
                   <ServiceCard 
                     key={service.id} 
@@ -219,10 +214,10 @@ const ServicesPreview = () => {
               </div>
               
               {/* CTA */}
-              <div className="text-center mt-8 md:mt-12">
+              <div className="text-center mt-6 md:mt-8">
                 <Link
                   to="/services"
-                  className="inline-block px-8 py-3 border border-primary text-primary font-sans text-sm uppercase tracking-widest hover:bg-primary hover:text-primary-foreground transition-all duration-300"
+                  className="inline-block px-6 py-2.5 border border-primary text-primary font-sans text-xs uppercase tracking-widest hover:bg-primary hover:text-primary-foreground transition-all duration-300"
                 >
                   View All Services
                 </Link>
@@ -232,10 +227,10 @@ const ServicesPreview = () => {
 
           {/* Layer B: Scatter Deck (covers grid initially) - z-50 for top stacking */}
           <motion.div 
-            className="absolute inset-0 flex items-center justify-center pointer-events-none pt-20 z-50"
+            className="absolute inset-0 flex items-center justify-center pointer-events-none z-40"
             style={{ opacity: deckOpacity }}
           >
-            <div className="relative w-72 h-96 md:w-96 md:h-[28rem]">
+            <div className="relative w-64 h-80 md:w-80 md:h-96">
               {scatterCards.map((card, index) => (
                 <motion.div
                   key={index}
@@ -249,13 +244,13 @@ const ServicesPreview = () => {
                   }}
                 >
                   {/* Dark glass card content */}
-                  <div className="w-full h-full flex flex-col items-center justify-center p-8">
+                  <div className="w-full h-full flex flex-col items-center justify-center p-6">
                     {/* Service label */}
-                    <span className="text-white/50 font-sans text-xs uppercase tracking-[0.3em] mb-4">
+                    <span className="text-white/50 font-sans text-xs uppercase tracking-[0.3em] mb-3">
                       Service {card.serviceNumber}
                     </span>
                     {/* Service title */}
-                    <h3 className="text-white font-serif text-xl md:text-2xl lg:text-3xl text-center leading-tight">
+                    <h3 className="text-white font-serif text-lg md:text-xl lg:text-2xl text-center leading-tight">
                       {card.label}
                     </h3>
                   </div>
