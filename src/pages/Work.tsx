@@ -93,7 +93,7 @@ const Work = () => {
                     : "opacity-50 hover:opacity-75"
                 }`}
               >
-                <div className="w-10 h-10 bg-white rounded-md p-1.5 flex items-center justify-center">
+                <div className="w-12 h-12 bg-white rounded-full p-2 flex items-center justify-center">
                   <img
                     src={project.logo}
                     alt={project.name}
@@ -131,7 +131,7 @@ const Work = () => {
                     rel="noopener noreferrer"
                     className="inline-block mb-8"
                   >
-                    <div className="w-24 h-24 bg-white rounded-lg p-3 flex items-center justify-center">
+                    <div className="w-40 h-40 bg-white rounded-full p-6 flex items-center justify-center">
                       <img
                         src={project.logo}
                         alt={project.name}
