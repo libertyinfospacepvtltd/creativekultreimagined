@@ -1,7 +1,7 @@
 import { Link, useLocation } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 import logo from "@/assets/creative-kult-logo.png";
 
 const navLinks = [
@@ -21,11 +21,27 @@ const Navbar = ({ showNavbar = true }: NavbarProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const isHomePage = location.pathname === "/";
 
+  // Close mobile menu on route change
+  useEffect(() => {
+    setIsOpen(false);
+  }, [location.pathname]);
+
+  // Prevent body scroll when mobile menu is open
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isOpen]);
+
   // Scroll progress for navbar reveal (only on home page)
   const { scrollYProgress } = useScroll();
   
   // Navbar background and links fade in only after logo has docked (at scroll 0.15)
-  // Slight delay after dock (0.16 - 0.22) for smooth transition
   const navOpacity = useTransform(scrollYProgress, [0.16, 0.22], [0, 1]);
   const navBgOpacity = useTransform(scrollYProgress, [0.16, 0.22], [0, 1]);
 
@@ -33,23 +49,23 @@ const Navbar = ({ showNavbar = true }: NavbarProps) => {
   if (!isHomePage) {
     return (
       <header className="fixed top-0 left-0 right-0 z-50 bg-background/50 backdrop-blur-md border-b border-border/20">
-        <nav className="container-luxury flex items-center justify-between h-16">
+        <nav className="container-luxury flex items-center justify-between h-14 sm:h-16">
           {/* Logo */}
           <Link to="/" className="relative z-10">
             <img 
               src={logo} 
               alt="Creative Kult" 
-              className="h-10 md:h-12 w-auto"
+              className="h-8 sm:h-10 md:h-12 w-auto"
             />
           </Link>
 
           {/* Desktop Navigation */}
-          <ul className="hidden md:flex items-center gap-8">
+          <ul className="hidden md:flex items-center gap-4 lg:gap-8">
             {navLinks.map((link) => (
               <li key={link.href}>
                 <Link
                   to={link.href}
-                  className={`text-sm tracking-wide uppercase font-sans font-medium transition-colors duration-300 link-underline ${
+                  className={`text-xs lg:text-sm tracking-wide uppercase font-sans font-medium transition-colors duration-300 link-underline ${
                     location.pathname === link.href
                       ? "text-primary"
                       : "text-foreground/70 hover:text-foreground"
@@ -64,41 +80,54 @@ const Navbar = ({ showNavbar = true }: NavbarProps) => {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden relative z-10 p-2 text-foreground"
+            className="md:hidden relative z-10 p-2 text-foreground min-h-[44px] min-w-[44px] flex items-center justify-center"
             aria-label="Toggle menu"
+            aria-expanded={isOpen}
           >
             {isOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
 
           {/* Mobile Navigation */}
-          {isOpen && (
-            <div className="md:hidden fixed inset-0 top-16 bg-background z-40 animate-fade-in">
-              <ul className="flex flex-col items-center justify-center h-full gap-8">
-                {navLinks.map((link) => (
-                  <li key={link.href}>
-                    <Link
-                      to={link.href}
-                      onClick={() => setIsOpen(false)}
-                      className={`text-2xl font-serif tracking-wide transition-colors duration-300 ${
-                        location.pathname === link.href
-                          ? "text-primary"
-                          : "text-foreground/70 hover:text-foreground"
-                      }`}
+          <AnimatePresence>
+            {isOpen && (
+              <motion.div 
+                className="md:hidden fixed inset-0 top-14 sm:top-16 bg-background z-40"
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.2 }}
+              >
+                <ul className="flex flex-col items-center justify-center h-full gap-6 sm:gap-8 pb-20">
+                  {navLinks.map((link, index) => (
+                    <motion.li 
+                      key={link.href}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: index * 0.1 }}
                     >
-                      {link.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )}
+                      <Link
+                        to={link.href}
+                        onClick={() => setIsOpen(false)}
+                        className={`text-xl sm:text-2xl font-serif tracking-wide transition-colors duration-300 min-h-[44px] flex items-center ${
+                          location.pathname === link.href
+                            ? "text-primary"
+                            : "text-foreground/70 hover:text-foreground"
+                        }`}
+                      >
+                        {link.label}
+                      </Link>
+                    </motion.li>
+                  ))}
+                </ul>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </nav>
       </header>
     );
   }
 
   // Home page - animated navbar that reveals after hero scroll
-  // Note: Logo is handled by the DockingLogo component, not here
   return (
     <motion.header 
       className="fixed top-0 left-0 right-0 z-40 border-b border-border/20"
@@ -118,20 +147,20 @@ const Navbar = ({ showNavbar = true }: NavbarProps) => {
         style={{ opacity: navBgOpacity }}
       />
       
-      <nav className="container-luxury flex items-center justify-between h-16 relative">
+      <nav className="container-luxury flex items-center justify-between h-14 sm:h-16 relative">
         {/* Empty space for logo - the DockingLogo component handles this */}
-        <div className="h-10 md:h-12 w-32 md:w-40" />
+        <div className="h-8 sm:h-10 md:h-12 w-24 sm:w-32 md:w-40" />
 
         {/* Desktop Navigation - fades in after logo docks */}
         <motion.ul 
-          className="hidden md:flex items-center gap-8"
+          className="hidden md:flex items-center gap-4 lg:gap-8"
           style={{ opacity: navOpacity }}
         >
           {navLinks.map((link) => (
             <li key={link.href}>
               <Link
                 to={link.href}
-                className={`text-sm tracking-wide uppercase font-sans font-medium transition-colors duration-300 link-underline ${
+                className={`text-xs lg:text-sm tracking-wide uppercase font-sans font-medium transition-colors duration-300 link-underline ${
                   location.pathname === link.href
                     ? "text-primary"
                     : "text-foreground/70 hover:text-foreground"
@@ -146,35 +175,49 @@ const Navbar = ({ showNavbar = true }: NavbarProps) => {
         {/* Mobile Menu Button - fades in after logo docks */}
         <motion.button
           onClick={() => setIsOpen(!isOpen)}
-          className="md:hidden relative z-10 p-2 text-foreground"
+          className="md:hidden relative z-10 p-2 text-foreground min-h-[44px] min-w-[44px] flex items-center justify-center"
           aria-label="Toggle menu"
+          aria-expanded={isOpen}
           style={{ opacity: navOpacity }}
         >
           {isOpen ? <X size={24} /> : <Menu size={24} />}
         </motion.button>
 
         {/* Mobile Navigation */}
-        {isOpen && (
-          <div className="md:hidden fixed inset-0 top-16 bg-background z-40 animate-fade-in">
-            <ul className="flex flex-col items-center justify-center h-full gap-8">
-              {navLinks.map((link) => (
-                <li key={link.href}>
-                  <Link
-                    to={link.href}
-                    onClick={() => setIsOpen(false)}
-                    className={`text-2xl font-serif tracking-wide transition-colors duration-300 ${
-                      location.pathname === link.href
-                        ? "text-primary"
-                        : "text-foreground/70 hover:text-foreground"
-                    }`}
+        <AnimatePresence>
+          {isOpen && (
+            <motion.div 
+              className="md:hidden fixed inset-0 top-14 sm:top-16 bg-background z-40"
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.2 }}
+            >
+              <ul className="flex flex-col items-center justify-center h-full gap-6 sm:gap-8 pb-20">
+                {navLinks.map((link, index) => (
+                  <motion.li 
+                    key={link.href}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: index * 0.1 }}
                   >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
+                    <Link
+                      to={link.href}
+                      onClick={() => setIsOpen(false)}
+                      className={`text-xl sm:text-2xl font-serif tracking-wide transition-colors duration-300 min-h-[44px] flex items-center ${
+                        location.pathname === link.href
+                          ? "text-primary"
+                          : "text-foreground/70 hover:text-foreground"
+                      }`}
+                    >
+                      {link.label}
+                    </Link>
+                  </motion.li>
+                ))}
+              </ul>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </nav>
     </motion.header>
   );

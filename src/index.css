@@ -74,31 +74,64 @@
 @layer base {
   * {
     @apply border-border;
+    box-sizing: border-box;
   }
 
   html {
     scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+    font-size: 16px;
   }
 
   body {
     @apply bg-background text-foreground antialiased;
     font-family: var(--font-sans);
-    cursor: none;
+    overflow-x: hidden;
+    min-height: 100vh;
+    min-height: 100dvh;
   }
 
-  a, button, input, textarea, select, [role="button"] {
-    cursor: none;
+  /* Custom cursor only on non-touch devices */
+  @media (hover: hover) and (pointer: fine) {
+    body {
+      cursor: none;
+    }
+    
+    a, button, input, textarea, select, [role="button"] {
+      cursor: none;
+    }
+  }
+
+  /* Touch-friendly tap targets */
+  @media (hover: none) and (pointer: coarse) {
+    a, button, [role="button"] {
+      min-height: 44px;
+      min-width: 44px;
+    }
   }
 
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-serif);
     @apply font-medium tracking-tight;
+    text-wrap: balance;
+  }
+
+  /* Responsive base font sizing */
+  h1 {
+    @apply text-3xl sm:text-4xl md:text-5xl lg:text-6xl;
   }
 
   /* Selection */
   ::selection {
     background: hsl(var(--gold) / 0.3);
     color: hsl(var(--foreground));
+  }
+
+  /* Prevent horizontal overflow */
+  img, video, iframe {
+    max-width: 100%;
+    height: auto;
   }
 }
 
@@ -151,14 +184,28 @@
     animation: radar-pulse 8s linear infinite;
   }
 
-  /* Section padding - reduced by 50% */
+  /* Section padding - mobile-first */
   .section-padding {
-    @apply py-10 md:py-16 lg:py-20;
+    @apply py-8 sm:py-10 md:py-16 lg:py-20;
   }
 
-  /* Container max width */
+  /* Container max width - mobile-first with safe area insets */
   .container-luxury {
-    @apply max-w-7xl mx-auto px-6 md:px-8 lg:px-12;
+    @apply max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12;
+    padding-left: max(1rem, env(safe-area-inset-left));
+    padding-right: max(1rem, env(safe-area-inset-right));
+  }
+
+  @screen sm {
+    .container-luxury {
+      padding-left: max(1.5rem, env(safe-area-inset-left));
+      padding-right: max(1.5rem, env(safe-area-inset-right));
+    }
+  }
+
+  /* Touch-friendly buttons */
+  .btn-touch {
+    @apply min-h-[44px] min-w-[44px] px-6 py-3;
   }
 }
 
