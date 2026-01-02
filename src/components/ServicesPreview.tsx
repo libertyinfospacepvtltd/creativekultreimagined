@@ -164,18 +164,24 @@ const ServicesPreview = () => {
   });
 
   // Transform for scatter animation - slower progression over 300vh
-  const scatterProgress = useTransform(scrollYProgress, [0.1, 0.6], [0, 1]);
-  const deckOpacity = useTransform(scrollYProgress, [0.4, 0.6], [1, 0]);
-  const gridOpacity = useTransform(scrollYProgress, [0.45, 0.65], [0, 1]);
-  const gridScale = useTransform(scrollYProgress, [0.45, 0.65], [0.9, 1]);
+  const scatterProgress = useTransform(scrollYProgress, [0, 0.6], [0, 1]);
+  const deckOpacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
+  
+  // Background content starts hidden, fades in from 20% to 60% scroll
+  const headerOpacity = useTransform(scrollYProgress, [0.2, 0.6], [0, 1]);
+  const gridOpacity = useTransform(scrollYProgress, [0.2, 0.6], [0, 1]);
+  const gridScale = useTransform(scrollYProgress, [0.2, 0.6], [0.9, 1]);
 
   return (
     <section ref={containerRef} className="relative h-[300vh] bg-background">
       {/* Sticky Container - Pins content to center during scroll */}
       <div className="sticky top-0 h-screen w-full overflow-hidden flex flex-col items-center justify-center">
         
-        {/* Header */}
-        <div className="absolute top-20 md:top-24 left-0 right-0 z-20">
+        {/* Header - starts hidden, fades in with scroll */}
+        <motion.div 
+          className="absolute top-20 md:top-24 left-0 right-0 z-10"
+          style={{ opacity: headerOpacity }}
+        >
           <div className="container-luxury text-center">
             <span className="text-primary font-sans text-sm uppercase tracking-widest mb-4 block">
               Our Services
@@ -187,15 +193,15 @@ const ServicesPreview = () => {
               Scroll to discover our comprehensive creative solutions
             </p>
           </div>
-        </div>
+        </motion.div>
 
         {/* Animation Layers Container */}
         <div className="relative w-full h-full flex items-center justify-center pt-32">
           
-          {/* Layer A: Services Grid (revealed) */}
+          {/* Layer A: Services Grid (revealed) - z-10 for lower stacking */}
           <motion.div 
-            className="absolute inset-0 flex items-center justify-center pt-20"
-            style={{ 
+            className="absolute inset-0 flex items-center justify-center pt-20 z-10"
+            style={{
               opacity: gridOpacity,
               scale: gridScale,
             }}
@@ -224,16 +230,16 @@ const ServicesPreview = () => {
             </div>
           </motion.div>
 
-          {/* Layer B: Scatter Deck (covers grid initially) */}
+          {/* Layer B: Scatter Deck (covers grid initially) - z-50 for top stacking */}
           <motion.div 
-            className="absolute inset-0 flex items-center justify-center pointer-events-none pt-20"
+            className="absolute inset-0 flex items-center justify-center pointer-events-none pt-20 z-50"
             style={{ opacity: deckOpacity }}
           >
             <div className="relative w-72 h-96 md:w-96 md:h-[28rem]">
               {scatterCards.map((card, index) => (
                 <motion.div
                   key={index}
-                  className="absolute inset-0 rounded-xl overflow-hidden border border-foreground/20 shadow-2xl bg-background"
+                  className="absolute inset-0 rounded-2xl overflow-hidden bg-black/40 backdrop-blur-md border border-white/10 shadow-2xl"
                   style={{
                     rotate: card.rotation,
                     x: useTransform(scatterProgress, [0, 1], [0, card.scatterX * 4]),
@@ -242,20 +248,20 @@ const ServicesPreview = () => {
                     zIndex: scatterCards.length - index,
                   }}
                 >
-                  {/* Dark premium card background */}
-                  <div className="w-full h-full bg-gradient-to-br from-foreground/95 to-foreground/80 flex flex-col items-center justify-center p-8">
+                  {/* Dark glass card content */}
+                  <div className="w-full h-full flex flex-col items-center justify-center p-8">
                     {/* Service label */}
-                    <span className="text-background/50 font-sans text-xs uppercase tracking-[0.3em] mb-4">
+                    <span className="text-white/50 font-sans text-xs uppercase tracking-[0.3em] mb-4">
                       Service {card.serviceNumber}
                     </span>
                     {/* Service title */}
-                    <h3 className="text-background font-serif text-xl md:text-2xl lg:text-3xl text-center leading-tight">
+                    <h3 className="text-white font-serif text-xl md:text-2xl lg:text-3xl text-center leading-tight">
                       {card.label}
                     </h3>
                   </div>
                   
-                  {/* Subtle gradient overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-background/10 to-transparent pointer-events-none" />
+                  {/* Subtle gradient overlay for glass effect */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent pointer-events-none rounded-2xl" />
                 </motion.div>
               ))}
             </div>
