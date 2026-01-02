@@ -1,12 +1,17 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform, useMotionValueEvent } from "framer-motion";
 import logo from "@/assets/creative-kult-logo.png";
 
-const DockingLogo = () => {
+interface DockingLogoProps {
+  onDockComplete?: () => void;
+}
+
+const DockingLogo = ({ onDockComplete }: DockingLogoProps) => {
   const location = useLocation();
   const isHomePage = location.pathname === "/";
   const [windowSize, setWindowSize] = useState({ width: 0, height: 0 });
+  const [hasDocked, setHasDocked] = useState(false);
 
   // Track window size for accurate positioning
   useEffect(() => {
@@ -21,8 +26,6 @@ const DockingLogo = () => {
   const { scrollYProgress } = useScroll();
 
   // Calculate positions
-  // Center position: 50% of viewport
-  // Navbar position: ~24px from left (container padding), ~8px from top (centered in 64px navbar)
   const isMobile = windowSize.width < 768;
   
   // Initial logo size (hero state)
@@ -41,29 +44,38 @@ const DockingLogo = () => {
   const centerY = windowSize.height / 2;
 
   // Navbar position (docked state) - matches container-luxury padding
-  // container-luxury has px-4 md:px-6 lg:px-8, and navbar h-16 (64px)
   const navPadding = isMobile ? 16 : windowSize.width >= 1024 ? 32 : 24;
   const navbarX = navPadding + (navLogoWidth / 2);
   const navbarY = 32; // Center of 64px navbar
 
-  // Scroll-linked transforms - animation completes at ~25% scroll progress
+  // Scroll-linked transforms - animation completes at ~20% scroll progress for smoother transition
   const x = useTransform(
     scrollYProgress, 
-    [0, 0.25], 
+    [0, 0.15], 
     [centerX, navbarX]
   );
   
   const y = useTransform(
     scrollYProgress, 
-    [0, 0.25], 
+    [0, 0.15], 
     [centerY, navbarY]
   );
   
   const scale = useTransform(
     scrollYProgress, 
-    [0, 0.25], 
+    [0, 0.15], 
     [1, scaleFactor]
   );
+
+  // Track when docking completes
+  useMotionValueEvent(scrollYProgress, "change", useCallback((latest: number) => {
+    if (latest >= 0.15 && !hasDocked) {
+      setHasDocked(true);
+      onDockComplete?.();
+    } else if (latest < 0.15 && hasDocked) {
+      setHasDocked(false);
+    }
+  }, [hasDocked, onDockComplete]));
 
   // Only render on home page
   if (!isHomePage || windowSize.width === 0) {

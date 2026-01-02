@@ -23,9 +23,11 @@ const HeroSection = ({ preloaderComplete = true }: HeroSectionProps) => {
   // Tagline opacity - fades out as scroll begins
   const taglineOpacity = useTransform(scrollYProgress, [0, 0.1], [1, 0]);
   
-  // Reveal text
-  const textOpacity = useTransform(scrollYProgress, [0.3, 0.5], [0, 1]);
-  const textY = useTransform(scrollYProgress, [0.3, 0.5], ["30px", "0px"]);
+  // Reveal text - only appears AFTER logo has docked (scroll > 0.15)
+  // Phase 2: Gap (0.15 - 0.22), Phase 3: Text reveal (0.22 - 0.35)
+  const textOpacity = useTransform(scrollYProgress, [0.22, 0.35], [0, 1]);
+  const textY = useTransform(scrollYProgress, [0.22, 0.35], ["50px", "0px"]);
+  const textScale = useTransform(scrollYProgress, [0.22, 0.35], [0.9, 1]);
   
   // CTAs and radar
   const ctaOpacity = useTransform(scrollYProgress, [0, 0.05], [1, 0]);
@@ -127,7 +129,7 @@ const HeroSection = ({ preloaderComplete = true }: HeroSectionProps) => {
           </div>
         </motion.div>
 
-        {/* Reveal Text - "Cultivating Digital Legacies" - with solid background */}
+        {/* Reveal Text - "Cultivating Digital Legacies" - appears AFTER logo docks */}
         <motion.div 
           className="absolute inset-0 flex items-center justify-center pointer-events-none z-30"
           style={{
@@ -141,7 +143,10 @@ const HeroSection = ({ preloaderComplete = true }: HeroSectionProps) => {
           />
           <motion.div 
             className="relative text-center px-4"
-            style={{ y: textY }}
+            style={{ 
+              y: textY,
+              scale: textScale,
+            }}
           >
             <h1 className="font-serif text-4xl md:text-6xl lg:text-8xl text-foreground tracking-tight">
               Cultivating Digital
