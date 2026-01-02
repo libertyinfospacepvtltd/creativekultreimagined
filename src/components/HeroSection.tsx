@@ -3,6 +3,10 @@ import { Link } from "react-router-dom";
 import { motion, useScroll, useTransform } from "framer-motion";
 import heroImage from "@/assets/victoria-memorial-hero.jpg";
 
+// Preload hero image immediately
+const preloadImage = new Image();
+preloadImage.src = heroImage;
+
 interface HeroSectionProps {
   preloaderComplete?: boolean;
 }

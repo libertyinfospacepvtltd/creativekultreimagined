@@ -28,16 +28,16 @@ const DockingLogo = ({ onDockComplete, isPreloading = false, onRevealComplete }:
     return () => window.removeEventListener("resize", updateSize);
   }, []);
 
-  // Handle preloader animation phases
+  // Handle preloader animation phases - fast and fluid
   useEffect(() => {
     if (!isPreloading || revealPhase === "complete") return;
 
     const timers = [
-      setTimeout(() => setRevealPhase("hold"), 2000),
+      setTimeout(() => setRevealPhase("hold"), 1200),
       setTimeout(() => {
         setRevealPhase("complete");
         onRevealComplete?.();
-      }, 2800),
+      }, 1400),
     ];
 
     return () => timers.forEach(clearTimeout);
@@ -127,9 +127,9 @@ const DockingLogo = ({ onDockComplete, isPreloading = false, onRevealComplete }:
               : "inset(0 0% 0 0)"
           }}
           transition={{
-            duration: isPreloading && revealPhase === "reveal" ? 2 : 0,
+            duration: isPreloading && revealPhase === "reveal" ? 1.2 : 0,
             ease: [0.25, 0.1, 0.25, 1],
-            times: [0, 0.15, 1], // Slow start on "K", then smooth reveal
+            times: [0, 0.15, 1],
           }}
         >
           <img

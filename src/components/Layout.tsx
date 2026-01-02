@@ -18,11 +18,10 @@ const Layout = ({ children }: LayoutProps) => {
   const [preloaderVisible, setPreloaderVisible] = useState(isHomePage);
   const [preloaderComplete, setPreloaderComplete] = useState(!isHomePage);
 
-  // Called when logo reveal animation finishes - fade out black overlay
+  // Called when logo reveal animation finishes - instant transition
   const handleRevealComplete = useCallback(() => {
     setPreloaderVisible(false);
-    // Small delay to ensure overlay fade completes before enabling scroll docking
-    setTimeout(() => setPreloaderComplete(true), 100);
+    setPreloaderComplete(true);
   }, []);
 
   return (
