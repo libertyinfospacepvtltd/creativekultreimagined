@@ -1,14 +1,13 @@
 import { useEffect, useState, useCallback } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { motion, useScroll, useTransform, useMotionValueEvent, LayoutGroup } from "framer-motion";
+import { motion, useScroll, useTransform, useMotionValueEvent } from "framer-motion";
 import logo from "@/assets/creative-kult-logo.png";
 
 interface DockingLogoProps {
   onDockComplete?: () => void;
-  isReady?: boolean;
 }
 
-const DockingLogo = ({ onDockComplete, isReady = true }: DockingLogoProps) => {
+const DockingLogo = ({ onDockComplete }: DockingLogoProps) => {
   const location = useLocation();
   const isHomePage = location.pathname === "/";
   const [windowSize, setWindowSize] = useState({ width: 0, height: 0 });
@@ -49,25 +48,19 @@ const DockingLogo = ({ onDockComplete, isReady = true }: DockingLogoProps) => {
   const navbarX = navPadding + (navLogoWidth / 2);
   const navbarY = 32; // Center of 64px navbar
 
-  // ARC MOTION: Up first, then left
-  // Phase 1 (0-30%): Move primarily UPWARD (clear the center stage)
-  // Phase 2 (30-100%): Continue up + aggressive LEFT movement to navbar
-  
-  // Y-axis: Move up throughout the animation
-  const y = useTransform(
-    scrollYProgress, 
-    [0, 0.08, 0.15], // Complete by 15% scroll
-    [centerY, centerY * 0.4, navbarY] // Start center, move up aggressively first
-  );
-  
-  // X-axis: Delayed movement, starts after initial upward motion
+  // Scroll-linked transforms - animation completes at ~20% scroll progress for smoother transition
   const x = useTransform(
     scrollYProgress, 
-    [0, 0.05, 0.15], // Slight delay on X movement
-    [centerX, centerX * 0.85, navbarX] // Stay center initially, then sweep left
+    [0, 0.15], 
+    [centerX, navbarX]
   );
   
-  // Scale: Gradual reduction throughout
+  const y = useTransform(
+    scrollYProgress, 
+    [0, 0.15], 
+    [centerY, navbarY]
+  );
+  
   const scale = useTransform(
     scrollYProgress, 
     [0, 0.15], 
@@ -90,33 +83,24 @@ const DockingLogo = ({ onDockComplete, isReady = true }: DockingLogoProps) => {
   }
 
   return (
-    <LayoutGroup>
-      <motion.div
-        layoutId="creative-kult-logo"
-        className="fixed z-50 pointer-events-none"
-        style={{
-          x,
-          y,
-          scale,
-          translateX: "-50%",
-          translateY: "-50%",
-        }}
-        initial={!isReady ? { opacity: 0 } : false}
-        animate={{ opacity: 1 }}
-        transition={{
-          opacity: { duration: 0.3 },
-          layout: { duration: 0.6, ease: [0.4, 0, 0.2, 1] }
-        }}
-      >
-        <Link to="/" className="pointer-events-auto block">
-          <img
-            src={logo}
-            alt="Creative Kult"
-            className="w-64 md:w-80 lg:w-[420px] h-auto"
-          />
-        </Link>
-      </motion.div>
-    </LayoutGroup>
+    <motion.div
+      className="fixed z-50 pointer-events-none"
+      style={{
+        x,
+        y,
+        scale,
+        translateX: "-50%",
+        translateY: "-50%",
+      }}
+    >
+      <Link to="/" className="pointer-events-auto block">
+        <img
+          src={logo}
+          alt="Creative Kult"
+          className="w-64 md:w-80 lg:w-[420px] h-auto"
+        />
+      </Link>
+    </motion.div>
   );
 };
 
