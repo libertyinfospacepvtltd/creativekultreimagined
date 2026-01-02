@@ -4,7 +4,11 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import logo from "@/assets/creative-kult-logo.png";
 import heroImage from "@/assets/victoria-memorial-hero.jpg";
 
-const HeroSection = () => {
+interface HeroSectionProps {
+  preloaderComplete?: boolean;
+}
+
+const HeroSection = ({ preloaderComplete = true }: HeroSectionProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
@@ -16,11 +20,27 @@ const HeroSection = () => {
 
   // Transform values based on scroll progress
   const backgroundScale = useTransform(scrollYProgress, [0, 0.5], [1.1, 1.8]);
-  const logoScale = useTransform(scrollYProgress, [0, 0.3], [1, 1.4]);
-  const logoY = useTransform(scrollYProgress, [0, 0.5], ["0%", "-120%"]);
-  const logoOpacity = useTransform(scrollYProgress, [0, 0.05, 0.3, 0.5], [1, 0.8, 0.5, 0]);
-  const textOpacity = useTransform(scrollYProgress, [0.15, 0.35], [0, 1]);
-  const textY = useTransform(scrollYProgress, [0.15, 0.35], ["30px", "0px"]);
+  
+  // Logo docking animation - from center to top-left navbar position
+  // Scale: starts at 1, shrinks to navbar size (roughly 0.15 of original)
+  const logoScale = useTransform(scrollYProgress, [0, 0.25], [1, 0.15]);
+  
+  // Position: move from center (0,0) to top-left corner
+  // We need to calculate the exact positions
+  const logoX = useTransform(scrollYProgress, [0, 0.25], ["0%", "-42vw"]);
+  const logoY = useTransform(scrollYProgress, [0, 0.25], ["0%", "-42vh"]);
+  
+  // Logo opacity - fade out after docking to let navbar logo take over
+  const logoOpacity = useTransform(scrollYProgress, [0.2, 0.28], [1, 0]);
+  
+  // Tagline opacity - fades out as scroll begins
+  const taglineOpacity = useTransform(scrollYProgress, [0, 0.1], [1, 0]);
+  
+  // Reveal text
+  const textOpacity = useTransform(scrollYProgress, [0.3, 0.5], [0, 1]);
+  const textY = useTransform(scrollYProgress, [0.3, 0.5], ["30px", "0px"]);
+  
+  // CTAs and radar
   const ctaOpacity = useTransform(scrollYProgress, [0, 0.05], [1, 0]);
   const radarOpacity = useTransform(scrollYProgress, [0, 0.1], [1, 0]);
 
@@ -105,30 +125,35 @@ const HeroSection = () => {
           ))}
         </motion.div>
 
-        {/* Center Logo with Scroll Animation */}
-        <div className="absolute inset-0 flex items-center justify-center">
+        {/* Center Logo with Docking Animation */}
+        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
           <motion.div 
             className="relative text-center"
             style={{
               scale: logoScale,
+              x: logoX,
               y: logoY,
               opacity: logoOpacity,
-              x: mousePosition.x * 10,
             }}
+            initial={{ opacity: preloaderComplete ? 1 : 0 }}
           >
             <img
               src={logo}
               alt="Creative Kult"
               className="w-64 md:w-80 lg:w-[420px] h-auto mx-auto"
             />
-            <div className="mt-8 space-y-3">
+            {/* Tagline - fades out quickly */}
+            <motion.div 
+              className="mt-8 space-y-3"
+              style={{ opacity: taglineOpacity }}
+            >
               <p className="text-foreground/90 font-serif text-xl md:text-2xl lg:text-3xl italic tracking-wide">
                 Where Brands Break the Mold
               </p>
               <p className="text-muted-foreground font-sans text-sm md:text-base tracking-widest uppercase">
                 Strategy • Rebellion • Results
               </p>
-            </div>
+            </motion.div>
           </motion.div>
         </div>
 
@@ -159,7 +184,7 @@ const HeroSection = () => {
 
         {/* Bottom CTAs */}
         <motion.div 
-          className="absolute bottom-12 left-0 right-0 flex flex-col items-center gap-8"
+          className="absolute bottom-12 left-0 right-0 flex flex-col items-center gap-8 pointer-events-auto"
           style={{ opacity: ctaOpacity }}
         >
           <div className="flex flex-col sm:flex-row items-center gap-4">
