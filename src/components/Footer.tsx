@@ -131,7 +131,7 @@ const Footer = () => {
             </a>
           </div>
           <p className="text-muted-foreground/60 text-xs font-sans">
-            © {new Date().getFullYear()} Creative Kult. All rights reserved.
+            © 2025 Creative Kult. All Rights Reserved.
           </p>
         </div>
       </div>

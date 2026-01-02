@@ -5,9 +5,9 @@ import logo from "@/assets/creative-kult-logo.png";
 
 const navLinks = [
   { href: "/", label: "Home" },
+  { href: "/about", label: "About" },
   { href: "/work", label: "Our Work" },
   { href: "/services", label: "Services" },
-  { href: "/about", label: "About" },
   { href: "/contact", label: "Contact" },
 ];
 
