@@ -1,8 +1,7 @@
-import { useState } from "react";
 import { Link } from "react-router-dom";
 import { 
   Megaphone, Target, Palette, Camera, Lightbulb, 
-  Newspaper, PenTool, FileText, Check 
+  Newspaper, PenTool, FileText
 } from "lucide-react";
 import Layout from "@/components/Layout";
 
@@ -11,97 +10,41 @@ const services = [
     id: "social-media",
     icon: Megaphone,
     title: "Social Media Marketing",
-    description: "Crafting scroll-stopping content and strategies that grow your brand and engage your audience where it matters most.",
-    features: [
-      "Content Strategy & Calendar",
-      "Community Management",
-      "Influencer Partnerships",
-      "Platform-Specific Optimization",
-    ],
   },
   {
     id: "performance",
     icon: Target,
     title: "Performance Marketing",
-    description: "Data-driven ad campaigns focused on results—more clicks, more conversions, more ROI.",
-    features: [
-      "Google & Meta Ads",
-      "Conversion Tracking",
-      "A/B Testing & Optimization",
-      "ROI-Focused Campaigns",
-    ],
   },
   {
     id: "branding",
     icon: Palette,
     title: "Offline Branding",
-    description: "From print to packaging, we build bold offline identities that make your brand unforgettable in the real world.",
-    features: [
-      "Logo & Visual Identity",
-      "Print Collateral Design",
-      "Packaging Design",
-      "Environmental Graphics",
-    ],
   },
   {
     id: "photography",
     icon: Camera,
     title: "Photoshoot & Videography",
-    description: "High-quality visuals tailored to your brand—product shoots, lifestyle content, reels, and everything in between.",
-    features: [
-      "Product Photography",
-      "Lifestyle & Brand Shoots",
-      "Video Production",
-      "Reels & Short-Form Content",
-    ],
   },
   {
     id: "strategy",
     icon: Lightbulb,
     title: "Brand Strategy",
-    description: "Building strong brand foundations through research, positioning, and strategic planning.",
-    features: [
-      "Market Research",
-      "Brand Positioning",
-      "Competitor Analysis",
-      "Growth Strategy",
-    ],
   },
   {
     id: "pr",
     icon: Newspaper,
     title: "Public Relations",
-    description: "Amplifying your brand's voice through strategic media relations and storytelling.",
-    features: [
-      "Press Releases",
-      "Media Outreach",
-      "Crisis Management",
-      "Event PR",
-    ],
   },
   {
     id: "design",
     icon: PenTool,
     title: "Creative Design",
-    description: "Stunning visual solutions that capture attention and communicate your brand story effectively.",
-    features: [
-      "Graphic Design",
-      "UI/UX Design",
-      "Motion Graphics",
-      "Illustration",
-    ],
   },
   {
     id: "content",
     icon: FileText,
     title: "Content Production",
-    description: "End-to-end content creation from ideation to execution across all formats.",
-    features: [
-      "Copywriting",
-      "Blog & Article Writing",
-      "Script Writing",
-      "Social Media Content",
-    ],
   },
 ];
 
@@ -113,9 +56,6 @@ const processSteps = [
 ];
 
 const Services = () => {
-  const [activeService, setActiveService] = useState(services[0].id);
-  const currentService = services.find(s => s.id === activeService) || services[0];
-
   return (
     <Layout>
       {/* Page Header */}
@@ -133,69 +73,33 @@ const Services = () => {
         </div>
       </section>
 
-      {/* Service Tabs */}
-      <section className="py-4 bg-card border-y border-border/30">
+      {/* Premium Editorial Grid */}
+      <section className="bg-background">
         <div className="container-luxury">
-          <div className="flex flex-wrap items-center justify-center gap-4 md:gap-6">
+          <div className="grid grid-cols-2 lg:grid-cols-4">
             {services.map((service) => (
-              <button
+              <div
                 key={service.id}
-                onClick={() => setActiveService(service.id)}
-                className={`flex items-center gap-2 py-3 px-4 font-sans text-sm transition-all duration-300 border-b-2 ${
-                  activeService === service.id
-                    ? "text-primary border-primary"
-                    : "text-muted-foreground border-transparent hover:text-foreground"
-                }`}
+                className="group relative flex flex-col items-center justify-center py-10 px-6 border border-foreground/10 transition-all duration-300 hover:bg-foreground/5"
               >
-                <service.icon size={18} />
-                <span>{service.title}</span>
-              </button>
+                {/* Icon */}
+                <service.icon 
+                  className="w-8 h-8 text-muted-foreground transition-colors duration-300 group-hover:text-primary mb-4"
+                  strokeWidth={1.5}
+                />
+                
+                {/* Title */}
+                <h3 className="text-foreground text-center font-serif text-base md:text-lg font-medium transition-colors duration-300 group-hover:text-primary">
+                  {service.title}
+                </h3>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Service Details */}
-      <section className="section-padding bg-background">
-        <div className="container-luxury">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 animate-fade-in" key={activeService}>
-            {/* Left - Info */}
-            <div>
-              <currentService.icon 
-                size={48} 
-                className="text-primary mb-8" 
-              />
-              <h2 className="text-3xl md:text-4xl font-serif text-foreground mb-6">
-                {currentService.title}
-              </h2>
-              <p className="text-muted-foreground font-sans leading-relaxed text-lg">
-                {currentService.description}
-              </p>
-            </div>
-
-            {/* Right - Features */}
-            <div className="bg-card border border-border/30 p-8 md:p-12">
-              <h4 className="text-primary font-sans text-xs uppercase tracking-widest mb-8">
-                What's Included
-              </h4>
-              <ul className="space-y-4">
-                {currentService.features.map((feature, index) => (
-                  <li
-                    key={index}
-                    className="flex items-center gap-4 text-foreground font-sans"
-                  >
-                    <Check size={18} className="text-primary flex-shrink-0" />
-                    {feature}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* Process Section */}
-      <section className="section-padding bg-card border-t border-border/30">
+      <section className="section-padding bg-card border-t border-border/30 mt-16">
         <div className="container-luxury">
           <div className="text-center mb-16">
             <span className="text-primary font-sans text-sm uppercase tracking-widest mb-4 block">
