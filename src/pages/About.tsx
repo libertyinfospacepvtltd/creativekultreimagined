@@ -68,12 +68,36 @@ const About = () => {
             <span className="text-primary font-sans text-xs sm:text-sm uppercase tracking-[0.3em] mb-3 sm:mb-4 block">The Team</span>
             <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-serif text-foreground mb-3 sm:mb-4">Creative Minds United</h2>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 lg:gap-10">
             {team.map((member, index) => (
-              <motion.div key={index} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: index * 0.15 }} viewport={{ once: true }} className="group relative">
-                <div className="relative h-64 sm:h-80 lg:h-96 overflow-hidden rounded-sm border border-foreground/10 bg-[hsl(220,15%,6%)]">
-                  <div className="absolute inset-0 flex flex-col justify-center items-center p-6 sm:p-8 text-center">
-                    <span className="text-primary/80 font-sans text-[10px] uppercase tracking-[0.25em] mb-2 sm:mb-3">{member.specialty}</span>
+              <motion.div 
+                key={index} 
+                initial={{ opacity: 0, y: 20 }} 
+                whileInView={{ opacity: 1, y: 0 }} 
+                transition={{ duration: 0.6, delay: index * 0.15 }} 
+                viewport={{ once: true }} 
+                className="group relative"
+              >
+                <div className="relative h-72 sm:h-80 lg:h-[420px] overflow-hidden rounded-sm border border-foreground/10 bg-[hsl(220,15%,6%)] transition-transform duration-500 group-hover:scale-[1.02]">
+                  {/* Portrait image - fades in on hover */}
+                  <motion.div 
+                    className="absolute inset-0 z-10"
+                    initial={{ opacity: 0, filter: "blur(8px)" }}
+                    whileHover={{ opacity: 1, filter: "blur(0px)" }}
+                    transition={{ duration: 0.5, ease: "easeOut" }}
+                  >
+                    <img 
+                      src={member.image} 
+                      alt={member.name}
+                      className="w-full h-full object-cover object-center"
+                    />
+                    {/* Gradient overlay for text readability */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-[hsl(220,15%,6%)]/90 via-transparent to-transparent" />
+                  </motion.div>
+                  
+                  {/* Text content - always visible */}
+                  <div className="absolute inset-0 flex flex-col justify-center items-center p-6 sm:p-8 text-center z-20 group-hover:justify-end group-hover:pb-8 transition-all duration-500">
+                    <span className="text-primary/80 font-sans text-[10px] sm:text-xs uppercase tracking-[0.25em] mb-2 sm:mb-3">{member.specialty}</span>
                     <h3 className="text-lg sm:text-xl lg:text-2xl font-serif text-foreground mb-1 sm:mb-2">{member.name}</h3>
                     <p className="text-muted-foreground font-sans text-xs sm:text-sm">{member.role}</p>
                   </div>

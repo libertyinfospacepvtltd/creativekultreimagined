@@ -1,5 +1,5 @@
 import { Link, useLocation } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Menu, X } from "lucide-react";
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 import logo from "@/assets/creative-kult-logo.png";
@@ -26,6 +26,18 @@ const Navbar = ({ showNavbar = true }: NavbarProps) => {
     setIsOpen(false);
   }, [location.pathname]);
 
+  // Close menu on scroll
+  useEffect(() => {
+    const handleScroll = () => {
+      if (isOpen) {
+        setIsOpen(false);
+      }
+    };
+    
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [isOpen]);
+
   // Prevent body scroll when mobile menu is open
   useEffect(() => {
     if (isOpen) {
@@ -38,6 +50,11 @@ const Navbar = ({ showNavbar = true }: NavbarProps) => {
     };
   }, [isOpen]);
 
+  // Close menu on tap outside (backdrop click)
+  const handleBackdropClick = useCallback(() => {
+    setIsOpen(false);
+  }, []);
+
   // Scroll progress for navbar reveal (only on home page)
   const { scrollYProgress } = useScroll();
   
@@ -48,7 +65,7 @@ const Navbar = ({ showNavbar = true }: NavbarProps) => {
   // For non-home pages, always show full navbar
   if (!isHomePage) {
     return (
-      <header className="fixed top-0 left-0 right-0 z-50 bg-background/50 backdrop-blur-md border-b border-border/20">
+      <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border/20">
         <nav className="container-luxury flex items-center justify-between h-14 sm:h-16">
           {/* Logo */}
           <Link to="/" className="relative z-10">
@@ -80,46 +97,58 @@ const Navbar = ({ showNavbar = true }: NavbarProps) => {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden relative z-10 p-2 text-foreground min-h-[44px] min-w-[44px] flex items-center justify-center"
+            className="md:hidden relative z-[60] p-2 text-foreground min-h-[44px] min-w-[44px] flex items-center justify-center"
             aria-label="Toggle menu"
             aria-expanded={isOpen}
           >
             {isOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
 
-          {/* Mobile Navigation */}
+          {/* Mobile Navigation - Fullscreen Overlay */}
           <AnimatePresence>
             {isOpen && (
-              <motion.div 
-                className="md:hidden fixed inset-0 top-14 sm:top-16 bg-background z-40"
-                initial={{ opacity: 0, y: -10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
-                transition={{ duration: 0.2 }}
-              >
-                <ul className="flex flex-col items-center justify-center h-full gap-6 sm:gap-8 pb-20">
-                  {navLinks.map((link, index) => (
-                    <motion.li 
-                      key={link.href}
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: index * 0.1 }}
-                    >
-                      <Link
-                        to={link.href}
-                        onClick={() => setIsOpen(false)}
-                        className={`text-xl sm:text-2xl font-serif tracking-wide transition-colors duration-300 min-h-[44px] flex items-center ${
-                          location.pathname === link.href
-                            ? "text-primary"
-                            : "text-foreground/70 hover:text-foreground"
-                        }`}
+              <>
+                {/* Backdrop */}
+                <motion.div
+                  className="md:hidden fixed inset-0 bg-background/60 backdrop-blur-sm z-40"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.2 }}
+                  onClick={handleBackdropClick}
+                />
+                {/* Menu Content */}
+                <motion.div 
+                  className="md:hidden fixed inset-0 bg-background/95 backdrop-blur-lg z-50"
+                  initial={{ opacity: 0, y: -20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -20 }}
+                  transition={{ duration: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }}
+                >
+                  <ul className="flex flex-col items-center justify-center h-full gap-6 sm:gap-8">
+                    {navLinks.map((link, index) => (
+                      <motion.li 
+                        key={link.href}
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: index * 0.1, duration: 0.3 }}
                       >
-                        {link.label}
-                      </Link>
-                    </motion.li>
-                  ))}
-                </ul>
-              </motion.div>
+                        <Link
+                          to={link.href}
+                          onClick={() => setIsOpen(false)}
+                          className={`text-2xl sm:text-3xl font-serif tracking-wide transition-colors duration-300 min-h-[44px] flex items-center ${
+                            location.pathname === link.href
+                              ? "text-primary"
+                              : "text-foreground/70 hover:text-foreground"
+                          }`}
+                        >
+                          {link.label}
+                        </Link>
+                      </motion.li>
+                    ))}
+                  </ul>
+                </motion.div>
+              </>
             )}
           </AnimatePresence>
         </nav>
@@ -130,14 +159,14 @@ const Navbar = ({ showNavbar = true }: NavbarProps) => {
   // Home page - animated navbar that reveals after hero scroll
   return (
     <motion.header 
-      className="fixed top-0 left-0 right-0 z-40 border-b border-border/20"
+      className="fixed top-0 left-0 right-0 z-50 border-b border-border/20"
       style={{
         pointerEvents: showNavbar ? "auto" : "none",
       }}
     >
       {/* Animated background */}
       <motion.div 
-        className="absolute inset-0 bg-background/50 backdrop-blur-md"
+        className="absolute inset-0 bg-background/80 backdrop-blur-md"
         style={{ opacity: navBgOpacity }}
       />
       
@@ -175,7 +204,7 @@ const Navbar = ({ showNavbar = true }: NavbarProps) => {
         {/* Mobile Menu Button - fades in after logo docks */}
         <motion.button
           onClick={() => setIsOpen(!isOpen)}
-          className="md:hidden relative z-10 p-2 text-foreground min-h-[44px] min-w-[44px] flex items-center justify-center"
+          className="md:hidden relative z-[60] p-2 text-foreground min-h-[44px] min-w-[44px] flex items-center justify-center"
           aria-label="Toggle menu"
           aria-expanded={isOpen}
           style={{ opacity: navOpacity }}
@@ -183,39 +212,51 @@ const Navbar = ({ showNavbar = true }: NavbarProps) => {
           {isOpen ? <X size={24} /> : <Menu size={24} />}
         </motion.button>
 
-        {/* Mobile Navigation */}
+        {/* Mobile Navigation - Fullscreen Overlay */}
         <AnimatePresence>
           {isOpen && (
-            <motion.div 
-              className="md:hidden fixed inset-0 top-14 sm:top-16 bg-background z-40"
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
-              transition={{ duration: 0.2 }}
-            >
-              <ul className="flex flex-col items-center justify-center h-full gap-6 sm:gap-8 pb-20">
-                {navLinks.map((link, index) => (
-                  <motion.li 
-                    key={link.href}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: index * 0.1 }}
-                  >
-                    <Link
-                      to={link.href}
-                      onClick={() => setIsOpen(false)}
-                      className={`text-xl sm:text-2xl font-serif tracking-wide transition-colors duration-300 min-h-[44px] flex items-center ${
-                        location.pathname === link.href
-                          ? "text-primary"
-                          : "text-foreground/70 hover:text-foreground"
-                      }`}
+            <>
+              {/* Backdrop */}
+              <motion.div
+                className="md:hidden fixed inset-0 bg-background/60 backdrop-blur-sm z-40"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.2 }}
+                onClick={handleBackdropClick}
+              />
+              {/* Menu Content */}
+              <motion.div 
+                className="md:hidden fixed inset-0 bg-background/95 backdrop-blur-lg z-50"
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }}
+              >
+                <ul className="flex flex-col items-center justify-center h-full gap-6 sm:gap-8">
+                  {navLinks.map((link, index) => (
+                    <motion.li 
+                      key={link.href}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: index * 0.1, duration: 0.3 }}
                     >
-                      {link.label}
-                    </Link>
-                  </motion.li>
-                ))}
-              </ul>
-            </motion.div>
+                      <Link
+                        to={link.href}
+                        onClick={() => setIsOpen(false)}
+                        className={`text-2xl sm:text-3xl font-serif tracking-wide transition-colors duration-300 min-h-[44px] flex items-center ${
+                          location.pathname === link.href
+                            ? "text-primary"
+                            : "text-foreground/70 hover:text-foreground"
+                        }`}
+                      >
+                        {link.label}
+                      </Link>
+                    </motion.li>
+                  ))}
+                </ul>
+              </motion.div>
+            </>
           )}
         </AnimatePresence>
       </nav>
