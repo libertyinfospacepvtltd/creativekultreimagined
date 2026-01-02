@@ -10,12 +10,20 @@ const CTASection = () => {
         <p className="text-muted-foreground font-sans max-w-xl mx-auto mb-10">
           Ready to transform your brand? Let's create something extraordinary together.
         </p>
-        <Link
-          to="/contact"
-          className="inline-block px-10 py-4 rounded-full bg-primary text-primary-foreground font-sans text-sm uppercase tracking-widest hover:bg-primary/90 transition-all duration-300"
-        >
-          Start a Project
-        </Link>
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+          <Link
+            to="/contact"
+            className="inline-block px-10 py-4 rounded-full bg-primary text-primary-foreground font-sans text-sm uppercase tracking-widest hover:bg-primary/90 transition-all duration-300"
+          >
+            Join the Kult
+          </Link>
+          <Link
+            to="/services"
+            className="inline-block px-10 py-4 rounded-full border border-primary text-primary font-sans text-sm uppercase tracking-widest hover:bg-primary hover:text-primary-foreground transition-all duration-300"
+          >
+            View Pricing
+          </Link>
+        </div>
       </div>
     </section>
   );

@@ -71,7 +71,7 @@ const CustomCursor = () => {
     <>
       {/* Main cursor dot */}
       <div
-        className={`fixed pointer-events-none z-[9999] transition-opacity duration-200 ${
+        className={`fixed pointer-events-none z-[10000] transition-opacity duration-200 ${
           isVisible ? "opacity-100" : "opacity-0"
         }`}
         style={{
@@ -92,7 +92,7 @@ const CustomCursor = () => {
 
       {/* Trailing circle */}
       <motion.div
-        className={`fixed pointer-events-none z-[9998] transition-opacity duration-200 ${
+        className={`fixed pointer-events-none z-[9999] transition-opacity duration-200 ${
           isVisible ? "opacity-100" : "opacity-0"
         }`}
         style={{
