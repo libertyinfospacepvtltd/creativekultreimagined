@@ -11,9 +11,27 @@ const values = [
 ];
 
 const team = [
-  { name: "Payel Das", role: "Creative Head", specialty: "Vision & Strategy", description: "A creative visionary with 4+ years of experience crafting compelling brand narratives.", image: "https://canvas-kolkata-vibe.lovable.app/assets/creative-head-Bz-5M7Qu.jpg" },
-  { name: "Sreyash Banerjee", role: "Marketing Head", specialty: "Growth & Performance", description: "Data-driven strategist turning insights into measurable business outcomes.", image: "https://canvas-kolkata-vibe.lovable.app/assets/marketing-lead-CXJaitgf.jpg" },
-  { name: "Palash Kanti Giri", role: "Design Head", specialty: "Visual Excellence", description: "Crafting stunning visual identities that capture brand essence.", image: "https://canvas-kolkata-vibe.lovable.app/assets/design-head-w392veiT.jpg" },
+  { 
+    name: "Payel Das", 
+    role: "Creative Head", 
+    specialty: "Vision & Strategy", 
+    description: "A creative visionary with 4+ years of experience crafting compelling brand narratives.", 
+    image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&h=500&fit=crop&crop=face" 
+  },
+  { 
+    name: "Sreyash Banerjee", 
+    role: "Marketing Head", 
+    specialty: "Growth & Performance", 
+    description: "Data-driven strategist turning insights into measurable business outcomes.", 
+    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=500&fit=crop&crop=face" 
+  },
+  { 
+    name: "Palash Kanti Giri", 
+    role: "Design Head", 
+    specialty: "Visual Excellence", 
+    description: "Crafting stunning visual identities that capture brand essence.", 
+    image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=500&fit=crop&crop=face" 
+  },
 ];
 
 const About = () => {
@@ -78,25 +96,24 @@ const About = () => {
                 viewport={{ once: true }} 
                 className="group relative"
               >
-                <div className="relative h-72 sm:h-80 lg:h-[420px] overflow-hidden rounded-sm border border-foreground/10 bg-[hsl(220,15%,6%)] transition-transform duration-500 group-hover:scale-[1.02]">
-                  {/* Portrait image - fades in on hover */}
-                  <motion.div 
-                    className="absolute inset-0 z-10"
-                    initial={{ opacity: 0, filter: "blur(8px)" }}
-                    whileHover={{ opacity: 1, filter: "blur(0px)" }}
-                    transition={{ duration: 0.5, ease: "easeOut" }}
-                  >
+                <div className="relative h-72 sm:h-80 lg:h-[420px] overflow-hidden rounded-sm border border-foreground/10 bg-[hsl(220,15%,6%)] transition-all duration-700 ease-[cubic-bezier(0.25,0.1,0.25,1)] group-hover:scale-[1.02]">
+                  {/* Portrait image - always visible */}
+                  <div className="absolute inset-0 z-10">
                     <img 
                       src={member.image} 
                       alt={member.name}
-                      className="w-full h-full object-cover object-center"
+                      className="w-full h-full object-cover object-top"
+                      onError={(e) => {
+                        // Fallback to placeholder avatar if image fails
+                        e.currentTarget.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(member.name)}&size=400&background=1a1a1a&color=d4af37&font-size=0.4`;
+                      }}
                     />
                     {/* Gradient overlay for text readability */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-[hsl(220,15%,6%)]/90 via-transparent to-transparent" />
-                  </motion.div>
+                    <div className="absolute inset-0 bg-gradient-to-t from-[hsl(220,15%,6%)] via-[hsl(220,15%,6%)]/40 to-transparent" />
+                  </div>
                   
-                  {/* Text content - always visible */}
-                  <div className="absolute inset-0 flex flex-col justify-center items-center p-6 sm:p-8 text-center z-20 group-hover:justify-end group-hover:pb-8 transition-all duration-500">
+                  {/* Text content - positioned at bottom */}
+                  <div className="absolute bottom-0 left-0 right-0 flex flex-col justify-end items-center p-6 sm:p-8 text-center z-20">
                     <span className="text-primary/80 font-sans text-[10px] sm:text-xs uppercase tracking-[0.25em] mb-2 sm:mb-3">{member.specialty}</span>
                     <h3 className="text-lg sm:text-xl lg:text-2xl font-serif text-foreground mb-1 sm:mb-2">{member.name}</h3>
                     <p className="text-muted-foreground font-sans text-xs sm:text-sm">{member.role}</p>
