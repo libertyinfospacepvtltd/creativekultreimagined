@@ -2,70 +2,56 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Instagram, Facebook, Globe } from "lucide-react";
 import Layout from "@/components/Layout";
-
-const projects = [
-  {
-    id: "easydo365",
-    name: "EasyDo 365",
-    category: "Productivity App",
-    description: "End-to-end creative strategy and content production for a lifestyle and productivity app, focusing on user engagement and app downloads.",
-    tags: ["Content Production", "Social Media", "Video Marketing"],
-    results: [
-      "200% increase in app downloads",
-      "4.5 star rating maintained",
-      "Viral content reaching 1M+ views",
-    ],
-    logo: "https://canvas-kolkata-vibe.lovable.app/assets/easydo365-logo-CI69kmpV.png",
-    website: "https://easydo365.com/",
-    instagram: "https://www.instagram.com/easydo_365/",
-    facebook: "https://www.facebook.com/Easydo365app",
-  },
-  {
-    id: "12thpass",
-    name: "12thPass.ai",
-    category: "Education Technology",
-    description: "Complete brand identity, social media management, and performance marketing for an AI-powered education platform targeting students across India.",
-    tags: ["Social Media", "Performance Marketing", "Brand Strategy"],
-    results: [
-      "300% increase in social engagement",
-      "50K+ organic followers",
-      "2x lead generation improvement",
-    ],
-    logo: "https://canvas-kolkata-vibe.lovable.app/assets/12thpass-logo-DhXy1KrN.png",
-    website: "https://www.12thpass.ai/",
-    instagram: "https://www.instagram.com/12thpass.ai/",
-    facebook: "https://www.facebook.com/12thPassAI",
-  },
-  {
-    id: "majorcolors",
-    name: "Major Colors",
-    category: "Design Studio",
-    description: "Brand positioning and digital presence for a premium design solutions company, establishing thought leadership in the creative industry.",
-    tags: ["Brand Strategy", "Digital Presence", "Content Marketing"],
-    results: [
-      "Premium brand positioning",
-      "Industry recognition",
-      "High-value client acquisition",
-    ],
-    logo: "https://canvas-kolkata-vibe.lovable.app/assets/majorcolours-logo-C9dMwmvs.png",
-    website: "https://majorcolors.com/",
-  },
-];
-
-const trustedBy = [
-  { name: "Liberty Infospace", url: "https://libertyinfospace.com/" },
-  { name: "12thPass.ai", url: "https://www.12thpass.ai/" },
-  { name: "EasyDo 365", url: "https://easydo365.com/" },
-  { name: "Major Colors", url: "https://majorcolors.com/" },
-];
-
+const projects = [{
+  id: "easydo365",
+  name: "EasyDo 365",
+  category: "Productivity App",
+  description: "End-to-end creative strategy and content production for a lifestyle and productivity app, focusing on user engagement and app downloads.",
+  tags: ["Content Production", "Social Media", "Video Marketing"],
+  results: ["200% increase in app downloads", "4.5 star rating maintained", "Viral content reaching 1M+ views"],
+  logo: "https://canvas-kolkata-vibe.lovable.app/assets/easydo365-logo-CI69kmpV.png",
+  website: "https://easydo365.com/",
+  instagram: "https://www.instagram.com/easydo_365/",
+  facebook: "https://www.facebook.com/Easydo365app"
+}, {
+  id: "12thpass",
+  name: "12thPass.ai",
+  category: "Education Technology",
+  description: "Complete brand identity, social media management, and performance marketing for an AI-powered education platform targeting students across India.",
+  tags: ["Social Media", "Performance Marketing", "Brand Strategy"],
+  results: ["300% increase in social engagement", "50K+ organic followers", "2x lead generation improvement"],
+  logo: "https://canvas-kolkata-vibe.lovable.app/assets/12thpass-logo-DhXy1KrN.png",
+  website: "https://www.12thpass.ai/",
+  instagram: "https://www.instagram.com/12thpass.ai/",
+  facebook: "https://www.facebook.com/12thPassAI"
+}, {
+  id: "majorcolors",
+  name: "Major Colors",
+  category: "Design Studio",
+  description: "Brand positioning and digital presence for a premium design solutions company, establishing thought leadership in the creative industry.",
+  tags: ["Brand Strategy", "Digital Presence", "Content Marketing"],
+  results: ["Premium brand positioning", "Industry recognition", "High-value client acquisition"],
+  logo: "https://canvas-kolkata-vibe.lovable.app/assets/majorcolours-logo-C9dMwmvs.png",
+  website: "https://majorcolors.com/"
+}];
+const trustedBy = [{
+  name: "Liberty Infospace",
+  url: "https://libertyinfospace.com/"
+}, {
+  name: "12thPass.ai",
+  url: "https://www.12thpass.ai/"
+}, {
+  name: "EasyDo 365",
+  url: "https://easydo365.com/"
+}, {
+  name: "Major Colors",
+  url: "https://majorcolors.com/"
+}];
 const Work = () => {
   const [activeProject, setActiveProject] = useState(projects[0].id);
-
-  return (
-    <Layout>
+  return <Layout>
       {/* Page Header */}
-      <section className="pt-32 pb-16 md:pt-40 md:pb-20 bg-background">
+      <section className="pt-32 pb-16 md:pt-40 md:pb-20 bg-background py-[15px]">
         <div className="container-luxury">
           <span className="text-primary font-sans text-sm uppercase tracking-widest mb-4 block">
             Our Portfolio
@@ -83,24 +69,9 @@ const Work = () => {
       <section className="py-4 bg-card border-y border-border/30 overflow-x-auto scrollbar-hide">
         <div className="container-luxury">
           <div className="flex items-center gap-8 min-w-max">
-            {projects.map((project) => (
-              <button
-                key={project.id}
-                onClick={() => setActiveProject(project.id)}
-                className={`flex items-center gap-3 py-4 transition-all duration-300 ${
-                  activeProject === project.id
-                    ? "opacity-100"
-                    : "opacity-50 hover:opacity-75"
-                }`}
-              >
-                <div className={`w-12 h-12 bg-white rounded-full flex items-center justify-center overflow-hidden ${
-                  project.id === "12thpass" ? "p-0" : "p-2"
-                }`}>
-                  <img
-                    src={project.logo}
-                    alt={project.name}
-                    className="w-full h-full object-contain"
-                  />
+            {projects.map(project => <button key={project.id} onClick={() => setActiveProject(project.id)} className={`flex items-center gap-3 py-4 transition-all duration-300 ${activeProject === project.id ? "opacity-100" : "opacity-50 hover:opacity-75"}`}>
+                <div className={`w-12 h-12 bg-white rounded-full flex items-center justify-center overflow-hidden ${project.id === "12thpass" ? "p-0" : "p-2"}`}>
+                  <img src={project.logo} alt={project.name} className="w-full h-full object-contain" />
                 </div>
                 <div className="text-left">
                   <span className="block text-foreground font-sans text-sm font-medium">
@@ -110,8 +81,7 @@ const Work = () => {
                     {project.category}
                   </span>
                 </div>
-              </button>
-            ))}
+              </button>)}
           </div>
         </div>
       </section>
@@ -119,28 +89,13 @@ const Work = () => {
       {/* Project Details */}
       <section className="section-padding bg-background">
         <div className="container-luxury">
-          {projects.map((project) => (
-            <div
-              key={project.id}
-              className={`${activeProject === project.id ? "block animate-fade-in" : "hidden"}`}
-            >
+          {projects.map(project => <div key={project.id} className={`${activeProject === project.id ? "block animate-fade-in" : "hidden"}`}>
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20">
                 {/* Left - Info */}
                 <div>
-                  <a
-                    href={project.website}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-block mb-8"
-                  >
-                    <div className={`w-40 h-40 bg-white rounded-full flex items-center justify-center overflow-hidden ${
-                      project.id === "12thpass" ? "p-0" : "p-6"
-                    }`}>
-                      <img
-                        src={project.logo}
-                        alt={project.name}
-                        className="w-full h-full object-contain"
-                      />
+                  <a href={project.website} target="_blank" rel="noopener noreferrer" className="inline-block mb-8">
+                    <div className={`w-40 h-40 bg-white rounded-full flex items-center justify-center overflow-hidden ${project.id === "12thpass" ? "p-0" : "p-6"}`}>
+                      <img src={project.logo} alt={project.name} className="w-full h-full object-contain" />
                     </div>
                   </a>
                   <span className="text-primary font-sans text-xs uppercase tracking-widest mb-4 block">
@@ -153,46 +108,20 @@ const Work = () => {
                     {project.description}
                   </p>
                   <div className="flex flex-wrap gap-2 mb-8">
-                    {project.tags.map((tag, index) => (
-                      <span
-                        key={index}
-                        className="px-3 py-1 bg-card border border-border/30 text-muted-foreground font-sans text-xs"
-                      >
+                    {project.tags.map((tag, index) => <span key={index} className="px-3 py-1 bg-card border border-border/30 text-muted-foreground font-sans text-xs">
                         {tag}
-                      </span>
-                    ))}
+                      </span>)}
                   </div>
                   <div className="flex items-center gap-4">
-                    {project.website && (
-                      <a
-                        href={project.website}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-muted-foreground hover:text-primary transition-colors"
-                      >
+                    {project.website && <a href={project.website} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors">
                         <Globe size={20} />
-                      </a>
-                    )}
-                    {project.instagram && (
-                      <a
-                        href={project.instagram}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-muted-foreground hover:text-primary transition-colors"
-                      >
+                      </a>}
+                    {project.instagram && <a href={project.instagram} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors">
                         <Instagram size={20} />
-                      </a>
-                    )}
-                    {project.facebook && (
-                      <a
-                        href={project.facebook}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-muted-foreground hover:text-primary transition-colors"
-                      >
+                      </a>}
+                    {project.facebook && <a href={project.facebook} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors">
                         <Facebook size={20} />
-                      </a>
-                    )}
+                      </a>}
                   </div>
                 </div>
 
@@ -202,19 +131,13 @@ const Work = () => {
                     Key Results
                   </h4>
                   <ul className="space-y-6">
-                    {project.results.map((result, index) => (
-                      <li
-                        key={index}
-                        className="text-foreground font-serif text-xl md:text-2xl border-b border-border/30 pb-6 last:border-0 last:pb-0"
-                      >
+                    {project.results.map((result, index) => <li key={index} className="text-foreground font-serif text-xl md:text-2xl border-b border-border/30 pb-6 last:border-0 last:pb-0">
                         {result}
-                      </li>
-                    ))}
+                      </li>)}
                   </ul>
                 </div>
               </div>
-            </div>
-          ))}
+            </div>)}
         </div>
       </section>
 
@@ -225,17 +148,9 @@ const Work = () => {
             Trusted By
           </h3>
           <div className="flex flex-wrap items-center justify-center gap-8 md:gap-12">
-            {trustedBy.map((brand, index) => (
-              <a
-                key={index}
-                href={brand.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-foreground/60 hover:text-primary font-serif text-lg transition-colors"
-              >
+            {trustedBy.map((brand, index) => <a key={index} href={brand.url} target="_blank" rel="noopener noreferrer" className="text-foreground/60 hover:text-primary font-serif text-lg transition-colors">
                 {brand.name}
-              </a>
-            ))}
+              </a>)}
           </div>
         </div>
       </section>
@@ -249,16 +164,9 @@ const Work = () => {
           <p className="text-muted-foreground font-sans max-w-xl mx-auto mb-10">
             Let's collaborate and create something extraordinary for your brand.
           </p>
-          <Link
-            to="/contact"
-            className="inline-block px-10 py-4 rounded-full bg-primary text-primary-foreground font-sans text-sm uppercase tracking-widest hover:bg-primary/90 transition-all duration-300"
-          >
-            Start a Project
-          </Link>
+          <Link to="/contact" className="inline-block px-10 py-4 rounded-full bg-primary text-primary-foreground font-sans text-sm uppercase tracking-widest hover:bg-primary/90 transition-all duration-300">JOIN THE KULT</Link>
         </div>
       </section>
-    </Layout>
-  );
+    </Layout>;
 };
-
 export default Work;
