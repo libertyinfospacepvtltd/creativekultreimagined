@@ -47,24 +47,30 @@ const DockingLogo = ({ onDockComplete, isPreloading = false, onRevealComplete }:
 
   // Calculate positions
   const isMobile = windowSize.width < 768;
+  const isTablet = windowSize.width >= 768 && windowSize.width < 1024;
   
-  // Initial logo size (hero state)
-  const heroLogoWidth = isMobile ? 256 : 420; // w-64 = 256px, lg:w-[420px]
+  // Initial logo size (hero state) - matches img class "w-64 md:w-80 lg:w-[420px]"
+  const heroLogoWidth = isMobile ? 256 : isTablet ? 320 : 420;
   
-  // Final logo size (navbar state) - h-10 = 40px, h-12 = 48px
-  const navLogoHeight = isMobile ? 40 : 48;
-  // Approximate width based on aspect ratio (logo is roughly 3.5:1)
-  const navLogoWidth = navLogoHeight * 3.5;
+  // Final logo size (navbar state) - MUST match Navbar.tsx exactly: "h-8 sm:h-10 md:h-12"
+  // h-8 = 32px (mobile), h-10 = 40px (sm/tablet), h-12 = 48px (md+/desktop)
+  const navLogoHeight = isMobile ? 32 : isTablet ? 40 : 48;
   
-  // Scale factor
+  // Calculate width from height using actual logo aspect ratio (approx 4.5:1 based on common logo proportions)
+  const logoAspectRatio = 4.5;
+  const navLogoWidth = navLogoHeight * logoAspectRatio;
+  
+  // Scale factor to shrink hero logo to exact navbar logo size
   const scaleFactor = navLogoWidth / heroLogoWidth;
 
   // Center position (hero state)
   const centerX = windowSize.width / 2;
   const centerY = windowSize.height / 2;
 
-  // Navbar position (docked state) - matches container-luxury padding
+  // Navbar position (docked state) - matches container-luxury padding exactly
+  // container-luxury uses: px-4 sm:px-6 lg:px-8 (16px, 24px, 32px)
   const navPadding = isMobile ? 16 : windowSize.width >= 1024 ? 32 : 24;
+  // Logo should be anchored at left edge, so center = padding + half width
   const navbarX = navPadding + (navLogoWidth / 2);
   const navbarY = 32; // Center of 64px navbar
 
@@ -135,7 +141,8 @@ const DockingLogo = ({ onDockComplete, isPreloading = false, onRevealComplete }:
           <img
             src={logo}
             alt="Creative Kult"
-            className="w-64 md:w-80 lg:w-[420px] h-auto"
+            className="w-64 md:w-80 lg:w-[420px] h-auto will-change-transform"
+            style={{ transformOrigin: 'center center' }}
           />
         </motion.div>
       </Link>

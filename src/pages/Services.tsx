@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { Megaphone, Target, Palette, Camera, Lightbulb, Newspaper, PenTool, FileText, Check } from "lucide-react";
-import { motion } from "framer-motion";
+import { Megaphone, Target, Palette, Camera, Lightbulb, Newspaper, PenTool, FileText, Check, Plus, Minus } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 import Layout from "@/components/Layout";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+
 const services = [{
   id: "social-media",
   icon: Megaphone,
@@ -142,11 +144,52 @@ const Services = () => {
         </div>
       </section>
 
-      {/* Premium Hover-Reveal Grid */}
+      {/* Premium Hover-Reveal Grid - Desktop Only */}
       <section className="bg-background pb-8 sm:pb-12 md:pb-24">
         <div className="container-luxury">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-3 md:gap-4">
+          {/* Desktop Grid - hidden on mobile */}
+          <div className="hidden md:grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4">
             {services.map(service => <ServiceCard key={service.id} service={service} isExpanded={expandedId === service.id} onToggle={() => handleToggle(service.id)} />)}
+          </div>
+          
+          {/* Mobile Accordion - visible only on mobile */}
+          <div className="block md:hidden">
+            <Accordion type="single" collapsible className="w-full">
+              {services.map((service) => {
+                const Icon = service.icon;
+                return (
+                  <AccordionItem 
+                    key={service.id} 
+                    value={service.id}
+                    className="border-b border-foreground/10"
+                  >
+                    <AccordionTrigger className="py-4 hover:no-underline group">
+                      <div className="flex items-center gap-3 text-left">
+                        <Icon className="w-5 h-5 text-primary flex-shrink-0" strokeWidth={1.5} />
+                        <span className="text-foreground font-serif text-sm font-medium group-hover:text-primary transition-colors">
+                          {service.title}
+                        </span>
+                      </div>
+                    </AccordionTrigger>
+                    <AccordionContent className="pb-4">
+                      <div className="pl-8">
+                        <p className="text-muted-foreground font-sans text-xs leading-relaxed mb-3">
+                          {service.description}
+                        </p>
+                        <ul className="space-y-2">
+                          {service.features.map((feature, index) => (
+                            <li key={index} className="flex items-start gap-2">
+                              <Check className="w-3 h-3 text-primary flex-shrink-0 mt-0.5" strokeWidth={2.5} />
+                              <span className="text-foreground font-sans text-xs">{feature}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </AccordionContent>
+                  </AccordionItem>
+                );
+              })}
+            </Accordion>
           </div>
         </div>
       </section>
