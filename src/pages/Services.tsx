@@ -81,13 +81,9 @@ const ServiceCard = ({
   onToggle: () => void;
 }) => {
   const Icon = service.icon;
-  return (
-    <motion.div 
-      className={`group relative flex flex-col border border-foreground/10 bg-background transition-all duration-500 overflow-hidden cursor-pointer h-56 sm:h-64 md:h-72
+  return <motion.div className={`group relative flex flex-col border border-foreground/10 bg-background transition-all duration-500 overflow-hidden cursor-pointer h-56 sm:h-64 md:h-72
         ${isExpanded ? 'border-primary bg-foreground/5' : 'hover:border-primary hover:bg-foreground/5'}
-      `}
-      onClick={onToggle}
-    >
+      `} onClick={onToggle}>
       {/* Default State Content - Icon & Title centered */}
       <div className={`absolute inset-0 flex flex-col items-center justify-center p-4 sm:p-6 transition-all duration-500 ease-out
         ${isExpanded ? 'opacity-0 -translate-y-full' : 'group-hover:opacity-0 group-hover:-translate-y-full md:opacity-100 md:translate-y-0'}
@@ -117,16 +113,13 @@ const ServiceCard = ({
 
         {/* Features List */}
         <ul className="space-y-1.5 sm:space-y-2 mt-auto">
-          {service.features.map((feature, index) => (
-            <li key={index} className="flex items-start gap-2">
+          {service.features.map((feature, index) => <li key={index} className="flex items-start gap-2">
               <Check className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-primary flex-shrink-0 mt-0.5" strokeWidth={2.5} />
               <span className="text-foreground font-sans text-[10px] sm:text-xs leading-tight">{feature}</span>
-            </li>
-          ))}
+            </li>)}
         </ul>
       </div>
-    </motion.div>
-  );
+    </motion.div>;
 };
 const Services = () => {
   const [expandedId, setExpandedId] = useState<string | null>(null);
@@ -195,12 +188,7 @@ const Services = () => {
           <p className="text-muted-foreground font-sans max-w-xl mx-auto mb-6 sm:mb-10 text-sm sm:text-base">
             Let's discuss how our services can help you achieve your business goals.
           </p>
-          <Link 
-            to="/contact" 
-            className="inline-block px-10 py-4 rounded-full bg-primary text-primary-foreground font-sans text-sm uppercase tracking-widest hover:bg-primary/90 transition-all duration-300"
-          >
-            Join the Kült
-          </Link>
+          <Link to="/contact" className="inline-block px-10 py-4 rounded-full bg-primary text-primary-foreground font-sans text-sm uppercase tracking-widest hover:bg-primary/90 transition-all duration-300">JOIN THE KULT</Link>
         </div>
       </section>
     </Layout>;
