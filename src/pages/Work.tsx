@@ -51,37 +51,43 @@ const Work = () => {
   const [activeProject, setActiveProject] = useState(projects[0].id);
   return <Layout>
       {/* Page Header */}
-      <section className="pt-32 pb-16 md:pt-40 md:pb-20 bg-background py-[15px]">
+      <section className="pt-4 sm:pt-8 pb-8 sm:pb-12 md:pt-24 md:pb-16 bg-background">
         <div className="container-luxury">
-          <span className="text-primary font-sans text-sm uppercase tracking-widest mb-4 block">
+          <span className="text-primary font-sans text-xs sm:text-sm uppercase tracking-widest mb-2 sm:mb-4 block">
             Our Portfolio
           </span>
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif text-foreground mb-6">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-serif text-foreground mb-3 sm:mb-6">
             The Showreel
           </h1>
-          <p className="text-muted-foreground font-sans max-w-2xl text-lg">
-            A curated collection of campaigns and projects that showcase our creative capabilities and deliver measurable results.
+          <p className="text-muted-foreground font-sans max-w-2xl text-sm sm:text-base lg:text-lg">
+            A curated collection of campaigns and projects that showcase our creative capabilities.
           </p>
         </div>
       </section>
 
-      {/* Project Tabs */}
-      <section className="py-4 bg-card border-y border-border/30 overflow-x-auto scrollbar-hide">
+      {/* Project Tabs - vertical stack on mobile */}
+      <section className="py-3 sm:py-4 bg-card border-y border-border/30">
         <div className="container-luxury">
-          <div className="flex items-center gap-8 min-w-max">
-            {projects.map(project => <button key={project.id} onClick={() => setActiveProject(project.id)} className={`flex items-center gap-3 py-4 transition-all duration-300 ${activeProject === project.id ? "opacity-100" : "opacity-50 hover:opacity-75"}`}>
-                <div className={`w-12 h-12 bg-white rounded-full flex items-center justify-center overflow-hidden ${project.id === "12thpass" ? "p-0" : "p-2"}`}>
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 sm:gap-6 md:gap-8">
+            {projects.map(project => (
+              <button 
+                key={project.id} 
+                onClick={() => setActiveProject(project.id)} 
+                className={`flex items-center gap-3 py-3 sm:py-4 px-3 sm:px-0 rounded-lg sm:rounded-none bg-background/50 sm:bg-transparent transition-all duration-300 ${activeProject === project.id ? "opacity-100 border border-primary/30 sm:border-none" : "opacity-60 hover:opacity-80 border border-transparent sm:border-none"}`}
+              >
+                <div className={`w-10 h-10 sm:w-12 sm:h-12 bg-white rounded-full flex items-center justify-center overflow-hidden flex-shrink-0 ${project.id === "12thpass" ? "p-0" : "p-1.5 sm:p-2"}`}>
                   <img src={project.logo} alt={project.name} className="w-full h-full object-contain" />
                 </div>
                 <div className="text-left">
-                  <span className="block text-foreground font-sans text-sm font-medium">
+                  <span className="block text-foreground font-sans text-xs sm:text-sm font-medium">
                     {project.name}
                   </span>
-                  <span className="block text-muted-foreground font-sans text-xs">
+                  <span className="block text-muted-foreground font-sans text-[10px] sm:text-xs">
                     {project.category}
                   </span>
                 </div>
-              </button>)}
+              </button>
+            ))}
           </div>
         </div>
       </section>

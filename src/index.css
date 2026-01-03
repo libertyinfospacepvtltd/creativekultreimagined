@@ -82,6 +82,8 @@
     -webkit-text-size-adjust: 100%;
     text-size-adjust: 100%;
     font-size: 16px;
+    margin: 0;
+    padding: 0;
   }
 
   body {
@@ -90,6 +92,9 @@
     overflow-x: hidden;
     min-height: 100vh;
     min-height: 100dvh;
+    margin: 0;
+    padding: 0;
+    padding-top: env(safe-area-inset-top);
   }
 
   /* Custom cursor only on non-touch devices */

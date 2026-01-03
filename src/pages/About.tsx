@@ -2,6 +2,12 @@ import { Link } from "react-router-dom";
 import { Heart, Users, Award, MapPin } from "lucide-react";
 import { motion } from "framer-motion";
 import Layout from "@/components/Layout";
+
+// Import team member photos
+import payalDasImg from "@/assets/team/payel-das.jpg";
+import sreyashBanerjeeImg from "@/assets/team/sreyash-banerjee.jpg";
+import palashGiriImg from "@/assets/team/palash-kanti-giri.jpeg";
+
 const values = [{
   icon: Heart,
   title: "Passion-Driven",
@@ -19,24 +25,25 @@ const values = [{
   title: "Rooted in Kolkata",
   description: "We draw inspiration from our city's rich artistic heritage and cultural depth."
 }];
+
 const team = [{
   name: "Payel Das",
   role: "Creative Head",
   specialty: "Vision & Strategy",
   description: "A creative visionary with 4+ years of experience crafting compelling brand narratives.",
-  image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&h=500&fit=crop&crop=face"
+  image: payalDasImg
 }, {
   name: "Sreyash Banerjee",
   role: "Marketing Head",
   specialty: "Growth & Performance",
   description: "Data-driven strategist turning insights into measurable business outcomes.",
-  image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=500&fit=crop&crop=face"
+  image: sreyashBanerjeeImg
 }, {
   name: "Palash Kanti Giri",
   role: "Design Head",
   specialty: "Visual Excellence",
   description: "Crafting stunning visual identities that capture brand essence.",
-  image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=500&fit=crop&crop=face"
+  image: palashGiriImg
 }];
 const About = () => {
   return <Layout>
@@ -81,44 +88,43 @@ const About = () => {
         </div>
       </section>
 
-      <section className="section-padding bg-[hsl(220,15%,8%)] border-t border-border/30">
+      <section className="section-padding bg-[hsl(220,15%,8%)] border-t border-border/30 pt-8 sm:pt-10 md:pt-16">
         <div className="container-luxury">
-          <div className="text-center mb-10 sm:mb-16">
+          <div className="text-center mb-8 sm:mb-12">
             <span className="text-primary font-sans text-xs sm:text-sm uppercase tracking-[0.3em] mb-3 sm:mb-4 block">The Team</span>
             <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-serif text-foreground mb-3 sm:mb-4">Creative Minds United</h2>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 lg:gap-10">
-            {team.map((member, index) => <motion.div key={index} initial={{
-            opacity: 0,
-            y: 20
-          }} whileInView={{
-            opacity: 1,
-            y: 0
-          }} transition={{
-            duration: 0.6,
-            delay: index * 0.15
-          }} viewport={{
-            once: true
-          }} className="group relative">
-                <div className="relative h-72 sm:h-80 lg:h-[420px] overflow-hidden rounded-sm border border-foreground/10 bg-[hsl(220,15%,6%)] transition-all duration-700 ease-[cubic-bezier(0.25,0.1,0.25,1)] group-hover:scale-[1.02]">
-                  {/* Portrait image - always visible */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-10">
+            {team.map((member, index) => (
+              <motion.div 
+                key={index} 
+                initial={{ opacity: 0, y: 20 }} 
+                whileInView={{ opacity: 1, y: 0 }} 
+                transition={{ duration: 0.6, delay: index * 0.15 }} 
+                viewport={{ once: true }} 
+                className="group relative"
+              >
+                <div className="relative h-64 sm:h-72 lg:h-[420px] overflow-hidden rounded-sm border border-foreground/10 bg-foreground/5 backdrop-blur-sm transition-all duration-700 ease-[cubic-bezier(0.25,0.1,0.25,1)] group-hover:scale-[1.02]">
+                  {/* Portrait image - always visible with circular crop on mobile */}
                   <div className="absolute inset-0 z-10">
-                    <img src={member.image} alt={member.name} className="w-full h-full object-cover object-top" onError={e => {
-                  // Fallback to placeholder avatar if image fails
-                  e.currentTarget.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(member.name)}&size=400&background=1a1a1a&color=d4af37&font-size=0.4`;
-                }} />
+                    <img 
+                      src={member.image} 
+                      alt={member.name} 
+                      className="w-full h-full object-cover object-top"
+                    />
                     {/* Gradient overlay for text readability */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-[hsl(220,15%,6%)] via-[hsl(220,15%,6%)]/40 to-transparent py-0" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[hsl(220,15%,6%)] via-[hsl(220,15%,6%)]/40 to-transparent" />
                   </div>
                   
                   {/* Text content - positioned at bottom */}
-                  <div className="absolute bottom-0 left-0 right-0 flex flex-col justify-end items-center p-6 sm:p-8 text-center z-20">
-                    <span className="text-primary/80 font-sans text-[10px] sm:text-xs uppercase tracking-[0.25em] mb-2 sm:mb-3">{member.specialty}</span>
-                    <h3 className="text-lg sm:text-xl lg:text-2xl font-serif text-foreground mb-1 sm:mb-2">{member.name}</h3>
+                  <div className="absolute bottom-0 left-0 right-0 flex flex-col justify-end items-center p-4 sm:p-6 lg:p-8 text-center z-20">
+                    <span className="text-primary/80 font-sans text-[10px] sm:text-xs uppercase tracking-[0.25em] mb-1 sm:mb-2 lg:mb-3">{member.specialty}</span>
+                    <h3 className="text-base sm:text-lg lg:text-2xl font-serif text-foreground mb-1">{member.name}</h3>
                     <p className="text-muted-foreground font-sans text-xs sm:text-sm">{member.role}</p>
                   </div>
                 </div>
-              </motion.div>)}
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>

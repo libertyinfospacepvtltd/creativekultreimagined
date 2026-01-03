@@ -124,19 +124,15 @@ const ServiceCard = ({ service, isExpanded, onToggle, delay = 0 }: {
         ease: [0.25, 0.1, 0.25, 1]
       }}
       whileHover={{ 
-        scale: 1.03,
+        scale: 1.05,
         y: -4,
-        boxShadow: "0 20px 40px -15px rgba(0,0,0,0.4)",
-        transition: { 
-          duration: 0.7, 
-          ease: [0.25, 0.1, 0.25, 1] 
-        }
+        boxShadow: "0 25px 50px -12px rgba(0,0,0,0.5)",
       }}
-      className={`group relative flex flex-col border border-foreground/10 bg-background overflow-hidden cursor-pointer min-h-[100px] sm:min-h-[120px] md:min-h-[140px]
+      className={`group relative flex flex-col border border-foreground/10 bg-background overflow-hidden cursor-pointer h-48 sm:h-32 md:h-36 w-full
         ${isExpanded ? 'border-primary bg-foreground/5' : ''}
       `}
       style={{
-        transition: 'border-color 0.7s cubic-bezier(0.25, 0.1, 0.25, 1), background-color 0.7s cubic-bezier(0.25, 0.1, 0.25, 1)'
+        transition: 'border-color 0.5s cubic-bezier(0.25, 0.1, 0.25, 1), background-color 0.5s cubic-bezier(0.25, 0.1, 0.25, 1)'
       }}
       onClick={onToggle}
     >
@@ -261,7 +257,7 @@ const ServicesPreview = () => {
               <div className="text-center mt-4 sm:mt-6 md:mt-8">
                 <Link
                   to="/services"
-                  className="inline-block px-4 sm:px-6 py-2 sm:py-2.5 border border-primary text-primary font-sans text-xs uppercase tracking-widest hover:bg-primary hover:text-primary-foreground transition-all duration-300 min-h-[44px] flex items-center justify-center"
+                  className="inline-flex items-center justify-center px-4 sm:px-6 py-2 sm:py-2.5 border border-primary text-primary font-sans text-xs uppercase tracking-widest hover:bg-primary hover:text-primary-foreground transition-all duration-300 min-h-[44px]"
                 >
                   View All Services
                 </Link>
