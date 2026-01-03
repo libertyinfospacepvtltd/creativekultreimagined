@@ -104,35 +104,64 @@ const scatterCards = [
   },
 ];
 
-// Service Card Component - Compact version
-const ServiceCard = ({ service, isExpanded, onToggle }: { 
+// Service Card Component - Compact version with smooth hover animations
+const ServiceCard = ({ service, isExpanded, onToggle, delay = 0 }: { 
   service: typeof services[0]; 
   isExpanded: boolean;
   onToggle: () => void;
+  delay?: number;
 }) => {
   const Icon = service.icon;
   
   return (
     <motion.div
-      className={`group relative flex flex-col border border-foreground/10 bg-background transition-all duration-500 overflow-hidden cursor-pointer min-h-[100px] sm:min-h-[120px] md:min-h-[140px]
-        ${isExpanded ? 'border-primary bg-foreground/5' : 'hover:border-primary hover:bg-foreground/5'}
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ 
+        duration: 0.6, 
+        delay: delay,
+        ease: [0.25, 0.1, 0.25, 1]
+      }}
+      whileHover={{ 
+        scale: 1.03,
+        y: -4,
+        boxShadow: "0 20px 40px -15px rgba(0,0,0,0.4)",
+        transition: { 
+          duration: 0.7, 
+          ease: [0.25, 0.1, 0.25, 1] 
+        }
+      }}
+      className={`group relative flex flex-col border border-foreground/10 bg-background overflow-hidden cursor-pointer min-h-[100px] sm:min-h-[120px] md:min-h-[140px]
+        ${isExpanded ? 'border-primary bg-foreground/5' : ''}
       `}
+      style={{
+        transition: 'border-color 0.7s cubic-bezier(0.25, 0.1, 0.25, 1), background-color 0.7s cubic-bezier(0.25, 0.1, 0.25, 1)'
+      }}
       onClick={onToggle}
     >
       {/* Default State */}
-      <div className={`absolute inset-0 flex flex-col items-center justify-center p-2 sm:p-3 transition-all duration-500 ease-out
+      <div className={`absolute inset-0 flex flex-col items-center justify-center p-2 sm:p-3
         ${isExpanded ? 'opacity-0 -translate-y-full' : 'group-hover:opacity-0 group-hover:-translate-y-full md:opacity-100 md:translate-y-0'}
-      `}>
-        <Icon className="w-5 h-5 sm:w-6 sm:h-6 text-muted-foreground transition-colors duration-300 group-hover:text-primary mb-1 sm:mb-2" strokeWidth={1.5} />
-        <h3 className="text-foreground text-center font-serif text-[11px] sm:text-xs md:text-sm font-medium transition-colors duration-300 group-hover:text-primary leading-tight px-1">
+      `}
+      style={{
+        transition: 'all 0.7s cubic-bezier(0.25, 0.1, 0.25, 1)'
+      }}
+      >
+        <Icon className="w-5 h-5 sm:w-6 sm:h-6 text-muted-foreground group-hover:text-primary mb-1 sm:mb-2" strokeWidth={1.5} style={{ transition: 'color 0.7s cubic-bezier(0.25, 0.1, 0.25, 1)' }} />
+        <h3 className="text-foreground text-center font-serif text-[11px] sm:text-xs md:text-sm font-medium group-hover:text-primary leading-tight px-1" style={{ transition: 'color 0.7s cubic-bezier(0.25, 0.1, 0.25, 1)' }}>
           {service.title}
         </h3>
       </div>
 
       {/* Expanded State */}
-      <div className={`absolute inset-0 flex flex-col p-2 sm:p-3 transition-all duration-500 ease-out
+      <div className={`absolute inset-0 flex flex-col p-2 sm:p-3
         ${isExpanded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8 group-hover:opacity-100 group-hover:translate-y-0'}
-      `}>
+      `}
+      style={{
+        transition: 'all 0.7s cubic-bezier(0.25, 0.1, 0.25, 1)'
+      }}
+      >
         <div className="flex items-center gap-1 sm:gap-1.5 mb-1 sm:mb-2">
           <Icon className="w-3 h-3 sm:w-4 sm:h-4 text-primary flex-shrink-0" strokeWidth={1.5} />
           <h3 className="text-primary font-serif text-[9px] sm:text-[10px] md:text-xs font-medium leading-tight">{service.title}</h3>
@@ -217,12 +246,13 @@ const ServicesPreview = () => {
           >
             <div className="w-full max-w-4xl mx-auto px-2 sm:px-4">
               <div className="grid grid-cols-2 md:grid-cols-4 gap-1.5 sm:gap-2 md:gap-3">
-                {services.map((service) => (
+                {services.map((service, index) => (
                   <ServiceCard 
                     key={service.id} 
                     service={service}
                     isExpanded={expandedId === service.id}
                     onToggle={() => setExpandedId(expandedId === service.id ? null : service.id)}
+                    delay={index * 0.2}
                   />
                 ))}
               </div>

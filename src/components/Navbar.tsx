@@ -16,6 +16,87 @@ interface NavbarProps {
   showNavbar?: boolean;
 }
 
+// Mobile menu overlay component - shared between home and non-home pages
+const MobileMenuOverlay = ({ 
+  isOpen, 
+  onClose, 
+  currentPath 
+}: { 
+  isOpen: boolean; 
+  onClose: () => void; 
+  currentPath: string;
+}) => {
+  // Close on escape key
+  useEffect(() => {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && isOpen) {
+        onClose();
+      }
+    };
+    window.addEventListener('keydown', handleEscape);
+    return () => window.removeEventListener('keydown', handleEscape);
+  }, [isOpen, onClose]);
+
+  return (
+    <AnimatePresence>
+      {isOpen && (
+        <>
+          {/* Backdrop - full black with blur */}
+          <motion.div
+            className="md:hidden fixed inset-0 bg-black/80 backdrop-blur-md z-[55]"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            onClick={onClose}
+          />
+          {/* Menu Content - slides from top */}
+          <motion.div 
+            className="md:hidden fixed inset-0 bg-background z-[60]"
+            initial={{ opacity: 0, y: "-100%" }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: "-100%" }}
+            transition={{ duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] }}
+          >
+            {/* Close button */}
+            <button
+              onClick={onClose}
+              className="absolute top-4 right-4 z-[70] p-2 text-foreground min-h-[44px] min-w-[44px] flex items-center justify-center"
+              aria-label="Close menu"
+              style={{ paddingTop: 'env(safe-area-inset-top)' }}
+            >
+              <X size={28} />
+            </button>
+            
+            <ul className="flex flex-col items-center justify-center h-full gap-6 sm:gap-8 pt-safe">
+              {navLinks.map((link, index) => (
+                <motion.li 
+                  key={link.href}
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: index * 0.1 + 0.2, duration: 0.4 }}
+                >
+                  <Link
+                    to={link.href}
+                    onClick={onClose}
+                    className={`text-2xl sm:text-3xl font-serif tracking-wide transition-colors duration-300 min-h-[44px] flex items-center ${
+                      currentPath === link.href
+                        ? "text-primary"
+                        : "text-foreground/70 hover:text-foreground"
+                    }`}
+                  >
+                    {link.label}
+                  </Link>
+                </motion.li>
+              ))}
+            </ul>
+          </motion.div>
+        </>
+      )}
+    </AnimatePresence>
+  );
+};
+
 const Navbar = ({ showNavbar = true }: NavbarProps) => {
   const location = useLocation();
   const [isOpen, setIsOpen] = useState(false);
@@ -50,8 +131,7 @@ const Navbar = ({ showNavbar = true }: NavbarProps) => {
     };
   }, [isOpen]);
 
-  // Close menu on tap outside (backdrop click)
-  const handleBackdropClick = useCallback(() => {
+  const handleClose = useCallback(() => {
     setIsOpen(false);
   }, []);
 
@@ -65,19 +145,88 @@ const Navbar = ({ showNavbar = true }: NavbarProps) => {
   // For non-home pages, always show full navbar
   if (!isHomePage) {
     return (
-      <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border/20">
-        <nav className="container-luxury flex items-center justify-between h-14 sm:h-16">
-          {/* Logo */}
-          <Link to="/" className="relative z-10">
-            <img 
-              src={logo} 
-              alt="Creative Kult" 
-              className="h-8 sm:h-10 md:h-12 w-auto"
-            />
-          </Link>
+      <>
+        <header className="fixed top-0 left-0 right-0 z-50 bg-background/90 backdrop-blur-md border-b border-border/20">
+          <nav className="container-luxury flex items-center justify-between h-14 sm:h-16">
+            {/* Logo */}
+            <Link to="/" className="relative z-10">
+              <img 
+                src={logo} 
+                alt="Creative Kult" 
+                className="h-8 sm:h-10 md:h-12 w-auto"
+              />
+            </Link>
 
-          {/* Desktop Navigation */}
-          <ul className="hidden md:flex items-center gap-4 lg:gap-8">
+            {/* Desktop Navigation */}
+            <ul className="hidden md:flex items-center gap-4 lg:gap-8">
+              {navLinks.map((link) => (
+                <li key={link.href}>
+                  <Link
+                    to={link.href}
+                    className={`text-xs lg:text-sm tracking-wide uppercase font-sans font-medium transition-colors duration-300 link-underline ${
+                      location.pathname === link.href
+                        ? "text-primary"
+                        : "text-foreground/70 hover:text-foreground"
+                    }`}
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+
+            {/* Mobile Menu Button */}
+            <button
+              onClick={() => setIsOpen(!isOpen)}
+              className="md:hidden relative z-[65] p-2 text-foreground min-h-[44px] min-w-[44px] flex items-center justify-center"
+              aria-label="Toggle menu"
+              aria-expanded={isOpen}
+            >
+              <Menu size={24} />
+            </button>
+          </nav>
+        </header>
+        
+        {/* Mobile Navigation Overlay */}
+        <MobileMenuOverlay 
+          isOpen={isOpen} 
+          onClose={handleClose} 
+          currentPath={location.pathname} 
+        />
+      </>
+    );
+  }
+
+  // Home page - animated navbar that reveals after hero scroll
+  return (
+    <>
+      <motion.header 
+        className="fixed top-0 left-0 right-0 z-50 border-b border-border/20"
+        style={{
+          pointerEvents: showNavbar ? "auto" : "none",
+        }}
+      >
+        {/* Animated background */}
+        <motion.div 
+          className="absolute inset-0 bg-background/90 backdrop-blur-md"
+          style={{ opacity: navBgOpacity }}
+        />
+        
+        {/* Border that fades in */}
+        <motion.div 
+          className="absolute bottom-0 left-0 right-0 h-px bg-border/20"
+          style={{ opacity: navBgOpacity }}
+        />
+        
+        <nav className="container-luxury flex items-center justify-between h-14 sm:h-16 relative">
+          {/* Empty space for logo - the DockingLogo component handles this */}
+          <div className="h-8 sm:h-10 md:h-12 w-24 sm:w-32 md:w-40" />
+
+          {/* Desktop Navigation - fades in after logo docks */}
+          <motion.ul 
+            className="hidden md:flex items-center gap-4 lg:gap-8"
+            style={{ opacity: navOpacity }}
+          >
             {navLinks.map((link) => (
               <li key={link.href}>
                 <Link
@@ -92,175 +241,28 @@ const Navbar = ({ showNavbar = true }: NavbarProps) => {
                 </Link>
               </li>
             ))}
-          </ul>
+          </motion.ul>
 
-          {/* Mobile Menu Button */}
-          <button
+          {/* Mobile Menu Button - fades in after logo docks */}
+          <motion.button
             onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden relative z-[60] p-2 text-foreground min-h-[44px] min-w-[44px] flex items-center justify-center"
+            className="md:hidden relative z-[65] p-2 text-foreground min-h-[44px] min-w-[44px] flex items-center justify-center"
             aria-label="Toggle menu"
             aria-expanded={isOpen}
+            style={{ opacity: navOpacity }}
           >
-            {isOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
-
-          {/* Mobile Navigation - Fullscreen Overlay */}
-          <AnimatePresence>
-            {isOpen && (
-              <>
-                {/* Backdrop */}
-                <motion.div
-                  className="md:hidden fixed inset-0 bg-background/60 backdrop-blur-sm z-40"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.2 }}
-                  onClick={handleBackdropClick}
-                />
-                {/* Menu Content */}
-                <motion.div 
-                  className="md:hidden fixed inset-0 bg-background/95 backdrop-blur-lg z-50"
-                  initial={{ opacity: 0, y: -20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -20 }}
-                  transition={{ duration: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }}
-                >
-                  <ul className="flex flex-col items-center justify-center h-full gap-6 sm:gap-8">
-                    {navLinks.map((link, index) => (
-                      <motion.li 
-                        key={link.href}
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: index * 0.1, duration: 0.3 }}
-                      >
-                        <Link
-                          to={link.href}
-                          onClick={() => setIsOpen(false)}
-                          className={`text-2xl sm:text-3xl font-serif tracking-wide transition-colors duration-300 min-h-[44px] flex items-center ${
-                            location.pathname === link.href
-                              ? "text-primary"
-                              : "text-foreground/70 hover:text-foreground"
-                          }`}
-                        >
-                          {link.label}
-                        </Link>
-                      </motion.li>
-                    ))}
-                  </ul>
-                </motion.div>
-              </>
-            )}
-          </AnimatePresence>
+            <Menu size={24} />
+          </motion.button>
         </nav>
-      </header>
-    );
-  }
-
-  // Home page - animated navbar that reveals after hero scroll
-  return (
-    <motion.header 
-      className="fixed top-0 left-0 right-0 z-50 border-b border-border/20"
-      style={{
-        pointerEvents: showNavbar ? "auto" : "none",
-      }}
-    >
-      {/* Animated background */}
-      <motion.div 
-        className="absolute inset-0 bg-background/80 backdrop-blur-md"
-        style={{ opacity: navBgOpacity }}
-      />
+      </motion.header>
       
-      {/* Border that fades in */}
-      <motion.div 
-        className="absolute bottom-0 left-0 right-0 h-px bg-border/20"
-        style={{ opacity: navBgOpacity }}
+      {/* Mobile Navigation Overlay */}
+      <MobileMenuOverlay 
+        isOpen={isOpen} 
+        onClose={handleClose} 
+        currentPath={location.pathname} 
       />
-      
-      <nav className="container-luxury flex items-center justify-between h-14 sm:h-16 relative">
-        {/* Empty space for logo - the DockingLogo component handles this */}
-        <div className="h-8 sm:h-10 md:h-12 w-24 sm:w-32 md:w-40" />
-
-        {/* Desktop Navigation - fades in after logo docks */}
-        <motion.ul 
-          className="hidden md:flex items-center gap-4 lg:gap-8"
-          style={{ opacity: navOpacity }}
-        >
-          {navLinks.map((link) => (
-            <li key={link.href}>
-              <Link
-                to={link.href}
-                className={`text-xs lg:text-sm tracking-wide uppercase font-sans font-medium transition-colors duration-300 link-underline ${
-                  location.pathname === link.href
-                    ? "text-primary"
-                    : "text-foreground/70 hover:text-foreground"
-                }`}
-              >
-                {link.label}
-              </Link>
-            </li>
-          ))}
-        </motion.ul>
-
-        {/* Mobile Menu Button - fades in after logo docks */}
-        <motion.button
-          onClick={() => setIsOpen(!isOpen)}
-          className="md:hidden relative z-[60] p-2 text-foreground min-h-[44px] min-w-[44px] flex items-center justify-center"
-          aria-label="Toggle menu"
-          aria-expanded={isOpen}
-          style={{ opacity: navOpacity }}
-        >
-          {isOpen ? <X size={24} /> : <Menu size={24} />}
-        </motion.button>
-
-        {/* Mobile Navigation - Fullscreen Overlay */}
-        <AnimatePresence>
-          {isOpen && (
-            <>
-              {/* Backdrop */}
-              <motion.div
-                className="md:hidden fixed inset-0 bg-background/60 backdrop-blur-sm z-40"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.2 }}
-                onClick={handleBackdropClick}
-              />
-              {/* Menu Content */}
-              <motion.div 
-                className="md:hidden fixed inset-0 bg-background/95 backdrop-blur-lg z-50"
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                transition={{ duration: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }}
-              >
-                <ul className="flex flex-col items-center justify-center h-full gap-6 sm:gap-8">
-                  {navLinks.map((link, index) => (
-                    <motion.li 
-                      key={link.href}
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: index * 0.1, duration: 0.3 }}
-                    >
-                      <Link
-                        to={link.href}
-                        onClick={() => setIsOpen(false)}
-                        className={`text-2xl sm:text-3xl font-serif tracking-wide transition-colors duration-300 min-h-[44px] flex items-center ${
-                          location.pathname === link.href
-                            ? "text-primary"
-                            : "text-foreground/70 hover:text-foreground"
-                        }`}
-                      >
-                        {link.label}
-                      </Link>
-                    </motion.li>
-                  ))}
-                </ul>
-              </motion.div>
-            </>
-          )}
-        </AnimatePresence>
-      </nav>
-    </motion.header>
+    </>
   );
 };
 
