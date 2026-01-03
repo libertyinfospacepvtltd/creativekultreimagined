@@ -40,7 +40,7 @@ const team = [{
 }];
 const About = () => {
   return <Layout>
-      <section className="pt-24 sm:pt-32 pb-12 sm:pb-16 md:pt-40 md:pb-20 bg-background py-[20px]">
+      <section className="pt-24 sm:pt-32 pb-12 sm:pb-16 md:pt-40 md:pb-20 bg-background py-[10px]">
         <div className="container-luxury">
           <span className="text-primary font-sans text-xs sm:text-sm uppercase tracking-widest mb-3 sm:mb-4 block">Our Story</span>
           <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif text-foreground mb-4 sm:mb-6">Born in Kolkata,<br />Built for the World</h1>
@@ -108,7 +108,7 @@ const About = () => {
                   e.currentTarget.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(member.name)}&size=400&background=1a1a1a&color=d4af37&font-size=0.4`;
                 }} />
                     {/* Gradient overlay for text readability */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-[hsl(220,15%,6%)] via-[hsl(220,15%,6%)]/40 to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[hsl(220,15%,6%)] via-[hsl(220,15%,6%)]/40 to-transparent py-0" />
                   </div>
                   
                   {/* Text content - positioned at bottom */}
@@ -126,7 +126,7 @@ const About = () => {
       <section className="section-padding bg-background">
         <div className="container-luxury text-center">
           <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-serif text-foreground mb-4 sm:mb-6">Ready to Join the Kult?</h2>
-          <Link to="/contact" className="inline-flex items-center justify-center px-8 sm:px-10 py-3 sm:py-4 rounded-full bg-primary text-primary-foreground font-sans text-sm uppercase tracking-widest hover:bg-primary/90 transition-all duration-300 min-h-[44px]">Get in Touch</Link>
+          <Link to="/contact" className="inline-flex items-center justify-center px-8 sm:px-10 py-3 sm:py-4 rounded-full bg-primary text-primary-foreground font-sans text-sm uppercase tracking-widest hover:bg-primary/90 transition-all duration-300 min-h-[44px]">JOIN THE KULT</Link>
         </div>
       </section>
     </Layout>;
