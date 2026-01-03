@@ -68,7 +68,7 @@ const Contact = () => {
   return (
     <Layout>
       {/* Page Header */}
-      <section className="pt-32 pb-16 md:pt-40 md:pb-20 bg-background">
+      <section className="pt-16 pb-8 md:pt-20 md:pb-12 bg-background">
         <div className="container-luxury">
           <span className="text-primary font-sans text-sm uppercase tracking-widest mb-4 block">
             Get in Touch
@@ -308,9 +308,13 @@ const Contact = () => {
                 </div>
               </div>
 
-              {/* Google Map Embed with overlay for cursor */}
-              <div className="mt-12 w-full min-h-[300px] sm:min-h-[350px] lg:min-h-[400px] bg-card border border-border/30 overflow-hidden relative">
-                <iframe
+              {/* Map Section with Heading */}
+              <div className="mt-12">
+                <h2 className="text-2xl md:text-3xl font-serif text-foreground text-center mb-8">
+                  Our Location
+                </h2>
+                <div className="w-full min-h-[300px] sm:min-h-[350px] lg:min-h-[400px] bg-card border border-border/30 overflow-hidden relative">
+                  <iframe
                   src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3685.8247772568364!2d88.33875!3d22.517897!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a0277c8a4a45c2f%3A0xe9e6e9e9e9e9e9e9!2sSagar%20Trade%20Cube!5e0!3m2!1sen!2sin!4v1234567890"
                   className="absolute inset-0 w-full h-full"
                   style={{ border: 0 }}
@@ -319,8 +323,9 @@ const Contact = () => {
                   referrerPolicy="no-referrer-when-downgrade"
                   title="Creative Kult Office Location"
                 />
-                {/* Transparent overlay to capture mouse events for custom cursor */}
-                <div className="absolute inset-0 bg-transparent z-10" />
+                  {/* Transparent overlay to capture mouse events for custom cursor */}
+                  <div className="absolute inset-0 bg-transparent z-10" />
+                </div>
               </div>
             </div>
           </div>

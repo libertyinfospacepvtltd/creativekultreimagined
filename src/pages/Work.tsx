@@ -51,7 +51,7 @@ const Work = () => {
   const [activeProject, setActiveProject] = useState(projects[0].id);
   return <Layout>
       {/* Page Header */}
-      <section className="pt-4 sm:pt-8 pb-8 sm:pb-12 md:pt-24 md:pb-16 bg-background">
+      <section className="pt-12 sm:pt-16 pb-6 sm:pb-10 md:pt-20 md:pb-14 bg-background">
         <div className="container-luxury">
           <span className="text-primary font-sans text-xs sm:text-sm uppercase tracking-widest mb-2 sm:mb-4 block">
             Our Portfolio

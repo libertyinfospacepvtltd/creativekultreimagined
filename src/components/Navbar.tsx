@@ -197,6 +197,20 @@ const Navbar = ({ showNavbar = true }: NavbarProps) => {
     );
   }
 
+  // Track scroll position for logo visibility fallback
+  const [scrolledPastHero, setScrolledPastHero] = useState(false);
+  
+  useEffect(() => {
+    const handleScrollCheck = () => {
+      const heroHeight = window.innerHeight;
+      setScrolledPastHero(window.scrollY > heroHeight);
+    };
+    
+    handleScrollCheck();
+    window.addEventListener('scroll', handleScrollCheck, { passive: true });
+    return () => window.removeEventListener('scroll', handleScrollCheck);
+  }, []);
+
   // Home page - animated navbar that reveals after hero scroll
   return (
     <>
@@ -219,8 +233,18 @@ const Navbar = ({ showNavbar = true }: NavbarProps) => {
         />
         
         <nav className="container-luxury flex items-center justify-between h-14 sm:h-16 relative">
-          {/* Empty space for logo - the DockingLogo component handles this */}
-          <div className="h-8 sm:h-10 md:h-12 w-24 sm:w-32 md:w-40" />
+          {/* Fallback logo - shows when scrolled past hero section */}
+          <Link 
+            to="/" 
+            className="relative z-10 transition-opacity duration-300"
+            style={{ opacity: scrolledPastHero ? 1 : 0, pointerEvents: scrolledPastHero ? 'auto' : 'none' }}
+          >
+            <img 
+              src={logo} 
+              alt="Creative Kult" 
+              className="h-8 sm:h-10 md:h-12 w-auto"
+            />
+          </Link>
 
           {/* Desktop Navigation - fades in after logo docks */}
           <motion.ul 
