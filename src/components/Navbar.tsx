@@ -146,9 +146,9 @@ const Navbar = ({ showNavbar = true }: NavbarProps) => {
   if (!isHomePage) {
     return (
       <>
-        <header className="fixed top-0 left-0 right-0 z-50 bg-background/90 backdrop-blur-md border-b border-border/20">
+        <header className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-md border-b border-border/20" style={{ paddingTop: 'env(safe-area-inset-top)' }}>
           <nav className="container-luxury flex items-center justify-between h-14 sm:h-16">
-            {/* Logo */}
+            {/* Logo - persistent */}
             <Link to="/" className="relative z-10">
               <img 
                 src={logo} 

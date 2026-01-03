@@ -81,47 +81,52 @@ const ServiceCard = ({
   onToggle: () => void;
 }) => {
   const Icon = service.icon;
-  return <motion.div className={`group relative flex flex-col border border-foreground/10 bg-background transition-all duration-500 overflow-hidden cursor-pointer
+  return (
+    <motion.div 
+      className={`group relative flex flex-col border border-foreground/10 bg-background transition-all duration-500 overflow-hidden cursor-pointer h-56 sm:h-64 md:h-72
         ${isExpanded ? 'border-primary bg-foreground/5' : 'hover:border-primary hover:bg-foreground/5'}
-      `} style={{
-    aspectRatio: '3/4'
-  }} onClick={onToggle}>
+      `}
+      onClick={onToggle}
+    >
       {/* Default State Content - Icon & Title centered */}
-      <div className={`absolute inset-0 flex flex-col items-center justify-center p-6 transition-all duration-500 ease-out
+      <div className={`absolute inset-0 flex flex-col items-center justify-center p-4 sm:p-6 transition-all duration-500 ease-out
         ${isExpanded ? 'opacity-0 -translate-y-full' : 'group-hover:opacity-0 group-hover:-translate-y-full md:opacity-100 md:translate-y-0'}
       `}>
-        <Icon className="w-10 h-10 text-muted-foreground transition-colors duration-300 group-hover:text-primary mb-4" strokeWidth={1.5} />
-        <h3 className="text-foreground text-center font-serif text-base md:text-lg font-medium transition-colors duration-300 group-hover:text-primary">
+        <Icon className="w-8 h-8 sm:w-10 sm:h-10 text-muted-foreground transition-colors duration-300 group-hover:text-primary mb-3 sm:mb-4" strokeWidth={1.5} />
+        <h3 className="text-foreground text-center font-serif text-sm sm:text-base md:text-lg font-medium transition-colors duration-300 group-hover:text-primary">
           {service.title}
         </h3>
       </div>
 
       {/* Hover/Expanded State Content - Full details */}
-      <div className={`absolute inset-0 flex flex-col p-5 transition-all duration-500 ease-out
+      <div className={`absolute inset-0 flex flex-col p-4 sm:p-5 transition-all duration-500 ease-out
         ${isExpanded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8 group-hover:opacity-100 group-hover:translate-y-0'}
       `}>
         {/* Icon & Title at top */}
-        <div className="flex items-center gap-3 mb-4">
-          <Icon className="w-6 h-6 text-primary flex-shrink-0" strokeWidth={1.5} />
-          <h3 className="text-primary font-serif text-sm md:text-base font-medium leading-tight">
+        <div className="flex items-center gap-2 sm:gap-3 mb-3 sm:mb-4">
+          <Icon className="w-5 h-5 sm:w-6 sm:h-6 text-primary flex-shrink-0" strokeWidth={1.5} />
+          <h3 className="text-primary font-serif text-xs sm:text-sm md:text-base font-medium leading-tight">
             {service.title}
           </h3>
         </div>
 
         {/* Description */}
-        <p className="text-muted-foreground font-sans text-xs md:text-sm leading-relaxed mb-4 line-clamp-2">
+        <p className="text-muted-foreground font-sans text-xs sm:text-sm leading-relaxed mb-3 sm:mb-4 line-clamp-2">
           {service.description}
         </p>
 
         {/* Features List */}
-        <ul className="space-y-2 mt-auto">
-          {service.features.map((feature, index) => <li key={index} className="flex items-start gap-2">
-              <Check className="w-3.5 h-3.5 text-primary flex-shrink-0 mt-0.5" strokeWidth={2.5} />
-              <span className="text-foreground font-sans text-xs leading-tight">{feature}</span>
-            </li>)}
+        <ul className="space-y-1.5 sm:space-y-2 mt-auto">
+          {service.features.map((feature, index) => (
+            <li key={index} className="flex items-start gap-2">
+              <Check className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-primary flex-shrink-0 mt-0.5" strokeWidth={2.5} />
+              <span className="text-foreground font-sans text-[10px] sm:text-xs leading-tight">{feature}</span>
+            </li>
+          ))}
         </ul>
       </div>
-    </motion.div>;
+    </motion.div>
+  );
 };
 const Services = () => {
   const [expandedId, setExpandedId] = useState<string | null>(null);
@@ -130,24 +135,24 @@ const Services = () => {
   };
   return <Layout>
       {/* Page Header */}
-      <section className="pt-32 pb-12 md:pt-40 md:pb-16 bg-background py-[15px]">
+      <section className="pt-4 sm:pt-8 pb-6 sm:pb-10 md:pt-24 md:pb-16 bg-background">
         <div className="container-luxury">
-          <span className="text-primary font-sans text-sm uppercase tracking-widest mb-4 block">
+          <span className="text-primary font-sans text-xs sm:text-sm uppercase tracking-widest mb-2 sm:mb-4 block">
             What We Do
           </span>
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif text-foreground mb-6">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-serif text-foreground mb-3 sm:mb-6">
             Services Crafted for Impact
           </h1>
-          <p className="text-muted-foreground font-sans max-w-2xl text-lg">
-            From strategy to execution, we deliver comprehensive creative solutions that transform brands.
+          <p className="text-muted-foreground font-sans max-w-2xl text-sm sm:text-base lg:text-lg">
+            From strategy to execution, we deliver comprehensive creative solutions.
           </p>
         </div>
       </section>
 
       {/* Premium Hover-Reveal Grid */}
-      <section className="bg-background pb-16 md:pb-24">
+      <section className="bg-background pb-8 sm:pb-12 md:pb-24">
         <div className="container-luxury">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-3 md:gap-4">
             {services.map(service => <ServiceCard key={service.id} service={service} isExpanded={expandedId === service.id} onToggle={() => handleToggle(service.id)} />)}
           </div>
         </div>
@@ -184,14 +189,17 @@ const Services = () => {
       {/* CTA */}
       <section className="section-padding bg-background">
         <div className="container-luxury text-center">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif text-foreground mb-6">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-serif text-foreground mb-4 sm:mb-6">
             Ready to Transform Your Brand?
           </h2>
-          <p className="text-muted-foreground font-sans max-w-xl mx-auto mb-10">
+          <p className="text-muted-foreground font-sans max-w-xl mx-auto mb-6 sm:mb-10 text-sm sm:text-base">
             Let's discuss how our services can help you achieve your business goals.
           </p>
-          <Link to="/contact" className="inline-block px-10 py-4 bg-primary text-primary-foreground font-sans text-sm uppercase tracking-widest hover:bg-primary/90 transition-all duration-300">
-            join the kult  
+          <Link 
+            to="/contact" 
+            className="inline-flex items-center justify-center w-40 sm:w-48 h-11 sm:h-12 rounded-2xl bg-gradient-to-r from-orange-500 to-orange-600 text-white font-sans text-xs sm:text-sm uppercase tracking-widest shadow-lg hover:scale-105 hover:shadow-xl transition-all duration-500"
+          >
+            Join the Kült
           </Link>
         </div>
       </section>
