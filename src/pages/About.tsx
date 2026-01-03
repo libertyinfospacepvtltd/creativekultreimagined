@@ -47,7 +47,7 @@ const team = [{
 }];
 const About = () => {
   return <Layout>
-      <section className="pt-24 sm:pt-32 pb-12 sm:pb-16 md:pt-40 md:pb-20 bg-background py-[10px]">
+      <section className="pt-12 sm:pt-16 pb-8 sm:pb-12 md:pt-20 md:pb-16 bg-background">
         <div className="container-luxury">
           <span className="text-primary font-sans text-xs sm:text-sm uppercase tracking-widest mb-3 sm:mb-4 block">Our Story</span>
           <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif text-foreground mb-4 sm:mb-6">Born in Kolkata,<br />Built for the World</h1>

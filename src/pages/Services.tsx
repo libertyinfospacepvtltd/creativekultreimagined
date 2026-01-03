@@ -135,7 +135,7 @@ const Services = () => {
   };
   return <Layout>
       {/* Page Header */}
-      <section className="pt-4 sm:pt-8 pb-6 sm:pb-10 md:pt-24 md:pb-16 bg-background">
+      <section className="pt-12 sm:pt-16 pb-6 sm:pb-10 md:pt-20 md:pb-14 bg-background">
         <div className="container-luxury">
           <span className="text-primary font-sans text-xs sm:text-sm uppercase tracking-widest mb-2 sm:mb-4 block">
             What We Do
@@ -197,7 +197,7 @@ const Services = () => {
           </p>
           <Link 
             to="/contact" 
-            className="inline-flex items-center justify-center w-40 sm:w-48 h-11 sm:h-12 rounded-2xl bg-gradient-to-r from-orange-500 to-orange-600 text-white font-sans text-xs sm:text-sm uppercase tracking-widest shadow-lg hover:scale-105 hover:shadow-xl transition-all duration-500"
+            className="inline-block px-10 py-4 rounded-full bg-primary text-primary-foreground font-sans text-sm uppercase tracking-widest hover:bg-primary/90 transition-all duration-300"
           >
             Join the Kült
           </Link>
