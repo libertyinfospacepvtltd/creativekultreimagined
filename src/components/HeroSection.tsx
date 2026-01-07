@@ -86,8 +86,8 @@ const HeroSection = ({ preloaderComplete = true }: HeroSectionProps) => {
         >
           <img
             src={heroImage}
-            alt="Victoria Memorial Kolkata"
-            className="w-full h-full object-cover"
+            alt="Hero background"
+            className="w-full h-full object-cover object-[30%_center] md:object-center"
             loading="eager"
           />
           {/* Dark Overlay */}
