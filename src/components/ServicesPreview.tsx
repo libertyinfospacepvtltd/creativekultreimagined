@@ -232,7 +232,7 @@ const ServicesPreview = () => {
         {/* Animation Area - Below header */}
         <div className="relative flex-1 w-full flex items-center justify-center">
           
-          {/* Layer A: Services Grid (revealed) - z-30 */}
+          {/* Layer A: Services Grid (Desktop) / Carousel (Mobile) - z-30 */}
           <motion.div 
             className="absolute inset-0 flex items-center justify-center z-30 pt-2 sm:pt-4"
             style={{
@@ -240,8 +240,9 @@ const ServicesPreview = () => {
               scale: gridScale,
             }}
           >
-            <div className="w-full max-w-4xl mx-auto px-2 sm:px-4">
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-1.5 sm:gap-2 md:gap-3">
+            {/* Desktop Grid - hidden on mobile */}
+            <div className="hidden md:block w-full max-w-4xl mx-auto px-2 sm:px-4">
+              <div className="grid grid-cols-4 gap-3">
                 {services.map((service, index) => (
                   <ServiceCard 
                     key={service.id} 
@@ -254,10 +255,79 @@ const ServicesPreview = () => {
               </div>
               
               {/* CTA */}
-              <div className="text-center mt-4 sm:mt-6 md:mt-8">
+              <div className="text-center mt-8">
                 <Link
                   to="/services"
-                  className="inline-flex items-center justify-center px-4 sm:px-6 py-2 sm:py-2.5 border border-primary text-primary font-sans text-xs uppercase tracking-widest hover:bg-primary hover:text-primary-foreground transition-all duration-300 min-h-[44px]"
+                  className="inline-flex items-center justify-center px-6 py-2.5 border border-primary text-primary font-sans text-xs uppercase tracking-widest hover:bg-primary hover:text-primary-foreground transition-all duration-300 min-h-[44px]"
+                >
+                  View All Services
+                </Link>
+              </div>
+            </div>
+
+            {/* Mobile Horizontal Carousel - visible only on mobile */}
+            <div className="block md:hidden w-full h-[50vh] flex flex-col justify-center">
+              <div 
+                className="flex gap-4 overflow-x-auto snap-x snap-mandatory px-4 pb-4 scrollbar-hide"
+                style={{ 
+                  scrollbarWidth: 'none',
+                  msOverflowStyle: 'none',
+                }}
+              >
+                {services.map((service, index) => {
+                  const Icon = service.icon;
+                  return (
+                    <motion.div
+                      key={service.id}
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ 
+                        duration: 0.6, 
+                        delay: index * 0.1,
+                        ease: [0.25, 0.1, 0.25, 1]
+                      }}
+                      className="flex-shrink-0 w-[85vw] snap-center border border-foreground/10 bg-background/50 backdrop-blur-sm p-6 flex flex-col"
+                    >
+                      <div className="flex items-center gap-3 mb-4">
+                        <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
+                          <Icon className="w-5 h-5 text-primary" strokeWidth={1.5} />
+                        </div>
+                        <h3 className="text-foreground font-serif text-lg font-medium">
+                          {service.title}
+                        </h3>
+                      </div>
+                      <p className="text-muted-foreground font-sans text-sm leading-relaxed mb-4 flex-1">
+                        {service.description}
+                      </p>
+                      <ul className="space-y-2">
+                        {service.features.map((feature, idx) => (
+                          <li key={idx} className="flex items-center gap-2">
+                            <Check className="w-3 h-3 text-primary flex-shrink-0" strokeWidth={2.5} />
+                            <span className="text-foreground font-sans text-xs">{feature}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </motion.div>
+                  );
+                })}
+              </div>
+              
+              {/* Scroll hint */}
+              <div className="flex justify-center gap-1.5 mt-4">
+                {services.map((_, index) => (
+                  <div 
+                    key={index} 
+                    className="w-1.5 h-1.5 rounded-full bg-foreground/20"
+                  />
+                ))}
+              </div>
+              
+              {/* CTA */}
+              <div className="text-center mt-6 px-4">
+                <Link
+                  to="/services"
+                  className="inline-flex items-center justify-center px-6 py-3 border border-primary text-primary font-sans text-xs uppercase tracking-widest hover:bg-primary hover:text-primary-foreground transition-all duration-300 min-h-[44px]"
                 >
                   View All Services
                 </Link>
