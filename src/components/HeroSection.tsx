@@ -137,7 +137,7 @@ const HeroSection = ({ preloaderComplete = true }: HeroSectionProps) => {
           className="absolute inset-0 flex items-center justify-center pointer-events-none px-4"
           style={{ opacity: taglineOpacity }}
         >
-          <div className="text-center mt-32 sm:mt-40 md:mt-48 lg:mt-56">
+          <div className="text-center mt-16 sm:mt-40 md:mt-48 lg:mt-56">
             <p className="text-foreground/90 font-serif text-lg sm:text-xl md:text-2xl lg:text-3xl italic tracking-wide">
               Where Brands Break the Mold
             </p>
