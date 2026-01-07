@@ -209,8 +209,8 @@ const ServicesPreview = () => {
   // Reduce scatter distance on mobile
   const scatterMultiplier = isMobile ? 2 : 4;
 
-  // Mobile: no extra scroll height needed
-  const sectionHeight = isMobile ? "auto" : "h-[140vh]";
+  // Desktop: 300vh for slower, cinematic animation | Mobile: auto (no scroll-based animation)
+  const sectionHeight = isMobile ? "auto" : "h-[300vh]";
 
   return (
     <section ref={containerRef} className={`relative ${sectionHeight} bg-background`}>
