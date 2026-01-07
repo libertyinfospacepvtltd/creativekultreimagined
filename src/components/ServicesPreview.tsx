@@ -198,180 +198,161 @@ const ServicesPreview = () => {
     offset: ["start start", "end end"]
   });
 
-  // Transform for scatter animation - completes by 50% of 140vh track
+  // Desktop: Transform for scatter animation - completes by 50% of 140vh track
   const scatterProgress = useTransform(scrollYProgress, [0, 0.5], [0, 1]);
   const deckOpacity = useTransform(scrollYProgress, [0, 0.4], [1, 0]);
   
-  // Grid fades in from 10% to 45% scroll
+  // Desktop: Grid fades in from 10% to 45% scroll
   const gridOpacity = useTransform(scrollYProgress, [0.1, 0.45], [0, 1]);
   const gridScale = useTransform(scrollYProgress, [0.1, 0.45], [0.9, 1]);
 
   // Reduce scatter distance on mobile
   const scatterMultiplier = isMobile ? 2 : 4;
 
+  // Mobile: no extra scroll height needed
+  const sectionHeight = isMobile ? "auto" : "h-[140vh]";
+
   return (
-    <section ref={containerRef} className="relative h-[140vh] bg-background">
-      {/* Main Sticky Wrapper - Contains everything and stays pinned */}
-      <div className="sticky top-0 h-screen h-[100dvh] w-full overflow-hidden flex flex-col">
-        
-        {/* Static Header - Always visible at top, NO animation */}
-        <div className="relative z-50 bg-background pt-16 sm:pt-20 md:pt-24 pb-4 sm:pb-6 flex-shrink-0">
-          <div className="container-luxury text-center">
-            <span className="text-primary font-sans text-xs sm:text-sm uppercase tracking-widest mb-2 sm:mb-4 block">
-              Our Services
-            </span>
-            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-serif text-foreground mb-2 sm:mb-4">
-              From Strategy to Execution
-            </h2>
-            <p className="text-muted-foreground font-sans max-w-2xl mx-auto text-xs sm:text-sm">
-              Scroll to discover our comprehensive creative solutions
-            </p>
+    <section ref={containerRef} className={`relative ${sectionHeight} bg-background`}>
+      {/* Desktop Layout - Sticky with scatter animation */}
+      <div className="hidden md:block sticky top-0 h-screen w-full overflow-hidden">
+        <div className="h-full w-full flex flex-col">
+          {/* Static Header */}
+          <div className="relative z-50 bg-background pt-24 pb-6 flex-shrink-0">
+            <div className="container-luxury text-center">
+              <span className="text-primary font-sans text-sm uppercase tracking-widest mb-4 block">
+                Our Services
+              </span>
+              <h2 className="text-4xl lg:text-5xl font-serif text-foreground mb-4">
+                From Strategy to Execution
+              </h2>
+              <p className="text-muted-foreground font-sans max-w-2xl mx-auto text-sm">
+                Scroll to discover our comprehensive creative solutions
+              </p>
+            </div>
+          </div>
+
+          {/* Animation Area */}
+          <div className="relative flex-1 w-full flex items-center justify-center">
+            {/* Layer A: Services Grid - z-30 */}
+            <motion.div 
+              className="absolute inset-0 flex items-center justify-center z-30 pt-4"
+              style={{
+                opacity: gridOpacity,
+                scale: gridScale,
+              }}
+            >
+              <div className="w-full max-w-4xl mx-auto px-4">
+                <div className="grid grid-cols-4 gap-3">
+                  {services.map((service, index) => (
+                    <ServiceCard 
+                      key={service.id} 
+                      service={service}
+                      isExpanded={expandedId === service.id}
+                      onToggle={() => setExpandedId(expandedId === service.id ? null : service.id)}
+                      delay={index * 0.2}
+                    />
+                  ))}
+                </div>
+                
+                {/* CTA */}
+                <div className="text-center mt-8">
+                  <Link
+                    to="/services"
+                    className="inline-flex items-center justify-center px-6 py-2.5 border border-primary text-primary font-sans text-xs uppercase tracking-widest hover:bg-primary hover:text-primary-foreground transition-all duration-300 min-h-[44px]"
+                  >
+                    View All Services
+                  </Link>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Layer B: Scatter Deck - z-40 */}
+            <motion.div 
+              className="absolute inset-0 flex items-center justify-center pointer-events-none z-40"
+              style={{ opacity: deckOpacity }}
+            >
+              <div className="relative w-80 h-80">
+                {scatterCards.map((card, index) => (
+                  <motion.div
+                    key={index}
+                    className="absolute inset-0 rounded-2xl overflow-hidden bg-black/40 backdrop-blur-md border border-white/10 shadow-2xl"
+                    style={{
+                      rotate: card.rotation,
+                      x: useTransform(scatterProgress, [0, 1], [0, card.scatterX * scatterMultiplier]),
+                      y: useTransform(scatterProgress, [0, 1], [0, card.scatterY * scatterMultiplier]),
+                      scale: useTransform(scatterProgress, [0, 0.5, 1], [1, 1.15, 1.4]),
+                      zIndex: scatterCards.length - index,
+                    }}
+                  >
+                    <div className="w-full h-full flex flex-col items-center justify-center p-6">
+                      <span className="text-white/50 font-sans text-xs uppercase tracking-[0.3em] mb-3">
+                        Service {card.serviceNumber}
+                      </span>
+                      <h3 className="text-white font-serif text-xl lg:text-2xl text-center leading-tight">
+                        {card.label}
+                      </h3>
+                    </div>
+                    <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent pointer-events-none rounded-2xl" />
+                  </motion.div>
+                ))}
+              </div>
+            </motion.div>
           </div>
         </div>
+      </div>
 
-        {/* Animation Area - Below header */}
-        <div className="relative flex-1 w-full flex items-center justify-center">
-          
-          {/* Layer A: Services Grid (Desktop) / Carousel (Mobile) - z-30 */}
-          <motion.div 
-            className="absolute inset-0 flex items-center justify-center z-30 pt-2 sm:pt-4"
-            style={{
-              opacity: gridOpacity,
-              scale: gridScale,
-            }}
-          >
-            {/* Desktop Grid - hidden on mobile */}
-            <div className="hidden md:block w-full max-w-4xl mx-auto px-2 sm:px-4">
-              <div className="grid grid-cols-4 gap-3">
-                {services.map((service, index) => (
-                  <ServiceCard 
-                    key={service.id} 
-                    service={service}
-                    isExpanded={expandedId === service.id}
-                    onToggle={() => setExpandedId(expandedId === service.id ? null : service.id)}
-                    delay={index * 0.2}
-                  />
-                ))}
-              </div>
-              
-              {/* CTA */}
-              <div className="text-center mt-8">
-                <Link
-                  to="/services"
-                  className="inline-flex items-center justify-center px-6 py-2.5 border border-primary text-primary font-sans text-xs uppercase tracking-widest hover:bg-primary hover:text-primary-foreground transition-all duration-300 min-h-[44px]"
-                >
-                  View All Services
-                </Link>
-              </div>
-            </div>
+      {/* Mobile Layout - Diagonal Float Transition with compact list */}
+      <div className="block md:hidden py-16 px-4 bg-background">
+        {/* Header */}
+        <div className="text-center mb-8">
+          <span className="text-primary font-sans text-xs uppercase tracking-widest mb-2 block">
+            Our Services
+          </span>
+          <h2 className="text-2xl sm:text-3xl font-serif text-foreground mb-2">
+            From Strategy to Execution
+          </h2>
+          <p className="text-muted-foreground font-sans text-xs max-w-sm mx-auto">
+            Comprehensive creative solutions for your brand
+          </p>
+        </div>
 
-            {/* Mobile Horizontal Carousel - visible only on mobile */}
-            <div className="block md:hidden w-full h-[50vh] flex flex-col justify-center">
-              <div 
-                className="flex gap-4 overflow-x-auto snap-x snap-mandatory px-4 pb-4 scrollbar-hide"
-                style={{ 
-                  scrollbarWidth: 'none',
-                  msOverflowStyle: 'none',
+        {/* Mobile Services Grid - Compact 2x4 with diagonal float animation */}
+        <div className="grid grid-cols-2 gap-3">
+          {services.map((service, index) => {
+            const Icon = service.icon;
+            return (
+              <motion.div
+                key={service.id}
+                initial={{ opacity: 0, x: 40, y: 40 }}
+                whileInView={{ opacity: 1, x: 0, y: 0 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ 
+                  duration: 0.5, 
+                  delay: index * 0.08,
+                  ease: [0.25, 0.1, 0.25, 1]
                 }}
+                className="border border-foreground/10 bg-background/80 backdrop-blur-sm p-4 flex flex-col items-center text-center"
               >
-                {services.map((service, index) => {
-                  const Icon = service.icon;
-                  return (
-                    <motion.div
-                      key={service.id}
-                      initial={{ opacity: 0, y: 20 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ 
-                        duration: 0.6, 
-                        delay: index * 0.1,
-                        ease: [0.25, 0.1, 0.25, 1]
-                      }}
-                      className="flex-shrink-0 w-[85vw] snap-center border border-foreground/10 bg-background/50 backdrop-blur-sm p-6 flex flex-col"
-                    >
-                      <div className="flex items-center gap-3 mb-4">
-                        <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
-                          <Icon className="w-5 h-5 text-primary" strokeWidth={1.5} />
-                        </div>
-                        <h3 className="text-foreground font-serif text-lg font-medium">
-                          {service.title}
-                        </h3>
-                      </div>
-                      <p className="text-muted-foreground font-sans text-sm leading-relaxed mb-4 flex-1">
-                        {service.description}
-                      </p>
-                      <ul className="space-y-2">
-                        {service.features.map((feature, idx) => (
-                          <li key={idx} className="flex items-center gap-2">
-                            <Check className="w-3 h-3 text-primary flex-shrink-0" strokeWidth={2.5} />
-                            <span className="text-foreground font-sans text-xs">{feature}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </motion.div>
-                  );
-                })}
-              </div>
-              
-              {/* Scroll hint */}
-              <div className="flex justify-center gap-1.5 mt-4">
-                {services.map((_, index) => (
-                  <div 
-                    key={index} 
-                    className="w-1.5 h-1.5 rounded-full bg-foreground/20"
-                  />
-                ))}
-              </div>
-              
-              {/* CTA */}
-              <div className="text-center mt-6 px-4">
-                <Link
-                  to="/services"
-                  className="inline-flex items-center justify-center px-6 py-3 border border-primary text-primary font-sans text-xs uppercase tracking-widest hover:bg-primary hover:text-primary-foreground transition-all duration-300 min-h-[44px]"
-                >
-                  View All Services
-                </Link>
-              </div>
-            </div>
-          </motion.div>
+                <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mb-3">
+                  <Icon className="w-5 h-5 text-primary" strokeWidth={1.5} />
+                </div>
+                <h3 className="text-foreground font-serif text-sm font-medium leading-tight">
+                  {service.title}
+                </h3>
+              </motion.div>
+            );
+          })}
+        </div>
 
-          {/* Layer B: Scatter Deck (covers grid initially) - z-40 */}
-          <motion.div 
-            className="absolute inset-0 flex items-center justify-center pointer-events-none z-40"
-            style={{ opacity: deckOpacity }}
+        {/* CTA - immediately after cards */}
+        <div className="text-center mt-6">
+          <Link
+            to="/services"
+            className="inline-flex items-center justify-center px-6 py-3 border border-primary text-primary font-sans text-xs uppercase tracking-widest hover:bg-primary hover:text-primary-foreground transition-all duration-300 min-h-[44px]"
           >
-            <div className="relative w-48 h-56 sm:w-64 sm:h-72 md:w-80 md:h-80">
-              {scatterCards.map((card, index) => (
-                <motion.div
-                  key={index}
-                  className="absolute inset-0 rounded-xl sm:rounded-2xl overflow-hidden bg-black/40 backdrop-blur-md border border-white/10 shadow-2xl"
-                  style={{
-                    rotate: card.rotation,
-                    x: useTransform(scatterProgress, [0, 1], [0, card.scatterX * scatterMultiplier]),
-                    y: useTransform(scatterProgress, [0, 1], [0, card.scatterY * scatterMultiplier]),
-                    scale: useTransform(scatterProgress, [0, 0.5, 1], [1, 1.15, 1.4]),
-                    zIndex: scatterCards.length - index,
-                  }}
-                >
-                  {/* Dark glass card content */}
-                  <div className="w-full h-full flex flex-col items-center justify-center p-4 sm:p-6">
-                    {/* Service label */}
-                    <span className="text-white/50 font-sans text-[10px] sm:text-xs uppercase tracking-[0.2em] sm:tracking-[0.3em] mb-2 sm:mb-3">
-                      Service {card.serviceNumber}
-                    </span>
-                    {/* Service title */}
-                    <h3 className="text-white font-serif text-base sm:text-lg md:text-xl lg:text-2xl text-center leading-tight">
-                      {card.label}
-                    </h3>
-                  </div>
-                  
-                  {/* Subtle gradient overlay for glass effect */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent pointer-events-none rounded-xl sm:rounded-2xl" />
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
-
+            View All Services
+          </Link>
         </div>
       </div>
     </section>

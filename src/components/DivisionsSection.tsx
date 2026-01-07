@@ -42,16 +42,16 @@ const DivisionsSection = () => {
           </p>
         </div>
 
-        {/* Divisions Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
+        {/* Desktop Grid - unchanged */}
+        <div className="hidden md:grid grid-cols-3 gap-8">
           {divisions.map((division, index) => (
             <div 
               key={index}
-              className="group bg-background border border-border/30 p-6 sm:p-8 text-center hover:border-primary/30 transition-all duration-500"
+              className="group bg-background border border-border/30 p-8 text-center hover:border-primary/30 transition-all duration-500"
             >
               {/* Circular white logo container */}
-              <div className={`bg-white rounded-full w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 mx-auto mb-4 sm:mb-6 flex items-center justify-center overflow-hidden ${
-                division.name === "12thPass.ai" ? "p-0" : "p-4 sm:p-6"
+              <div className={`bg-white rounded-full w-32 h-32 mx-auto mb-6 flex items-center justify-center overflow-hidden ${
+                division.name === "12thPass.ai" ? "p-0" : "p-6"
               }`}>
                 <a 
                   href={division.website} 
@@ -62,19 +62,87 @@ const DivisionsSection = () => {
                   <img
                     src={division.logo}
                     alt={division.name}
-                    className={`object-contain ${
-                      division.name === "12thPass.ai" ? "w-full h-full" : "w-full h-full"
-                    }`}
+                    className="object-contain w-full h-full"
+                  />
+                </a>
+              </div>
+              <h3 className="text-xl font-serif text-foreground mb-2">
+                {division.name}
+              </h3>
+              <p className="text-muted-foreground font-sans text-sm mb-6">
+                {division.description}
+              </p>
+              <div className="flex items-center justify-center gap-4">
+                {division.website && (
+                  <a
+                    href={division.website}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-muted-foreground hover:text-primary transition-colors p-2 min-h-[44px] min-w-[44px] flex items-center justify-center"
+                    aria-label={`Visit ${division.name} website`}
+                  >
+                    <Globe size={18} />
+                  </a>
+                )}
+                {division.instagram && (
+                  <a
+                    href={division.instagram}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-muted-foreground hover:text-primary transition-colors p-2 min-h-[44px] min-w-[44px] flex items-center justify-center"
+                    aria-label={`Visit ${division.name} Instagram`}
+                  >
+                    <Instagram size={18} />
+                  </a>
+                )}
+                {division.facebook && (
+                  <a
+                    href={division.facebook}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-muted-foreground hover:text-primary transition-colors p-2 min-h-[44px] min-w-[44px] flex items-center justify-center"
+                    aria-label={`Visit ${division.name} Facebook`}
+                  >
+                    <Facebook size={18} />
+                  </a>
+                )}
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Mobile Tablet-Shape Cards - stacked vertically */}
+        <div className="flex md:hidden flex-col gap-6">
+          {divisions.map((division, index) => (
+            <div 
+              key={index}
+              className="group bg-background border border-border/30 rounded-3xl overflow-hidden h-[50vh] max-h-[400px] flex flex-col items-center justify-center p-6 text-center hover:border-primary/30 transition-all duration-500"
+              style={{ aspectRatio: '3/4' }}
+            >
+              {/* Circular white logo container */}
+              <div className={`bg-white rounded-full w-24 h-24 sm:w-28 sm:h-28 mx-auto mb-4 flex items-center justify-center overflow-hidden ${
+                division.name === "12thPass.ai" ? "p-0" : "p-4 sm:p-5"
+              }`}>
+                <a 
+                  href={division.website} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="block w-full h-full flex items-center justify-center"
+                >
+                  <img
+                    src={division.logo}
+                    alt={division.name}
+                    className="object-contain w-full h-full"
                   />
                 </a>
               </div>
               <h3 className="text-lg sm:text-xl font-serif text-foreground mb-2">
                 {division.name}
               </h3>
-              <p className="text-muted-foreground font-sans text-xs sm:text-sm mb-4 sm:mb-6">
+              <p className="text-muted-foreground font-sans text-xs sm:text-sm mb-4">
                 {division.description}
               </p>
-              <div className="flex items-center justify-center gap-3 sm:gap-4">
+              <div className="flex items-center justify-center gap-4">
                 {division.website && (
                   <a
                     href={division.website}
