@@ -68,15 +68,15 @@ const Contact = () => {
   return (
     <Layout>
       {/* Page Header */}
-      <section className="pt-16 pb-8 md:pt-20 md:pb-12 bg-background">
+      <section className="pt-12 sm:pt-16 pb-6 sm:pb-10 md:pt-20 md:pb-12 bg-background">
         <div className="container-luxury">
-          <span className="text-primary font-sans text-sm uppercase tracking-widest mb-4 block">
+          <span className="text-primary font-sans text-xs sm:text-sm uppercase tracking-widest mb-3 sm:mb-4 block">
             Get in Touch
           </span>
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif text-foreground mb-6">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-serif text-foreground mb-4 sm:mb-6">
             Let's Create Together
           </h1>
-          <p className="text-muted-foreground font-sans max-w-2xl text-lg">
+          <p className="text-muted-foreground font-sans max-w-2xl text-sm sm:text-base lg:text-lg">
             Ready to transform your brand? We'd love to hear about your project and explore how we can help.
           </p>
         </div>
@@ -85,13 +85,13 @@ const Contact = () => {
       {/* Contact Content */}
       <section className="section-padding bg-card border-t border-border/30">
         <div className="container-luxury">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-10 lg:gap-20">
             {/* Contact Form */}
             <div>
-              <h2 className="text-2xl font-serif text-foreground mb-8">
+              <h2 className="text-xl sm:text-2xl font-serif text-foreground mb-6 sm:mb-8">
                 Send Us a Message
               </h2>
-              <form onSubmit={handleSubmit} className="space-y-6">
+              <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                   <div>
                     <label className="block text-sm font-sans text-muted-foreground mb-2">
@@ -158,7 +158,7 @@ const Contact = () => {
                         key={service}
                         type="button"
                         onClick={() => handleServiceToggle(service)}
-                        className={`px-4 py-2 rounded-full text-xs font-sans transition-all duration-300 ${
+                        className={`px-4 py-2.5 rounded-full text-xs font-sans transition-all duration-300 min-h-[44px] ${
                           formData.services.includes(service)
                             ? "bg-primary text-primary-foreground"
                             : "bg-background border border-border/50 text-muted-foreground hover:border-primary hover:text-primary"
@@ -213,7 +213,7 @@ const Contact = () => {
 
             {/* Contact Info */}
             <div>
-              <h2 className="text-2xl font-serif text-foreground mb-8">
+              <h2 className="text-xl sm:text-2xl font-serif text-foreground mb-6 sm:mb-8">
                 Contact Information
               </h2>
               <div className="space-y-8">
@@ -276,12 +276,12 @@ const Contact = () => {
                   <h3 className="text-foreground font-sans font-medium mb-4">
                     Follow Us
                   </h3>
-                  <div className="flex items-center gap-4">
+                  <div className="flex flex-wrap items-center gap-3 sm:gap-4">
                     <a
                       href="https://instagram.com/creativekult"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="w-12 h-12 flex items-center justify-center border border-border/50 text-muted-foreground hover:bg-primary hover:border-primary hover:text-primary-foreground transition-all duration-300"
+                      className="w-11 h-11 sm:w-12 sm:h-12 flex items-center justify-center border border-border/50 text-muted-foreground hover:bg-primary hover:border-primary hover:text-primary-foreground transition-all duration-300"
                       aria-label="Instagram"
                     >
                       <Instagram size={20} />
@@ -290,7 +290,7 @@ const Contact = () => {
                       href="https://facebook.com/creativekult"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="w-12 h-12 flex items-center justify-center border border-border/50 text-muted-foreground hover:bg-primary hover:border-primary hover:text-primary-foreground transition-all duration-300"
+                      className="w-11 h-11 sm:w-12 sm:h-12 flex items-center justify-center border border-border/50 text-muted-foreground hover:bg-primary hover:border-primary hover:text-primary-foreground transition-all duration-300"
                       aria-label="Facebook"
                     >
                       <Facebook size={20} />
@@ -299,7 +299,7 @@ const Contact = () => {
                       href="https://linkedin.com/company/creativekult"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="w-12 h-12 flex items-center justify-center border border-border/50 text-muted-foreground hover:bg-primary hover:border-primary hover:text-primary-foreground transition-all duration-300"
+                      className="w-11 h-11 sm:w-12 sm:h-12 flex items-center justify-center border border-border/50 text-muted-foreground hover:bg-primary hover:border-primary hover:text-primary-foreground transition-all duration-300"
                       aria-label="LinkedIn"
                     >
                       <Linkedin size={20} />
@@ -309,11 +309,11 @@ const Contact = () => {
               </div>
 
               {/* Map Section with Heading */}
-              <div className="mt-12">
-                <h2 className="text-2xl md:text-3xl font-serif text-foreground text-center mb-8">
+              <div className="mt-8 sm:mt-12">
+                <h2 className="text-xl sm:text-2xl md:text-3xl font-serif text-foreground text-center mb-6 sm:mb-8">
                   Our Location
                 </h2>
-                <div className="w-full min-h-[300px] sm:min-h-[350px] lg:min-h-[400px] bg-card border border-border/30 overflow-hidden relative">
+                <div className="w-full min-h-[250px] sm:min-h-[300px] lg:min-h-[400px] bg-card border border-border/30 overflow-hidden relative">
                   <iframe
                   src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3685.8247772568364!2d88.33875!3d22.517897!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a0277c8a4a45c2f%3A0xe9e6e9e9e9e9e9e9!2sSagar%20Trade%20Cube!5e0!3m2!1sen!2sin!4v1234567890"
                   className="absolute inset-0 w-full h-full"
