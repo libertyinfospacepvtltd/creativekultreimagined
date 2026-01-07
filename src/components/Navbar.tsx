@@ -197,18 +197,16 @@ const Navbar = ({ showNavbar = true }: NavbarProps) => {
     );
   }
 
-  // Track scroll position for logo visibility fallback
-  const [scrolledPastHero, setScrolledPastHero] = useState(false);
+  // Listen for handshake event from DockingLogo
+  const [dockingComplete, setDockingComplete] = useState(false);
   
   useEffect(() => {
-    const handleScrollCheck = () => {
-      const heroHeight = window.innerHeight;
-      setScrolledPastHero(window.scrollY > heroHeight);
+    const handleHandshake = (e: CustomEvent<{ complete: boolean }>) => {
+      setDockingComplete(e.detail.complete);
     };
     
-    handleScrollCheck();
-    window.addEventListener('scroll', handleScrollCheck, { passive: true });
-    return () => window.removeEventListener('scroll', handleScrollCheck);
+    window.addEventListener('docking-handshake', handleHandshake as EventListener);
+    return () => window.removeEventListener('docking-handshake', handleHandshake as EventListener);
   }, []);
 
   // Home page - animated navbar that reveals after hero scroll
@@ -233,11 +231,15 @@ const Navbar = ({ showNavbar = true }: NavbarProps) => {
         />
         
         <nav className="container-luxury flex items-center justify-between h-14 sm:h-16 relative">
-          {/* Fallback logo - shows when scrolled past hero section */}
+          {/* Invisible Anchor Logo - opacity 0 by default, shows ONLY after handshake */}
           <Link 
             to="/" 
-            className="relative z-10 transition-opacity duration-300"
-            style={{ opacity: scrolledPastHero ? 1 : 0, pointerEvents: scrolledPastHero ? 'auto' : 'none' }}
+            className="relative z-10"
+            style={{ 
+              opacity: dockingComplete ? 1 : 0, 
+              pointerEvents: dockingComplete ? 'auto' : 'none',
+              transition: 'opacity 0.1s ease-out'
+            }}
           >
             <img 
               src={logo} 
