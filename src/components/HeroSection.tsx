@@ -167,7 +167,7 @@ const HeroSection = ({ preloaderComplete = true }: HeroSectionProps) => {
             }}
           >
             <h1 className="font-serif text-3xl sm:text-4xl md:text-6xl lg:text-8xl text-foreground tracking-tight">
-              Cultivating Digital
+              Sculpting Digital
             </h1>
             <h1 className="font-serif text-3xl sm:text-4xl md:text-6xl lg:text-8xl text-primary italic mt-1 sm:mt-2">
               Legacies.
