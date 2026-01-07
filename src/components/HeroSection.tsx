@@ -87,7 +87,7 @@ const HeroSection = ({ preloaderComplete = true }: HeroSectionProps) => {
           <img
             src={heroImage}
             alt="Hero background"
-            className="w-full h-full object-cover object-[30%_center] md:object-center"
+            className="w-full h-full object-cover object-left md:object-center"
             loading="eager"
           />
           {/* Dark Overlay */}
