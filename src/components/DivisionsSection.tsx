@@ -111,17 +111,16 @@ const DivisionsSection = () => {
           ))}
         </div>
 
-        {/* Mobile Tablet-Shape Cards - stacked vertically */}
-        <div className="flex md:hidden flex-col gap-6">
+        {/* Mobile Compact Cards - stacked vertically */}
+        <div className="flex md:hidden flex-col gap-4">
           {divisions.map((division, index) => (
             <div 
               key={index}
-              className="group bg-background border border-border/30 rounded-3xl overflow-hidden h-[50vh] max-h-[400px] flex flex-col items-center justify-center p-6 text-center hover:border-primary/30 transition-all duration-500"
-              style={{ aspectRatio: '3/4' }}
+              className="group bg-background border border-border/30 rounded-2xl overflow-hidden flex items-center gap-4 p-4 text-left hover:border-primary/30 transition-all duration-500"
             >
               {/* Circular white logo container */}
-              <div className={`bg-white rounded-full w-24 h-24 sm:w-28 sm:h-28 mx-auto mb-4 flex items-center justify-center overflow-hidden ${
-                division.name === "12thPass.ai" ? "p-0" : "p-4 sm:p-5"
+              <div className={`bg-white rounded-full w-16 h-16 flex-shrink-0 flex items-center justify-center overflow-hidden ${
+                division.name === "12thPass.ai" ? "p-0" : "p-3"
               }`}>
                 <a 
                   href={division.website} 
@@ -136,46 +135,48 @@ const DivisionsSection = () => {
                   />
                 </a>
               </div>
-              <h3 className="text-lg sm:text-xl font-serif text-foreground mb-2">
-                {division.name}
-              </h3>
-              <p className="text-muted-foreground font-sans text-xs sm:text-sm mb-4">
-                {division.description}
-              </p>
-              <div className="flex items-center justify-center gap-4">
-                {division.website && (
-                  <a
-                    href={division.website}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-muted-foreground hover:text-primary transition-colors p-2 min-h-[44px] min-w-[44px] flex items-center justify-center"
-                    aria-label={`Visit ${division.name} website`}
-                  >
-                    <Globe size={18} />
-                  </a>
-                )}
-                {division.instagram && (
-                  <a
-                    href={division.instagram}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-muted-foreground hover:text-primary transition-colors p-2 min-h-[44px] min-w-[44px] flex items-center justify-center"
-                    aria-label={`Visit ${division.name} Instagram`}
-                  >
-                    <Instagram size={18} />
-                  </a>
-                )}
-                {division.facebook && (
-                  <a
-                    href={division.facebook}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-muted-foreground hover:text-primary transition-colors p-2 min-h-[44px] min-w-[44px] flex items-center justify-center"
-                    aria-label={`Visit ${division.name} Facebook`}
-                  >
-                    <Facebook size={18} />
-                  </a>
-                )}
+              <div className="flex-1 min-w-0">
+                <h3 className="text-base font-serif text-foreground mb-1">
+                  {division.name}
+                </h3>
+                <p className="text-muted-foreground font-sans text-xs mb-2">
+                  {division.description}
+                </p>
+                <div className="flex items-center gap-3">
+                  {division.website && (
+                    <a
+                      href={division.website}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-muted-foreground hover:text-primary transition-colors"
+                      aria-label={`Visit ${division.name} website`}
+                    >
+                      <Globe size={16} />
+                    </a>
+                  )}
+                  {division.instagram && (
+                    <a
+                      href={division.instagram}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-muted-foreground hover:text-primary transition-colors"
+                      aria-label={`Visit ${division.name} Instagram`}
+                    >
+                      <Instagram size={16} />
+                    </a>
+                  )}
+                  {division.facebook && (
+                    <a
+                      href={division.facebook}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-muted-foreground hover:text-primary transition-colors"
+                      aria-label={`Visit ${division.name} Facebook`}
+                    >
+                      <Facebook size={16} />
+                    </a>
+                  )}
+                </div>
               </div>
             </div>
           ))}
