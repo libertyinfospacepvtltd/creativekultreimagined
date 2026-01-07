@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { motion, useScroll, useTransform } from "framer-motion";
-import heroImage from "@/assets/victoria-memorial-hero.jpg";
+import heroImage from "@/assets/hero-background.png";
 
 // Preload hero image immediately
 const preloadImage = new Image();
