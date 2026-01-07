@@ -2,10 +2,13 @@ import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { motion, useScroll, useTransform } from "framer-motion";
 import heroImage from "@/assets/hero-background.png";
+import heroImageMobile from "@/assets/hero-background-mobile.png";
 
-// Preload hero image immediately
+// Preload hero images immediately
 const preloadImage = new Image();
 preloadImage.src = heroImage;
+const preloadImageMobile = new Image();
+preloadImageMobile.src = heroImageMobile;
 
 interface HeroSectionProps {
   preloaderComplete?: boolean;
@@ -84,10 +87,18 @@ const HeroSection = ({ preloaderComplete = true }: HeroSectionProps) => {
             y: isMobile ? 0 : mousePosition.y * -20,
           }}
         >
+          {/* Mobile Image */}
+          <img
+            src={heroImageMobile}
+            alt="Hero background"
+            className="block md:hidden w-full h-full object-cover object-center"
+            loading="eager"
+          />
+          {/* Desktop Image */}
           <img
             src={heroImage}
             alt="Hero background"
-            className="w-full h-full object-cover object-left md:object-center"
+            className="hidden md:block w-full h-full object-cover object-center"
             loading="eager"
           />
           {/* Dark Overlay */}
