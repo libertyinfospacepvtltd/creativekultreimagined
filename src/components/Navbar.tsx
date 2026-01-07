@@ -234,11 +234,12 @@ const Navbar = ({ showNavbar = true }: NavbarProps) => {
           {/* Invisible Anchor Logo - opacity 0 by default, shows ONLY after handshake */}
           <Link 
             to="/" 
+            id="navbar-logo-anchor"
             className="relative z-10"
             style={{ 
               opacity: dockingComplete ? 1 : 0, 
               pointerEvents: dockingComplete ? 'auto' : 'none',
-              transition: 'opacity 0.1s ease-out'
+              transition: 'opacity 0.05s ease-out'
             }}
           >
             <img 
