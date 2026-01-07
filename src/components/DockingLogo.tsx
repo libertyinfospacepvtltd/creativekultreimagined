@@ -1,4 +1,4 @@
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useCallback, useRef } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { motion, useScroll, useTransform, useMotionValueEvent } from "framer-motion";
 import logo from "@/assets/creative-kult-logo.png";
@@ -9,11 +9,15 @@ interface DockingLogoProps {
   onRevealComplete?: () => void;
 }
 
+// Export a function to get the navbar logo element for positioning
+export const NAVBAR_LOGO_ID = "navbar-logo-anchor";
+
 const DockingLogo = ({ onDockComplete, isPreloading = false, onRevealComplete }: DockingLogoProps) => {
   const location = useLocation();
   const isHomePage = location.pathname === "/";
   const [windowSize, setWindowSize] = useState({ width: 0, height: 0 });
   const [hasDocked, setHasDocked] = useState(false);
+  const [handshakeComplete, setHandshakeComplete] = useState(false);
   const [revealPhase, setRevealPhase] = useState<"reveal" | "hold" | "complete">(
     isPreloading ? "reveal" : "complete"
   );
@@ -93,15 +97,31 @@ const DockingLogo = ({ onDockComplete, isPreloading = false, onRevealComplete }:
     [1, scaleFactor]
   );
 
-  // Track when docking completes
+  // Docking logo opacity - hide after handshake
+  const dockingLogoOpacity = useTransform(
+    scrollYProgress,
+    [0, 0.149, 0.15],
+    [1, 1, 0]
+  );
+
+  // Track when docking completes and trigger handshake
   useMotionValueEvent(scrollYProgress, "change", useCallback((latest: number) => {
     if (latest >= 0.15 && !hasDocked) {
       setHasDocked(true);
+      // Handshake: DockingLogo is now at exact position, signal navbar to show its logo
+      setHandshakeComplete(true);
       onDockComplete?.();
     } else if (latest < 0.15 && hasDocked) {
       setHasDocked(false);
+      setHandshakeComplete(false);
     }
   }, [hasDocked, onDockComplete]));
+
+  // Expose handshake state via custom event for Navbar to listen
+  useEffect(() => {
+    const event = new CustomEvent('docking-handshake', { detail: { complete: handshakeComplete } });
+    window.dispatchEvent(event);
+  }, [handshakeComplete]);
 
   // Only render on home page
   if (!isHomePage || windowSize.width === 0) {
@@ -120,6 +140,7 @@ const DockingLogo = ({ onDockComplete, isPreloading = false, onRevealComplete }:
         scale: isAnimatingPreloader ? 1 : scale,
         translateX: "-50%",
         translateY: "-50%",
+        opacity: handshakeComplete ? 0 : 1,
       }}
     >
       <Link to="/" className="pointer-events-auto block">
