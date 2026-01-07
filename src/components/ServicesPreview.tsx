@@ -198,19 +198,19 @@ const ServicesPreview = () => {
     offset: ["start start", "end end"]
   });
 
-  // Desktop: Transform for scatter animation - completes by 50% of 140vh track
-  const scatterProgress = useTransform(scrollYProgress, [0, 0.5], [0, 1]);
-  const deckOpacity = useTransform(scrollYProgress, [0, 0.4], [1, 0]);
+  // Desktop: Transform for scatter animation - completes at 90% of scroll for minimal dead space
+  const scatterProgress = useTransform(scrollYProgress, [0, 0.9], [0, 1]);
+  const deckOpacity = useTransform(scrollYProgress, [0, 0.7], [1, 0]);
   
-  // Desktop: Grid fades in from 10% to 45% scroll
-  const gridOpacity = useTransform(scrollYProgress, [0.1, 0.45], [0, 1]);
-  const gridScale = useTransform(scrollYProgress, [0.1, 0.45], [0.9, 1]);
+  // Desktop: Grid fades in from 20% to 80% scroll
+  const gridOpacity = useTransform(scrollYProgress, [0.2, 0.8], [0, 1]);
+  const gridScale = useTransform(scrollYProgress, [0.2, 0.8], [0.9, 1]);
 
   // Reduce scatter distance on mobile
   const scatterMultiplier = isMobile ? 2 : 4;
 
-  // Desktop: 300vh for slower, cinematic animation | Mobile: auto (no scroll-based animation)
-  const sectionHeight = isMobile ? "auto" : "h-[300vh]";
+  // Desktop: 250vh for slow animation with minimal dead scroll | Mobile: auto
+  const sectionHeight = isMobile ? "auto" : "h-[250vh]";
 
   return (
     <section ref={containerRef} className={`relative ${sectionHeight} bg-background`}>
