@@ -9,7 +9,7 @@ interface DockingLogoProps {
   onRevealComplete?: () => void;
 }
 
-// Export a function to get the navbar logo element for positioning
+// ID for the navbar logo anchor element
 export const NAVBAR_LOGO_ID = "navbar-logo-anchor";
 
 const DockingLogo = ({ onDockComplete, isPreloading = false, onRevealComplete }: DockingLogoProps) => {
@@ -21,6 +21,9 @@ const DockingLogo = ({ onDockComplete, isPreloading = false, onRevealComplete }:
   const [revealPhase, setRevealPhase] = useState<"reveal" | "hold" | "complete">(
     isPreloading ? "reveal" : "complete"
   );
+  
+  // Store the navbar logo's bounding rect for pixel-perfect positioning
+  const [navbarLogoRect, setNavbarLogoRect] = useState<DOMRect | null>(null);
 
   // Track window size for accurate positioning
   useEffect(() => {
@@ -31,6 +34,31 @@ const DockingLogo = ({ onDockComplete, isPreloading = false, onRevealComplete }:
     window.addEventListener("resize", updateSize);
     return () => window.removeEventListener("resize", updateSize);
   }, []);
+
+  // Get the navbar logo's bounding rect using getBoundingClientRect
+  useEffect(() => {
+    const getNavbarLogoPosition = () => {
+      const navbarLogo = document.getElementById(NAVBAR_LOGO_ID);
+      if (navbarLogo) {
+        const rect = navbarLogo.getBoundingClientRect();
+        setNavbarLogoRect(rect);
+      }
+    };
+    
+    // Initial measurement
+    getNavbarLogoPosition();
+    
+    // Re-measure on resize and scroll (navbar might reposition)
+    window.addEventListener("resize", getNavbarLogoPosition);
+    
+    // Use a small delay to ensure navbar is rendered
+    const timeout = setTimeout(getNavbarLogoPosition, 100);
+    
+    return () => {
+      window.removeEventListener("resize", getNavbarLogoPosition);
+      clearTimeout(timeout);
+    };
+  }, [windowSize.width]); // Re-run when window size changes
 
   // Handle preloader animation phases - fast and fluid
   useEffect(() => {
@@ -50,19 +78,16 @@ const DockingLogo = ({ onDockComplete, isPreloading = false, onRevealComplete }:
   const { scrollYProgress } = useScroll();
 
   // Calculate positions
-  const isMobile = windowSize.width < 768;
-  const isTablet = windowSize.width >= 768 && windowSize.width < 1024;
+  const isMobile = windowSize.width < 640; // sm breakpoint
+  const isTablet = windowSize.width >= 640 && windowSize.width < 768; // between sm and md
   
   // Initial logo size (hero state) - matches img class "w-64 md:w-80 lg:w-[420px]"
-  const heroLogoWidth = isMobile ? 256 : isTablet ? 320 : 420;
+  const heroLogoWidth = windowSize.width < 768 ? 256 : windowSize.width < 1024 ? 320 : 420;
   
-  // Final logo size (navbar state) - MUST match Navbar.tsx exactly: "h-8 sm:h-10 md:h-12"
-  // h-8 = 32px (mobile), h-10 = 40px (sm/tablet), h-12 = 48px (md+/desktop)
-  const navLogoHeight = isMobile ? 32 : isTablet ? 40 : 48;
-  
-  // Calculate width from height using actual logo aspect ratio (approx 4.5:1 based on common logo proportions)
-  const logoAspectRatio = 4.5;
-  const navLogoWidth = navLogoHeight * logoAspectRatio;
+  // Final logo dimensions from navbar anchor (pixel-perfect)
+  // Fallback values if navbar logo not yet measured: h-8=32px, sm:h-10=40px, md:h-12=48px
+  const navLogoWidth = navbarLogoRect?.width ?? (isMobile ? 144 : isTablet ? 180 : 216);
+  const navLogoHeight = navbarLogoRect?.height ?? (isMobile ? 32 : isTablet ? 40 : 48);
   
   // Scale factor to shrink hero logo to exact navbar logo size
   const scaleFactor = navLogoWidth / heroLogoWidth;
@@ -71,12 +96,14 @@ const DockingLogo = ({ onDockComplete, isPreloading = false, onRevealComplete }:
   const centerX = windowSize.width / 2;
   const centerY = windowSize.height / 2;
 
-  // Navbar position (docked state) - matches container-luxury padding exactly
-  // container-luxury uses: px-4 sm:px-6 lg:px-8 (16px, 24px, 32px)
-  const navPadding = isMobile ? 16 : windowSize.width >= 1024 ? 32 : 24;
-  // Logo should be anchored at left edge, so center = padding + half width
-  const navbarX = navPadding + (navLogoWidth / 2);
-  const navbarY = 32; // Center of 64px navbar
+  // Navbar position (docked state) - use getBoundingClientRect for pixel-perfect positioning
+  // Calculate center of navbar logo bounding box
+  const navbarX = navbarLogoRect 
+    ? navbarLogoRect.left + (navbarLogoRect.width / 2)
+    : (isMobile ? 16 : windowSize.width >= 1024 ? 32 : 24) + (navLogoWidth / 2);
+  const navbarY = navbarLogoRect 
+    ? navbarLogoRect.top + (navbarLogoRect.height / 2)
+    : 32; // Center of navbar
 
   // Scroll-linked transforms - animation completes at ~15% scroll progress
   const x = useTransform(
@@ -95,13 +122,6 @@ const DockingLogo = ({ onDockComplete, isPreloading = false, onRevealComplete }:
     scrollYProgress, 
     [0, 0.15], 
     [1, scaleFactor]
-  );
-
-  // Docking logo opacity - hide after handshake
-  const dockingLogoOpacity = useTransform(
-    scrollYProgress,
-    [0, 0.149, 0.15],
-    [1, 1, 0]
   );
 
   // Track when docking completes and trigger handshake
