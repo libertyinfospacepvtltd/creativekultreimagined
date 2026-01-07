@@ -92,9 +92,9 @@ const DockingLogo = ({ onDockComplete, isPreloading = false, onRevealComplete }:
   // Scale factor to shrink hero logo to exact navbar logo size
   const scaleFactor = navLogoWidth / heroLogoWidth;
 
-  // Center position (hero state)
+  // Center position (hero state) - slightly above center to avoid overlapping tagline
   const centerX = windowSize.width / 2;
-  const centerY = windowSize.height / 2;
+  const centerY = (windowSize.height / 2) - (isMobile ? 40 : 60);
 
   // Navbar position (docked state) - use getBoundingClientRect for pixel-perfect positioning
   // Calculate center of navbar logo bounding box
