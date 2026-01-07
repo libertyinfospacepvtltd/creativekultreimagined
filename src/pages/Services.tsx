@@ -197,24 +197,24 @@ const Services = () => {
       {/* Process Section */}
       <section className="section-padding bg-card border-t border-border/30">
         <div className="container-luxury">
-          <div className="text-center mb-16">
-            <span className="text-primary font-sans text-sm uppercase tracking-widest mb-4 block">
+          <div className="text-center mb-10 sm:mb-16">
+            <span className="text-primary font-sans text-xs sm:text-sm uppercase tracking-widest mb-3 sm:mb-4 block">
               Our Process
             </span>
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif text-foreground">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-serif text-foreground">
               A Streamlined Approach
             </h2>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {processSteps.map((step, index) => <div key={index} className="text-center">
-                <span className="text-5xl md:text-6xl font-serif text-primary/20 block mb-4">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 md:gap-8">
+            {processSteps.map((step, index) => <div key={index} className="text-center p-2 sm:p-4">
+                <span className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif text-primary/20 block mb-2 sm:mb-4">
                   {step.number}
                 </span>
-                <h3 className="text-xl font-serif text-foreground mb-3">
+                <h3 className="text-base sm:text-lg md:text-xl font-serif text-foreground mb-2 sm:mb-3">
                   {step.title}
                 </h3>
-                <p className="text-muted-foreground font-sans text-sm">
+                <p className="text-muted-foreground font-sans text-xs sm:text-sm">
                   {step.description}
                 </p>
               </div>)}
