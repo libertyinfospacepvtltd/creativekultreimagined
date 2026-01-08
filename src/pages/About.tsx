@@ -39,7 +39,7 @@ const team = [{
   image: payalDasImg
 }, {
   name: "Sreyash Banerjee",
-  role: "Marketing Head",
+  role: "Head of Marketing",
   specialty: "Growth & Performance",
   description: "Data-driven strategist turning insights into measurable business outcomes.",
   image: sreyashBanerjeeImg
