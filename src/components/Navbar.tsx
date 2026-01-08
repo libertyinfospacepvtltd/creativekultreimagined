@@ -116,6 +116,7 @@ const Navbar = ({ showNavbar = true }: NavbarProps) => {
   const isHomePage = location.pathname === "/";
   const { theme } = useTheme();
   
+  // For non-home pages, use theme-appropriate logo
   const logo = theme === "dark" ? logoDark : logoLight;
 
   // Close mobile menu on route change
@@ -229,6 +230,13 @@ const Navbar = ({ showNavbar = true }: NavbarProps) => {
     return () => window.removeEventListener('docking-handshake', handleHandshake as EventListener);
   }, []);
 
+  // Chameleon navbar logo: white during hero view, switches to black after docking (in light mode)
+  // During hero view (before docking), navbar bg is transparent over dark hero, so use white logo
+  // After docking, navbar has its own bg, so use theme-appropriate logo
+  const homeNavbarLogo = dockingComplete 
+    ? (theme === "dark" ? logoDark : logoLight)
+    : logoDark; // Always white before docking since hero is dark-styled
+
   // Home page - animated navbar that reveals after hero scroll
   return (
     <>
@@ -263,7 +271,7 @@ const Navbar = ({ showNavbar = true }: NavbarProps) => {
             }}
           >
             <img 
-              src={logo} 
+              src={homeNavbarLogo} 
               alt="Creative Kult" 
               className="h-8 sm:h-10 md:h-12 w-auto"
             />
