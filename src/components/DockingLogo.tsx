@@ -1,7 +1,9 @@
 import { useEffect, useState, useCallback, useRef } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { motion, useScroll, useTransform, useMotionValueEvent } from "framer-motion";
-import logo from "@/assets/creative-kult-logo.png";
+import logoDark from "@/assets/creative-kult-logo.png";
+import logoLight from "@/assets/creative-kult-logo-black.png";
+import { useTheme } from "./ThemeProvider";
 
 interface DockingLogoProps {
   onDockComplete?: () => void;
@@ -15,6 +17,8 @@ export const NAVBAR_LOGO_ID = "navbar-logo-anchor";
 const DockingLogo = ({ onDockComplete, isPreloading = false, onRevealComplete }: DockingLogoProps) => {
   const location = useLocation();
   const isHomePage = location.pathname === "/";
+  const { theme } = useTheme();
+  const logo = theme === "dark" ? logoDark : logoLight;
   const [windowSize, setWindowSize] = useState({ width: 0, height: 0 });
   const [hasDocked, setHasDocked] = useState(false);
   const [handshakeComplete, setHandshakeComplete] = useState(false);

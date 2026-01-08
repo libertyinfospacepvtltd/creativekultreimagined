@@ -6,7 +6,7 @@
 
 @layer base {
   :root {
-    /* Core Colors - Rich Dark Charcoal & White with Gold Accent */
+    /* Core Colors - Rich Dark Charcoal & White with Gold Accent (Dark Mode Default) */
     --background: 0 0% 7%;
     --foreground: 0 0% 100%;
 
@@ -47,6 +47,9 @@
     --off-white: 0 0% 95%;
     --cream: 40 20% 90%;
     
+    /* Glass card opacity */
+    --glass-bg: 0 0% 100% / 0.05;
+    
     /* Typography */
     --font-serif: 'Cormorant Garamond', Georgia, serif;
     --font-sans: 'Manrope', system-ui, sans-serif;
@@ -63,6 +66,51 @@
     /* Transitions */
     --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     --transition-slow: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* Light Mode - Grainy Sand Theme */
+  .light {
+    /* Warm Off-White / Bone Color Background */
+    --background: 50 20% 96%;
+    --foreground: 0 0% 10%;
+
+    --card: 50 20% 96%;
+    --card-foreground: 0 0% 10%;
+
+    --popover: 50 20% 98%;
+    --popover-foreground: 0 0% 10%;
+
+    /* Darker gold for better contrast on light background */
+    --primary: 43 74% 42%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 50 10% 90%;
+    --secondary-foreground: 0 0% 15%;
+
+    --muted: 50 10% 88%;
+    --muted-foreground: 0 0% 40%;
+
+    --accent: 43 74% 42%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 62% 50%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 50 10% 85%;
+    --input: 50 10% 85%;
+    --ring: 43 74% 42%;
+    
+    /* Custom Design Tokens - Light Mode */
+    --gold: 43 74% 42%;
+    --gold-light: 43 74% 52%;
+    --gold-dark: 43 74% 35%;
+    
+    /* Glass card opacity - darker for light mode */
+    --glass-bg: 0 0% 0% / 0.05;
+    
+    /* Shadows - subtle for light mode */
+    --shadow-gold: 0 0 40px hsl(43 74% 42% / 0.12);
+    --shadow-elegant: 0 25px 50px -12px hsl(0 0% 0% / 0.15);
   }
 
   .dark {

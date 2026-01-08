@@ -7,6 +7,8 @@ import ScrollToTopOnRouteChange from "./ScrollToTopOnRouteChange";
 import CustomCursor from "./CustomCursor";
 import Preloader from "./Preloader";
 import DockingLogo from "./DockingLogo";
+import ThemeToggle from "./ThemeToggle";
+import { useTheme } from "./ThemeProvider";
 
 interface LayoutProps {
   children: ReactNode;
@@ -17,6 +19,7 @@ const Layout = ({ children }: LayoutProps) => {
   const isHomePage = location.pathname === "/";
   const [preloaderVisible, setPreloaderVisible] = useState(isHomePage);
   const [preloaderComplete, setPreloaderComplete] = useState(!isHomePage);
+  const { theme } = useTheme();
 
   // Called when logo reveal animation finishes - instant transition
   const handleRevealComplete = useCallback(() => {
@@ -25,13 +28,15 @@ const Layout = ({ children }: LayoutProps) => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-background relative">
+    <div className="min-h-screen bg-background relative transition-colors duration-300">
       {/* Black Overlay - Middle Layer (z-40) */}
       <Preloader isVisible={preloaderVisible} />
       
-      {/* Film grain overlay */}
+      {/* Film grain / sand noise overlay */}
       <div 
-        className="fixed inset-0 pointer-events-none z-[9997] opacity-[0.04]"
+        className={`fixed inset-0 pointer-events-none z-[9997] ${
+          theme === "light" ? "opacity-[0.06]" : "opacity-[0.04]"
+        }`}
         style={{
           backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
         }}
@@ -48,6 +53,7 @@ const Layout = ({ children }: LayoutProps) => {
       <Navbar showNavbar={preloaderComplete} />
       <main className={isHomePage ? "" : "pt-14 sm:pt-16 md:pt-0"}>{children}</main>
       <Footer />
+      <ThemeToggle />
       <ScrollToTop />
       <ScrollToTopOnRouteChange />
       <CustomCursor />
