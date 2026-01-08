@@ -266,7 +266,7 @@ const Contact = () => {
                       WhatsApp Us
                     </h3>
                     <p className="text-muted-foreground font-sans text-sm">
-                      <span className="font-bold tracking-tight">+91 98316 70284</span>
+                      <span className="font-numbers font-bold tracking-tight tabular-nums">+91 98316 70284</span>
                     </p>
                   </div>
                 </a>

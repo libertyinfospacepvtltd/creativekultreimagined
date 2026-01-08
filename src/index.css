@@ -53,6 +53,7 @@
     /* Typography */
     --font-serif: 'Cormorant Garamond', Georgia, serif;
     --font-sans: 'Manrope', system-ui, sans-serif;
+    --font-numbers: 'Space Grotesk', system-ui, sans-serif;
     
     /* Gradients */
     --gradient-gold: linear-gradient(135deg, hsl(43 74% 52%), hsl(43 74% 40%));
