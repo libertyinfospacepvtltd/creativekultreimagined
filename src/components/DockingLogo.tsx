@@ -2,8 +2,6 @@ import { useEffect, useState, useCallback, useRef } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { motion, useScroll, useTransform, useMotionValueEvent } from "framer-motion";
 import logoDark from "@/assets/creative-kult-logo.png";
-import logoLight from "@/assets/creative-kult-logo-black.png";
-import { useTheme } from "./ThemeProvider";
 
 interface DockingLogoProps {
   onDockComplete?: () => void;
@@ -17,8 +15,8 @@ export const NAVBAR_LOGO_ID = "navbar-logo-anchor";
 const DockingLogo = ({ onDockComplete, isPreloading = false, onRevealComplete }: DockingLogoProps) => {
   const location = useLocation();
   const isHomePage = location.pathname === "/";
-  const { theme } = useTheme();
-  const logo = theme === "dark" ? logoDark : logoLight;
+  // Always use white/gold logo for hero animation (hero is always dark-styled)
+  const logo = logoDark;
   const [windowSize, setWindowSize] = useState({ width: 0, height: 0 });
   const [hasDocked, setHasDocked] = useState(false);
   const [handshakeComplete, setHandshakeComplete] = useState(false);

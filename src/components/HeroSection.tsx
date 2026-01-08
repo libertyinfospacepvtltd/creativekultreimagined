@@ -74,7 +74,7 @@ const HeroSection = ({ preloaderComplete = true }: HeroSectionProps) => {
   return (
     <section 
       ref={containerRef}
-      className="relative h-[200vh] w-full bg-background z-10"
+      className="relative h-[200vh] w-full bg-[hsl(220,15%,8%)] z-10"
     >
       {/* Sticky Container */}
       <div className="sticky top-0 h-screen h-[100dvh] w-full overflow-hidden z-10">
@@ -101,8 +101,8 @@ const HeroSection = ({ preloaderComplete = true }: HeroSectionProps) => {
             className="hidden md:block w-full h-full object-cover object-center"
             loading="eager"
           />
-          {/* Dark Overlay - uses dark overlay in both modes for image visibility */}
-          <div className="absolute inset-0 bg-black/70 dark:bg-background/80" />
+          {/* Dark Overlay - consistent dark style in both modes */}
+          <div className="absolute inset-0 bg-background/80" style={{ background: 'hsla(220, 15%, 8%, 0.8)' }} />
         </motion.div>
 
         {/* Rotating Radar Circles - smaller on mobile */}
@@ -149,10 +149,10 @@ const HeroSection = ({ preloaderComplete = true }: HeroSectionProps) => {
           style={{ opacity: taglineOpacity }}
         >
           <div className="text-center mt-16 sm:mt-40 md:mt-48 lg:mt-56">
-            <p className="text-foreground/90 font-serif text-lg sm:text-xl md:text-2xl lg:text-3xl italic tracking-wide">
+            <p className="text-white/90 font-serif text-lg sm:text-xl md:text-2xl lg:text-3xl italic tracking-wide">
               Where Brands Break the Mold
             </p>
-            <p className="text-muted-foreground font-sans text-xs sm:text-sm md:text-base tracking-widest uppercase mt-2 sm:mt-3">
+            <p className="text-gray-400 font-sans text-xs sm:text-sm md:text-base tracking-widest uppercase mt-2 sm:mt-3">
               Strategy • Rebellion • Results
             </p>
           </div>
