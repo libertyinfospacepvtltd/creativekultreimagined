@@ -120,16 +120,11 @@
     font-family: var(--font-serif);
     @apply font-medium tracking-tight;
     text-wrap: balance;
-    max-width: 90vw;
   }
 
-  /* Fluid responsive heading sizes */
+  /* Responsive base font sizing */
   h1 {
-    font-size: clamp(1.75rem, 5vw + 0.5rem, 4rem);
-  }
-
-  h2 {
-    font-size: clamp(1.5rem, 4vw + 0.5rem, 3rem);
+    @apply text-3xl sm:text-4xl md:text-5xl lg:text-6xl;
   }
 
   /* Selection */
@@ -142,11 +137,6 @@
   img, video, iframe {
     max-width: 100%;
     height: auto;
-  }
-  
-  /* Global overflow protection */
-  html, body {
-    overflow-x: hidden;
   }
 }
 
@@ -206,7 +196,7 @@
 
   /* Container max width - mobile-first with safe area insets */
   .container-luxury {
-    @apply max-w-7xl mx-auto px-4 sm:px-6 md:px-10 lg:px-12 xl:px-20;
+    @apply max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12;
     padding-left: max(1rem, env(safe-area-inset-left));
     padding-right: max(1rem, env(safe-area-inset-right));
   }
@@ -217,28 +207,10 @@
       padding-right: max(1.5rem, env(safe-area-inset-right));
     }
   }
-  
-  @screen md {
-    .container-luxury {
-      padding-left: max(2.5rem, env(safe-area-inset-left));
-      padding-right: max(2.5rem, env(safe-area-inset-right));
-    }
-  }
 
   /* Touch-friendly buttons */
   .btn-touch {
     @apply min-h-[44px] min-w-[44px] px-6 py-3;
-  }
-  
-  /* Flex wrap safety */
-  .flex-safe {
-    @apply flex flex-wrap;
-  }
-  
-  /* Height safety - use min-height instead of fixed height */
-  .min-h-safe {
-    min-height: 100vh;
-    min-height: 100dvh;
   }
 }
 

@@ -132,12 +132,12 @@ const Work = () => {
                 </div>
 
                 {/* Right - Results */}
-                <div className="bg-card border border-border/30 p-6 sm:p-8 md:p-12">
-                  <h4 className="text-primary font-sans text-xs uppercase tracking-widest mb-6 sm:mb-8">
+                <div className="bg-card border border-border/30 p-8 md:p-12">
+                  <h4 className="text-primary font-sans text-xs uppercase tracking-widest mb-8">
                     Key Results
                   </h4>
-                  <ul className="space-y-4 sm:space-y-6">
-                    {project.results.map((result, index) => <li key={index} className="text-foreground font-serif text-base sm:text-lg md:text-xl lg:text-2xl border-b border-border/30 pb-4 sm:pb-6 last:border-0 last:pb-0">
+                  <ul className="space-y-6">
+                    {project.results.map((result, index) => <li key={index} className="text-foreground font-serif text-xl md:text-2xl border-b border-border/30 pb-6 last:border-0 last:pb-0">
                         {result}
                       </li>)}
                   </ul>
@@ -148,13 +148,13 @@ const Work = () => {
       </section>
 
       {/* Trusted By */}
-      <section className="py-10 sm:py-12 md:py-16 bg-card border-t border-border/30">
+      <section className="py-16 bg-card border-t border-border/30">
         <div className="container-luxury">
-          <h3 className="text-center text-muted-foreground font-sans text-xs sm:text-sm uppercase tracking-widest mb-6 sm:mb-8">
+          <h3 className="text-center text-muted-foreground font-sans text-sm uppercase tracking-widest mb-8">
             Trusted By
           </h3>
-          <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6 md:gap-8 lg:gap-12">
-            {trustedBy.map((brand, index) => <a key={index} href={brand.url} target="_blank" rel="noopener noreferrer" className="text-foreground/60 hover:text-primary font-serif text-sm sm:text-base md:text-lg transition-colors py-2">
+          <div className="flex flex-wrap items-center justify-center gap-8 md:gap-12">
+            {trustedBy.map((brand, index) => <a key={index} href={brand.url} target="_blank" rel="noopener noreferrer" className="text-foreground/60 hover:text-primary font-serif text-lg transition-colors">
                 {brand.name}
               </a>)}
           </div>
@@ -164,13 +164,13 @@ const Work = () => {
       {/* CTA */}
       <section className="section-padding bg-background">
         <div className="container-luxury text-center">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-serif text-foreground mb-4 sm:mb-6">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif text-foreground mb-6">
             Want to Be Our Next Success Story?
           </h2>
-          <p className="text-muted-foreground font-sans max-w-xl mx-auto mb-6 sm:mb-8 md:mb-10 text-sm sm:text-base">
+          <p className="text-muted-foreground font-sans max-w-xl mx-auto mb-10">
             Let's collaborate and create something extraordinary for your brand.
           </p>
-          <Link to="/contact" className="inline-flex items-center justify-center px-8 sm:px-10 py-3 sm:py-4 rounded-full bg-primary text-primary-foreground font-sans text-sm uppercase tracking-widest hover:bg-primary/90 transition-all duration-300 min-h-[44px]">JOIN THE KULT</Link>
+          <Link to="/contact" className="inline-block px-10 py-4 rounded-full bg-primary text-primary-foreground font-sans text-sm uppercase tracking-widest hover:bg-primary/90 transition-all duration-300">JOIN THE KULT</Link>
         </div>
       </section>
     </Layout>;
