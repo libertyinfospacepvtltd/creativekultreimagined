@@ -5,7 +5,7 @@ interface StatCardProps {
 
 const StatCard = ({ value, label }: StatCardProps) => (
   <div className="text-center p-4 sm:p-6 md:p-8">
-    <div className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-sans font-bold text-primary mb-1 sm:mb-2 tracking-tight">
+    <div className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-numbers font-bold text-primary mb-1 sm:mb-2 tracking-tight tabular-nums">
       {value}
     </div>
     <div className="text-[10px] sm:text-xs md:text-sm font-sans text-muted-foreground uppercase tracking-wider">
