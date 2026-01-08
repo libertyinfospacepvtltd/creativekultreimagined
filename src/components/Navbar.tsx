@@ -5,6 +5,7 @@ import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion"
 import logoDark from "@/assets/creative-kult-logo.png";
 import logoLight from "@/assets/creative-kult-logo-black.png";
 import { useTheme } from "./ThemeProvider";
+import ThemeToggle from "./ThemeToggle";
 
 const navLinks = [
   { href: "/", label: "Home" },
@@ -91,6 +92,16 @@ const MobileMenuOverlay = ({
                   </Link>
                 </motion.li>
               ))}
+              
+              {/* Theme Toggle at bottom of mobile menu */}
+              <motion.li
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: navLinks.length * 0.1 + 0.2, duration: 0.4 }}
+                className="mt-4 pt-4 border-t border-border/20"
+              >
+                <ThemeToggle className="min-h-[44px] min-w-[44px]" />
+              </motion.li>
             </ul>
           </motion.div>
         </>
@@ -164,6 +175,10 @@ const Navbar = ({ showNavbar = true }: NavbarProps) => {
 
             {/* Desktop Navigation */}
             <ul className="hidden md:flex items-center gap-4 lg:gap-8">
+              {/* Theme Toggle - left of Home */}
+              <li>
+                <ThemeToggle />
+              </li>
               {navLinks.map((link) => (
                 <li key={link.href}>
                   <Link
@@ -259,6 +274,10 @@ const Navbar = ({ showNavbar = true }: NavbarProps) => {
             className="hidden md:flex items-center gap-4 lg:gap-8"
             style={{ opacity: navOpacity }}
           >
+            {/* Theme Toggle - left of Home */}
+            <li>
+              <ThemeToggle />
+            </li>
             {navLinks.map((link) => (
               <li key={link.href}>
                 <Link

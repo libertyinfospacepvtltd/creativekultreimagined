@@ -2,13 +2,17 @@ import { Sun, Moon } from "lucide-react";
 import { useTheme } from "./ThemeProvider";
 import { motion, AnimatePresence } from "framer-motion";
 
-const ThemeToggle = () => {
+interface ThemeToggleProps {
+  className?: string;
+}
+
+const ThemeToggle = ({ className = "" }: ThemeToggleProps) => {
   const { theme, toggleTheme } = useTheme();
 
   return (
     <button
       onClick={toggleTheme}
-      className="fixed bottom-[88px] right-6 z-50 w-12 h-12 rounded-full border-2 border-primary bg-background/80 backdrop-blur-md flex items-center justify-center text-primary hover:bg-primary hover:text-primary-foreground transition-all duration-300"
+      className={`p-2 text-foreground/70 hover:text-foreground transition-colors duration-300 ${className}`}
       aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
     >
       <AnimatePresence mode="wait" initial={false}>
@@ -20,7 +24,7 @@ const ThemeToggle = () => {
             exit={{ rotate: 90, opacity: 0 }}
             transition={{ duration: 0.2 }}
           >
-            <Sun size={20} />
+            <Sun size={18} />
           </motion.div>
         ) : (
           <motion.div
@@ -30,7 +34,7 @@ const ThemeToggle = () => {
             exit={{ rotate: -90, opacity: 0 }}
             transition={{ duration: 0.2 }}
           >
-            <Moon size={20} />
+            <Moon size={18} />
           </motion.div>
         )}
       </AnimatePresence>
