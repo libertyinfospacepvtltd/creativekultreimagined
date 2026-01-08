@@ -11,7 +11,7 @@ import palashGiriImg from "@/assets/team/palash-kanti-giri.jpeg";
 
 // Import logos
 import logoDark from "@/assets/creative-kult-logo.png";
-import logoLight from "@/assets/creative-kult-logo-black.png";
+import logoLight from "@/assets/creative-kult-logo-brown.png";
 
 const values = [{
   icon: Heart,

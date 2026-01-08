@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { Instagram, Facebook, Linkedin, Mail, Phone, MapPin } from "lucide-react";
 import logoDark from "@/assets/creative-kult-logo.png";
-import logoLight from "@/assets/creative-kult-logo-black.png";
+import logoLight from "@/assets/creative-kult-logo-brown.png";
 import { useTheme } from "./ThemeProvider";
 
 const Footer = () => {
