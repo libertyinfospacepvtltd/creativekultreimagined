@@ -170,7 +170,7 @@ const Work = () => {
           <p className="text-muted-foreground font-sans max-w-xl mx-auto mb-10">
             Let's collaborate and create something extraordinary for your brand.
           </p>
-          <Link to="/contact" className="inline-block px-10 py-4 rounded-full bg-primary text-primary-foreground font-sans text-sm uppercase tracking-widest hover:bg-primary/90 transition-all duration-300">JOIN THE KULT</Link>
+          <Link to="/contact" className="inline-block px-10 py-4 rounded-full border-2 border-primary bg-transparent text-primary font-sans text-sm uppercase tracking-widest hover:bg-primary hover:text-primary-foreground transition-all duration-300">JOIN THE KULT</Link>
         </div>
       </section>
     </Layout>;
