@@ -2,11 +2,16 @@ import { Link } from "react-router-dom";
 import { Heart, Users, Award, MapPin } from "lucide-react";
 import { motion } from "framer-motion";
 import Layout from "@/components/Layout";
+import { useTheme } from "@/components/ThemeProvider";
 
 // Import team member photos
 import payalDasImg from "@/assets/team/payel-das.jpg";
 import sreyashBanerjeeImg from "@/assets/team/sreyash-banerjee.jpg";
 import palashGiriImg from "@/assets/team/palash-kanti-giri.jpeg";
+
+// Import logos
+import logoDark from "@/assets/creative-kult-logo.png";
+import logoLight from "@/assets/creative-kult-logo-black.png";
 
 const values = [{
   icon: Heart,
@@ -46,6 +51,8 @@ const team = [{
   image: palashGiriImg
 }];
 const About = () => {
+  const { theme } = useTheme();
+  
   return <Layout>
       <section className="pt-12 sm:pt-16 pb-8 sm:pb-12 md:pt-20 md:pb-16 bg-background">
         <div className="container-luxury">
@@ -66,7 +73,11 @@ const About = () => {
               </div>
             </div>
             <div className="flex justify-center lg:justify-end">
-              <img src="https://canvas-kolkata-vibe.lovable.app/assets/creative-kult-story-logo-BWnpSHrr.png" alt="Creative Kult Logo" className="w-48 sm:w-72 md:w-96 lg:w-[480px] h-auto opacity-90" />
+              <img 
+                src={theme === 'dark' ? logoDark : logoLight} 
+                alt="Creative Kult Logo" 
+                className="w-48 sm:w-72 md:w-96 lg:w-[480px] h-auto opacity-90" 
+              />
             </div>
           </div>
         </div>
@@ -88,7 +99,7 @@ const About = () => {
         </div>
       </section>
 
-      <section className="section-padding bg-[hsl(220,15%,8%)] border-t border-border/30 pt-8 sm:pt-10 md:pt-16">
+      <section className="section-padding bg-background dark:bg-[hsl(220,15%,8%)] border-t border-border/30 pt-8 sm:pt-10 md:pt-16">
         <div className="container-luxury">
           <div className="text-center mb-8 sm:mb-12">
             <span className="text-primary font-sans text-xs sm:text-sm uppercase tracking-[0.3em] mb-3 sm:mb-4 block">The Team</span>
@@ -119,8 +130,8 @@ const About = () => {
                   {/* Text content - positioned at bottom */}
                   <div className="absolute bottom-0 left-0 right-0 flex flex-col justify-end items-center p-4 sm:p-6 lg:p-8 text-center z-20">
                     <span className="text-primary/80 font-sans text-[10px] sm:text-xs uppercase tracking-[0.25em] mb-1 sm:mb-2 lg:mb-3">{member.specialty}</span>
-                    <h3 className="text-base sm:text-lg lg:text-2xl font-serif text-foreground mb-1">{member.name}</h3>
-                    <p className="text-muted-foreground font-sans text-xs sm:text-sm">{member.role}</p>
+                    <h3 className="text-base sm:text-lg lg:text-2xl font-serif text-white dark:text-foreground mb-1">{member.name}</h3>
+                    <p className="text-gray-300 dark:text-muted-foreground font-sans text-xs sm:text-sm">{member.role}</p>
                   </div>
                 </div>
               </motion.div>

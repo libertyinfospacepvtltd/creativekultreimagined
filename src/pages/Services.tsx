@@ -208,7 +208,7 @@ const Services = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {processSteps.map((step, index) => <div key={index} className="text-center">
-                <span className="text-5xl md:text-6xl font-serif text-primary/20 block mb-4">
+                <span className="text-5xl md:text-6xl font-serif text-amber-700 dark:text-primary/20 block mb-4">
                   {step.number}
                 </span>
                 <h3 className="text-xl font-serif text-foreground mb-3">
