@@ -253,11 +253,7 @@ const MobilePricingTabs = () => {
           {/* CTA Button */}
           <Link 
             to="/contact" 
-            className={`w-full text-center py-3 rounded-full font-sans text-sm uppercase tracking-widest transition-all duration-300
-              ${activeTier.featured 
-                ? 'bg-primary text-primary-foreground hover:bg-primary/90' 
-                : 'border border-primary text-primary hover:bg-primary hover:text-primary-foreground'
-              }`}
+            className="w-full text-center py-3 rounded-full font-sans text-sm uppercase tracking-widest transition-all duration-300 border-2 border-primary bg-transparent text-primary hover:bg-primary hover:text-primary-foreground"
           >
             {activeTier.ctaText}
           </Link>
@@ -415,7 +411,7 @@ const Services = () => {
               </ul>
               <Link 
                 to="/contact" 
-                className="w-full text-center py-4 rounded-full border border-primary text-primary font-sans text-sm uppercase tracking-widest hover:bg-primary hover:text-primary-foreground transition-all duration-300"
+                className="w-full text-center py-4 rounded-full border-2 border-primary bg-transparent text-primary font-sans text-sm uppercase tracking-widest hover:bg-primary hover:text-primary-foreground transition-all duration-300"
               >
                 Choose Strategy
               </Link>
@@ -462,7 +458,7 @@ const Services = () => {
               </ul>
               <Link 
                 to="/contact" 
-                className="w-full text-center py-4 rounded-full bg-primary text-primary-foreground font-sans text-sm uppercase tracking-widest hover:bg-primary/90 transition-all duration-300"
+                className="w-full text-center py-4 rounded-full border-2 border-primary bg-transparent text-primary font-sans text-sm uppercase tracking-widest hover:bg-primary hover:text-primary-foreground transition-all duration-300"
               >
                 Choose Growth
               </Link>
@@ -508,7 +504,7 @@ const Services = () => {
               </ul>
               <Link 
                 to="/contact" 
-                className="w-full text-center py-4 rounded-full border border-primary text-primary font-sans text-sm uppercase tracking-widest hover:bg-primary hover:text-primary-foreground transition-all duration-300"
+                className="w-full text-center py-4 rounded-full border-2 border-primary bg-transparent text-primary font-sans text-sm uppercase tracking-widest hover:bg-primary hover:text-primary-foreground transition-all duration-300"
               >
                 Choose Domination
               </Link>
@@ -598,7 +594,7 @@ const Services = () => {
           <p className="text-muted-foreground font-sans max-w-xl mx-auto mb-6 sm:mb-10 text-sm sm:text-base">
             Let's discuss how our services can help you achieve your business goals.
           </p>
-          <Link to="/contact" className="inline-block px-10 py-4 rounded-full bg-primary text-primary-foreground font-sans text-sm uppercase tracking-widest hover:bg-primary/90 transition-all duration-300">JOIN THE KULT</Link>
+          <Link to="/contact" className="inline-block px-10 py-4 rounded-full border-2 border-primary bg-transparent text-primary font-sans text-sm uppercase tracking-widest hover:bg-primary hover:text-primary-foreground transition-all duration-300">JOIN THE KULT</Link>
         </div>
       </section>
     </Layout>;

@@ -149,7 +149,7 @@ const Contact = () => {
                 })} className="w-full bg-background border border-border/50 px-4 py-3 text-foreground font-sans text-sm focus:outline-none focus:border-primary transition-colors resize-none" placeholder="Tell us about your project..." />
                 </div>
 
-                <button type="submit" disabled={isSubmitting} className="w-full px-8 py-4 rounded-full bg-primary text-primary-foreground font-sans text-sm uppercase tracking-widest hover:bg-primary/90 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed">
+                <button type="submit" disabled={isSubmitting} className="w-full px-8 py-4 rounded-full border-2 border-primary bg-transparent text-primary font-sans text-sm uppercase tracking-widest hover:bg-primary hover:text-primary-foreground transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed">
                   {isSubmitting ? "Sending..." : "Send Message"}
                 </button>
               </form>
