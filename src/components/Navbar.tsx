@@ -3,7 +3,7 @@ import { useState, useEffect, useCallback } from "react";
 import { Menu, X } from "lucide-react";
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 import logoDark from "@/assets/creative-kult-logo.png";
-import logoLight from "@/assets/creative-kult-logo-black.png";
+import logoLight from "@/assets/creative-kult-logo-brown.png";
 import { useTheme } from "./ThemeProvider";
 import ThemeToggle from "./ThemeToggle";
 
