@@ -7,7 +7,7 @@ import ScrollToTopOnRouteChange from "./ScrollToTopOnRouteChange";
 import CustomCursor from "./CustomCursor";
 import Preloader from "./Preloader";
 import DockingLogo from "./DockingLogo";
-import ThemeToggle from "./ThemeToggle";
+
 import { useTheme } from "./ThemeProvider";
 
 interface LayoutProps {
@@ -53,7 +53,6 @@ const Layout = ({ children }: LayoutProps) => {
       <Navbar showNavbar={preloaderComplete} />
       <main className={isHomePage ? "" : "pt-14 sm:pt-16 md:pt-0"}>{children}</main>
       <Footer />
-      <ThemeToggle />
       <ScrollToTop />
       <ScrollToTopOnRouteChange />
       <CustomCursor />
