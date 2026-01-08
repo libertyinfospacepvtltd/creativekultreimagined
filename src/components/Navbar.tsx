@@ -241,18 +241,18 @@ const Navbar = ({ showNavbar = true }: NavbarProps) => {
   return (
     <>
       <motion.header 
-        className="fixed top-0 left-0 right-0 z-50 border-b border-border/20"
+        className="fixed top-0 left-0 right-0 z-50"
         style={{
           pointerEvents: showNavbar ? "auto" : "none",
         }}
       >
-        {/* Animated background */}
+        {/* Animated background - only appears after scrolling */}
         <motion.div 
           className="absolute inset-0 bg-background/90 backdrop-blur-md"
           style={{ opacity: navBgOpacity }}
         />
         
-        {/* Border that fades in */}
+        {/* Border that fades in ONLY after scrolling (not visible on hero) */}
         <motion.div 
           className="absolute bottom-0 left-0 right-0 h-px bg-border/20"
           style={{ opacity: navBgOpacity }}
