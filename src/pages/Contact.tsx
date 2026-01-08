@@ -102,7 +102,7 @@ const Contact = () => {
                       required
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      className="w-full bg-background border border-border/50 px-4 py-3 text-foreground font-sans text-sm focus:outline-none focus:border-primary transition-colors"
+                      className="w-full bg-background border border-border/50 rounded-xl px-4 py-3 text-foreground font-sans text-sm focus:outline-none focus:border-primary transition-colors"
                       placeholder="Your name"
                     />
                   </div>
@@ -115,7 +115,7 @@ const Contact = () => {
                       required
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                      className="w-full bg-background border border-border/50 px-4 py-3 text-foreground font-sans text-sm focus:outline-none focus:border-primary transition-colors"
+                      className="w-full bg-background border border-border/50 rounded-xl px-4 py-3 text-foreground font-sans text-sm focus:outline-none focus:border-primary transition-colors"
                       placeholder="your@email.com"
                     />
                   </div>
@@ -130,7 +130,7 @@ const Contact = () => {
                       type="tel"
                       value={formData.mobile}
                       onChange={(e) => setFormData({ ...formData, mobile: e.target.value })}
-                      className="w-full bg-background border border-border/50 px-4 py-3 text-foreground font-sans text-sm focus:outline-none focus:border-primary transition-colors"
+                      className="w-full bg-background border border-border/50 rounded-xl px-4 py-3 text-foreground font-sans text-sm focus:outline-none focus:border-primary transition-colors"
                       placeholder="Your Number"
                     />
                   </div>
@@ -142,7 +142,7 @@ const Contact = () => {
                       type="text"
                       value={formData.company}
                       onChange={(e) => setFormData({ ...formData, company: e.target.value })}
-                      className="w-full bg-background border border-border/50 px-4 py-3 text-foreground font-sans text-sm focus:outline-none focus:border-primary transition-colors"
+                      className="w-full bg-background border border-border/50 rounded-xl px-4 py-3 text-foreground font-sans text-sm focus:outline-none focus:border-primary transition-colors"
                       placeholder="Your company"
                     />
                   </div>
@@ -177,7 +177,7 @@ const Contact = () => {
                   <select
                     value={formData.budget}
                     onChange={(e) => setFormData({ ...formData, budget: e.target.value })}
-                    className="w-full bg-background border border-border/50 px-4 py-3 text-foreground font-sans text-sm focus:outline-none focus:border-primary transition-colors appearance-none cursor-pointer"
+                    className="w-full bg-background border border-border/50 rounded-xl px-4 py-3 text-foreground font-sans text-sm focus:outline-none focus:border-primary transition-colors appearance-none cursor-pointer"
                   >
                     <option value="">Select budget range</option>
                     {budgetOptions.map((option) => (
@@ -196,7 +196,7 @@ const Contact = () => {
                     rows={5}
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                    className="w-full bg-background border border-border/50 px-4 py-3 text-foreground font-sans text-sm focus:outline-none focus:border-primary transition-colors resize-none"
+                    className="w-full bg-background border border-border/50 rounded-xl px-4 py-3 text-foreground font-sans text-sm focus:outline-none focus:border-primary transition-colors resize-none"
                     placeholder="Tell us about your project..."
                   />
                 </div>
@@ -281,7 +281,7 @@ const Contact = () => {
                       href="https://instagram.com/creativekult"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="w-12 h-12 flex items-center justify-center border border-border/50 text-muted-foreground hover:bg-primary hover:border-primary hover:text-primary-foreground transition-all duration-300"
+                      className="w-12 h-12 flex items-center justify-center border border-border/50 rounded-xl text-muted-foreground hover:bg-primary hover:border-primary hover:text-primary-foreground transition-all duration-300"
                       aria-label="Instagram"
                     >
                       <Instagram size={20} />
@@ -290,7 +290,7 @@ const Contact = () => {
                       href="https://facebook.com/creativekult"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="w-12 h-12 flex items-center justify-center border border-border/50 text-muted-foreground hover:bg-primary hover:border-primary hover:text-primary-foreground transition-all duration-300"
+                      className="w-12 h-12 flex items-center justify-center border border-border/50 rounded-xl text-muted-foreground hover:bg-primary hover:border-primary hover:text-primary-foreground transition-all duration-300"
                       aria-label="Facebook"
                     >
                       <Facebook size={20} />
@@ -299,7 +299,7 @@ const Contact = () => {
                       href="https://linkedin.com/company/creativekult"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="w-12 h-12 flex items-center justify-center border border-border/50 text-muted-foreground hover:bg-primary hover:border-primary hover:text-primary-foreground transition-all duration-300"
+                      className="w-12 h-12 flex items-center justify-center border border-border/50 rounded-xl text-muted-foreground hover:bg-primary hover:border-primary hover:text-primary-foreground transition-all duration-300"
                       aria-label="LinkedIn"
                     >
                       <Linkedin size={20} />
@@ -313,7 +313,7 @@ const Contact = () => {
                 <h2 className="text-2xl md:text-3xl font-serif text-foreground text-center mb-8">
                   Our Location
                 </h2>
-                <div className="w-full min-h-[300px] sm:min-h-[350px] lg:min-h-[400px] bg-card border border-border/30 overflow-hidden relative">
+                <div className="w-full min-h-[300px] sm:min-h-[350px] lg:min-h-[400px] bg-card border border-border/30 rounded-3xl overflow-hidden relative">
                   <iframe
                   src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3685.8247772568364!2d88.33875!3d22.517897!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a0277c8a4a45c2f%3A0xe9e6e9e9e9e9e9e9!2sSagar%20Trade%20Cube!5e0!3m2!1sen!2sin!4v1234567890"
                   className="absolute inset-0 w-full h-full"

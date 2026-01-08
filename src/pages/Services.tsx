@@ -83,7 +83,7 @@ const ServiceCard = ({
   onToggle: () => void;
 }) => {
   const Icon = service.icon;
-  return <motion.div className={`group relative flex flex-col border border-foreground/10 bg-background transition-all duration-500 overflow-hidden cursor-pointer h-56 sm:h-64 md:h-72
+  return <motion.div className={`group relative flex flex-col border border-foreground/10 bg-background transition-all duration-500 overflow-hidden cursor-pointer h-56 sm:h-64 md:h-72 rounded-2xl
         ${isExpanded ? 'border-primary bg-foreground/5' : 'hover:border-primary hover:bg-foreground/5'}
       `} onClick={onToggle}>
       {/* Default State Content - Icon & Title centered */}
@@ -213,7 +213,7 @@ const MobilePricingTabs = () => {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -10 }}
           transition={{ duration: 0.3 }}
-          className="relative flex flex-col p-6 rounded-lg bg-[#FAF9F6] dark:bg-white/5 border border-border/30 dark:border-amber-500/30 shadow-xl dark:shadow-none"
+          className="relative flex flex-col p-6 rounded-3xl bg-[#FAF9F6] dark:bg-white/5 border border-border/30 dark:border-amber-500/30 shadow-xl dark:shadow-none"
         >
           {/* Most Popular Badge */}
           {activeTier.featured && (
@@ -384,7 +384,7 @@ const Services = () => {
           {/* Desktop Premium Pricing Cards */}
           <div className="hidden md:grid grid-cols-3 gap-8">
             {/* The Strategy Tier */}
-            <div className="flex flex-col p-8 rounded-lg bg-white/80 dark:bg-white/5 border border-border/30 dark:border-amber-500/30 shadow-xl dark:shadow-none transition-all duration-300 hover:shadow-2xl dark:hover:border-amber-500/50">
+            <div className="flex flex-col p-8 rounded-3xl bg-white/80 dark:bg-white/5 border border-border/30 dark:border-amber-500/30 shadow-xl dark:shadow-none transition-all duration-300 hover:shadow-2xl dark:hover:border-amber-500/50">
               <span className="text-muted-foreground font-sans text-xs uppercase tracking-[0.2em] mb-4">
                 The Strategy
               </span>
@@ -422,7 +422,7 @@ const Services = () => {
             </div>
 
             {/* The Growth Tier - Featured */}
-            <div className="flex flex-col p-8 rounded-lg bg-white/80 dark:bg-white/5 border-2 border-primary shadow-xl dark:shadow-none transition-all duration-300 hover:shadow-2xl relative">
+            <div className="flex flex-col p-8 rounded-3xl bg-white/80 dark:bg-white/5 border-2 border-primary shadow-xl dark:shadow-none transition-all duration-300 hover:shadow-2xl relative">
               <div className="absolute -top-3 left-1/2 -translate-x-1/2">
                 <span className="bg-primary text-primary-foreground font-sans text-[10px] uppercase tracking-widest px-4 py-1 rounded-full">
                   Most Popular
@@ -469,7 +469,7 @@ const Services = () => {
             </div>
 
             {/* The Domination Tier */}
-            <div className="flex flex-col p-8 rounded-lg bg-white/80 dark:bg-white/5 border border-border/30 dark:border-amber-500/30 shadow-xl dark:shadow-none transition-all duration-300 hover:shadow-2xl dark:hover:border-amber-500/50">
+            <div className="flex flex-col p-8 rounded-3xl bg-white/80 dark:bg-white/5 border border-border/30 dark:border-amber-500/30 shadow-xl dark:shadow-none transition-all duration-300 hover:shadow-2xl dark:hover:border-amber-500/50">
               <span className="text-muted-foreground font-sans text-xs uppercase tracking-[0.2em] mb-4">
                 The Domination
               </span>
@@ -535,7 +535,7 @@ const Services = () => {
           {/* 4-Column Grid (2x2 on Mobile) */}
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
             {/* Product Photography */}
-            <div className="flex flex-col items-center justify-center p-5 sm:p-8 rounded-lg bg-[#FAF9F6] dark:bg-white/5 transition-all duration-300 hover:scale-[1.02]">
+            <div className="flex flex-col items-center justify-center p-5 sm:p-8 rounded-3xl bg-[#FAF9F6] dark:bg-white/5 transition-all duration-300 hover:scale-[1.02]">
               <h3 className="text-foreground font-sans text-[10px] sm:text-xs uppercase tracking-widest font-bold mb-3 sm:mb-4 text-center">
                 Product Photography
               </h3>
@@ -548,7 +548,7 @@ const Services = () => {
             </div>
 
             {/* Video Production */}
-            <div className="flex flex-col items-center justify-center p-5 sm:p-8 rounded-lg bg-[#FAF9F6] dark:bg-white/5 transition-all duration-300 hover:scale-[1.02]">
+            <div className="flex flex-col items-center justify-center p-5 sm:p-8 rounded-3xl bg-[#FAF9F6] dark:bg-white/5 transition-all duration-300 hover:scale-[1.02]">
               <h3 className="text-foreground font-sans text-[10px] sm:text-xs uppercase tracking-widest font-bold mb-3 sm:mb-4 text-center">
                 Video Production
               </h3>
@@ -561,7 +561,7 @@ const Services = () => {
             </div>
 
             {/* Brand Identity Design */}
-            <div className="flex flex-col items-center justify-center p-5 sm:p-8 rounded-lg bg-[#FAF9F6] dark:bg-white/5 transition-all duration-300 hover:scale-[1.02]">
+            <div className="flex flex-col items-center justify-center p-5 sm:p-8 rounded-3xl bg-[#FAF9F6] dark:bg-white/5 transition-all duration-300 hover:scale-[1.02]">
               <h3 className="text-foreground font-sans text-[10px] sm:text-xs uppercase tracking-widest font-bold mb-3 sm:mb-4 text-center">
                 Brand Identity Design
               </h3>
@@ -574,7 +574,7 @@ const Services = () => {
             </div>
 
             {/* Website Design */}
-            <div className="flex flex-col items-center justify-center p-5 sm:p-8 rounded-lg bg-[#FAF9F6] dark:bg-white/5 transition-all duration-300 hover:scale-[1.02]">
+            <div className="flex flex-col items-center justify-center p-5 sm:p-8 rounded-3xl bg-[#FAF9F6] dark:bg-white/5 transition-all duration-300 hover:scale-[1.02]">
               <h3 className="text-foreground font-sans text-[10px] sm:text-xs uppercase tracking-widest font-bold mb-3 sm:mb-4 text-center">
                 Website Design
               </h3>
