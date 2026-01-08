@@ -1,8 +1,13 @@
 import { Link } from "react-router-dom";
 import { Instagram, Facebook, Linkedin, Mail, Phone, MapPin } from "lucide-react";
-import logo from "@/assets/creative-kult-logo.png";
+import logoDark from "@/assets/creative-kult-logo.png";
+import logoLight from "@/assets/creative-kult-logo-black.png";
+import { useTheme } from "./ThemeProvider";
 
 const Footer = () => {
+  const { theme } = useTheme();
+  const logo = theme === "dark" ? logoDark : logoLight;
+  
   return (
     <footer className="bg-card border-t border-border/30">
       <div className="container-luxury py-10 sm:py-12 md:py-16 lg:py-20">

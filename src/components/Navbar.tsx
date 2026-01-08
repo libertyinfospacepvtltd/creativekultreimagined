@@ -2,7 +2,9 @@ import { Link, useLocation } from "react-router-dom";
 import { useState, useEffect, useCallback } from "react";
 import { Menu, X } from "lucide-react";
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
-import logo from "@/assets/creative-kult-logo.png";
+import logoDark from "@/assets/creative-kult-logo.png";
+import logoLight from "@/assets/creative-kult-logo-black.png";
+import { useTheme } from "./ThemeProvider";
 
 const navLinks = [
   { href: "/", label: "Home" },
@@ -101,6 +103,9 @@ const Navbar = ({ showNavbar = true }: NavbarProps) => {
   const location = useLocation();
   const [isOpen, setIsOpen] = useState(false);
   const isHomePage = location.pathname === "/";
+  const { theme } = useTheme();
+  
+  const logo = theme === "dark" ? logoDark : logoLight;
 
   // Close mobile menu on route change
   useEffect(() => {
