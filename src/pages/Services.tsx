@@ -370,6 +370,78 @@ const Services = () => {
         </div>
       </section>
 
+      {/* Add-On Services Section */}
+      <section className="section-padding bg-card border-t border-border/30">
+        <div className="container-luxury">
+          <div className="text-center mb-10 sm:mb-14">
+            <span className="text-primary font-sans text-xs sm:text-sm uppercase tracking-widest mb-3 sm:mb-4 block">
+              Add-On Services
+            </span>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-serif text-foreground mb-4">
+              Enhance Your Package
+            </h2>
+            <p className="text-muted-foreground font-sans max-w-xl mx-auto text-sm sm:text-base">
+              Specialized services tailored to your needs.
+            </p>
+          </div>
+
+          {/* 4-Column Grid (2x2 on Mobile) */}
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+            {/* Product Photography */}
+            <div className="flex flex-col items-center justify-center p-5 sm:p-8 rounded-lg bg-[#FAF9F6] dark:bg-white/5 transition-all duration-300 hover:scale-[1.02]">
+              <h3 className="text-foreground font-sans text-[10px] sm:text-xs uppercase tracking-widest font-bold mb-3 sm:mb-4 text-center">
+                Product Photography
+              </h3>
+              <span className="text-amber-600 dark:text-yellow-400 font-serif text-2xl sm:text-3xl md:text-4xl mb-1">
+                ₹15,000
+              </span>
+              <span className="text-muted-foreground/60 font-sans text-[10px] sm:text-xs">
+                per session
+              </span>
+            </div>
+
+            {/* Video Production */}
+            <div className="flex flex-col items-center justify-center p-5 sm:p-8 rounded-lg bg-[#FAF9F6] dark:bg-white/5 transition-all duration-300 hover:scale-[1.02]">
+              <h3 className="text-foreground font-sans text-[10px] sm:text-xs uppercase tracking-widest font-bold mb-3 sm:mb-4 text-center">
+                Video Production
+              </h3>
+              <span className="text-amber-600 dark:text-yellow-400 font-serif text-2xl sm:text-3xl md:text-4xl mb-1">
+                ₹30,000
+              </span>
+              <span className="text-muted-foreground/60 font-sans text-[10px] sm:text-xs">
+                per video
+              </span>
+            </div>
+
+            {/* Brand Identity Design */}
+            <div className="flex flex-col items-center justify-center p-5 sm:p-8 rounded-lg bg-[#FAF9F6] dark:bg-white/5 transition-all duration-300 hover:scale-[1.02]">
+              <h3 className="text-foreground font-sans text-[10px] sm:text-xs uppercase tracking-widest font-bold mb-3 sm:mb-4 text-center">
+                Brand Identity Design
+              </h3>
+              <span className="text-amber-600 dark:text-yellow-400 font-serif text-2xl sm:text-3xl md:text-4xl mb-1">
+                ₹75,000
+              </span>
+              <span className="text-muted-foreground/60 font-sans text-[10px] sm:text-xs">
+                one-time
+              </span>
+            </div>
+
+            {/* Website Design */}
+            <div className="flex flex-col items-center justify-center p-5 sm:p-8 rounded-lg bg-[#FAF9F6] dark:bg-white/5 transition-all duration-300 hover:scale-[1.02]">
+              <h3 className="text-foreground font-sans text-[10px] sm:text-xs uppercase tracking-widest font-bold mb-3 sm:mb-4 text-center">
+                Website Design
+              </h3>
+              <span className="text-amber-600 dark:text-yellow-400 font-serif text-2xl sm:text-3xl md:text-4xl mb-1">
+                ₹50,000
+              </span>
+              <span className="text-muted-foreground/60 font-sans text-[10px] sm:text-xs">
+                starting from
+              </span>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* CTA */}
       <section className="section-padding bg-background">
         <div className="container-luxury text-center">
