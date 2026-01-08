@@ -101,8 +101,8 @@ const HeroSection = ({ preloaderComplete = true }: HeroSectionProps) => {
             className="hidden md:block w-full h-full object-cover object-center"
             loading="eager"
           />
-          {/* Dark Overlay */}
-          <div className="absolute inset-0 bg-background/80" />
+          {/* Dark Overlay - uses dark overlay in both modes for image visibility */}
+          <div className="absolute inset-0 bg-black/70 dark:bg-background/80" />
         </motion.div>
 
         {/* Rotating Radar Circles - smaller on mobile */}
