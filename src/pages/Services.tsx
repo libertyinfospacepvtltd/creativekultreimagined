@@ -222,6 +222,154 @@ const Services = () => {
         </div>
       </section>
 
+      {/* Engagement Models Section */}
+      <section className="section-padding bg-background border-t border-border/30">
+        <div className="container-luxury">
+          <div className="text-center mb-12 sm:mb-16">
+            <span className="text-primary font-sans text-xs sm:text-sm uppercase tracking-widest mb-3 sm:mb-4 block">
+              Engagement Models
+            </span>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-serif text-foreground">
+              Choose Your Path Forward
+            </h2>
+          </div>
+
+          {/* Premium Pricing Cards */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
+            {/* The Strategy Tier */}
+            <div className="flex flex-col p-6 sm:p-8 rounded-lg bg-white/80 dark:bg-white/5 border border-border/30 dark:border-amber-500/30 shadow-xl dark:shadow-none transition-all duration-300 hover:shadow-2xl dark:hover:border-amber-500/50">
+              <span className="text-muted-foreground dark:text-muted-foreground font-sans text-xs uppercase tracking-[0.2em] mb-4">
+                The Strategy
+              </span>
+              <div className="mb-6">
+                <span className="text-4xl sm:text-5xl font-serif text-foreground">₹25,000</span>
+                <span className="text-muted-foreground font-sans text-sm ml-2">/project</span>
+              </div>
+              <p className="text-muted-foreground font-sans text-sm mb-6">
+                Perfect for brands seeking strategic clarity and direction.
+              </p>
+              <ul className="space-y-3 mb-8 flex-grow">
+                <li className="flex items-start gap-3">
+                  <Check className="w-4 h-4 text-primary flex-shrink-0 mt-0.5" strokeWidth={2.5} />
+                  <span className="text-foreground font-sans text-sm">Brand Audit & Analysis</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <Check className="w-4 h-4 text-primary flex-shrink-0 mt-0.5" strokeWidth={2.5} />
+                  <span className="text-foreground font-sans text-sm">Market Positioning Strategy</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <Check className="w-4 h-4 text-primary flex-shrink-0 mt-0.5" strokeWidth={2.5} />
+                  <span className="text-foreground font-sans text-sm">Content Calendar (1 Month)</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <Check className="w-4 h-4 text-primary flex-shrink-0 mt-0.5" strokeWidth={2.5} />
+                  <span className="text-foreground font-sans text-sm">Competitor Analysis Report</span>
+                </li>
+              </ul>
+              <Link 
+                to="/contact" 
+                className="w-full text-center py-3 sm:py-4 rounded-full border border-primary text-primary font-sans text-sm uppercase tracking-widest hover:bg-primary hover:text-primary-foreground transition-all duration-300"
+              >
+                Choose Strategy
+              </Link>
+            </div>
+
+            {/* The Growth Tier - Featured */}
+            <div className="flex flex-col p-6 sm:p-8 rounded-lg bg-white/80 dark:bg-white/5 border-2 border-primary dark:border-primary shadow-xl dark:shadow-none transition-all duration-300 hover:shadow-2xl relative">
+              <div className="absolute -top-3 left-1/2 -translate-x-1/2">
+                <span className="bg-primary text-primary-foreground font-sans text-[10px] uppercase tracking-widest px-4 py-1 rounded-full">
+                  Most Popular
+                </span>
+              </div>
+              <span className="text-muted-foreground dark:text-muted-foreground font-sans text-xs uppercase tracking-[0.2em] mb-4">
+                The Growth
+              </span>
+              <div className="mb-6">
+                <span className="text-4xl sm:text-5xl font-serif text-foreground">₹50,000</span>
+                <span className="text-muted-foreground font-sans text-sm ml-2">/month</span>
+              </div>
+              <p className="text-muted-foreground font-sans text-sm mb-6">
+                For brands ready to scale with consistent creative output.
+              </p>
+              <ul className="space-y-3 mb-8 flex-grow">
+                <li className="flex items-start gap-3">
+                  <Check className="w-4 h-4 text-primary flex-shrink-0 mt-0.5" strokeWidth={2.5} />
+                  <span className="text-foreground font-sans text-sm">Everything in Strategy</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <Check className="w-4 h-4 text-primary flex-shrink-0 mt-0.5" strokeWidth={2.5} />
+                  <span className="text-foreground font-sans text-sm">Social Media Management</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <Check className="w-4 h-4 text-primary flex-shrink-0 mt-0.5" strokeWidth={2.5} />
+                  <span className="text-foreground font-sans text-sm">20 Custom Creatives/Month</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <Check className="w-4 h-4 text-primary flex-shrink-0 mt-0.5" strokeWidth={2.5} />
+                  <span className="text-foreground font-sans text-sm">Monthly Performance Reports</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <Check className="w-4 h-4 text-primary flex-shrink-0 mt-0.5" strokeWidth={2.5} />
+                  <span className="text-foreground font-sans text-sm">Community Management</span>
+                </li>
+              </ul>
+              <Link 
+                to="/contact" 
+                className="w-full text-center py-3 sm:py-4 rounded-full bg-primary text-primary-foreground font-sans text-sm uppercase tracking-widest hover:bg-primary/90 transition-all duration-300"
+              >
+                Choose Growth
+              </Link>
+            </div>
+
+            {/* The Domination Tier */}
+            <div className="flex flex-col p-6 sm:p-8 rounded-lg bg-white/80 dark:bg-white/5 border border-border/30 dark:border-amber-500/30 shadow-xl dark:shadow-none transition-all duration-300 hover:shadow-2xl dark:hover:border-amber-500/50">
+              <span className="text-muted-foreground dark:text-muted-foreground font-sans text-xs uppercase tracking-[0.2em] mb-4">
+                The Domination
+              </span>
+              <div className="mb-6">
+                <span className="text-4xl sm:text-5xl font-serif text-foreground">₹1,00,000</span>
+                <span className="text-muted-foreground font-sans text-sm ml-2">/month</span>
+              </div>
+              <p className="text-muted-foreground font-sans text-sm mb-6">
+                Full-service partnership for brands demanding market leadership.
+              </p>
+              <ul className="space-y-3 mb-8 flex-grow">
+                <li className="flex items-start gap-3">
+                  <Check className="w-4 h-4 text-primary flex-shrink-0 mt-0.5" strokeWidth={2.5} />
+                  <span className="text-foreground font-sans text-sm">Everything in Growth</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <Check className="w-4 h-4 text-primary flex-shrink-0 mt-0.5" strokeWidth={2.5} />
+                  <span className="text-foreground font-sans text-sm">Performance Marketing (Ads)</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <Check className="w-4 h-4 text-primary flex-shrink-0 mt-0.5" strokeWidth={2.5} />
+                  <span className="text-foreground font-sans text-sm">Influencer Collaborations</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <Check className="w-4 h-4 text-primary flex-shrink-0 mt-0.5" strokeWidth={2.5} />
+                  <span className="text-foreground font-sans text-sm">PR & Media Outreach</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <Check className="w-4 h-4 text-primary flex-shrink-0 mt-0.5" strokeWidth={2.5} />
+                  <span className="text-foreground font-sans text-sm">Dedicated Account Manager</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <Check className="w-4 h-4 text-primary flex-shrink-0 mt-0.5" strokeWidth={2.5} />
+                  <span className="text-foreground font-sans text-sm">Priority Support (24/7)</span>
+                </li>
+              </ul>
+              <Link 
+                to="/contact" 
+                className="w-full text-center py-3 sm:py-4 rounded-full border border-primary text-primary font-sans text-sm uppercase tracking-widest hover:bg-primary hover:text-primary-foreground transition-all duration-300"
+              >
+                Choose Domination
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* CTA */}
       <section className="section-padding bg-background">
         <div className="container-luxury text-center">
