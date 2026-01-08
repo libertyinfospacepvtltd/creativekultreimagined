@@ -114,7 +114,7 @@ const Work = () => {
                     {project.description}
                   </p>
                   <div className="flex flex-wrap gap-2 mb-8">
-                    {project.tags.map((tag, index) => <span key={index} className="px-3 py-1 bg-card border border-border/30 text-muted-foreground font-sans text-xs">
+                    {project.tags.map((tag, index) => <span key={index} className="px-3 py-1 bg-card border border-border/30 rounded-full text-muted-foreground font-sans text-xs">
                         {tag}
                       </span>)}
                   </div>
@@ -132,7 +132,7 @@ const Work = () => {
                 </div>
 
                 {/* Right - Results */}
-                <div className="bg-card border border-border/30 p-8 md:p-12">
+                <div className="bg-card border border-border/30 rounded-3xl p-8 md:p-12">
                   <h4 className="text-primary font-sans text-xs uppercase tracking-widest mb-8">
                     Key Results
                   </h4>

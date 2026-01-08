@@ -90,7 +90,7 @@ const About = () => {
             <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-serif text-foreground mb-3 sm:mb-4">What We Stand For</h2>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 md:gap-8">
-            {values.map((value, index) => <div key={index} className="text-center p-6 sm:p-8 border border-border/30 hover:border-primary/30 transition-colors duration-300 px-[25px] py-[15px]">
+            {values.map((value, index) => <div key={index} className="text-center p-6 sm:p-8 border border-border/30 hover:border-primary/30 transition-colors duration-300 px-[25px] py-[15px] rounded-2xl">
                 <value.icon size={28} className="text-primary mx-auto mb-4 sm:mb-6" />
                 <h3 className="text-lg sm:text-xl font-serif text-foreground mb-2 sm:mb-3">{value.title}</h3>
                 <p className="text-muted-foreground font-sans text-xs sm:text-sm">{value.description}</p>
@@ -115,7 +115,7 @@ const About = () => {
                 viewport={{ once: true }} 
                 className="group relative"
               >
-                <div className="relative h-64 sm:h-72 lg:h-[420px] overflow-hidden rounded-sm border border-foreground/10 bg-foreground/5 backdrop-blur-sm transition-all duration-700 ease-[cubic-bezier(0.25,0.1,0.25,1)] group-hover:scale-[1.02]">
+                <div className="relative h-64 sm:h-72 lg:h-[420px] overflow-hidden rounded-3xl border border-foreground/10 bg-foreground/5 backdrop-blur-sm transition-all duration-700 ease-[cubic-bezier(0.25,0.1,0.25,1)] group-hover:scale-[1.02]">
                   {/* Portrait image - always visible with circular crop on mobile */}
                   <div className="absolute inset-0 z-10">
                     <img 

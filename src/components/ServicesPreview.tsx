@@ -128,7 +128,7 @@ const ServiceCard = ({ service, isExpanded, onToggle, delay = 0 }: {
         y: -4,
         boxShadow: "0 25px 50px -12px rgba(0,0,0,0.5)",
       }}
-      className={`group relative flex flex-col border border-foreground/10 bg-background overflow-hidden cursor-pointer h-48 sm:h-32 md:h-36 w-full
+      className={`group relative flex flex-col border border-foreground/10 bg-background overflow-hidden cursor-pointer h-48 sm:h-32 md:h-36 w-full rounded-2xl
         ${isExpanded ? 'border-primary bg-foreground/5' : ''}
       `}
       style={{
@@ -332,7 +332,7 @@ const ServicesPreview = () => {
                   delay: index * 0.08,
                   ease: [0.25, 0.1, 0.25, 1]
                 }}
-                className="border border-foreground/10 bg-background/80 backdrop-blur-sm p-4 flex flex-col items-center text-center"
+                className="border border-foreground/10 bg-background/80 backdrop-blur-sm p-4 flex flex-col items-center text-center rounded-2xl"
               >
                 <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mb-3">
                   <Icon className="w-5 h-5 text-primary" strokeWidth={1.5} />

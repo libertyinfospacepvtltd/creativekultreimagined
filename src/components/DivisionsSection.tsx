@@ -47,7 +47,7 @@ const DivisionsSection = () => {
           {divisions.map((division, index) => (
             <div 
               key={index}
-              className="group bg-background border border-border/30 p-8 text-center hover:border-primary/30 transition-all duration-500"
+              className="group bg-background border border-border/30 rounded-3xl p-8 text-center hover:border-primary/30 transition-all duration-500"
             >
               {/* Circular white logo container */}
               <div className={`bg-white rounded-full w-32 h-32 mx-auto mb-6 flex items-center justify-center overflow-hidden ${
@@ -116,7 +116,7 @@ const DivisionsSection = () => {
           {divisions.map((division, index) => (
             <div 
               key={index}
-              className="group bg-background border border-border/30 rounded-2xl overflow-hidden flex items-center gap-4 p-4 text-left hover:border-primary/30 transition-all duration-500"
+              className="group bg-background border border-border/30 rounded-3xl overflow-hidden flex items-center gap-4 p-4 text-left hover:border-primary/30 transition-all duration-500"
             >
               {/* Circular white logo container */}
               <div className={`bg-white rounded-full w-16 h-16 flex-shrink-0 flex items-center justify-center overflow-hidden ${
