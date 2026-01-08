@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { Megaphone, Target, Palette, Camera, Lightbulb, Newspaper, PenTool, FileText, Check, Plus, Minus } from "lucide-react";
+import { Megaphone, Target, Palette, Camera, Lightbulb, Newspaper, PenTool, FileText, Check } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import Layout from "@/components/Layout";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
@@ -123,6 +123,150 @@ const ServiceCard = ({
       </div>
     </motion.div>;
 };
+
+// Pricing tiers data
+const pricingTiers = [
+  {
+    id: "strategy",
+    name: "Strategy",
+    displayName: "The Strategy",
+    price: "₹25,000",
+    period: "/project",
+    description: "Perfect for brands seeking strategic clarity and direction.",
+    features: [
+      "Brand Audit & Analysis",
+      "Market Positioning Strategy",
+      "Content Calendar (1 Month)",
+      "Competitor Analysis Report"
+    ],
+    featured: false,
+    ctaText: "Choose Strategy"
+  },
+  {
+    id: "growth",
+    name: "Growth",
+    displayName: "The Growth",
+    price: "₹50,000",
+    period: "/month",
+    description: "For brands ready to scale with consistent creative output.",
+    features: [
+      "Everything in Strategy",
+      "Social Media Management",
+      "20 Custom Creatives/Month",
+      "Monthly Performance Reports",
+      "Community Management"
+    ],
+    featured: true,
+    ctaText: "Choose Growth"
+  },
+  {
+    id: "domination",
+    name: "Enterprise",
+    displayName: "The Domination",
+    price: "₹1,00,000",
+    period: "/month",
+    description: "Full-service partnership for brands demanding market leadership.",
+    features: [
+      "Everything in Growth",
+      "Performance Marketing (Ads)",
+      "Influencer Collaborations",
+      "PR & Media Outreach",
+      "Dedicated Account Manager",
+      "Priority Support (24/7)"
+    ],
+    featured: false,
+    ctaText: "Choose Domination"
+  }
+];
+
+// Mobile Pricing Tabs Component
+const MobilePricingTabs = () => {
+  const [activeTab, setActiveTab] = useState("growth");
+  const activeTier = pricingTiers.find(t => t.id === activeTab) || pricingTiers[1];
+
+  return (
+    <div className="block md:hidden">
+      {/* Pill-shaped Tab Navigation */}
+      <div className="flex justify-center mb-6">
+        <div className="inline-flex bg-white/10 dark:bg-white/5 rounded-full p-1 border border-border/20">
+          {pricingTiers.map((tier) => (
+            <button
+              key={tier.id}
+              onClick={() => setActiveTab(tier.id)}
+              className={`px-4 py-2 text-xs uppercase tracking-widest font-sans transition-all duration-300 rounded-full
+                ${activeTab === tier.id 
+                  ? 'bg-primary text-primary-foreground' 
+                  : 'text-muted-foreground hover:text-foreground'
+                }`}
+            >
+              {tier.name}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* Active Pricing Card */}
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={activeTab}
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -10 }}
+          transition={{ duration: 0.3 }}
+          className="relative flex flex-col p-6 rounded-lg bg-white/5 border border-amber-500/30"
+        >
+          {/* Most Popular Badge */}
+          {activeTier.featured && (
+            <div className="absolute -top-3 left-1/2 -translate-x-1/2">
+              <span className="bg-primary text-primary-foreground font-sans text-[10px] uppercase tracking-widest px-4 py-1 rounded-full whitespace-nowrap">
+                Most Popular
+              </span>
+            </div>
+          )}
+
+          {/* Tier Name */}
+          <h3 className="text-white font-sans text-lg uppercase tracking-widest font-bold mb-2 mt-2">
+            {activeTier.displayName.replace("The ", "")}
+          </h3>
+
+          {/* Description */}
+          <p className="text-gray-400 font-sans text-sm mb-4">
+            {activeTier.description}
+          </p>
+
+          {/* Price */}
+          <div className="mb-6">
+            <span className="text-4xl font-bold text-white">{activeTier.price}</span>
+            <span className="text-gray-400 font-sans text-sm ml-1">{activeTier.period}</span>
+          </div>
+
+          {/* Features */}
+          <ul className="space-y-3 mb-6">
+            {activeTier.features.map((feature, index) => (
+              <li key={index} className="flex items-start gap-3">
+                <Check className="w-4 h-4 text-yellow-400 flex-shrink-0 mt-0.5" strokeWidth={2.5} />
+                <span className="text-white font-sans text-sm">{feature}</span>
+              </li>
+            ))}
+          </ul>
+
+          {/* CTA Button */}
+          <Link 
+            to="/contact" 
+            className={`w-full text-center py-3 rounded-full font-sans text-sm uppercase tracking-widest transition-all duration-300
+              ${activeTier.featured 
+                ? 'bg-primary text-primary-foreground hover:bg-primary/90' 
+                : 'border border-primary text-primary hover:bg-primary hover:text-primary-foreground'
+              }`}
+          >
+            {activeTier.ctaText}
+          </Link>
+        </motion.div>
+      </AnimatePresence>
+    </div>
+  );
+};
+
 const Services = () => {
   const [expandedId, setExpandedId] = useState<string | null>(null);
   const handleToggle = (id: string) => {
@@ -208,7 +352,7 @@ const Services = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {processSteps.map((step, index) => <div key={index} className="text-center">
-                <span className="text-5xl md:text-6xl font-serif text-amber-700 dark:text-primary/20 block mb-4">
+                <span className="text-5xl md:text-6xl font-serif text-[#B8860B] dark:text-yellow-400/80 block mb-4">
                   {step.number}
                 </span>
                 <h3 className="text-xl font-serif text-foreground mb-3">
@@ -234,15 +378,18 @@ const Services = () => {
             </h2>
           </div>
 
-          {/* Premium Pricing Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
+          {/* Mobile Tabbed Interface */}
+          <MobilePricingTabs />
+
+          {/* Desktop Premium Pricing Cards */}
+          <div className="hidden md:grid grid-cols-3 gap-8">
             {/* The Strategy Tier */}
-            <div className="flex flex-col p-6 sm:p-8 rounded-lg bg-white/80 dark:bg-white/5 border border-border/30 dark:border-amber-500/30 shadow-xl dark:shadow-none transition-all duration-300 hover:shadow-2xl dark:hover:border-amber-500/50">
-              <span className="text-muted-foreground dark:text-muted-foreground font-sans text-xs uppercase tracking-[0.2em] mb-4">
+            <div className="flex flex-col p-8 rounded-lg bg-white/80 dark:bg-white/5 border border-border/30 dark:border-amber-500/30 shadow-xl dark:shadow-none transition-all duration-300 hover:shadow-2xl dark:hover:border-amber-500/50">
+              <span className="text-muted-foreground font-sans text-xs uppercase tracking-[0.2em] mb-4">
                 The Strategy
               </span>
               <div className="mb-6">
-                <span className="text-4xl sm:text-5xl font-serif text-foreground">₹25,000</span>
+                <span className="text-5xl font-serif text-foreground">₹25,000</span>
                 <span className="text-muted-foreground font-sans text-sm ml-2">/project</span>
               </div>
               <p className="text-muted-foreground font-sans text-sm mb-6">
@@ -268,24 +415,24 @@ const Services = () => {
               </ul>
               <Link 
                 to="/contact" 
-                className="w-full text-center py-3 sm:py-4 rounded-full border border-primary text-primary font-sans text-sm uppercase tracking-widest hover:bg-primary hover:text-primary-foreground transition-all duration-300"
+                className="w-full text-center py-4 rounded-full border border-primary text-primary font-sans text-sm uppercase tracking-widest hover:bg-primary hover:text-primary-foreground transition-all duration-300"
               >
                 Choose Strategy
               </Link>
             </div>
 
             {/* The Growth Tier - Featured */}
-            <div className="flex flex-col p-6 sm:p-8 rounded-lg bg-white/80 dark:bg-white/5 border-2 border-primary dark:border-primary shadow-xl dark:shadow-none transition-all duration-300 hover:shadow-2xl relative">
+            <div className="flex flex-col p-8 rounded-lg bg-white/80 dark:bg-white/5 border-2 border-primary shadow-xl dark:shadow-none transition-all duration-300 hover:shadow-2xl relative">
               <div className="absolute -top-3 left-1/2 -translate-x-1/2">
                 <span className="bg-primary text-primary-foreground font-sans text-[10px] uppercase tracking-widest px-4 py-1 rounded-full">
                   Most Popular
                 </span>
               </div>
-              <span className="text-muted-foreground dark:text-muted-foreground font-sans text-xs uppercase tracking-[0.2em] mb-4">
+              <span className="text-muted-foreground font-sans text-xs uppercase tracking-[0.2em] mb-4">
                 The Growth
               </span>
               <div className="mb-6">
-                <span className="text-4xl sm:text-5xl font-serif text-foreground">₹50,000</span>
+                <span className="text-5xl font-serif text-foreground">₹50,000</span>
                 <span className="text-muted-foreground font-sans text-sm ml-2">/month</span>
               </div>
               <p className="text-muted-foreground font-sans text-sm mb-6">
@@ -315,19 +462,19 @@ const Services = () => {
               </ul>
               <Link 
                 to="/contact" 
-                className="w-full text-center py-3 sm:py-4 rounded-full bg-primary text-primary-foreground font-sans text-sm uppercase tracking-widest hover:bg-primary/90 transition-all duration-300"
+                className="w-full text-center py-4 rounded-full bg-primary text-primary-foreground font-sans text-sm uppercase tracking-widest hover:bg-primary/90 transition-all duration-300"
               >
                 Choose Growth
               </Link>
             </div>
 
             {/* The Domination Tier */}
-            <div className="flex flex-col p-6 sm:p-8 rounded-lg bg-white/80 dark:bg-white/5 border border-border/30 dark:border-amber-500/30 shadow-xl dark:shadow-none transition-all duration-300 hover:shadow-2xl dark:hover:border-amber-500/50">
-              <span className="text-muted-foreground dark:text-muted-foreground font-sans text-xs uppercase tracking-[0.2em] mb-4">
+            <div className="flex flex-col p-8 rounded-lg bg-white/80 dark:bg-white/5 border border-border/30 dark:border-amber-500/30 shadow-xl dark:shadow-none transition-all duration-300 hover:shadow-2xl dark:hover:border-amber-500/50">
+              <span className="text-muted-foreground font-sans text-xs uppercase tracking-[0.2em] mb-4">
                 The Domination
               </span>
               <div className="mb-6">
-                <span className="text-4xl sm:text-5xl font-serif text-foreground">₹1,00,000</span>
+                <span className="text-5xl font-serif text-foreground">₹1,00,000</span>
                 <span className="text-muted-foreground font-sans text-sm ml-2">/month</span>
               </div>
               <p className="text-muted-foreground font-sans text-sm mb-6">
@@ -361,7 +508,7 @@ const Services = () => {
               </ul>
               <Link 
                 to="/contact" 
-                className="w-full text-center py-3 sm:py-4 rounded-full border border-primary text-primary font-sans text-sm uppercase tracking-widest hover:bg-primary hover:text-primary-foreground transition-all duration-300"
+                className="w-full text-center py-4 rounded-full border border-primary text-primary font-sans text-sm uppercase tracking-widest hover:bg-primary hover:text-primary-foreground transition-all duration-300"
               >
                 Choose Domination
               </Link>

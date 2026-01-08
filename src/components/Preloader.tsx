@@ -9,7 +9,7 @@ const Preloader = ({ isVisible }: PreloaderProps) => {
     <AnimatePresence>
       {isVisible && (
         <motion.div
-          className="fixed inset-0 z-40 bg-background"
+          className="fixed inset-0 z-40 bg-black"
           initial={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ 
