@@ -213,7 +213,7 @@ const MobilePricingTabs = () => {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -10 }}
           transition={{ duration: 0.3 }}
-          className="relative flex flex-col p-6 rounded-lg bg-white/5 border border-amber-500/30"
+          className="relative flex flex-col p-6 rounded-lg bg-[#FAF9F6] dark:bg-white/5 border border-border/30 dark:border-amber-500/30 shadow-xl dark:shadow-none"
         >
           {/* Most Popular Badge */}
           {activeTier.featured && (
@@ -225,27 +225,27 @@ const MobilePricingTabs = () => {
           )}
 
           {/* Tier Name */}
-          <h3 className="text-white font-sans text-lg uppercase tracking-widest font-bold mb-2 mt-2">
+          <h3 className="text-neutral-900 dark:text-white font-sans text-lg uppercase tracking-widest font-bold mb-2 mt-2">
             {activeTier.displayName.replace("The ", "")}
           </h3>
 
           {/* Description */}
-          <p className="text-gray-400 font-sans text-sm mb-4">
+          <p className="text-gray-700 dark:text-gray-400 font-sans text-sm mb-4">
             {activeTier.description}
           </p>
 
           {/* Price */}
           <div className="mb-6">
-            <span className="text-4xl font-bold text-white">{activeTier.price}</span>
-            <span className="text-gray-400 font-sans text-sm ml-1">{activeTier.period}</span>
+            <span className="text-4xl font-bold text-neutral-900 dark:text-white">{activeTier.price}</span>
+            <span className="text-gray-500 dark:text-gray-400 font-sans text-sm ml-1">{activeTier.period}</span>
           </div>
 
           {/* Features */}
           <ul className="space-y-3 mb-6">
             {activeTier.features.map((feature, index) => (
               <li key={index} className="flex items-start gap-3">
-                <Check className="w-4 h-4 text-yellow-400 flex-shrink-0 mt-0.5" strokeWidth={2.5} />
-                <span className="text-white font-sans text-sm">{feature}</span>
+                <Check className="w-4 h-4 text-amber-600 dark:text-yellow-400 flex-shrink-0 mt-0.5" strokeWidth={2.5} />
+                <span className="text-gray-800 dark:text-white font-sans text-sm">{feature}</span>
               </li>
             ))}
           </ul>
