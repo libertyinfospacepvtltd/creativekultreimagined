@@ -236,7 +236,7 @@ const MobilePricingTabs = () => {
 
           {/* Price */}
           <div className="mb-6">
-            <span className="text-4xl font-bold text-neutral-900 dark:text-white">{activeTier.price}</span>
+            <span className="text-4xl font-sans font-bold text-neutral-900 dark:text-white tracking-tight">{activeTier.price}</span>
             <span className="text-gray-500 dark:text-gray-400 font-sans text-sm ml-1">{activeTier.period}</span>
           </div>
 
@@ -352,7 +352,7 @@ const Services = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {processSteps.map((step, index) => <div key={index} className="text-center">
-                <span className="text-5xl md:text-6xl font-serif text-[#B8860B] dark:text-yellow-400/80 block mb-4">
+                <span className="text-5xl md:text-6xl font-sans font-bold text-[#B8860B] dark:text-yellow-400/80 block mb-4 tracking-tight">
                   {step.number}
                 </span>
                 <h3 className="text-xl font-serif text-foreground mb-3">
@@ -389,7 +389,7 @@ const Services = () => {
                 The Strategy
               </span>
               <div className="mb-6">
-                <span className="text-5xl font-serif text-foreground">₹25,000</span>
+                <span className="text-5xl font-sans font-bold text-foreground tracking-tight">₹25,000</span>
                 <span className="text-muted-foreground font-sans text-sm ml-2">/project</span>
               </div>
               <p className="text-muted-foreground font-sans text-sm mb-6">
@@ -432,7 +432,7 @@ const Services = () => {
                 The Growth
               </span>
               <div className="mb-6">
-                <span className="text-5xl font-serif text-foreground">₹50,000</span>
+                <span className="text-5xl font-sans font-bold text-foreground tracking-tight">₹50,000</span>
                 <span className="text-muted-foreground font-sans text-sm ml-2">/month</span>
               </div>
               <p className="text-muted-foreground font-sans text-sm mb-6">
@@ -474,7 +474,7 @@ const Services = () => {
                 The Domination
               </span>
               <div className="mb-6">
-                <span className="text-5xl font-serif text-foreground">₹1,00,000</span>
+                <span className="text-5xl font-sans font-bold text-foreground tracking-tight">₹1,00,000</span>
                 <span className="text-muted-foreground font-sans text-sm ml-2">/month</span>
               </div>
               <p className="text-muted-foreground font-sans text-sm mb-6">
@@ -539,7 +539,7 @@ const Services = () => {
               <h3 className="text-foreground font-sans text-[10px] sm:text-xs uppercase tracking-widest font-bold mb-3 sm:mb-4 text-center">
                 Product Photography
               </h3>
-              <span className="text-amber-600 dark:text-yellow-400 font-serif text-2xl sm:text-3xl md:text-4xl mb-1">
+              <span className="text-amber-600 dark:text-yellow-400 font-sans font-bold text-2xl sm:text-3xl md:text-4xl mb-1 tracking-tight">
                 ₹15,000
               </span>
               <span className="text-muted-foreground/60 font-sans text-[10px] sm:text-xs">
@@ -552,7 +552,7 @@ const Services = () => {
               <h3 className="text-foreground font-sans text-[10px] sm:text-xs uppercase tracking-widest font-bold mb-3 sm:mb-4 text-center">
                 Video Production
               </h3>
-              <span className="text-amber-600 dark:text-yellow-400 font-serif text-2xl sm:text-3xl md:text-4xl mb-1">
+              <span className="text-amber-600 dark:text-yellow-400 font-sans font-bold text-2xl sm:text-3xl md:text-4xl mb-1 tracking-tight">
                 ₹30,000
               </span>
               <span className="text-muted-foreground/60 font-sans text-[10px] sm:text-xs">
@@ -565,7 +565,7 @@ const Services = () => {
               <h3 className="text-foreground font-sans text-[10px] sm:text-xs uppercase tracking-widest font-bold mb-3 sm:mb-4 text-center">
                 Brand Identity Design
               </h3>
-              <span className="text-amber-600 dark:text-yellow-400 font-serif text-2xl sm:text-3xl md:text-4xl mb-1">
+              <span className="text-amber-600 dark:text-yellow-400 font-sans font-bold text-2xl sm:text-3xl md:text-4xl mb-1 tracking-tight">
                 ₹75,000
               </span>
               <span className="text-muted-foreground/60 font-sans text-[10px] sm:text-xs">
@@ -578,7 +578,7 @@ const Services = () => {
               <h3 className="text-foreground font-sans text-[10px] sm:text-xs uppercase tracking-widest font-bold mb-3 sm:mb-4 text-center">
                 Website Design
               </h3>
-              <span className="text-amber-600 dark:text-yellow-400 font-serif text-2xl sm:text-3xl md:text-4xl mb-1">
+              <span className="text-amber-600 dark:text-yellow-400 font-sans font-bold text-2xl sm:text-3xl md:text-4xl mb-1 tracking-tight">
                 ₹50,000
               </span>
               <span className="text-muted-foreground/60 font-sans text-[10px] sm:text-xs">
