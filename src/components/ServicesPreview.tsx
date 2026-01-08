@@ -259,7 +259,7 @@ const ServicesPreview = () => {
                 <div className="text-center mt-8">
                   <Link
                     to="/services"
-                    className="inline-flex items-center justify-center px-6 py-2.5 border border-primary text-primary font-sans text-xs uppercase tracking-widest hover:bg-primary hover:text-primary-foreground transition-all duration-300 min-h-[44px]"
+                    className="inline-flex items-center justify-center px-6 py-2.5 rounded-full border border-primary text-primary font-sans text-xs uppercase tracking-widest hover:bg-primary hover:text-primary-foreground transition-all duration-300 min-h-[44px]"
                   >
                     View All Services
                   </Link>
@@ -349,7 +349,7 @@ const ServicesPreview = () => {
         <div className="text-center mt-6">
           <Link
             to="/services"
-            className="inline-flex items-center justify-center px-6 py-3 border border-primary text-primary font-sans text-xs uppercase tracking-widest hover:bg-primary hover:text-primary-foreground transition-all duration-300 min-h-[44px]"
+            className="inline-flex items-center justify-center px-6 py-3 rounded-full border border-primary text-primary font-sans text-xs uppercase tracking-widest hover:bg-primary hover:text-primary-foreground transition-all duration-300 min-h-[44px]"
           >
             View All Services
           </Link>
