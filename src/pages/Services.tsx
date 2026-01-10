@@ -275,10 +275,10 @@ const Services = () => {
           <span className="text-primary font-sans text-xs sm:text-sm uppercase tracking-widest mb-2 sm:mb-4 block">
             What We Do
           </span>
-          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-7xl 3xl:text-8xl font-serif text-foreground mb-3 sm:mb-6 2xl:mb-8">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-serif text-foreground mb-3 sm:mb-6">
             Services Crafted for Impact
           </h1>
-          <p className="text-muted-foreground font-sans max-w-2xl 2xl:max-w-3xl text-sm sm:text-base lg:text-lg 2xl:text-xl">
+          <p className="text-muted-foreground font-sans max-w-2xl text-sm sm:text-base lg:text-lg">
             From strategy to execution, we deliver comprehensive creative solutions.
           </p>
         </div>
@@ -287,8 +287,8 @@ const Services = () => {
       {/* Premium Hover-Reveal Grid - Desktop Only */}
       <section className="bg-background pb-8 sm:pb-12 md:pb-24">
         <div className="container-luxury">
-          {/* Desktop Grid - hidden on mobile, 4 cols on ultra-large */}
-          <div className="hidden md:grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4 2xl:gap-6 3xl:gap-8">
+          {/* Desktop Grid - hidden on mobile */}
+          <div className="hidden md:grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4">
             {services.map(service => <ServiceCard key={service.id} service={service} isExpanded={expandedId === service.id} onToggle={() => handleToggle(service.id)} />)}
           </div>
           
@@ -341,20 +341,20 @@ const Services = () => {
             <span className="text-primary font-sans text-sm uppercase tracking-widest mb-4 block">
               Our Process
             </span>
-            <h2 className="text-3xl md:text-4xl lg:text-5xl 2xl:text-6xl 3xl:text-7xl font-serif text-foreground">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif text-foreground">
               A Streamlined Approach
             </h2>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 2xl:gap-12">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {processSteps.map((step, index) => <div key={index} className="text-center">
-                <span className="text-5xl md:text-6xl 2xl:text-7xl 3xl:text-8xl font-numbers font-bold text-primary block mb-4 2xl:mb-6 tracking-tight tabular-nums">
+                <span className="text-5xl md:text-6xl font-numbers font-bold text-primary block mb-4 tracking-tight tabular-nums">
                   {step.number}
                 </span>
-                <h3 className="text-xl 2xl:text-2xl font-serif text-foreground mb-3 2xl:mb-4">
+                <h3 className="text-xl font-serif text-foreground mb-3">
                   {step.title}
                 </h3>
-                <p className="text-muted-foreground font-sans text-sm 2xl:text-base">
+                <p className="text-muted-foreground font-sans text-sm">
                   {step.description}
                 </p>
               </div>)}
@@ -369,7 +369,7 @@ const Services = () => {
             <span className="text-primary font-sans text-xs sm:text-sm uppercase tracking-widest mb-3 sm:mb-4 block">
               Engagement Models
             </span>
-            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl 2xl:text-6xl 3xl:text-7xl font-serif text-foreground">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-serif text-foreground">
               Choose Your Path Forward
             </h2>
           </div>
@@ -378,7 +378,7 @@ const Services = () => {
           <MobilePricingTabs />
 
           {/* Desktop Premium Pricing Cards */}
-          <div className="hidden md:grid grid-cols-3 gap-8 2xl:gap-12">
+          <div className="hidden md:grid grid-cols-3 gap-8">
             {/* The Strategy Tier */}
             <div className="flex flex-col p-8 rounded-3xl bg-white/80 dark:bg-white/5 border border-border/30 dark:border-amber-500/30 shadow-xl dark:shadow-none transition-all duration-300 hover:shadow-2xl dark:hover:border-amber-500/50">
               <span className="text-muted-foreground font-sans text-xs uppercase tracking-[0.2em] mb-4">

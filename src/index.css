@@ -171,26 +171,9 @@
     text-wrap: balance;
   }
 
-  /* Responsive base font sizing with ultra-large display support */
+  /* Responsive base font sizing */
   h1 {
-    @apply text-3xl sm:text-4xl md:text-5xl lg:text-6xl 2xl:text-7xl 3xl:text-8xl;
-  }
-
-  h2 {
-    @apply 2xl:text-6xl 3xl:text-7xl;
-  }
-
-  /* Ultra-large display typography scaling */
-  @media (min-width: 1536px) {
-    html {
-      font-size: 17px;
-    }
-  }
-
-  @media (min-width: 1920px) {
-    html {
-      font-size: 18px;
-    }
+    @apply text-3xl sm:text-4xl md:text-5xl lg:text-6xl;
   }
 
   /* Selection */
@@ -255,14 +238,14 @@
     animation: radar-pulse 8s linear infinite;
   }
 
-  /* Section padding - mobile-first with ultra-large display support */
+  /* Section padding - mobile-first */
   .section-padding {
-    @apply py-8 sm:py-10 md:py-16 lg:py-20 2xl:py-28 3xl:py-32;
+    @apply py-8 sm:py-10 md:py-16 lg:py-20;
   }
 
-  /* Container max width - mobile-first with safe area insets and ultra-large display support */
+  /* Container max width - mobile-first with safe area insets */
   .container-luxury {
-    @apply max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 2xl:max-w-[1600px] 3xl:max-w-[1800px] 2xl:px-16 3xl:px-20;
+    @apply max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12;
     padding-left: max(1rem, env(safe-area-inset-left));
     padding-right: max(1rem, env(safe-area-inset-right));
   }
@@ -271,13 +254,6 @@
     .container-luxury {
       padding-left: max(1.5rem, env(safe-area-inset-left));
       padding-right: max(1.5rem, env(safe-area-inset-right));
-    }
-  }
-
-  @screen 2xl {
-    .container-luxury {
-      padding-left: max(4rem, env(safe-area-inset-left));
-      padding-right: max(4rem, env(safe-area-inset-right));
     }
   }
 
