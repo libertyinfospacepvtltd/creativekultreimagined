@@ -76,8 +76,8 @@ const HeroSection = ({ preloaderComplete = true }: HeroSectionProps) => {
       ref={containerRef}
       className="relative h-[200vh] w-full bg-[hsl(220,15%,8%)] z-10"
     >
-      {/* Sticky Container */}
-      <div className="sticky top-0 h-screen h-[100dvh] w-full overflow-hidden z-10">
+      {/* Sticky Container - Always min-h-screen for ultra-large displays */}
+      <div className="sticky top-0 min-h-screen h-[100dvh] w-full overflow-hidden z-10">
         {/* Background Image with Parallax + Scroll Zoom */}
         <motion.div 
           className="absolute inset-0 transition-transform duration-300 ease-out origin-center"
@@ -148,11 +148,11 @@ const HeroSection = ({ preloaderComplete = true }: HeroSectionProps) => {
           className="absolute inset-0 flex items-center justify-center pointer-events-none px-4"
           style={{ opacity: taglineOpacity }}
         >
-          <div className="text-center mt-16 sm:mt-40 md:mt-48 lg:mt-56">
-            <p className="text-white/90 font-serif text-lg sm:text-xl md:text-2xl lg:text-3xl italic tracking-wide">
+          <div className="text-center mt-16 sm:mt-40 md:mt-48 lg:mt-56 2xl:mt-64">
+            <p className="text-white/90 font-serif text-lg sm:text-xl md:text-2xl lg:text-3xl 2xl:text-4xl 3xl:text-5xl italic tracking-wide">
               Where Brands Break the Mold
             </p>
-            <p className="text-gray-400 font-sans text-xs sm:text-sm md:text-base tracking-widest uppercase mt-2 sm:mt-3">
+            <p className="text-gray-400 font-sans text-xs sm:text-sm md:text-base 2xl:text-lg 3xl:text-xl tracking-widest uppercase mt-2 sm:mt-3 2xl:mt-4">
               Strategy • Rebellion • Results
             </p>
           </div>
@@ -177,10 +177,10 @@ const HeroSection = ({ preloaderComplete = true }: HeroSectionProps) => {
               scale: textScale,
             }}
           >
-            <h1 className="font-serif text-3xl sm:text-4xl md:text-6xl lg:text-8xl text-foreground tracking-tight">
+            <h1 className="font-serif text-3xl sm:text-4xl md:text-6xl lg:text-8xl 2xl:text-9xl 3xl:text-[10rem] text-foreground tracking-tight">
               Sculpting Digital
             </h1>
-            <h1 className="font-serif text-3xl sm:text-4xl md:text-6xl lg:text-8xl text-primary italic mt-1 sm:mt-2">
+            <h1 className="font-serif text-3xl sm:text-4xl md:text-6xl lg:text-8xl 2xl:text-9xl 3xl:text-[10rem] text-primary italic mt-1 sm:mt-2">
               Legacies.
             </h1>
           </motion.div>
