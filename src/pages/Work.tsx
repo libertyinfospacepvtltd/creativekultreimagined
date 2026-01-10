@@ -56,10 +56,10 @@ const Work = () => {
           <span className="text-primary font-sans text-xs sm:text-sm uppercase tracking-widest mb-2 sm:mb-4 block">
             Our Portfolio
           </span>
-          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-7xl 3xl:text-8xl font-serif text-foreground mb-3 sm:mb-6 2xl:mb-8">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-serif text-foreground mb-3 sm:mb-6">
             The Showreel
           </h1>
-          <p className="text-muted-foreground font-sans max-w-2xl 2xl:max-w-3xl text-sm sm:text-base lg:text-lg 2xl:text-xl">
+          <p className="text-muted-foreground font-sans max-w-2xl text-sm sm:text-base lg:text-lg">
             A curated collection of campaigns and projects that showcase our creative capabilities.
           </p>
         </div>
@@ -164,10 +164,10 @@ const Work = () => {
       {/* CTA */}
       <section className="section-padding bg-background">
         <div className="container-luxury text-center">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl 2xl:text-6xl 3xl:text-7xl font-serif text-foreground mb-6 2xl:mb-8">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif text-foreground mb-6">
             Want to Be Our Next Success Story?
           </h2>
-          <p className="text-muted-foreground font-sans max-w-xl 2xl:max-w-2xl mx-auto mb-10 2xl:mb-14 2xl:text-lg">
+          <p className="text-muted-foreground font-sans max-w-xl mx-auto mb-10">
             Let's collaborate and create something extraordinary for your brand.
           </p>
           <Link to="/contact" className="inline-block px-10 py-4 rounded-full border-2 border-primary bg-transparent text-primary font-sans text-sm uppercase tracking-widest hover:bg-primary hover:text-primary-foreground transition-all duration-300">JOIN THE KULT</Link>

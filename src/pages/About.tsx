@@ -57,8 +57,8 @@ const About = () => {
       <section className="pt-12 sm:pt-16 pb-8 sm:pb-12 md:pt-20 md:pb-16 bg-background">
         <div className="container-luxury">
           <span className="text-primary font-sans text-xs sm:text-sm uppercase tracking-widest mb-3 sm:mb-4 block">Our Story</span>
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl 2xl:text-7xl 3xl:text-8xl font-serif text-foreground mb-4 sm:mb-6 2xl:mb-8">Born in Kolkata,<br />Built for the World</h1>
-          <p className="text-muted-foreground font-sans max-w-2xl 2xl:max-w-3xl text-base sm:text-lg 2xl:text-xl">Creative Kult is the creative powerhouse behind Liberty Infospace's digital ventures.</p>
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif text-foreground mb-4 sm:mb-6">Born in Kolkata,<br />Built for the World</h1>
+          <p className="text-muted-foreground font-sans max-w-2xl text-base sm:text-lg">Creative Kult is the creative powerhouse behind Liberty Infospace's digital ventures.</p>
         </div>
       </section>
 
@@ -89,7 +89,7 @@ const About = () => {
             <span className="text-primary font-sans text-xs sm:text-sm uppercase tracking-widest mb-3 sm:mb-4 block">Our Values</span>
             <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-serif text-foreground mb-3 sm:mb-4">What We Stand For</h2>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 md:gap-8 2xl:gap-10">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 md:gap-8">
             {values.map((value, index) => <div key={index} className="text-center p-6 sm:p-8 border border-border/30 hover:border-primary/30 transition-colors duration-300 px-[25px] py-[15px] rounded-2xl">
                 <value.icon size={28} className="text-primary mx-auto mb-4 sm:mb-6" />
                 <h3 className="text-lg sm:text-xl font-serif text-foreground mb-2 sm:mb-3">{value.title}</h3>
@@ -105,7 +105,7 @@ const About = () => {
             <span className="text-primary font-sans text-xs sm:text-sm uppercase tracking-[0.3em] mb-3 sm:mb-4 block">The Team</span>
             <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-serif text-foreground mb-3 sm:mb-4">Creative Minds United</h2>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-10 2xl:gap-14">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-10">
             {team.map((member, index) => (
               <motion.div 
                 key={index} 
@@ -142,7 +142,7 @@ const About = () => {
 
       <section className="section-padding bg-background">
         <div className="container-luxury text-center">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl 2xl:text-6xl 3xl:text-7xl font-serif text-foreground mb-4 sm:mb-6 2xl:mb-8">Ready to Join the Kult?</h2>
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-serif text-foreground mb-4 sm:mb-6">Ready to Join the Kult?</h2>
           <Link to="/contact" className="inline-flex items-center justify-center px-8 sm:px-10 py-3 sm:py-4 rounded-full border-2 border-primary bg-transparent text-primary font-sans text-sm uppercase tracking-widest hover:bg-primary hover:text-primary-foreground transition-all duration-300 min-h-[44px]">JOIN THE KULT</Link>
         </div>
       </section>
