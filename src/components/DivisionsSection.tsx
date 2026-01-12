@@ -18,7 +18,7 @@ const divisions = [
     logo: "https://canvas-kolkata-vibe.lovable.app/assets/12thpass-logo-DhXy1KrN.png",
   },
   {
-    name: "Major Colors",
+    name: "Major Colours",
     description: "Premium design solutions",
     website: "https://majorcolors.com/",
     logo: "https://canvas-kolkata-vibe.lovable.app/assets/majorcolours-logo-C9dMwmvs.png",

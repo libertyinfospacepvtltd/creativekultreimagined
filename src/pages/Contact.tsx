@@ -208,13 +208,13 @@ const Contact = () => {
                     Follow Us
                   </h3>
                   <div className="flex items-center gap-4">
-                    <a href="https://instagram.com/creativekult" target="_blank" rel="noopener noreferrer" className="w-12 h-12 flex items-center justify-center border border-border/50 text-muted-foreground hover:bg-primary hover:border-primary hover:text-primary-foreground transition-all duration-300" aria-label="Instagram">
+                    <a href="https://www.instagram.com/creativekult.agency/" target="_blank" rel="noopener noreferrer" className="w-12 h-12 flex items-center justify-center border border-border/50 text-muted-foreground hover:bg-primary hover:border-primary hover:text-primary-foreground transition-all duration-300" aria-label="Instagram">
                       <Instagram size={20} />
                     </a>
-                    <a href="https://facebook.com/creativekult" target="_blank" rel="noopener noreferrer" className="w-12 h-12 flex items-center justify-center border border-border/50 text-muted-foreground hover:bg-primary hover:border-primary hover:text-primary-foreground transition-all duration-300" aria-label="Facebook">
+                    <a href="https://www.facebook.com/creativekult.agency" target="_blank" rel="noopener noreferrer" className="w-12 h-12 flex items-center justify-center border border-border/50 text-muted-foreground hover:bg-primary hover:border-primary hover:text-primary-foreground transition-all duration-300" aria-label="Facebook">
                       <Facebook size={20} />
                     </a>
-                    <a href="https://linkedin.com/company/creativekult" target="_blank" rel="noopener noreferrer" className="w-12 h-12 flex items-center justify-center border border-border/50 text-muted-foreground hover:bg-primary hover:border-primary hover:text-primary-foreground transition-all duration-300" aria-label="LinkedIn">
+                    <a href="https://www.linkedin.com/company/102707935/admin/dashboard/" target="_blank" rel="noopener noreferrer" className="w-12 h-12 flex items-center justify-center border border-border/50 text-muted-foreground hover:bg-primary hover:border-primary hover:text-primary-foreground transition-all duration-300" aria-label="LinkedIn">
                       <Linkedin size={20} />
                     </a>
                   </div>
