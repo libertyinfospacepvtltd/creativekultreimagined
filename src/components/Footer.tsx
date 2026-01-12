@@ -108,7 +108,7 @@ const Footer = () => {
         <div className="mt-10 sm:mt-12 lg:mt-16 pt-6 sm:pt-8 border-t border-border/30 flex flex-col sm:flex-row items-center justify-between gap-4 sm:gap-6">
           <div className="flex items-center gap-4 sm:gap-6">
             <a 
-              href="https://instagram.com/creativekult" 
+              href="https://www.instagram.com/creativekult.agency/" 
               target="_blank" 
               rel="noopener noreferrer"
               className="text-muted-foreground hover:text-primary transition-colors p-2 min-h-[44px] min-w-[44px] flex items-center justify-center"
@@ -117,7 +117,7 @@ const Footer = () => {
               <Instagram size={20} />
             </a>
             <a 
-              href="https://facebook.com/creativekult" 
+              href="https://www.facebook.com/creativekult.agency" 
               target="_blank" 
               rel="noopener noreferrer"
               className="text-muted-foreground hover:text-primary transition-colors p-2 min-h-[44px] min-w-[44px] flex items-center justify-center"
@@ -126,7 +126,7 @@ const Footer = () => {
               <Facebook size={20} />
             </a>
             <a 
-              href="https://linkedin.com/company/creativekult" 
+              href="https://www.linkedin.com/company/102707935/admin/dashboard/" 
               target="_blank" 
               rel="noopener noreferrer"
               className="text-muted-foreground hover:text-primary transition-colors p-2 min-h-[44px] min-w-[44px] flex items-center justify-center"

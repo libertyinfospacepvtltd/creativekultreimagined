@@ -25,8 +25,8 @@ const projects = [{
   instagram: "https://www.instagram.com/12thpass.ai/",
   facebook: "https://www.facebook.com/12thPassAI"
 }, {
-  id: "majorcolors",
-  name: "Major Colors",
+  id: "majorcolours",
+  name: "Major Colours",
   category: "Design Studio",
   description: "Brand positioning and digital presence for a premium design solutions company, establishing thought leadership in the creative industry.",
   tags: ["Brand Strategy", "Digital Presence", "Content Marketing"],
@@ -44,7 +44,7 @@ const trustedBy = [{
   name: "EasyDo 365",
   url: "https://easydo365.com/"
 }, {
-  name: "Major Colors",
+  name: "Major Colours",
   url: "https://majorcolors.com/"
 }];
 const Work = () => {
