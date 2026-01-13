@@ -11,56 +11,56 @@ const services = [
     id: "social-media",
     icon: Megaphone,
     title: "Social Media Marketing",
-    description: "Crafting scroll-stopping content and strategies that grow your brand.",
+    description: "Engage. Influence. Convert.",
     features: ["Content Strategy", "Community Management", "Influencer Partnerships"]
   },
   {
     id: "performance",
     icon: Target,
     title: "Performance Marketing",
-    description: "Data-driven campaigns that maximize ROI through targeted advertising.",
+    description: "Clicks that scale growth.",
     features: ["PPC Campaigns", "Conversion Optimization", "A/B Testing"]
   },
   {
     id: "branding",
     icon: Palette,
     title: "Offline Branding",
-    description: "Tangible brand experiences through print, signage, and environmental design.",
+    description: "Presence that demands attention.",
     features: ["Print Design", "Signage", "Packaging"]
   },
   {
     id: "photography",
     icon: Camera,
     title: "Photoshoot & Videography",
-    description: "Professional visual content that captures your brand's essence.",
+    description: "Stories told visually.",
     features: ["Product Photography", "Video Production", "Social Content"]
   },
   {
     id: "strategy",
     icon: Lightbulb,
     title: "Brand Strategy",
-    description: "Comprehensive brand positioning that differentiates you in the marketplace.",
+    description: "Define. Differentiate. Dominate.",
     features: ["Brand Audit", "Positioning", "Visual Identity"]
   },
   {
     id: "pr",
     icon: Newspaper,
     title: "Public Relations",
-    description: "Strategic communications that build credibility and secure media coverage.",
+    description: "Trust built with intent.",
     features: ["Media Relations", "Press Releases", "Crisis Comms"]
   },
   {
     id: "design",
     icon: PenTool,
     title: "Creative Design",
-    description: "Visually stunning designs that communicate your brand message.",
+    description: "Design that speaks.",
     features: ["Graphic Design", "UI/UX", "Motion Graphics"]
   },
   {
     id: "content",
     icon: FileText,
     title: "Content Production",
-    description: "Compelling content that educates, entertains, and converts.",
+    description: "Content with purpose.",
     features: ["Copywriting", "Blog Writing", "Script Writing"]
   },
 ];
@@ -158,11 +158,11 @@ const ServiceCard = ({ service, isExpanded, onToggle, delay = 0 }: {
         transition: 'all 0.7s cubic-bezier(0.25, 0.1, 0.25, 1)'
       }}
       >
-        <div className="flex items-center gap-1.5 sm:gap-2 mb-1.5 sm:mb-2">
+        <div className="flex items-center gap-1.5 sm:gap-2 mb-2 sm:mb-3">
           <Icon className="w-4 h-4 sm:w-5 sm:h-5 text-primary flex-shrink-0" strokeWidth={1.5} />
           <h3 className="text-primary font-serif text-xs sm:text-sm md:text-base font-medium leading-tight">{service.title}</h3>
         </div>
-        <p className="text-muted-foreground font-sans text-xs sm:text-sm md:text-base leading-snug text-center px-1 line-clamp-3">
+        <p className="text-foreground/80 font-sans text-sm sm:text-base md:text-lg font-medium tracking-wide text-center">
           {service.description}
         </p>
       </div>
