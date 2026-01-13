@@ -11,56 +11,56 @@ const services = [
     id: "social-media",
     icon: Megaphone,
     title: "Social Media Marketing",
-    description: "Engage. Influence. Convert.",
+    description: "Crafting scroll-stopping content and strategies that grow your brand.",
     features: ["Content Strategy", "Community Management", "Influencer Partnerships"]
   },
   {
     id: "performance",
     icon: Target,
     title: "Performance Marketing",
-    description: "Clicks that scale growth.",
+    description: "Data-driven campaigns that maximize ROI through targeted advertising.",
     features: ["PPC Campaigns", "Conversion Optimization", "A/B Testing"]
   },
   {
     id: "branding",
     icon: Palette,
     title: "Offline Branding",
-    description: "Presence that demands attention.",
+    description: "Tangible brand experiences through print, signage, and environmental design.",
     features: ["Print Design", "Signage", "Packaging"]
   },
   {
     id: "photography",
     icon: Camera,
     title: "Photoshoot & Videography",
-    description: "Stories told visually.",
+    description: "Professional visual content that captures your brand's essence.",
     features: ["Product Photography", "Video Production", "Social Content"]
   },
   {
     id: "strategy",
     icon: Lightbulb,
     title: "Brand Strategy",
-    description: "Define. Differentiate. Dominate.",
+    description: "Comprehensive brand positioning that differentiates you in the marketplace.",
     features: ["Brand Audit", "Positioning", "Visual Identity"]
   },
   {
     id: "pr",
     icon: Newspaper,
     title: "Public Relations",
-    description: "Trust built with intent.",
+    description: "Strategic communications that build credibility and secure media coverage.",
     features: ["Media Relations", "Press Releases", "Crisis Comms"]
   },
   {
     id: "design",
     icon: PenTool,
     title: "Creative Design",
-    description: "Design that speaks.",
+    description: "Visually stunning designs that communicate your brand message.",
     features: ["Graphic Design", "UI/UX", "Motion Graphics"]
   },
   {
     id: "content",
     icon: FileText,
     title: "Content Production",
-    description: "Content with purpose.",
+    description: "Compelling content that educates, entertains, and converts.",
     features: ["Copywriting", "Blog Writing", "Script Writing"]
   },
 ];
@@ -151,20 +151,28 @@ const ServiceCard = ({ service, isExpanded, onToggle, delay = 0 }: {
       </div>
 
       {/* Expanded State */}
-      <div className={`absolute inset-0 flex flex-col items-center justify-center h-full px-3 py-2 sm:px-4 sm:py-3
+      <div className={`absolute inset-0 flex flex-col p-2 sm:p-3
         ${isExpanded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8 group-hover:opacity-100 group-hover:translate-y-0'}
       `}
       style={{
         transition: 'all 0.7s cubic-bezier(0.25, 0.1, 0.25, 1)'
       }}
       >
-        <div className="flex items-center gap-2 sm:gap-2.5 mb-2 sm:mb-3 min-h-[3.5rem]">
-          <Icon className="w-5 h-5 sm:w-6 sm:h-6 text-primary flex-shrink-0" strokeWidth={1.5} />
-          <h3 className="text-primary font-serif text-lg sm:text-xl font-medium leading-tight">{service.title}</h3>
+        <div className="flex items-center gap-1 sm:gap-1.5 mb-1 sm:mb-2">
+          <Icon className="w-3 h-3 sm:w-4 sm:h-4 text-primary flex-shrink-0" strokeWidth={1.5} />
+          <h3 className="text-primary font-serif text-[9px] sm:text-[10px] md:text-xs font-medium leading-tight">{service.title}</h3>
         </div>
-        <p className="text-gray-300 font-sans text-sm sm:text-base font-normal tracking-wide text-center">
+        <p className="text-muted-foreground font-sans text-[8px] sm:text-[9px] md:text-[10px] leading-relaxed mb-1 sm:mb-2 line-clamp-2">
           {service.description}
         </p>
+        <ul className="space-y-0.5 sm:space-y-1 mt-auto">
+          {service.features.map((feature, index) => (
+            <li key={index} className="flex items-start gap-0.5 sm:gap-1">
+              <Check className="w-2 h-2 sm:w-2.5 sm:h-2.5 text-primary flex-shrink-0 mt-0.5" strokeWidth={2.5} />
+              <span className="text-foreground font-sans text-[8px] sm:text-[9px] leading-tight">{feature}</span>
+            </li>
+          ))}
+        </ul>
       </div>
     </motion.div>
   );
