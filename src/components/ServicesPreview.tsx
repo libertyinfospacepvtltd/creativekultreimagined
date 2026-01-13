@@ -151,28 +151,20 @@ const ServiceCard = ({ service, isExpanded, onToggle, delay = 0 }: {
       </div>
 
       {/* Expanded State */}
-      <div className={`absolute inset-0 flex flex-col p-2 sm:p-3
+      <div className={`absolute inset-0 flex flex-col items-center justify-center p-3 sm:p-4
         ${isExpanded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8 group-hover:opacity-100 group-hover:translate-y-0'}
       `}
       style={{
         transition: 'all 0.7s cubic-bezier(0.25, 0.1, 0.25, 1)'
       }}
       >
-        <div className="flex items-center gap-1 sm:gap-1.5 mb-1 sm:mb-2">
-          <Icon className="w-3 h-3 sm:w-4 sm:h-4 text-primary flex-shrink-0" strokeWidth={1.5} />
-          <h3 className="text-primary font-serif text-[9px] sm:text-[10px] md:text-xs font-medium leading-tight">{service.title}</h3>
+        <div className="flex items-center gap-1.5 sm:gap-2 mb-2 sm:mb-3">
+          <Icon className="w-4 h-4 sm:w-5 sm:h-5 text-primary flex-shrink-0" strokeWidth={1.5} />
+          <h3 className="text-primary font-serif text-xs sm:text-sm md:text-base font-medium leading-tight">{service.title}</h3>
         </div>
-        <p className="text-muted-foreground font-sans text-[8px] sm:text-[9px] md:text-[10px] leading-relaxed mb-1 sm:mb-2 line-clamp-2">
+        <p className="text-muted-foreground font-sans text-sm sm:text-base md:text-base leading-relaxed text-center px-1">
           {service.description}
         </p>
-        <ul className="space-y-0.5 sm:space-y-1 mt-auto">
-          {service.features.map((feature, index) => (
-            <li key={index} className="flex items-start gap-0.5 sm:gap-1">
-              <Check className="w-2 h-2 sm:w-2.5 sm:h-2.5 text-primary flex-shrink-0 mt-0.5" strokeWidth={2.5} />
-              <span className="text-foreground font-sans text-[8px] sm:text-[9px] leading-tight">{feature}</span>
-            </li>
-          ))}
-        </ul>
       </div>
     </motion.div>
   );
