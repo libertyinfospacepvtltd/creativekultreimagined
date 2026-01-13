@@ -97,21 +97,29 @@ const ServiceCard = ({
       </div>
 
       {/* Hover/Expanded State Content - Full details */}
-      <div className={`absolute inset-0 flex flex-col justify-center p-5 sm:p-6 transition-all duration-500 ease-out
+      <div className={`absolute inset-0 flex flex-col p-4 sm:p-5 transition-all duration-500 ease-out
         ${isExpanded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8 group-hover:opacity-100 group-hover:translate-y-0'}
       `}>
         {/* Icon & Title at top */}
-        <div className="flex items-center gap-2 sm:gap-3 mb-4">
+        <div className="flex items-center gap-2 sm:gap-3 mb-3 sm:mb-4">
           <Icon className="w-5 h-5 sm:w-6 sm:h-6 text-primary flex-shrink-0" strokeWidth={1.5} />
-          <h3 className="text-primary font-serif text-sm sm:text-base md:text-lg font-medium leading-tight">
+          <h3 className="text-primary font-serif text-xs sm:text-sm md:text-base font-medium leading-tight">
             {service.title}
           </h3>
         </div>
 
         {/* Description */}
-        <p className="text-muted-foreground font-sans text-sm sm:text-base leading-relaxed">
+        <p className="text-muted-foreground font-sans text-xs sm:text-sm leading-relaxed mb-3 sm:mb-4 line-clamp-2">
           {service.description}
         </p>
+
+        {/* Features List */}
+        <ul className="space-y-1.5 sm:space-y-2 mt-auto">
+          {service.features.map((feature, index) => <li key={index} className="flex items-start gap-2">
+              <Check className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-primary flex-shrink-0 mt-0.5" strokeWidth={2.5} />
+              <span className="text-foreground font-sans text-[10px] sm:text-xs leading-tight">{feature}</span>
+            </li>)}
+        </ul>
       </div>
     </motion.div>;
 };
