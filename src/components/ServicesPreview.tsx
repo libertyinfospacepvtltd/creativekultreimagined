@@ -104,11 +104,9 @@ const scatterCards = [
   },
 ];
 
-// Service Card Component - Compact version with smooth hover animations
-const ServiceCard = ({ service, isExpanded, onToggle, delay = 0 }: { 
+// Service Card Component - Simplified with prominent description
+const ServiceCard = ({ service, delay = 0 }: { 
   service: typeof services[0]; 
-  isExpanded: boolean;
-  onToggle: () => void;
   delay?: number;
 }) => {
   const Icon = service.icon;
@@ -124,62 +122,34 @@ const ServiceCard = ({ service, isExpanded, onToggle, delay = 0 }: {
         ease: [0.25, 0.1, 0.25, 1]
       }}
       whileHover={{ 
-        scale: 1.05,
+        scale: 1.03,
         y: -4,
         boxShadow: "0 25px 50px -12px rgba(0,0,0,0.5)",
       }}
-      className={`group relative flex flex-col border border-foreground/10 bg-background overflow-hidden cursor-pointer h-48 sm:h-32 md:h-36 w-full rounded-2xl
-        ${isExpanded ? 'border-primary bg-foreground/5' : ''}
-      `}
+      className="group relative flex flex-col items-center justify-center text-center border border-foreground/10 bg-background overflow-hidden h-56 w-full rounded-2xl p-5 hover:border-primary/50"
       style={{
         transition: 'border-color 0.5s cubic-bezier(0.25, 0.1, 0.25, 1), background-color 0.5s cubic-bezier(0.25, 0.1, 0.25, 1)'
       }}
-      onClick={onToggle}
     >
-      {/* Default State */}
-      <div className={`absolute inset-0 flex flex-col items-center justify-center p-2 sm:p-3
-        ${isExpanded ? 'opacity-0 -translate-y-full' : 'group-hover:opacity-0 group-hover:-translate-y-full md:opacity-100 md:translate-y-0'}
-      `}
-      style={{
-        transition: 'all 0.7s cubic-bezier(0.25, 0.1, 0.25, 1)'
-      }}
-      >
-        <Icon className="w-5 h-5 sm:w-6 sm:h-6 text-muted-foreground group-hover:text-primary mb-1 sm:mb-2" strokeWidth={1.5} style={{ transition: 'color 0.7s cubic-bezier(0.25, 0.1, 0.25, 1)' }} />
-        <h3 className="text-foreground text-center font-serif text-[11px] sm:text-xs md:text-sm font-medium group-hover:text-primary leading-tight px-1" style={{ transition: 'color 0.7s cubic-bezier(0.25, 0.1, 0.25, 1)' }}>
-          {service.title}
-        </h3>
+      {/* Icon */}
+      <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/20" style={{ transition: 'background-color 0.5s ease' }}>
+        <Icon className="w-6 h-6 text-primary" strokeWidth={1.5} />
       </div>
-
-      {/* Expanded State */}
-      <div className={`absolute inset-0 flex flex-col p-2 sm:p-3
-        ${isExpanded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8 group-hover:opacity-100 group-hover:translate-y-0'}
-      `}
-      style={{
-        transition: 'all 0.7s cubic-bezier(0.25, 0.1, 0.25, 1)'
-      }}
-      >
-        <div className="flex items-center gap-1 sm:gap-1.5 mb-1 sm:mb-2">
-          <Icon className="w-3 h-3 sm:w-4 sm:h-4 text-primary flex-shrink-0" strokeWidth={1.5} />
-          <h3 className="text-primary font-serif text-[9px] sm:text-[10px] md:text-xs font-medium leading-tight">{service.title}</h3>
-        </div>
-        <p className="text-muted-foreground font-sans text-[8px] sm:text-[9px] md:text-[10px] leading-relaxed mb-1 sm:mb-2 line-clamp-2">
-          {service.description}
-        </p>
-        <ul className="space-y-0.5 sm:space-y-1 mt-auto">
-          {service.features.map((feature, index) => (
-            <li key={index} className="flex items-start gap-0.5 sm:gap-1">
-              <Check className="w-2 h-2 sm:w-2.5 sm:h-2.5 text-primary flex-shrink-0 mt-0.5" strokeWidth={2.5} />
-              <span className="text-foreground font-sans text-[8px] sm:text-[9px] leading-tight">{feature}</span>
-            </li>
-          ))}
-        </ul>
-      </div>
+      
+      {/* Title */}
+      <h3 className="text-foreground font-serif text-base font-medium mb-3 group-hover:text-primary leading-tight" style={{ transition: 'color 0.5s ease' }}>
+        {service.title}
+      </h3>
+      
+      {/* Description - Larger & More Readable */}
+      <p className="text-muted-foreground/80 font-sans text-base leading-relaxed line-clamp-3">
+        {service.description}
+      </p>
     </motion.div>
   );
 };
 
 const ServicesPreview = () => {
-  const [expandedId, setExpandedId] = useState<string | null>(null);
   const [isMobile, setIsMobile] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   
@@ -248,9 +218,7 @@ const ServicesPreview = () => {
                     <ServiceCard 
                       key={service.id} 
                       service={service}
-                      isExpanded={expandedId === service.id}
-                      onToggle={() => setExpandedId(expandedId === service.id ? null : service.id)}
-                      delay={index * 0.2}
+                      delay={index * 0.1}
                     />
                   ))}
                 </div>
