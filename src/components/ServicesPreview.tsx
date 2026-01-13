@@ -158,11 +158,11 @@ const ServiceCard = ({ service, isExpanded, onToggle, delay = 0 }: {
         transition: 'all 0.7s cubic-bezier(0.25, 0.1, 0.25, 1)'
       }}
       >
-        <div className="flex items-center gap-1.5 sm:gap-2 mb-2 sm:mb-3">
-          <Icon className="w-4 h-4 sm:w-5 sm:h-5 text-primary flex-shrink-0" strokeWidth={1.5} />
-          <h3 className="text-primary font-serif text-xs sm:text-sm md:text-base font-medium leading-tight">{service.title}</h3>
+        <div className="flex items-center gap-2 sm:gap-2.5 mb-2 sm:mb-3">
+          <Icon className="w-5 h-5 sm:w-6 sm:h-6 text-primary flex-shrink-0" strokeWidth={1.5} />
+          <h3 className="text-primary font-serif text-base sm:text-lg md:text-2xl font-semibold leading-tight">{service.title}</h3>
         </div>
-        <p className="text-foreground/80 font-sans text-sm sm:text-base md:text-lg font-medium tracking-wide text-center">
+        <p className="text-foreground/60 font-sans text-xs sm:text-sm md:text-lg font-normal tracking-wide text-center">
           {service.description}
         </p>
       </div>
