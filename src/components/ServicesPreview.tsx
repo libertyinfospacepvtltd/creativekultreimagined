@@ -151,18 +151,18 @@ const ServiceCard = ({ service, isExpanded, onToggle, delay = 0 }: {
       </div>
 
       {/* Expanded State */}
-      <div className={`absolute inset-0 flex flex-col items-center justify-center p-3 sm:p-4
+      <div className={`absolute inset-0 flex flex-col items-center justify-center h-full px-3 py-2 sm:px-4 sm:py-3
         ${isExpanded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8 group-hover:opacity-100 group-hover:translate-y-0'}
       `}
       style={{
         transition: 'all 0.7s cubic-bezier(0.25, 0.1, 0.25, 1)'
       }}
       >
-        <div className="flex items-center gap-1.5 sm:gap-2 mb-2 sm:mb-3">
+        <div className="flex items-center gap-1.5 sm:gap-2 mb-1.5 sm:mb-2">
           <Icon className="w-4 h-4 sm:w-5 sm:h-5 text-primary flex-shrink-0" strokeWidth={1.5} />
           <h3 className="text-primary font-serif text-xs sm:text-sm md:text-base font-medium leading-tight">{service.title}</h3>
         </div>
-        <p className="text-muted-foreground font-sans text-sm sm:text-base md:text-base leading-relaxed text-center px-1">
+        <p className="text-muted-foreground font-sans text-xs sm:text-sm md:text-base leading-snug text-center px-1 line-clamp-3">
           {service.description}
         </p>
       </div>
