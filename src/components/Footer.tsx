@@ -136,7 +136,7 @@ const Footer = () => {
             </a>
           </div>
           <p className="text-muted-foreground/60 text-xs font-sans text-center sm:text-right">
-            © 2025 Creative Kult. All Rights Reserved.
+            © 2026 Creative Kult. All Rights Reserved.
           </p>
         </div>
       </div>
