@@ -47,7 +47,7 @@ const DivisionsSection = () => {
           {divisions.map((division, index) => (
             <div 
               key={index}
-              className="group bg-background border border-border/30 rounded-3xl p-8 text-center hover:border-primary/30 transition-all duration-500"
+              className="group bg-background border border-border/30 rounded-3xl p-8 text-center transition-all duration-300 hover:bg-background/40 hover:backdrop-blur-md hover:border-primary/40 hover:scale-105 hover:shadow-2xl hover:shadow-primary/10"
             >
               {/* Circular white logo container */}
               <div className={`bg-white rounded-full w-32 h-32 mx-auto mb-6 flex items-center justify-center overflow-hidden ${
@@ -116,7 +116,7 @@ const DivisionsSection = () => {
           {divisions.map((division, index) => (
             <div 
               key={index}
-              className="group bg-background border border-border/30 rounded-3xl overflow-hidden flex items-center gap-4 p-4 text-left hover:border-primary/30 transition-all duration-500"
+              className="group bg-background border border-border/30 rounded-3xl overflow-hidden flex items-center gap-4 p-4 text-left transition-all duration-300 hover:bg-background/40 hover:backdrop-blur-md hover:border-primary/40 hover:scale-[1.02] hover:shadow-xl hover:shadow-primary/10"
             >
               {/* Circular white logo container */}
               <div className={`bg-white rounded-full w-16 h-16 flex-shrink-0 flex items-center justify-center overflow-hidden ${
