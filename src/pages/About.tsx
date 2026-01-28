@@ -22,7 +22,7 @@ const values = [{
   description: "We align with businesses, not briefs."
 }, {
   icon: Award,
-  title: "Excellence",
+  title: "Systems Over Shortcuts",
   description: "We set the bar high and consistently deliver beyond expectations."
 }, {
   icon: MapPin,
