@@ -150,10 +150,10 @@ const HeroSection = ({ preloaderComplete = true }: HeroSectionProps) => {
         >
           <div className="text-center mt-16 sm:mt-40 md:mt-48 lg:mt-56">
             <p className="text-white/90 font-serif text-lg sm:text-xl md:text-2xl lg:text-3xl italic tracking-wide">
-              Where Brands Break the Mold
+              Where Insight Meets Impact.
             </p>
             <p className="text-gray-400 font-sans text-xs sm:text-sm md:text-base tracking-widest uppercase mt-2 sm:mt-3">
-              Strategy • Rebellion • Results
+              Strategy • Clarity • Results
             </p>
           </div>
         </motion.div>
