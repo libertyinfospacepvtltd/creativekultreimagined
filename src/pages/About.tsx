@@ -15,7 +15,7 @@ import logoLight from "@/assets/creative-kult-logo-brown.png";
 const values = [{
   icon: Heart,
   title: "Clarity Before Creativity",
-  description: "We pour our heart into every project, treating your brand as our own."
+  description: "Every idea must solve a problem before it looks good."
 }, {
   icon: Users,
   title: "Collaborative",
