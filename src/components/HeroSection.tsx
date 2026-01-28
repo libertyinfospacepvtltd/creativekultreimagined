@@ -3,8 +3,7 @@ import { Link } from "react-router-dom";
 import { motion, useScroll, useTransform } from "framer-motion";
 import heroImage from "@/assets/hero-background.png";
 import heroImageMobile from "@/assets/hero-background-mobile.png";
-import NeuralSignalCanvas from "@/components/NeuralSignalCanvas";
-import NeuralSignalStatic from "@/components/NeuralSignalStatic";
+import NeuralFlowOverlay from "@/components/NeuralFlowOverlay";
 
 // Preload hero images immediately
 const preloadImage = new Image();
@@ -129,26 +128,18 @@ const HeroSection = ({ preloaderComplete = true }: HeroSectionProps) => {
           <div className="absolute inset-0 bg-background/80" style={{ background: 'hsla(220, 15%, 8%, 0.8)' }} />
         </motion.div>
 
-        {/* Neural Signal Animation - Fades in during Phase B */}
+        {/* Gold Brain Neural Flow - Fades in during Phase B */}
         <motion.div 
           className="absolute inset-0"
           style={{ 
-            opacity: prefersReducedMotion ? 0.8 : brandImageOpacity,
+            opacity: prefersReducedMotion ? 0.9 : brandImageOpacity,
             scale: prefersReducedMotion ? 1 : brandImageScale,
           }}
         >
-          {/* Animated canvas for desktop/non-reduced-motion */}
-          {!prefersReducedMotion && !isMobile && (
-            <NeuralSignalCanvas className="z-0" />
-          )}
-          
-          {/* Static SVG fallback for mobile or reduced motion */}
-          {(prefersReducedMotion || isMobile) && (
-            <NeuralSignalStatic className="z-0" />
-          )}
-          
-          {/* Gradient overlay for text readability */}
-          <div className="absolute inset-0 bg-gradient-to-t from-[hsl(220,15%,8%)] via-transparent to-[hsl(220,15%,8%)/50] z-10" />
+          <NeuralFlowOverlay 
+            className="z-0" 
+            isStatic={prefersReducedMotion || isMobile}
+          />
         </motion.div>
 
         {/* Rotating Radar Circles - smaller on mobile */}
