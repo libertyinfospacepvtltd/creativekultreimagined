@@ -18,7 +18,7 @@ const values = [{
   description: "Every idea must solve a problem before it looks good."
 }, {
   icon: Users,
-  title: "Collaborative",
+  title: "Partnership Over Transactions",
   description: "We believe the best work comes from true partnerships with our clients."
 }, {
   icon: Award,
