@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Heart, Users, Award, MapPin } from "lucide-react";
+import { Focus, Handshake, Layers, Brain } from "lucide-react";
 import { motion } from "framer-motion";
 import Layout from "@/components/Layout";
 import { useTheme } from "@/components/ThemeProvider";
@@ -14,19 +14,19 @@ import palashGiriImg from "@/assets/team/palash-kanti-giri.jpeg";
 import logoDark from "@/assets/creative-kult-logo.png";
 import logoLight from "@/assets/creative-kult-logo-brown.png";
 const values = [{
-  icon: Heart,
+  icon: Focus,
   title: "Clarity Before Creativity",
   description: "Every idea must solve a problem before it looks good."
 }, {
-  icon: Users,
+  icon: Handshake,
   title: "Partnership Over Transactions",
   description: "We align with businesses, not briefs."
 }, {
-  icon: Award,
+  icon: Layers,
   title: "Systems Over Shortcuts",
   description: "We build structures that scale, not hacks that fade."
 }, {
-  icon: MapPin,
+  icon: Brain,
   title: "Intelligence-Led Thinking",
   description: "Decisions powered by data, sharpened by AI, guided by human thinking."
 }];
