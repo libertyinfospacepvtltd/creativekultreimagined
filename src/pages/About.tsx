@@ -12,7 +12,6 @@ import palashGiriImg from "@/assets/team/palash-kanti-giri.jpeg";
 // Import logos
 import logoDark from "@/assets/creative-kult-logo.png";
 import logoLight from "@/assets/creative-kult-logo-brown.png";
-
 const values = [{
   icon: Heart,
   title: "Passion-Driven",
@@ -30,7 +29,6 @@ const values = [{
   title: "Rooted in Kolkata",
   description: "We draw inspiration from our city's rich artistic heritage and cultural depth."
 }];
-
 const team = [{
   name: "Payel Das",
   role: "Creative Head",
@@ -51,8 +49,9 @@ const team = [{
   image: palashGiriImg
 }];
 const About = () => {
-  const { theme } = useTheme();
-  
+  const {
+    theme
+  } = useTheme();
   return <Layout>
       <section className="pt-12 sm:pt-16 pb-8 sm:pb-12 md:pt-20 md:pb-16 bg-background">
         <div className="container-luxury">
@@ -67,8 +66,8 @@ const About = () => {
         <div className="container-luxury">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-20 items-center">
             <div>
-              <span className="text-primary font-sans text-xs sm:text-sm uppercase tracking-widest mb-3 sm:mb-4 block">Origin</span>
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-serif text-foreground mb-4 sm:mb-6">Creative Kult began as Creative Cult.</h2>
+              <span className="text-primary font-sans text-xs uppercase tracking-widest mb-3 sm:mb-4 block sm:text-base">Origin</span>
+              <h2 className="text-2xl sm:text-3xl font-serif text-foreground mb-4 sm:mb-6 md:text-xl">Creative Kult began as Creative Cult.</h2>
               <div className="space-y-3 sm:space-y-4 text-muted-foreground font-sans text-sm sm:text-base leading-relaxed">
                 <p>In 2023, it started as a small agency focused on F&B and nightlife brands. The work was fast, tactical, and execution-led.</p>
                 <p><strong className="text-foreground">As the founders evolved, so did the agency.</strong><br />What began as marketing gradually became thinking. The focus shifted from driving footfall to building brands with clarity, structure, and intent.</p>
@@ -78,11 +77,7 @@ const About = () => {
               </div>
             </div>
             <div className="flex justify-center lg:justify-end">
-              <img 
-                src={theme === 'dark' ? logoDark : logoLight} 
-                alt="Creative Kult Logo" 
-                className="w-48 sm:w-72 md:w-96 lg:w-[480px] h-auto opacity-90" 
-              />
+              <img src={theme === 'dark' ? logoDark : logoLight} alt="Creative Kult Logo" className="w-48 sm:w-72 md:w-96 lg:w-[480px] h-auto opacity-90" />
             </div>
           </div>
         </div>
@@ -175,23 +170,22 @@ const About = () => {
             <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-serif text-foreground mb-3 sm:mb-4">Creative Minds United</h2>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-10">
-            {team.map((member, index) => (
-              <motion.div 
-                key={index} 
-                initial={{ opacity: 0, y: 20 }} 
-                whileInView={{ opacity: 1, y: 0 }} 
-                transition={{ duration: 0.6, delay: index * 0.15 }} 
-                viewport={{ once: true }} 
-                className="group relative"
-              >
+            {team.map((member, index) => <motion.div key={index} initial={{
+            opacity: 0,
+            y: 20
+          }} whileInView={{
+            opacity: 1,
+            y: 0
+          }} transition={{
+            duration: 0.6,
+            delay: index * 0.15
+          }} viewport={{
+            once: true
+          }} className="group relative">
                 <div className="relative h-64 sm:h-72 lg:h-[420px] overflow-hidden rounded-3xl border border-foreground/10 bg-foreground/5 backdrop-blur-sm transition-all duration-700 ease-[cubic-bezier(0.25,0.1,0.25,1)] group-hover:scale-[1.02]">
                   {/* Portrait image - always visible with circular crop on mobile */}
                   <div className="absolute inset-0 z-10">
-                    <img 
-                      src={member.image} 
-                      alt={member.name} 
-                      className="w-full h-full object-cover object-top"
-                    />
+                    <img src={member.image} alt={member.name} className="w-full h-full object-cover object-top" />
                     {/* Gradient overlay for text readability */}
                     <div className="absolute inset-0 bg-gradient-to-t from-[hsl(220,15%,6%)] via-[hsl(220,15%,6%)]/40 to-transparent" />
                   </div>
@@ -203,8 +197,7 @@ const About = () => {
                     <p className="text-gray-300 dark:text-muted-foreground font-sans text-xs sm:text-sm">{member.role}</p>
                   </div>
                 </div>
-              </motion.div>
-            ))}
+              </motion.div>)}
           </div>
         </div>
       </section>
