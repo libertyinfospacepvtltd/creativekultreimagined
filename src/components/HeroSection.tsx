@@ -3,7 +3,8 @@ import { Link } from "react-router-dom";
 import { motion, useScroll, useTransform } from "framer-motion";
 import heroImage from "@/assets/hero-background.png";
 import heroImageMobile from "@/assets/hero-background-mobile.png";
-import brandLegacyHead from "@/assets/brand-legacy-head.png";
+import NeuralSignalCanvas from "@/components/NeuralSignalCanvas";
+import NeuralSignalStatic from "@/components/NeuralSignalStatic";
 
 // Preload hero images immediately
 const preloadImage = new Image();
@@ -128,22 +129,26 @@ const HeroSection = ({ preloaderComplete = true }: HeroSectionProps) => {
           <div className="absolute inset-0 bg-background/80" style={{ background: 'hsla(220, 15%, 8%, 0.8)' }} />
         </motion.div>
 
-        {/* Brand Legacy Head Image - Fades in during Phase B */}
+        {/* Neural Signal Animation - Fades in during Phase B */}
         <motion.div 
-          className="absolute inset-0 flex items-center justify-center"
+          className="absolute inset-0"
           style={{ 
             opacity: prefersReducedMotion ? 0.8 : brandImageOpacity,
             scale: prefersReducedMotion ? 1 : brandImageScale,
           }}
         >
-          <img
-            src={brandLegacyHead}
-            alt="Brand legacy visualization"
-            className="w-full h-full object-cover object-center md:object-[center_30%]"
-            loading="eager"
-          />
+          {/* Animated canvas for desktop/non-reduced-motion */}
+          {!prefersReducedMotion && !isMobile && (
+            <NeuralSignalCanvas className="z-0" />
+          )}
+          
+          {/* Static SVG fallback for mobile or reduced motion */}
+          {(prefersReducedMotion || isMobile) && (
+            <NeuralSignalStatic className="z-0" />
+          )}
+          
           {/* Gradient overlay for text readability */}
-          <div className="absolute inset-0 bg-gradient-to-t from-[hsl(220,15%,8%)] via-transparent to-[hsl(220,15%,8%)/50]" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[hsl(220,15%,8%)] via-transparent to-[hsl(220,15%,8%)/50] z-10" />
         </motion.div>
 
         {/* Rotating Radar Circles - smaller on mobile */}
