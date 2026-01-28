@@ -62,14 +62,19 @@ const About = () => {
         </div>
       </section>
 
+      {/* Origin Section */}
       <section className="section-padding bg-card border-t border-border/30">
         <div className="container-luxury">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-20 items-center">
             <div>
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-serif text-foreground mb-4 sm:mb-6">The Creative Kult Story</h2>
+              <span className="text-primary font-sans text-xs sm:text-sm uppercase tracking-widest mb-3 sm:mb-4 block">Origin</span>
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-serif text-foreground mb-4 sm:mb-6">Creative Kult began as Creative Cult.</h2>
               <div className="space-y-3 sm:space-y-4 text-muted-foreground font-sans text-sm sm:text-base leading-relaxed">
-                <p>Founded as the creative arm of Liberty Infospace Pvt. Ltd., Creative Kult emerged from a simple belief: that great ideas deserve exceptional execution.</p>
-                <p>Our roots in Kolkata—the City of Joy—infuse our work with a unique blend of artistic sensibility and cultural depth.</p>
+                <p>In 2023, it started as a small agency focused on F&B and nightlife brands. The work was fast, tactical, and execution-led.</p>
+                <p><strong className="text-foreground">As the founders evolved, so did the agency.</strong><br />What began as marketing gradually became thinking. The focus shifted from driving footfall to building brands with clarity, structure, and intent.</p>
+                <p>A business founder saw that shift early and trusted us with their in-house brands. We delivered with clear branding, measurable ROI, and AI-driven, data-backed strategies that produced real business results.</p>
+                <p className="text-primary font-medium">That belief changed everything.</p>
+                <p>Creative Cult became <strong className="text-foreground">Creative Kult</strong> — Powered by Liberty Infospace, built as an AI-first branding and marketing agency focused on sculpting brand legacies, not short-term noise.</p>
               </div>
             </div>
             <div className="flex justify-center lg:justify-end">
@@ -78,6 +83,70 @@ const About = () => {
                 alt="Creative Kult Logo" 
                 className="w-48 sm:w-72 md:w-96 lg:w-[480px] h-auto opacity-90" 
               />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Who We Are Section */}
+      <section className="section-padding bg-background border-t border-border/30">
+        <div className="container-luxury">
+          <div className="max-w-3xl">
+            <span className="text-primary font-sans text-xs sm:text-sm uppercase tracking-widest mb-3 sm:mb-4 block">Who We Are</span>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-serif text-foreground mb-4 sm:mb-6">
+              Creative Kult is a branding and marketing agency for businesses that think long-term.
+            </h2>
+            <div className="space-y-3 sm:space-y-4 text-muted-foreground font-sans text-sm sm:text-base leading-relaxed">
+              <p>We work at the intersection of strategy, creativity, and intelligence, building brand systems designed to scale with the business.</p>
+              <p className="text-foreground font-medium">We don't build visibility.<br />We build clarity.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* AI-First Section */}
+      <section className="section-padding bg-card border-t border-border/30">
+        <div className="container-luxury">
+          <div className="max-w-3xl">
+            <span className="text-primary font-sans text-xs sm:text-sm uppercase tracking-widest mb-3 sm:mb-4 block">AI-First, By Design</span>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-serif text-foreground mb-4 sm:mb-6">
+              AI isn't an add-on.<br />It's our foundation.
+            </h2>
+            <div className="space-y-3 sm:space-y-4 text-muted-foreground font-sans text-sm sm:text-base leading-relaxed">
+              <p>We use AI to analyse markets, decode competition, and remove guesswork from brand and marketing decisions — so creativity is sharper and strategy is smarter.</p>
+              <p className="text-foreground font-medium">Human insight leads.<br />AI strengthens.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* How We Work Section */}
+      <section className="section-padding bg-background border-t border-border/30">
+        <div className="container-luxury">
+          <div className="max-w-3xl">
+            <span className="text-primary font-sans text-xs sm:text-sm uppercase tracking-widest mb-3 sm:mb-4 block">How We Work</span>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-serif text-foreground mb-4 sm:mb-6">
+              We start with thinking.
+            </h2>
+            <div className="space-y-3 sm:space-y-4 text-muted-foreground font-sans text-sm sm:text-base leading-relaxed">
+              <p>Before design or campaigns, we define positioning, messaging, and direction. Everything we create is built to support growth, consistency, and long-term value.</p>
+              <p className="text-foreground font-medium">No trends.<br />No templates.<br />Only frameworks that last.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Partnerships Section */}
+      <section className="section-padding bg-card border-t border-border/30">
+        <div className="container-luxury">
+          <div className="max-w-3xl">
+            <span className="text-primary font-sans text-xs sm:text-sm uppercase tracking-widest mb-3 sm:mb-4 block">Partnerships</span>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-serif text-foreground mb-4 sm:mb-6">
+              We work with businesses ready to evolve.
+            </h2>
+            <div className="space-y-3 sm:space-y-4 text-muted-foreground font-sans text-sm sm:text-base leading-relaxed">
+              <p>Brands that value structure, intent, and strategic depth.</p>
+              <p className="text-primary font-medium italic">Selective by design.</p>
             </div>
           </div>
         </div>
