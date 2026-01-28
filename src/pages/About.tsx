@@ -87,13 +87,13 @@ const About = () => {
       <section className="section-padding bg-background border-t border-border/30">
         <div className="container-luxury">
           <div className="max-w-3xl">
-            <span className="text-primary font-sans text-xs sm:text-sm uppercase tracking-widest mb-3 sm:mb-4 block">Who We Are</span>
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-serif text-foreground mb-4 sm:mb-6">
+            <span className="text-primary font-sans text-xs uppercase tracking-widest mb-3 sm:mb-4 block sm:text-base">Who We Are</span>
+            <h2 className="text-2xl sm:text-3xl font-serif text-foreground mb-4 sm:mb-6 md:text-xl">
               Creative Kult is a branding and marketing agency for businesses that think long-term.
             </h2>
             <div className="space-y-3 sm:space-y-4 text-muted-foreground font-sans text-sm sm:text-base leading-relaxed">
               <p>We work at the intersection of strategy, creativity, and intelligence, building brand systems designed to scale with the business.</p>
-              <p className="text-foreground font-medium">We don't build visibility.<br />We build clarity.</p>
+              <p className="font-medium text-[#b1915d]">We don't build visibility.<br />We build clarity.</p>
             </div>
           </div>
         </div>
@@ -103,13 +103,13 @@ const About = () => {
       <section className="section-padding bg-card border-t border-border/30">
         <div className="container-luxury">
           <div className="max-w-3xl">
-            <span className="text-primary font-sans text-xs sm:text-sm uppercase tracking-widest mb-3 sm:mb-4 block">AI-First, By Design</span>
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-serif text-foreground mb-4 sm:mb-6">
+            <span className="text-primary font-sans text-xs uppercase tracking-widest mb-3 sm:mb-4 block sm:text-base">AI-First, By Design</span>
+            <h2 className="text-2xl sm:text-3xl font-serif text-foreground mb-4 sm:mb-6 md:text-xl">
               AI isn't an add-on.<br />It's our foundation.
             </h2>
             <div className="space-y-3 sm:space-y-4 text-muted-foreground font-sans text-sm sm:text-base leading-relaxed">
               <p>We use AI to analyse markets, decode competition, and remove guesswork from brand and marketing decisions — so creativity is sharper and strategy is smarter.</p>
-              <p className="text-foreground font-medium">Human insight leads.<br />AI strengthens.</p>
+              <p className="font-medium text-[#b1915d]">Human insight leads.<br />AI strengthens.</p>
             </div>
           </div>
         </div>
@@ -119,13 +119,13 @@ const About = () => {
       <section className="section-padding bg-background border-t border-border/30">
         <div className="container-luxury">
           <div className="max-w-3xl">
-            <span className="text-primary font-sans text-xs sm:text-sm uppercase tracking-widest mb-3 sm:mb-4 block">How We Work</span>
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-serif text-foreground mb-4 sm:mb-6">
+            <span className="text-primary font-sans text-xs uppercase tracking-widest mb-3 sm:mb-4 block sm:text-base">How We Work</span>
+            <h2 className="text-2xl sm:text-3xl font-serif text-foreground mb-4 sm:mb-6 md:text-xl">
               We start with thinking.
             </h2>
             <div className="space-y-3 sm:space-y-4 text-muted-foreground font-sans text-sm sm:text-base leading-relaxed">
               <p>Before design or campaigns, we define positioning, messaging, and direction. Everything we create is built to support growth, consistency, and long-term value.</p>
-              <p className="text-foreground font-medium">No trends.<br />No templates.<br />Only frameworks that last.</p>
+              <p className="font-medium text-[#b1915d]">No trends.<br />No templates.<br />Only frameworks that last.</p>
             </div>
           </div>
         </div>
@@ -135,8 +135,8 @@ const About = () => {
       <section className="section-padding bg-card border-t border-border/30">
         <div className="container-luxury">
           <div className="max-w-3xl">
-            <span className="text-primary font-sans text-xs sm:text-sm uppercase tracking-widest mb-3 sm:mb-4 block">Partnerships</span>
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-serif text-foreground mb-4 sm:mb-6">
+            <span className="text-primary font-sans text-xs uppercase tracking-widest mb-3 sm:mb-4 block sm:text-base">Partnerships</span>
+            <h2 className="text-2xl sm:text-3xl font-serif text-foreground mb-4 sm:mb-6 md:text-xl">
               We work with businesses ready to evolve.
             </h2>
             <div className="space-y-3 sm:space-y-4 text-muted-foreground font-sans text-sm sm:text-base leading-relaxed">
