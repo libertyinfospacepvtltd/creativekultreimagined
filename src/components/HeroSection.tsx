@@ -10,8 +10,6 @@ const preloadImage = new Image();
 preloadImage.src = heroImage;
 const preloadImageMobile = new Image();
 preloadImageMobile.src = heroImageMobile;
-const preloadBrandHead = new Image();
-preloadBrandHead.src = brandLegacyHead;
 
 interface HeroSectionProps {
   preloaderComplete?: boolean;
@@ -66,12 +64,7 @@ const HeroSection = ({ preloaderComplete = true }: HeroSectionProps) => {
   
   // Text merge effect - Phase B
   const mergeTextOpacity = useTransform(scrollYProgress, [0.22, 0.35], [0, 1]);
-  const textMaskProgress = useTransform(scrollYProgress, [0.25, 0.55], ["inset(0 100% 0 0)", "inset(0 0% 0 0)"]);
-  const textTracking = useTransform(scrollYProgress, [0.3, 0.5], ["0.1em", "0.02em"]);
   const textY = useTransform(scrollYProgress, [0.22, 0.35], [40, 0]);
-  
-  // Clean text opacity - Phase B end
-  const cleanTextOpacity = useTransform(scrollYProgress, [0.5, 0.65], [0, 1]);
   
   // Exit phase - Phase C (70-100%)
   const exitY = useTransform(scrollYProgress, [0.7, 1], [0, -100]);
@@ -206,88 +199,54 @@ const HeroSection = ({ preloaderComplete = true }: HeroSectionProps) => {
           </div>
         </motion.div>
 
-        {/* Sculpting Brand Legacies - Merge Effect Text */}
+        {/* Sculpting Brand Legacies - Clean Single Wrapper */}
         <motion.div 
           className="absolute inset-0 flex items-center justify-center pointer-events-none z-30"
           style={{ opacity: mergeTextOpacity }}
         >
-          {/* Solid background layer that covers hero content */}
+          {/* Subtle background overlay */}
           <motion.div 
-            className="absolute inset-0"
-            style={{ 
-              background: 'hsla(220, 15%, 8%, 0.6)',
-              opacity: mergeTextOpacity 
-            }}
+            className="absolute inset-0 bg-background/60"
+            style={{ opacity: mergeTextOpacity }}
           />
           
-          {/* Text Container - Positioned over the image focal point */}
+          {/* Text Lockup - Single wrapper with GPU acceleration */}
           <motion.div 
             className="relative text-center md:text-left md:ml-[5%] lg:ml-[10%] px-4"
-            style={{ y: prefersReducedMotion ? 0 : textY }}
+            style={{ 
+              y: prefersReducedMotion ? 0 : textY,
+              transform: 'translateZ(0)',
+              backfaceVisibility: 'hidden',
+              willChange: 'transform, opacity',
+            }}
           >
-            {/* Layer 1: Base text with subtle opacity */}
-            <div className="relative">
-              <motion.h1 
-                className="font-serif text-3xl sm:text-4xl md:text-6xl lg:text-8xl text-foreground/30 tracking-tight"
-                style={{ letterSpacing: isMobile ? '0.02em' : textTracking }}
-              >
+            {/* Line 1: Sculpting */}
+            <div 
+              className="brand-legacy-text relative"
+              data-text="Sculpting"
+              style={{ 
+                '--blend-opacity': isMobile ? 0 : 0.4,
+                '--mask-progress': isMobile ? '100%' : undefined,
+              } as React.CSSProperties}
+            >
+              <h1 className="font-serif text-[clamp(2rem,8vw,6rem)] font-medium leading-[0.95] tracking-[0.02em] text-foreground">
                 Sculpting
-              </motion.h1>
-              <motion.h1 
-                className="font-serif text-3xl sm:text-4xl md:text-6xl lg:text-8xl text-primary/30 italic mt-1 sm:mt-2 md:ml-8 lg:ml-16"
-                style={{ letterSpacing: isMobile ? '0.02em' : textTracking }}
-              >
-                Brand Legacies.
-              </motion.h1>
+              </h1>
             </div>
             
-            {/* Layer 2: Image-filled text with clip mask (desktop only) */}
-            {!isMobile && (
-              <motion.div 
-                className="absolute inset-0"
-                style={{ clipPath: textMaskProgress }}
-              >
-                <motion.h1 
-                  className="font-serif text-6xl lg:text-8xl tracking-tight"
-                  style={{
-                    background: `url(${brandLegacyHead}) center/cover`,
-                    WebkitBackgroundClip: 'text',
-                    backgroundClip: 'text',
-                    WebkitTextFillColor: 'transparent',
-                    WebkitTextStroke: '1px hsl(37 35% 53% / 0.3)',
-                    letterSpacing: textTracking,
-                  }}
-                >
-                  Sculpting
-                </motion.h1>
-                <motion.h1 
-                  className="font-serif text-6xl lg:text-8xl italic mt-2 ml-8 lg:ml-16"
-                  style={{
-                    background: `url(${brandLegacyHead}) center/cover`,
-                    WebkitBackgroundClip: 'text',
-                    backgroundClip: 'text',
-                    WebkitTextFillColor: 'transparent',
-                    WebkitTextStroke: '1px hsl(37 35% 53% / 0.5)',
-                    letterSpacing: textTracking,
-                  }}
-                >
-                  Brand Legacies.
-                </motion.h1>
-              </motion.div>
-            )}
-            
-            {/* Layer 3: Clean readable text overlay (appears after merge) */}
-            <motion.div 
-              className="absolute inset-0"
-              style={{ opacity: cleanTextOpacity }}
+            {/* Line 2: Brand Legacies */}
+            <div 
+              className="brand-legacy-text brand-legacy-text--accent relative mt-2 md:mt-3 md:ml-8 lg:ml-16"
+              data-text="Brand Legacies."
+              style={{ 
+                '--blend-opacity': isMobile ? 0 : 0.5,
+                '--mask-progress': isMobile ? '100%' : undefined,
+              } as React.CSSProperties}
             >
-              <h1 className="font-serif text-3xl sm:text-4xl md:text-6xl lg:text-8xl text-foreground tracking-tight">
-                Sculpting
-              </h1>
-              <h1 className="font-serif text-3xl sm:text-4xl md:text-6xl lg:text-8xl text-primary italic mt-1 sm:mt-2 md:ml-8 lg:ml-16">
+              <h1 className="font-serif text-[clamp(1.75rem,7vw,5.5rem)] font-medium italic leading-[0.95] tracking-[0.02em] text-primary">
                 Brand Legacies.
               </h1>
-            </motion.div>
+            </div>
           </motion.div>
         </motion.div>
 
