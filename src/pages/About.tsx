@@ -27,7 +27,7 @@ const values = [{
 }, {
   icon: MapPin,
   title: "Intelligence-Led Thinking",
-  description: "We draw inspiration from our city's rich artistic heritage and cultural depth."
+  description: "Decisions powered by data, sharpened by AI, guided by human thinking."
 }];
 const team = [{
   name: "Payel Das",
