@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { motion, useScroll, useTransform } from "framer-motion";
 import heroImage from "@/assets/hero-background.png";
 import heroImageMobile from "@/assets/hero-background-mobile.png";
-import NeuralFlowOverlay from "@/components/NeuralFlowOverlay";
+import brandLegacyHead from "@/assets/brand-legacy-head.png";
 
 // Preload hero images immediately
 const preloadImage = new Image();
@@ -128,18 +128,22 @@ const HeroSection = ({ preloaderComplete = true }: HeroSectionProps) => {
           <div className="absolute inset-0 bg-background/80" style={{ background: 'hsla(220, 15%, 8%, 0.8)' }} />
         </motion.div>
 
-        {/* Gold Brain Neural Flow - Fades in during Phase B */}
+        {/* Brand Legacy Head Image - Fades in during Phase B */}
         <motion.div 
-          className="absolute inset-0"
+          className="absolute inset-0 flex items-center justify-center"
           style={{ 
-            opacity: prefersReducedMotion ? 0.9 : brandImageOpacity,
+            opacity: prefersReducedMotion ? 0.8 : brandImageOpacity,
             scale: prefersReducedMotion ? 1 : brandImageScale,
           }}
         >
-          <NeuralFlowOverlay 
-            className="z-0" 
-            isStatic={prefersReducedMotion || isMobile}
+          <img
+            src={brandLegacyHead}
+            alt="Brand legacy visualization"
+            className="w-full h-full object-cover object-center md:object-[center_30%]"
+            loading="eager"
           />
+          {/* Gradient overlay for text readability */}
+          <div className="absolute inset-0 bg-gradient-to-t from-[hsl(220,15%,8%)] via-transparent to-[hsl(220,15%,8%)/50]" />
         </motion.div>
 
         {/* Rotating Radar Circles - smaller on mobile */}
@@ -217,14 +221,28 @@ const HeroSection = ({ preloaderComplete = true }: HeroSectionProps) => {
             }}
           >
             {/* Line 1: Sculpting */}
-            <div className="brand-legacy-text">
+            <div 
+              className="brand-legacy-text relative"
+              data-text="Sculpting"
+              style={{ 
+                '--blend-opacity': isMobile ? 0 : 0.4,
+                '--mask-progress': isMobile ? '100%' : undefined,
+              } as React.CSSProperties}
+            >
               <h1 className="font-serif text-[clamp(2rem,8vw,6rem)] font-medium leading-[0.95] tracking-[0.02em] text-foreground">
                 Sculpting
               </h1>
             </div>
             
             {/* Line 2: Brand Legacies */}
-            <div className="brand-legacy-text brand-legacy-text--accent mt-2 md:mt-3 md:ml-8 lg:ml-16">
+            <div 
+              className="brand-legacy-text brand-legacy-text--accent relative mt-2 md:mt-3 md:ml-8 lg:ml-16"
+              data-text="Brand Legacies."
+              style={{ 
+                '--blend-opacity': isMobile ? 0 : 0.5,
+                '--mask-progress': isMobile ? '100%' : undefined,
+              } as React.CSSProperties}
+            >
               <h1 className="font-serif text-[clamp(1.75rem,7vw,5.5rem)] font-medium italic leading-[0.95] tracking-[0.02em] text-primary">
                 Brand Legacies.
               </h1>
