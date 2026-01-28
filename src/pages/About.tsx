@@ -23,7 +23,7 @@ const values = [{
 }, {
   icon: Award,
   title: "Systems Over Shortcuts",
-  description: "We set the bar high and consistently deliver beyond expectations."
+  description: "We build structures that scale, not hacks that fade."
 }, {
   icon: MapPin,
   title: "Rooted in Kolkata",
