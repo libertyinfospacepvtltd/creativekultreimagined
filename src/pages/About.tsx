@@ -26,7 +26,7 @@ const values = [{
   description: "We build structures that scale, not hacks that fade."
 }, {
   icon: MapPin,
-  title: "Rooted in Kolkata",
+  title: "Intelligence-Led Thinking",
   description: "We draw inspiration from our city's rich artistic heritage and cultural depth."
 }];
 const team = [{
