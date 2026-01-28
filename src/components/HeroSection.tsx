@@ -226,28 +226,14 @@ const HeroSection = ({ preloaderComplete = true }: HeroSectionProps) => {
             }}
           >
             {/* Line 1: Sculpting */}
-            <div 
-              className="brand-legacy-text relative"
-              data-text="Sculpting"
-              style={{ 
-                '--blend-opacity': isMobile ? 0 : 0.4,
-                '--mask-progress': isMobile ? '100%' : undefined,
-              } as React.CSSProperties}
-            >
+            <div className="brand-legacy-text">
               <h1 className="font-serif text-[clamp(2rem,8vw,6rem)] font-medium leading-[0.95] tracking-[0.02em] text-foreground">
                 Sculpting
               </h1>
             </div>
             
             {/* Line 2: Brand Legacies */}
-            <div 
-              className="brand-legacy-text brand-legacy-text--accent relative mt-2 md:mt-3 md:ml-8 lg:ml-16"
-              data-text="Brand Legacies."
-              style={{ 
-                '--blend-opacity': isMobile ? 0 : 0.5,
-                '--mask-progress': isMobile ? '100%' : undefined,
-              } as React.CSSProperties}
-            >
+            <div className="brand-legacy-text brand-legacy-text--accent mt-2 md:mt-3 md:ml-8 lg:ml-16">
               <h1 className="font-serif text-[clamp(1.75rem,7vw,5.5rem)] font-medium italic leading-[0.95] tracking-[0.02em] text-primary">
                 Brand Legacies.
               </h1>
