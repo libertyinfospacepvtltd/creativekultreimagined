@@ -258,15 +258,15 @@ const HeroSection = ({ preloaderComplete = true }: HeroSectionProps) => {
           <div className="flex flex-col sm:flex-row items-center gap-3 sm:gap-4 w-full sm:w-auto">
             <Link
               to="/work"
-              className="btn-glitch w-full sm:w-auto text-center px-6 sm:px-8 py-3 rounded-full border-2 border-primary bg-transparent text-primary font-sans text-sm uppercase tracking-widest hover:bg-primary hover:text-primary-foreground transition-all duration-300 min-h-[44px] flex items-center justify-center"
+              className="w-full sm:w-auto text-center px-6 sm:px-8 py-3 rounded-full border-2 border-primary bg-transparent text-primary font-sans text-sm uppercase tracking-widest hover:bg-primary hover:text-primary-foreground transition-all duration-300 min-h-[44px] flex items-center justify-center"
             >
-              <span className="glitch-text" data-text="Explore Our Work">Explore Our Work</span>
+              Explore Our Work
             </Link>
             <Link
               to="/contact"
-              className="btn-glitch w-full sm:w-auto text-center px-6 sm:px-8 py-3 rounded-full border-2 border-primary bg-transparent text-primary font-sans text-sm uppercase tracking-widest hover:bg-primary hover:text-primary-foreground transition-all duration-300 min-h-[44px] flex items-center justify-center"
+              className="w-full sm:w-auto text-center px-6 sm:px-8 py-3 rounded-full border-2 border-primary bg-transparent text-primary font-sans text-sm uppercase tracking-widest hover:bg-primary hover:text-primary-foreground transition-all duration-300 min-h-[44px] flex items-center justify-center"
             >
-              <span className="glitch-text" data-text="Join the Kult">Join the Kult</span>
+              Join the Kult
             </Link>
           </div>
           
