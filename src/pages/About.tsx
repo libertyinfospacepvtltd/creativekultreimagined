@@ -53,7 +53,7 @@ const About = () => {
     theme
   } = useTheme();
   return <Layout>
-      <section className="pt-12 sm:pt-16 pb-8 sm:pb-12 md:pt-20 md:pb-16 bg-background">
+      <section className="pt-12 sm:pt-16 pb-8 sm:pb-12 md:pt-20 md:pb-16 bg-background py-[30px]">
         <div className="container-luxury">
           <span className="text-primary font-sans text-xs sm:text-sm uppercase tracking-widest mb-3 sm:mb-4 block">Our Story</span>
           <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif text-foreground mb-4 sm:mb-6">Born in Kolkata,<br />Built for the World</h1>
@@ -62,7 +62,7 @@ const About = () => {
       </section>
 
       {/* Origin Section */}
-      <section className="section-padding bg-card border-t border-border/30">
+      <section className="section-padding bg-card border-t border-border/30 py-[50px]">
         <div className="container-luxury">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-20 items-center">
             <div>
@@ -84,7 +84,7 @@ const About = () => {
       </section>
 
       {/* Who We Are Section */}
-      <section className="section-padding bg-background border-t border-border/30">
+      <section className="section-padding bg-background border-t border-border/30 py-[50px]">
         <div className="container-luxury">
           <div className="max-w-3xl">
             <span className="text-primary font-sans text-xs uppercase tracking-widest mb-3 sm:mb-4 block sm:text-base">Who We Are</span>
@@ -100,7 +100,7 @@ const About = () => {
       </section>
 
       {/* AI-First Section */}
-      <section className="section-padding bg-card border-t border-border/30">
+      <section className="section-padding bg-card border-t border-border/30 py-[50px]">
         <div className="container-luxury">
           <div className="max-w-3xl">
             <span className="text-primary font-sans text-xs uppercase tracking-widest mb-3 sm:mb-4 block sm:text-base">AI-First, By Design</span>
@@ -132,7 +132,7 @@ const About = () => {
       </section>
 
       {/* Partnerships Section */}
-      <section className="section-padding bg-card border-t border-border/30">
+      <section className="section-padding bg-card border-t border-border/30 py-[50px]">
         <div className="container-luxury">
           <div className="max-w-3xl">
             <span className="text-primary font-sans text-xs uppercase tracking-widest mb-3 sm:mb-4 block sm:text-base">Partnerships</span>
