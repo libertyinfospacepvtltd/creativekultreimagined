@@ -93,7 +93,7 @@ const About = () => {
             </h2>
             <div className="space-y-3 sm:space-y-4 text-muted-foreground font-sans text-sm sm:text-base leading-relaxed">
               <p>We work at the intersection of strategy, creativity, and intelligence, building brand systems designed to scale with the business.</p>
-              <p className="font-medium text-[#b1915d]">We don't build visibility.<br />We build clarity.</p>
+              <p className="text-primary font-medium italic">We don't build visibility.<br />We build clarity.</p>
             </div>
           </div>
         </div>
@@ -109,7 +109,7 @@ const About = () => {
             </h2>
             <div className="space-y-3 sm:space-y-4 text-muted-foreground font-sans text-sm sm:text-base leading-relaxed">
               <p>We use AI to analyse markets, decode competition, and remove guesswork from brand and marketing decisions — so creativity is sharper and strategy is smarter.</p>
-              <p className="font-medium text-[#b1915d]">Human insight leads.<br />AI strengthens.</p>
+              <p className="text-primary font-medium italic">Human insight leads.<br />AI strengthens.</p>
             </div>
           </div>
         </div>
@@ -125,7 +125,7 @@ const About = () => {
             </h2>
             <div className="space-y-3 sm:space-y-4 text-muted-foreground font-sans text-sm sm:text-base leading-relaxed">
               <p>Before design or campaigns, we define positioning, messaging, and direction. Everything we create is built to support growth, consistency, and long-term value.</p>
-              <p className="font-medium text-[#b1915d]">No trends.<br />No templates.<br />Only frameworks that last.</p>
+              <p className="text-primary font-medium italic">No trends.<br />No templates.<br />Only frameworks that last.</p>
             </div>
           </div>
         </div>
