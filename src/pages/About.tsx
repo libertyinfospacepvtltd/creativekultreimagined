@@ -14,7 +14,7 @@ import logoDark from "@/assets/creative-kult-logo.png";
 import logoLight from "@/assets/creative-kult-logo-brown.png";
 const values = [{
   icon: Heart,
-  title: "Passion-Driven",
+  title: "Clarity Before Creativity",
   description: "We pour our heart into every project, treating your brand as our own."
 }, {
   icon: Users,
