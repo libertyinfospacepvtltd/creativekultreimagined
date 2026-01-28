@@ -101,6 +101,18 @@ export default {
           "50%": { transform: "rotateY(15deg)" },
           "100%": { transform: "rotateY(-15deg)" },
         },
+        "glitch": {
+          "0%, 100%": { transform: "translate(0, 0)" },
+          "10%": { transform: "translate(-1px, 0)" },
+          "20%": { transform: "translate(1px, 1px)" },
+          "30%": { transform: "translate(0, -1px)" },
+          "40%": { transform: "translate(1px, 0)" },
+          "50%": { transform: "translate(-1px, 1px)" },
+          "60%": { transform: "translate(1px, -1px)" },
+          "70%": { transform: "translate(0, 1px)" },
+          "80%": { transform: "translate(-1px, -1px)" },
+          "90%": { transform: "translate(1px, 0)" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
@@ -112,6 +124,7 @@ export default {
         float: "float 6s ease-in-out infinite",
         pulse: "pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite",
         "spin-slow-3d": "spin-slow-3d 7s ease-in-out infinite",
+        "glitch": "glitch 0.4s ease-in-out infinite",
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
