@@ -19,7 +19,7 @@ const values = [{
 }, {
   icon: Users,
   title: "Partnership Over Transactions",
-  description: "We believe the best work comes from true partnerships with our clients."
+  description: "We align with businesses, not briefs."
 }, {
   icon: Award,
   title: "Excellence",
