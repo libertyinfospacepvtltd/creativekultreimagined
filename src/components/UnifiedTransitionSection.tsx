@@ -160,20 +160,19 @@ const UnifiedTransitionSection = () => {
     offset: ["start end", "end start"],
   });
 
-  // Total scroll height: 280vh
+  // Total scroll height: 300vh
   // Phase breakdown (normalized 0-1):
   // 0.00 - 0.08: Entry - "Artificial Intelligence" slides up
   // 0.08 - 0.20: Subtractive fade - extra letters fade out
-  // 0.20 - 0.30: Form AI - A and I slide together
+  // 0.20 - 0.30: Form AI - A and I slide together into centered "AI"
   // 0.30 - 0.40: Reveal tagline
-  // 0.40 - 0.50: Hold AI + tagline
-  // 0.50 - 0.55: AI fades out
-  // 0.55 - 0.70: Sculpting rises and holds
-  // 0.70 - 0.85: Hold sculpting
-  // 0.85 - 1.00: Exit - everything scrolls away, PCB fades
+  // 0.40 - 0.55: Hold AI + tagline pinned in center
+  // 0.55 - 0.75: Handoff - AI moves up, Sculpting enters from bottom
+  // 0.75 - 0.90: Hold sculpting in center
+  // 0.90 - 1.00: Exit - everything scrolls away, PCB fades
 
   // PCB Background - fades in early, stays through sculpting, fades at end
-  const circuitOpacity = useTransform(scrollYProgress, [0, 0.05, 0.88, 0.95], [0, 0.9, 0.9, 0]);
+  const circuitOpacity = useTransform(scrollYProgress, [0, 0.05, 0.92, 1.0], [0, 0.9, 0.9, 0]);
 
   // AI Text Entry - slide up from bottom
   const aiEntryY = useTransform(scrollYProgress, [0, 0.08], ["100vh", "0vh"]);
@@ -181,22 +180,22 @@ const UnifiedTransitionSection = () => {
 
   // Subtractive fade - fade out "rtificial" and "ntelligence"
   const extraLettersOpacity = useTransform(scrollYProgress, [0.08, 0.20], [1, 0]);
-
-  // Form AI - move A right, I left to meet in center
-  const letterAX = useTransform(scrollYProgress, [0.20, 0.30], [0, 55]);
-  const letterIX = useTransform(scrollYProgress, [0.20, 0.30], [0, -55]);
+  
+  // Show "AI" wrapper only after extra letters have faded
+  const aiWrapperVisible = useTransform(scrollYProgress, [0.19, 0.20], [0, 1]);
 
   // Reveal supporting line
   const taglineOpacity = useTransform(scrollYProgress, [0.30, 0.40], [0, 1]);
   const taglineY = useTransform(scrollYProgress, [0.30, 0.40], [30, 0]);
 
-  // AI section fades out to make room for Sculpting
-  const aiSectionOpacity = useTransform(scrollYProgress, [0.48, 0.55], [1, 0]);
+  // HANDOFF: AI group moves upward as Sculpting enters
+  // AI section moves up and fades during handoff
+  const aiGroupY = useTransform(scrollYProgress, [0.55, 0.70], ["0vh", "-50vh"]);
+  const aiGroupOpacity = useTransform(scrollYProgress, [0.55, 0.68], [1, 0]);
 
-  // Sculpting text rises from below
-  const sculptingY = useTransform(scrollYProgress, [0.50, 0.62], ["80px", "0px"]);
-  const sculptingOpacity = useTransform(scrollYProgress, [0.50, 0.60], [0, 1]);
-  const sculptingScale = useTransform(scrollYProgress, [0.50, 0.62], [0.95, 1]);
+  // Sculpting scrolls up from bottom naturally (no fade, pure position)
+  // Starts at bottom of viewport, scrolls to center
+  const sculptingY = useTransform(scrollYProgress, [0.55, 0.75], ["100vh", "0vh"]);
 
   // Check for reduced motion preference
   const prefersReducedMotion = typeof window !== 'undefined' 
@@ -206,7 +205,7 @@ const UnifiedTransitionSection = () => {
   return (
     <section 
       ref={containerRef}
-      className="relative h-[280vh] w-full bg-background z-20"
+      className="relative h-[300vh] w-full bg-background z-20"
     >
       {/* Sticky Container - entire sequence pins here */}
       <div className="sticky top-0 h-screen w-full overflow-hidden flex items-center justify-center">
@@ -219,55 +218,58 @@ const UnifiedTransitionSection = () => {
           <CircuitBackground />
         </motion.div>
 
-        {/* AI Text Container */}
+        {/* AI Text Container - pinned then moves up during handoff */}
         <motion.div 
           className="absolute inset-0 flex items-center justify-center z-10 px-4"
           style={{ 
-            y: prefersReducedMotion ? 0 : aiEntryY,
-            opacity: prefersReducedMotion ? 0 : aiSectionOpacity,
+            y: prefersReducedMotion ? 0 : aiGroupY,
+            opacity: prefersReducedMotion ? 0 : aiGroupOpacity,
           }}
         >
-          <div className="text-center">
-            {/* Artificial Intelligence / AI Text - matches Sculpting typography */}
-            <div className="flex items-center justify-center font-serif text-3xl sm:text-4xl md:text-6xl lg:text-8xl tracking-tight">
-              {/* "A" - gold accent like "Legacies." */}
+          {/* Entry wrapper for initial slide-up */}
+          <motion.div 
+            className="text-center"
+            style={{ 
+              y: prefersReducedMotion ? 0 : aiEntryY,
+            }}
+          >
+            {/* Phase 1: Full "Artificial Intelligence" text - shown before letters merge */}
+            <motion.div 
+              className="flex items-center justify-center font-serif text-3xl sm:text-4xl md:text-6xl lg:text-8xl tracking-tight"
+              style={{ 
+                opacity: prefersReducedMotion ? 0 : extraLettersOpacity,
+              }}
+            >
               <motion.span 
-                className="relative inline-block text-primary"
-                style={{ 
-                  x: prefersReducedMotion ? 45 : letterAX,
-                  opacity: prefersReducedMotion ? 1 : aiEntryOpacity,
-                }}
+                className="text-primary"
+                style={{ opacity: prefersReducedMotion ? 1 : aiEntryOpacity }}
               >
                 A
               </motion.span>
-              
-              {/* "rtificial " - fades out */}
+              <span className="text-foreground">rtificial </span>
               <motion.span 
-                className="inline-block text-foreground"
-                style={{ opacity: prefersReducedMotion ? 0 : extraLettersOpacity }}
-              >
-                rtificial{" "}
-              </motion.span>
-              
-              {/* "I" - gold accent like "Legacies." */}
-              <motion.span 
-                className="relative inline-block text-primary"
-                style={{ 
-                  x: prefersReducedMotion ? -45 : letterIX,
-                  opacity: prefersReducedMotion ? 1 : aiEntryOpacity,
-                }}
+                className="text-primary"
+                style={{ opacity: prefersReducedMotion ? 1 : aiEntryOpacity }}
               >
                 I
               </motion.span>
-              
-              {/* "ntelligence" - fades out */}
-              <motion.span 
-                className="inline-block text-foreground"
-                style={{ opacity: prefersReducedMotion ? 0 : extraLettersOpacity }}
-              >
-                ntelligence
-              </motion.span>
-            </div>
+              <span className="text-foreground">ntelligence</span>
+            </motion.div>
+
+            {/* Phase 2: Centered "AI" wrapper - appears after merge, truly centered */}
+            <motion.div 
+              className="flex items-center justify-center font-serif text-3xl sm:text-4xl md:text-6xl lg:text-8xl tracking-tight"
+              style={{ 
+                opacity: prefersReducedMotion ? 1 : aiWrapperVisible,
+                position: 'absolute',
+                top: '50%',
+                left: '50%',
+                transform: 'translate(-50%, -50%)',
+              }}
+            >
+              <span className="text-primary">A</span>
+              <span className="text-primary">I</span>
+            </motion.div>
 
             {/* Supporting Line - font-serif to match Sculpting, confident sub-headline size */}
             <motion.p 
@@ -279,16 +281,14 @@ const UnifiedTransitionSection = () => {
             >
               -first branding and marketing agency
             </motion.p>
-          </div>
+          </motion.div>
         </motion.div>
 
-        {/* Sculpting Text Container - rises after AI fades */}
+        {/* Sculpting Text Container - scrolls up naturally from bottom, no fade */}
         <motion.div 
           className="absolute inset-0 flex items-center justify-center z-10 px-4"
           style={{ 
             y: prefersReducedMotion ? 0 : sculptingY,
-            opacity: prefersReducedMotion ? 1 : sculptingOpacity,
-            scale: prefersReducedMotion ? 1 : sculptingScale,
           }}
         >
           <div className="text-center">
