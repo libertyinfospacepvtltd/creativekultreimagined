@@ -186,7 +186,7 @@ const UnifiedTransitionSection = () => {
   // The motion is minimal - just enough to center the remaining "AI"
   // A moves slightly RIGHT, I moves slightly LEFT - they converge but NEVER cross
   // Using em units for tight, logo-like spacing - letters should feel unified
-  const letterAX = useTransform(scrollYProgress, [0.22, 0.35], [0, 350]);  // A slides right to +350px
+  const letterAX = useTransform(scrollYProgress, [0.22, 0.35], [0, 320]);  // A slides right to +320px
   const letterIX = useTransform(scrollYProgress, [0.22, 0.35], [0, 60]);   // I slides right
   
   // Hide the faded text containers completely after they're invisible (cleanup)
