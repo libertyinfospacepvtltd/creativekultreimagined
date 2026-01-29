@@ -271,54 +271,37 @@ const AITransitionSection = () => {
     [0, 1, 1, 0]
   );
 
-  // Phase 1: "Artificial Intelligence" visible (0-30%)
-  // Phase 2: Compression animation (30-60%)
-  // Phase 3: "AI" locked + rest fades in (60-100%)
+  // Phase 1 (0-20%): Full "Artificial Intelligence" visible
+  // Phase 2 (20-45%): Fade out "rtificial" and "ntelligence", keep A and I
+  // Phase 3 (45-60%): Slide A and I together to form "AI"
+  // Phase 4 (60-80%): Fade in "-first branding and marketing agency"
 
-  // "Artificial" text transform
-  const artificialScaleX = useTransform(
+  // Fade out "rtificial" (letters after A in "Artificial")
+  const rtificialOpacity = useTransform(
     scrollYProgress,
-    [0.25, 0.55],
+    [0.2, 0.4],
     [1, 0]
-  );
-  const artificialOpacity = useTransform(
-    scrollYProgress,
-    [0.25, 0.5],
-    [1, 0]
-  );
-  const artificialX = useTransform(
-    scrollYProgress,
-    [0.25, 0.55],
-    [0, 50]
   );
 
-  // "Intelligence" text transform
-  const intelligenceScaleX = useTransform(
+  // Fade out "ntelligence" (letters after I in "Intelligence")
+  const ntelligenceOpacity = useTransform(
     scrollYProgress,
-    [0.3, 0.6],
+    [0.2, 0.4],
     [1, 0]
-  );
-  const intelligenceOpacity = useTransform(
-    scrollYProgress,
-    [0.3, 0.55],
-    [1, 0]
-  );
-  const intelligenceX = useTransform(
-    scrollYProgress,
-    [0.3, 0.6],
-    [0, -50]
   );
 
-  // "AI" emergence
-  const aiOpacity = useTransform(
+  // After fade, slide "A" right toward center
+  const aSlideX = useTransform(
     scrollYProgress,
-    [0.35, 0.55],
-    [0, 1]
+    [0.4, 0.55],
+    [0, isMobile ? 30 : 60]
   );
-  const aiScale = useTransform(
+
+  // After fade, slide "I" left toward center
+  const iSlideX = useTransform(
     scrollYProgress,
-    [0.35, 0.55],
-    [0.8, 1]
+    [0.4, 0.55],
+    [0, isMobile ? -30 : -60]
   );
 
   // Rest of text fade in
@@ -392,52 +375,37 @@ const AITransitionSection = () => {
             </h2>
           ) : (
             <>
-              {/* Phase 1 & 2: Full words compressing */}
-              <div className="relative h-[clamp(4rem,12vw,8rem)] flex items-center justify-center overflow-hidden">
-                {/* "Artificial" - compresses from left */}
-                <motion.span
-                  className="font-serif text-[clamp(2rem,6vw,5rem)] text-foreground/90 tracking-wide absolute"
-                  style={{
-                    scaleX: artificialScaleX,
-                    opacity: artificialOpacity,
-                    x: artificialX,
-                    originX: 1,
-                    whiteSpace: "nowrap",
-                  }}
-                >
-                  Artificial
-                </motion.span>
+              {/* Phase 1-3: "Artificial Intelligence" with subtractive fade */}
+              <div className="relative flex items-center justify-center">
+                {/* Container for the words - keeps A and I in position initially */}
+                <div className="flex items-baseline justify-center gap-[0.3em] font-serif text-[clamp(2rem,6vw,5rem)] text-foreground/90 tracking-wide">
+                  {/* "Artificial" - A stays, "rtificial" fades */}
+                  <motion.span 
+                    className="relative inline-flex"
+                    style={{ x: aSlideX }}
+                  >
+                    <span className="text-primary font-semibold">A</span>
+                    <motion.span style={{ opacity: rtificialOpacity }}>
+                      rtificial
+                    </motion.span>
+                  </motion.span>
 
-                {/* "Intelligence" - compresses from right */}
-                <motion.span
-                  className="font-serif text-[clamp(2rem,6vw,5rem)] text-foreground/90 tracking-wide absolute"
-                  style={{
-                    scaleX: intelligenceScaleX,
-                    opacity: intelligenceOpacity,
-                    x: intelligenceX,
-                    originX: 0,
-                    marginLeft: isMobile ? "0" : "1rem",
-                    whiteSpace: "nowrap",
-                  }}
-                >
-                  {isMobile ? "" : " "}Intelligence
-                </motion.span>
-
-                {/* "AI" - emerges */}
-                <motion.span
-                  className="font-serif text-[clamp(2.5rem,8vw,6rem)] text-primary font-bold tracking-tight"
-                  style={{
-                    opacity: aiOpacity,
-                    scale: aiScale,
-                  }}
-                >
-                  AI
-                </motion.span>
+                  {/* "Intelligence" - I stays, "ntelligence" fades */}
+                  <motion.span 
+                    className="relative inline-flex"
+                    style={{ x: iSlideX }}
+                  >
+                    <span className="text-primary font-semibold">I</span>
+                    <motion.span style={{ opacity: ntelligenceOpacity }}>
+                      ntelligence
+                    </motion.span>
+                  </motion.span>
+                </div>
               </div>
 
-              {/* Phase 3: Rest of the text */}
+              {/* Phase 4: Rest of the text */}
               <motion.div
-                className="mt-2 sm:mt-4"
+                className="mt-4 sm:mt-6"
                 style={{
                   opacity: restTextOpacity,
                   y: restTextY,
