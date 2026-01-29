@@ -228,11 +228,11 @@ const UnifiedTransitionSection = () => {
           }}
         >
           <div className="text-center">
-            {/* Artificial Intelligence / AI Text */}
-            <div className="flex items-center justify-center font-serif text-4xl sm:text-5xl md:text-7xl lg:text-8xl text-foreground tracking-tight">
-              {/* "A" */}
+            {/* Artificial Intelligence / AI Text - matches Sculpting typography */}
+            <div className="flex items-center justify-center font-serif text-3xl sm:text-4xl md:text-6xl lg:text-8xl tracking-tight">
+              {/* "A" - gold accent like "Legacies." */}
               <motion.span 
-                className="relative inline-block"
+                className="relative inline-block text-primary"
                 style={{ 
                   x: prefersReducedMotion ? 45 : letterAX,
                   opacity: prefersReducedMotion ? 1 : aiEntryOpacity,
@@ -243,15 +243,15 @@ const UnifiedTransitionSection = () => {
               
               {/* "rtificial " - fades out */}
               <motion.span 
-                className="inline-block"
+                className="inline-block text-foreground"
                 style={{ opacity: prefersReducedMotion ? 0 : extraLettersOpacity }}
               >
                 rtificial{" "}
               </motion.span>
               
-              {/* "I" */}
+              {/* "I" - gold accent like "Legacies." */}
               <motion.span 
-                className="relative inline-block"
+                className="relative inline-block text-primary"
                 style={{ 
                   x: prefersReducedMotion ? -45 : letterIX,
                   opacity: prefersReducedMotion ? 1 : aiEntryOpacity,
@@ -262,16 +262,16 @@ const UnifiedTransitionSection = () => {
               
               {/* "ntelligence" - fades out */}
               <motion.span 
-                className="inline-block"
+                className="inline-block text-foreground"
                 style={{ opacity: prefersReducedMotion ? 0 : extraLettersOpacity }}
               >
                 ntelligence
               </motion.span>
             </div>
 
-            {/* Supporting Line */}
+            {/* Supporting Line - font-serif to match Sculpting, smaller size, neutral color */}
             <motion.p 
-              className="mt-4 md:mt-6 font-sans text-lg sm:text-xl md:text-2xl lg:text-3xl text-primary tracking-wide"
+              className="mt-4 md:mt-6 font-serif text-base sm:text-lg md:text-xl lg:text-2xl text-foreground/80 tracking-wide"
               style={{ 
                 opacity: prefersReducedMotion ? 1 : taglineOpacity,
                 y: prefersReducedMotion ? 0 : taglineY,
