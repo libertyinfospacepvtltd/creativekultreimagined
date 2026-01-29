@@ -29,21 +29,21 @@ const HeroSection = ({ preloaderComplete = true }: HeroSectionProps) => {
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
-  // Scroll-linked animation
+  // Scroll-linked animation - shorter hero for tighter transition
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end start"],
   });
 
   // Transform values based on scroll progress
-  const backgroundScale = useTransform(scrollYProgress, [0, 0.5], [1.1, 1.8]);
+  const backgroundScale = useTransform(scrollYProgress, [0, 0.6], [1.1, 1.6]);
   
   // Tagline opacity - fades out as scroll begins
-  const taglineOpacity = useTransform(scrollYProgress, [0, 0.1], [1, 0]);
+  const taglineOpacity = useTransform(scrollYProgress, [0, 0.15], [1, 0]);
   
-  // CTAs and radar
-  const ctaOpacity = useTransform(scrollYProgress, [0, 0.05], [1, 0]);
-  const radarOpacity = useTransform(scrollYProgress, [0, 0.1], [1, 0]);
+  // CTAs and radar - fade out quickly
+  const ctaOpacity = useTransform(scrollYProgress, [0, 0.08], [1, 0]);
+  const radarOpacity = useTransform(scrollYProgress, [0, 0.12], [1, 0]);
 
   useEffect(() => {
     // Disable parallax on mobile for performance
@@ -69,7 +69,7 @@ const HeroSection = ({ preloaderComplete = true }: HeroSectionProps) => {
   return (
     <section 
       ref={containerRef}
-      className="relative h-[200vh] w-full bg-[hsl(220,15%,8%)] z-10"
+      className="relative h-[150vh] w-full bg-[hsl(220,15%,8%)] z-10"
     >
       {/* Sticky Container */}
       <div className="sticky top-0 h-screen h-[100dvh] w-full overflow-hidden z-10">
