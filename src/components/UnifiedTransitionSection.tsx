@@ -182,9 +182,9 @@ const UnifiedTransitionSection = () => {
   // Subtractive fade - fade out "rtificial" and "ntelligence"
   const extraLettersOpacity = useTransform(scrollYProgress, [0.08, 0.20], [1, 0]);
 
-  // Form AI - move A right, I left
-  const letterAX = useTransform(scrollYProgress, [0.20, 0.30], [0, 45]);
-  const letterIX = useTransform(scrollYProgress, [0.20, 0.30], [0, -45]);
+  // Form AI - move A right, I left to meet in center
+  const letterAX = useTransform(scrollYProgress, [0.20, 0.30], [0, 55]);
+  const letterIX = useTransform(scrollYProgress, [0.20, 0.30], [0, -55]);
 
   // Reveal supporting line
   const taglineOpacity = useTransform(scrollYProgress, [0.30, 0.40], [0, 1]);
@@ -269,9 +269,9 @@ const UnifiedTransitionSection = () => {
               </motion.span>
             </div>
 
-            {/* Supporting Line - font-serif to match Sculpting, smaller size, neutral color */}
+            {/* Supporting Line - font-serif to match Sculpting, confident sub-headline size */}
             <motion.p 
-              className="mt-4 md:mt-6 font-serif text-base sm:text-lg md:text-xl lg:text-2xl text-foreground/80 tracking-wide"
+              className="mt-4 md:mt-6 font-serif text-xl sm:text-2xl md:text-3xl lg:text-5xl text-foreground/80 tracking-wide"
               style={{ 
                 opacity: prefersReducedMotion ? 1 : taglineOpacity,
                 y: prefersReducedMotion ? 0 : taglineY,
