@@ -206,8 +206,8 @@ const UnifiedTransitionSection = () => {
       ref={containerRef}
       className="relative h-[260vh] w-full bg-background z-20"
     >
-      {/* Sticky Container */}
-      <div className="sticky top-0 h-screen w-full overflow-hidden flex items-center justify-center">
+      {/* Sticky Container - no overflow-hidden to prevent text cut-off */}
+      <div className="sticky top-0 h-screen w-full flex items-center justify-center">
         
         {/* PCB Circuit Background */}
         <motion.div 
@@ -227,7 +227,7 @@ const UnifiedTransitionSection = () => {
         >
           {/* Entry wrapper - centers everything */}
           <motion.div 
-            className="flex flex-col items-center justify-center"
+            className="flex flex-col items-center justify-center w-full"
             style={{ 
               y: prefersReducedMotion ? 0 : aiEntryY,
               opacity: prefersReducedMotion ? 1 : aiEntryOpacity,
@@ -235,51 +235,60 @@ const UnifiedTransitionSection = () => {
           >
             {/* 
               SINGLE TEXT LAYER: "Artificial Intelligence"
-              - Tight layout with gap-3 - letters barely move when collapsing
-              - Width-based collapse for smooth "kiss" merge
+              - Tight layout with no gap - width collapse creates the merge
+              - items-center ensures vertical alignment on same line
+              - Responsive font clamp to prevent overflow on mobile
             */}
-            <motion.div 
-              className="font-serif tracking-tight flex flex-row items-baseline justify-center whitespace-nowrap gap-3"
+            <div 
+              className="font-serif tracking-tight flex flex-row items-center justify-center whitespace-nowrap w-full text-center"
               style={{
-                scale: prefersReducedMotion ? 1.15 : aiScale,
-                fontSize: 'clamp(2rem, 5vw, 6rem)',
+                fontSize: 'clamp(1.5rem, 4vw, 6rem)',
               }}
             >
-              
-              {/* "A" - primary letter, stays in document flow position */}
-              <span className="text-primary inline-block">
-                A
-              </span>
-              
-              {/* "rtificial " - width collapses to 0, opacity fades */}
-              <motion.span 
-                className="text-foreground inline-block overflow-hidden whitespace-nowrap"
-                style={{ 
-                  opacity: prefersReducedMotion ? 0 : extraLettersOpacity,
-                  width: prefersReducedMotion ? 0 : extraLettersWidth,
-                  transition: 'all 1s ease-in-out',
+              <motion.div
+                className="flex flex-row items-center justify-center"
+                style={{
+                  scale: prefersReducedMotion ? 1.15 : aiScale,
                 }}
               >
-                rtificial
-              </motion.span>
-              
-              {/* "I" - primary letter, stays in document flow position */}
-              <span className="text-primary inline-block">
-                I
-              </span>
-              
-              {/* "ntelligence" - width collapses to 0, opacity fades */}
-              <motion.span 
-                className="text-foreground inline-block overflow-hidden whitespace-nowrap"
-                style={{ 
-                  opacity: prefersReducedMotion ? 0 : extraLettersOpacity,
-                  width: prefersReducedMotion ? 0 : extraLettersWidth,
-                  transition: 'all 1s ease-in-out',
-                }}
-              >
-                ntelligence
-              </motion.span>
-            </motion.div>
+                {/* "A" - primary letter, stays in document flow position */}
+                <span className="text-primary inline-block">
+                  A
+                </span>
+                
+                {/* "rtificial " - width collapses to 0, opacity fades */}
+                <motion.span 
+                  className="text-foreground inline-block overflow-hidden whitespace-nowrap"
+                  style={{ 
+                    opacity: prefersReducedMotion ? 0 : extraLettersOpacity,
+                    maxWidth: prefersReducedMotion ? 0 : extraLettersWidth,
+                    transition: 'max-width 1s ease-in-out, opacity 1s ease-in-out',
+                  }}
+                >
+                  rtificial
+                </motion.span>
+                
+                {/* Small gap between A and I when collapsed */}
+                <span className="inline-block w-1 md:w-2" />
+                
+                {/* "I" - primary letter, stays in document flow position */}
+                <span className="text-primary inline-block">
+                  I
+                </span>
+                
+                {/* "ntelligence" - width collapses to 0, opacity fades */}
+                <motion.span 
+                  className="text-foreground inline-block overflow-hidden whitespace-nowrap"
+                  style={{ 
+                    opacity: prefersReducedMotion ? 0 : extraLettersOpacity,
+                    maxWidth: prefersReducedMotion ? 0 : extraLettersWidth,
+                    transition: 'max-width 1s ease-in-out, opacity 1s ease-in-out',
+                  }}
+                >
+                  ntelligence
+                </motion.span>
+              </motion.div>
+            </div>
 
             {/* Supporting Line */}
             <motion.p 
