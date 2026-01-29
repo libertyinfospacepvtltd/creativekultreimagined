@@ -204,7 +204,7 @@ const UnifiedTransitionSection = () => {
   return (
     <section 
       ref={containerRef}
-      className="relative h-[320vh] w-full bg-background z-20"
+      className="relative h-[260vh] w-full bg-background z-20"
     >
       {/* Sticky Container */}
       <div className="sticky top-0 h-screen w-full overflow-hidden flex items-center justify-center">
@@ -235,13 +235,11 @@ const UnifiedTransitionSection = () => {
           >
             {/* 
               SINGLE TEXT LAYER: "Artificial Intelligence"
-              - A and I are always visible, never faded
-              - "rtificial " and "ntelligence" fade out subtractively
-              - After fade, A and I slide to close the gap
-              - NO duplicate "AI" layer - this IS the final AI
+              - Tight layout with gap-3 - letters barely move when collapsing
+              - Width-based collapse for smooth "kiss" merge
             */}
             <motion.div 
-              className="font-serif tracking-tight flex flex-row items-baseline justify-center whitespace-nowrap w-full gap-1"
+              className="font-serif tracking-tight flex flex-row items-baseline justify-center whitespace-nowrap gap-3"
               style={{
                 scale: prefersReducedMotion ? 1.15 : aiScale,
                 fontSize: 'clamp(2rem, 5vw, 6rem)',
@@ -259,7 +257,7 @@ const UnifiedTransitionSection = () => {
                 style={{ 
                   opacity: prefersReducedMotion ? 0 : extraLettersOpacity,
                   width: prefersReducedMotion ? 0 : extraLettersWidth,
-                  transition: 'opacity 1.5s ease-in-out, width 1.5s ease-in-out',
+                  transition: 'all 1s ease-in-out',
                 }}
               >
                 rtificial
@@ -276,7 +274,7 @@ const UnifiedTransitionSection = () => {
                 style={{ 
                   opacity: prefersReducedMotion ? 0 : extraLettersOpacity,
                   width: prefersReducedMotion ? 0 : extraLettersWidth,
-                  transition: 'opacity 1.5s ease-in-out, width 1.5s ease-in-out',
+                  transition: 'all 1s ease-in-out',
                 }}
               >
                 ntelligence
