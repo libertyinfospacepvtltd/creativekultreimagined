@@ -160,46 +160,46 @@ const UnifiedTransitionSection = () => {
     offset: ["start end", "end start"],
   });
 
-  // Phase breakdown (normalized 0-1):
-  // 0.00 - 0.10: Entry - "Artificial Intelligence" slides up
-  // 0.10 - 0.25: Subtractive fade - "rtificial " and "ntelligence" fade out (letters stay put)
-  // 0.25 - 0.40: Letter shift - A and I slide together horizontally
-  // 0.40 - 0.50: Reveal tagline
-  // 0.50 - 0.58: Hold AI + tagline pinned (tighter)
-  // 0.58 - 0.78: Handoff - AI moves up, Sculpting enters from bottom
-  // 0.78 - 0.88: Hold sculpting in center
-  // 0.88 - 1.00: Exit
+  // Phase breakdown (normalized 0-1) - EXTENDED for post-sculpting hold:
+  // 0.00 - 0.08: Entry - "Artificial Intelligence" slides up
+  // 0.08 - 0.20: Subtractive fade - "rtificial " and "ntelligence" fade out
+  // 0.20 - 0.32: Letter shift - A and I slide together horizontally
+  // 0.32 - 0.40: Reveal tagline
+  // 0.40 - 0.48: Hold AI + tagline pinned
+  // 0.48 - 0.60: Handoff - AI moves up, Sculpting enters from bottom
+  // 0.60 - 0.80: EXTENDED HOLD - Sculpting stays centered (user reads it)
+  // 0.80 - 1.00: Exit
 
   // PCB Background
-  const circuitOpacity = useTransform(scrollYProgress, [0, 0.05, 0.90, 1.0], [0, 0.9, 0.9, 0]);
+  const circuitOpacity = useTransform(scrollYProgress, [0, 0.05, 0.85, 1.0], [0, 0.9, 0.9, 0]);
 
   // AI Text Entry - slide up from bottom
-  const aiEntryY = useTransform(scrollYProgress, [0, 0.10], ["100vh", "0vh"]);
-  const aiEntryOpacity = useTransform(scrollYProgress, [0, 0.08], [0, 1]);
+  const aiEntryY = useTransform(scrollYProgress, [0, 0.08], ["100vh", "0vh"]);
+  const aiEntryOpacity = useTransform(scrollYProgress, [0, 0.06], [0, 1]);
 
   // Subtractive fade - "rtificial " and "ntelligence" fade out (no movement)
-  const extraLettersOpacity = useTransform(scrollYProgress, [0.12, 0.25], [1, 0]);
+  const extraLettersOpacity = useTransform(scrollYProgress, [0.10, 0.20], [1, 0]);
   
   // Letter shift - converge toward centered "AI" position
-  // "A" starts left, moves right toward center (small movement)
-  // "I" starts right (after invisible "rtificial "), moves left to close the gap
-  // ORDER GUARANTEE: I always stays to the right of A (gap shrinks, never inverts)
-  const letterAShift = useTransform(scrollYProgress, [0.25, 0.40], ["0em", "1.8em"]);
-  const letterIShift = useTransform(scrollYProgress, [0.25, 0.40], ["0em", "-2.8em"]);
+  // Both letters move to meet in the center
+  const letterAShift = useTransform(scrollYProgress, [0.20, 0.32], ["0em", "2.5em"]);
+  const letterIShift = useTransform(scrollYProgress, [0.20, 0.32], ["0em", "-3.2em"]);
   
-  // Hide faded text containers after letters merge (cleanup)
-  const fadedTextDisplay = useTransform(scrollYProgress, (value) => value > 0.40 ? 0 : 1);
+  // After letters merge, show the clean centered "AI" and hide individual letters
+  const mergedAIOpacity = useTransform(scrollYProgress, [0.31, 0.33], [0, 1]);
+  const individualLettersOpacity = useTransform(scrollYProgress, [0.31, 0.33], [1, 0]);
 
   // Reveal supporting line
-  const taglineOpacity = useTransform(scrollYProgress, [0.40, 0.50], [0, 1]);
-  const taglineY = useTransform(scrollYProgress, [0.40, 0.50], [30, 0]);
+  const taglineOpacity = useTransform(scrollYProgress, [0.32, 0.40], [0, 1]);
+  const taglineY = useTransform(scrollYProgress, [0.32, 0.40], [30, 0]);
 
   // HANDOFF: AI group moves upward as Sculpting enters
-  const aiGroupY = useTransform(scrollYProgress, [0.58, 0.73], ["0vh", "-50vh"]);
-  const aiGroupOpacity = useTransform(scrollYProgress, [0.58, 0.70], [1, 0]);
+  const aiGroupY = useTransform(scrollYProgress, [0.48, 0.58], ["0vh", "-50vh"]);
+  const aiGroupOpacity = useTransform(scrollYProgress, [0.48, 0.56], [1, 0]);
 
   // Sculpting scrolls up from bottom naturally (no fade, pure position)
-  const sculptingY = useTransform(scrollYProgress, [0.58, 0.78], ["100vh", "0vh"]);
+  // Reaches center at 0.60, then HOLDS until 0.80
+  const sculptingY = useTransform(scrollYProgress, [0.48, 0.60], ["100vh", "0vh"]);
 
   // Check for reduced motion preference
   const prefersReducedMotion = typeof window !== 'undefined' 
@@ -209,7 +209,7 @@ const UnifiedTransitionSection = () => {
   return (
     <section 
       ref={containerRef}
-      className="relative h-[250vh] w-full bg-background z-20"
+      className="relative h-[320vh] w-full bg-background z-20"
     >
       {/* Sticky Container */}
       <div className="sticky top-0 h-screen w-full overflow-hidden flex items-center justify-center">
@@ -238,13 +238,28 @@ const UnifiedTransitionSection = () => {
               opacity: prefersReducedMotion ? 1 : aiEntryOpacity,
             }}
           >
-            {/* "Artificial Intelligence" with sliding A and I */}
-            <div className="relative font-serif text-3xl sm:text-4xl md:text-6xl lg:text-8xl tracking-tight flex items-baseline justify-center">
+            {/* Merged "AI" - appears after transition, perfectly centered */}
+            <motion.div 
+              className="absolute font-serif text-3xl sm:text-4xl md:text-6xl lg:text-8xl tracking-tight text-primary"
+              style={{ 
+                opacity: prefersReducedMotion ? 1 : mergedAIOpacity,
+              }}
+            >
+              AI
+            </motion.div>
+
+            {/* "Artificial Intelligence" with sliding A and I - hidden after merge */}
+            <motion.div 
+              className="relative font-serif text-3xl sm:text-4xl md:text-6xl lg:text-8xl tracking-tight flex items-baseline justify-center"
+              style={{
+                opacity: prefersReducedMotion ? 0 : individualLettersOpacity,
+              }}
+            >
               {/* "A" - slides right toward center */}
               <motion.span 
                 className="text-primary inline-block"
                 style={{ 
-                  x: prefersReducedMotion ? "1.8em" : letterAShift,
+                  x: letterAShift,
                 }}
               >
                 A
@@ -254,7 +269,7 @@ const UnifiedTransitionSection = () => {
               <motion.span 
                 className="text-foreground inline-block"
                 style={{ 
-                  opacity: prefersReducedMotion ? 0 : extraLettersOpacity,
+                  opacity: extraLettersOpacity,
                   pointerEvents: 'none',
                 }}
               >
@@ -265,7 +280,7 @@ const UnifiedTransitionSection = () => {
               <motion.span 
                 className="text-primary inline-block"
                 style={{ 
-                  x: prefersReducedMotion ? "-2.8em" : letterIShift,
+                  x: letterIShift,
                 }}
               >
                 I
@@ -275,13 +290,13 @@ const UnifiedTransitionSection = () => {
               <motion.span 
                 className="text-foreground inline-block"
                 style={{ 
-                  opacity: prefersReducedMotion ? 0 : extraLettersOpacity,
+                  opacity: extraLettersOpacity,
                   pointerEvents: 'none',
                 }}
               >
                 ntelligence
               </motion.span>
-            </div>
+            </motion.div>
 
             {/* Supporting Line */}
             <motion.p 
