@@ -3,8 +3,14 @@ import { motion, useScroll, useTransform } from "framer-motion";
 
 // PCB / Circuit Background Component
 const CircuitBackground = () => {
-  return <div className="absolute inset-0 bg-background overflow-hidden">
-      <svg className="absolute inset-0 w-full h-full" viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+  return (
+    <div className="absolute inset-0 bg-background overflow-hidden">
+      <svg 
+        className="absolute inset-0 w-full h-full" 
+        viewBox="0 0 1920 1080" 
+        preserveAspectRatio="xMidYMid slice"
+        xmlns="http://www.w3.org/2000/svg"
+      >
         <defs>
           {/* Gradient for signal flow animation */}
           <linearGradient id="signalGradient" x1="0%" y1="0%" x2="100%" y2="0%">
@@ -16,10 +22,10 @@ const CircuitBackground = () => {
           
           {/* Glow filter */}
           <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
-            <feGaussianBlur stdDeviation="2" result="coloredBlur" />
+            <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
             <feMerge>
-              <feMergeNode in="coloredBlur" />
-              <feMergeNode in="SourceGraphic" />
+              <feMergeNode in="coloredBlur"/>
+              <feMergeNode in="SourceGraphic"/>
             </feMerge>
           </filter>
         </defs>
@@ -27,9 +33,13 @@ const CircuitBackground = () => {
         {/* Base grid pattern */}
         <g stroke="hsl(var(--primary))" strokeOpacity="0.08" strokeWidth="0.5" fill="none">
           {/* Horizontal lines */}
-          {[...Array(20)].map((_, i) => <line key={`h-${i}`} x1="0" y1={54 * (i + 1)} x2="1920" y2={54 * (i + 1)} />)}
+          {[...Array(20)].map((_, i) => (
+            <line key={`h-${i}`} x1="0" y1={54 * (i + 1)} x2="1920" y2={54 * (i + 1)} />
+          ))}
           {/* Vertical lines */}
-          {[...Array(30)].map((_, i) => <line key={`v-${i}`} x1={64 * (i + 1)} y1="0" x2={64 * (i + 1)} y2="1080" />)}
+          {[...Array(30)].map((_, i) => (
+            <line key={`v-${i}`} x1={64 * (i + 1)} y1="0" x2={64 * (i + 1)} y2="1080" />
+          ))}
         </g>
 
         {/* Circuit traces - main paths */}
@@ -138,118 +148,170 @@ const CircuitBackground = () => {
         </radialGradient>
         <rect x="0" y="0" width="1920" height="1080" fill="url(#centerGlow)" />
       </svg>
-    </div>;
+    </div>
+  );
 };
+
 const UnifiedTransitionSection = () => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const {
-    scrollYProgress
-  } = useScroll({
+  
+  const { scrollYProgress } = useScroll({
     target: containerRef,
-    offset: ["start end", "end start"]
+    offset: ["start end", "end start"],
   });
 
-  // Total scroll height: 300vh
   // Phase breakdown (normalized 0-1):
-  // 0.00 - 0.08: Entry - "Artificial Intelligence" slides up
-  // 0.08 - 0.20: Subtractive fade - extra letters fade out
-  // 0.20 - 0.30: Form AI - A and I slide together into centered "AI"
-  // 0.30 - 0.40: Reveal tagline
-  // 0.40 - 0.55: Hold AI + tagline pinned in center
-  // 0.55 - 0.75: Handoff - AI moves up, Sculpting enters from bottom
-  // 0.75 - 0.90: Hold sculpting in center
-  // 0.90 - 1.00: Exit - everything scrolls away, PCB fades
+  // 0.00 - 0.08: Entry - "Artificial Intelligence" slides up into view
+  // 0.08 - 0.22: Subtractive fade - "rtificial " and "ntelligence" fade out (NO movement)
+  // 0.22 - 0.35: Positional lock-in - A and I slide subtly to close the gap
+  // 0.35 - 0.42: Reveal tagline
+  // 0.42 - 0.50: Hold AI + tagline pinned
+  // 0.50 - 0.62: Handoff - AI moves up, Sculpting enters from bottom
+  // 0.62 - 0.82: EXTENDED HOLD - Sculpting stays centered
+  // 0.82 - 1.00: Exit
 
-  // PCB Background - fades in early, stays through sculpting, fades at end
-  const circuitOpacity = useTransform(scrollYProgress, [0, 0.05, 0.92, 1.0], [0, 0.9, 0.9, 0]);
+  // PCB Background
+  const circuitOpacity = useTransform(scrollYProgress, [0, 0.05, 0.85, 1.0], [0, 0.9, 0.9, 0]);
 
   // AI Text Entry - slide up from bottom
   const aiEntryY = useTransform(scrollYProgress, [0, 0.08], ["100vh", "0vh"]);
   const aiEntryOpacity = useTransform(scrollYProgress, [0, 0.06], [0, 1]);
 
-  // Subtractive fade - fade out "rtificial" and "ntelligence"
-  const extraLettersOpacity = useTransform(scrollYProgress, [0.08, 0.20], [1, 0]);
-
-  // Show "AI" wrapper only after extra letters have faded
-  const aiWrapperVisible = useTransform(scrollYProgress, [0.19, 0.20], [0, 1]);
+  // === SUBTRACTIVE FADE ===
+  // Only "rtificial " and "ntelligence" fade out - letters A and I stay fully visible
+  const extraLettersOpacity = useTransform(scrollYProgress, [0.10, 0.22], [1, 0]);
+  
+  // === POSITIONAL LOCK-IN ===
+  // After faded text is invisible, A and I slide subtly to close the gap
+  // The motion is minimal - just enough to center the remaining "AI"
+  // A moves slightly RIGHT, I moves slightly LEFT - they converge but NEVER cross
+  // Using pixels for precise control to ensure they never form "IA"
+  const letterAX = useTransform(scrollYProgress, [0.22, 0.35], [0, 80]);  // A moves right
+  const letterIX = useTransform(scrollYProgress, [0.22, 0.35], [0, -120]); // I moves left (more distance to cover)
+  
+  // Hide the faded text containers completely after they're invisible (cleanup)
+  const fadedTextVisibility = useTransform(scrollYProgress, (value) => value > 0.24 ? 'hidden' : 'visible');
 
   // Reveal supporting line
-  const taglineOpacity = useTransform(scrollYProgress, [0.30, 0.40], [0, 1]);
-  const taglineY = useTransform(scrollYProgress, [0.30, 0.40], [30, 0]);
+  const taglineOpacity = useTransform(scrollYProgress, [0.35, 0.42], [0, 1]);
+  const taglineY = useTransform(scrollYProgress, [0.35, 0.42], [20, 0]);
 
   // HANDOFF: AI group moves upward as Sculpting enters
-  // AI section moves up and fades during handoff
-  const aiGroupY = useTransform(scrollYProgress, [0.55, 0.70], ["0vh", "-50vh"]);
-  const aiGroupOpacity = useTransform(scrollYProgress, [0.55, 0.68], [1, 0]);
+  const aiGroupY = useTransform(scrollYProgress, [0.50, 0.60], ["0vh", "-50vh"]);
+  const aiGroupOpacity = useTransform(scrollYProgress, [0.50, 0.58], [1, 0]);
 
   // Sculpting scrolls up from bottom naturally (no fade, pure position)
-  // Starts at bottom of viewport, scrolls to center
-  const sculptingY = useTransform(scrollYProgress, [0.55, 0.75], ["100vh", "0vh"]);
+  const sculptingY = useTransform(scrollYProgress, [0.50, 0.62], ["100vh", "0vh"]);
 
   // Check for reduced motion preference
-  const prefersReducedMotion = typeof window !== 'undefined' ? window.matchMedia('(prefers-reduced-motion: reduce)').matches : false;
-  return <section ref={containerRef} className="relative h-[300vh] w-full bg-background z-20">
-      {/* Sticky Container - entire sequence pins here */}
+  const prefersReducedMotion = typeof window !== 'undefined' 
+    ? window.matchMedia('(prefers-reduced-motion: reduce)').matches 
+    : false;
+
+  return (
+    <section 
+      ref={containerRef}
+      className="relative h-[320vh] w-full bg-background z-20"
+    >
+      {/* Sticky Container */}
       <div className="sticky top-0 h-screen w-full overflow-hidden flex items-center justify-center">
         
-        {/* PCB Circuit Background - continuous through all phases */}
-        <motion.div className="absolute inset-0 pointer-events-none" style={{
-        opacity: prefersReducedMotion ? 0.9 : circuitOpacity
-      }}>
+        {/* PCB Circuit Background */}
+        <motion.div 
+          className="absolute inset-0 pointer-events-none"
+          style={{ opacity: prefersReducedMotion ? 0.9 : circuitOpacity }}
+        >
           <CircuitBackground />
         </motion.div>
 
-        {/* AI Text Container - pinned then moves up during handoff */}
-        <motion.div className="absolute inset-0 flex items-center justify-center z-10 px-4" style={{
-        y: prefersReducedMotion ? 0 : aiGroupY,
-        opacity: prefersReducedMotion ? 0 : aiGroupOpacity
-      }}>
-          {/* Entry wrapper for initial slide-up */}
-          <motion.div className="text-center" style={{
-          y: prefersReducedMotion ? 0 : aiEntryY
-        }}>
-            {/* Phase 1: Full "Artificial Intelligence" text - shown before letters merge */}
-            <motion.div className="flex items-center justify-center font-serif text-3xl sm:text-4xl md:text-6xl lg:text-8xl tracking-tight" style={{
-            opacity: prefersReducedMotion ? 0 : extraLettersOpacity
-          }}>
-              <motion.span className="text-primary" style={{
-              opacity: prefersReducedMotion ? 1 : aiEntryOpacity
-            }}>
+        {/* AI Text Container */}
+        <motion.div 
+          className="absolute inset-0 flex items-center justify-center z-10 px-4"
+          style={{ 
+            y: prefersReducedMotion ? 0 : aiGroupY,
+            opacity: prefersReducedMotion ? 0 : aiGroupOpacity,
+          }}
+        >
+          {/* Entry wrapper - centers everything */}
+          <motion.div 
+            className="flex flex-col items-center justify-center"
+            style={{ 
+              y: prefersReducedMotion ? 0 : aiEntryY,
+              opacity: prefersReducedMotion ? 1 : aiEntryOpacity,
+            }}
+          >
+            {/* 
+              SINGLE TEXT LAYER: "Artificial Intelligence"
+              - A and I are always visible, never faded
+              - "rtificial " and "ntelligence" fade out subtractively
+              - After fade, A and I slide to close the gap
+              - NO duplicate "AI" layer - this IS the final AI
+            */}
+            <div className="relative font-serif text-3xl sm:text-4xl md:text-6xl lg:text-8xl tracking-tight flex items-baseline justify-center whitespace-nowrap">
+              
+              {/* "A" - primary letter, slides right after fade completes */}
+              <motion.span 
+                className="text-primary inline-block relative z-10"
+                style={{ 
+                  x: prefersReducedMotion ? 80 : letterAX,
+                }}
+              >
                 A
               </motion.span>
-              <span className="text-foreground">rtificial </span>
-              <motion.span className="text-primary" style={{
-              opacity: prefersReducedMotion ? 1 : aiEntryOpacity
-            }}>AI</motion.span>
-              <span className="text-foreground">ntelligence</span>
-            </motion.div>
+              
+              {/* "rtificial " - fades out, no movement, hidden after fade */}
+              <motion.span 
+                className="text-foreground inline-block"
+                style={{ 
+                  opacity: prefersReducedMotion ? 0 : extraLettersOpacity,
+                  visibility: prefersReducedMotion ? 'hidden' : fadedTextVisibility,
+                }}
+              >
+                rtificial{' '}
+              </motion.span>
+              
+              {/* "I" - primary letter, slides left after fade completes */}
+              <motion.span 
+                className="text-primary inline-block relative z-10"
+                style={{ 
+                  x: prefersReducedMotion ? -120 : letterIX,
+                }}
+              >
+                I
+              </motion.span>
+              
+              {/* "ntelligence" - fades out, no movement, hidden after fade */}
+              <motion.span 
+                className="text-foreground inline-block"
+                style={{ 
+                  opacity: prefersReducedMotion ? 0 : extraLettersOpacity,
+                  visibility: prefersReducedMotion ? 'hidden' : fadedTextVisibility,
+                }}
+              >
+                ntelligence
+              </motion.span>
+            </div>
 
-            {/* Phase 2: Centered "AI" wrapper - appears after merge, truly centered */}
-            <motion.div className="flex items-center justify-center font-serif text-3xl sm:text-4xl md:text-6xl lg:text-8xl tracking-tight" style={{
-            opacity: prefersReducedMotion ? 1 : aiWrapperVisible,
-            position: 'absolute',
-            top: '50%',
-            left: '50%',
-            transform: 'translate(-50%, -50%)'
-          }}>
-              <span className="text-primary">A</span>
-              <span className="text-primary">I</span>
-            </motion.div>
-
-            {/* Supporting Line - font-serif to match Sculpting, confident sub-headline size */}
-            <motion.p className="mt-4 md:mt-6 font-serif text-xl sm:text-2xl md:text-3xl lg:text-5xl text-foreground/80 tracking-wide" style={{
-            opacity: prefersReducedMotion ? 1 : taglineOpacity,
-            y: prefersReducedMotion ? 0 : taglineY
-          }}>
-              -first branding and marketing agency
+            {/* Supporting Line */}
+            <motion.p 
+              className="mt-4 md:mt-6 font-serif text-xl sm:text-2xl md:text-3xl lg:text-5xl text-foreground/80 tracking-wide"
+              style={{ 
+                opacity: prefersReducedMotion ? 1 : taglineOpacity,
+                y: prefersReducedMotion ? 0 : taglineY,
+              }}
+            >
+              - first branding and marketing agency
             </motion.p>
           </motion.div>
         </motion.div>
 
-        {/* Sculpting Text Container - scrolls up naturally from bottom, no fade */}
-        <motion.div className="absolute inset-0 flex items-center justify-center z-10 px-4" style={{
-        y: prefersReducedMotion ? 0 : sculptingY
-      }}>
+        {/* Sculpting Text Container - scrolls up naturally from bottom */}
+        <motion.div 
+          className="absolute inset-0 flex items-center justify-center z-10 px-4"
+          style={{ 
+            y: prefersReducedMotion ? 0 : sculptingY,
+          }}
+        >
           <div className="text-center">
             <h1 className="font-serif text-3xl sm:text-4xl md:text-6xl lg:text-8xl text-foreground tracking-tight">
               Sculpting Brand
@@ -260,6 +322,8 @@ const UnifiedTransitionSection = () => {
           </div>
         </motion.div>
       </div>
-    </section>;
+    </section>
+  );
 };
+
 export default UnifiedTransitionSection;
