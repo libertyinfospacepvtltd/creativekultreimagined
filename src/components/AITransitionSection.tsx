@@ -264,40 +264,74 @@ const AITransitionSection = () => {
     offset: ["start start", "end end"],
   });
 
-  // Supporting text reveals as user scrolls (Layer B content)
+  // ========== PHASE TIMING ==========
+  // Phase 1 (0-15%): Full "Artificial Intelligence" visible
+  // Phase 2 (15-35%): Fade out "rtificial" and "ntelligence"
+  // Phase 3 (35-55%): Slide A and I together to form "AI"
+  // Phase 4 (55-75%): Fade in supporting text
+  // Phase 5 (75-100%): Hold and exit
+
+  // Layer 2: Transitional letters fade out
+  const rtificialOpacity = useTransform(
+    scrollYProgress,
+    [0.15, 0.35],
+    [1, 0]
+  );
+  const ntelligenceOpacity = useTransform(
+    scrollYProgress,
+    [0.15, 0.35],
+    [1, 0]
+  );
+
+  // Layer 1: A and I slide together after fade completes
+  const slideDistance = isMobile ? 60 : 120;
+  const aSlideX = useTransform(
+    scrollYProgress,
+    [0.35, 0.55],
+    [0, slideDistance]
+  );
+  const iSlideX = useTransform(
+    scrollYProgress,
+    [0.35, 0.55],
+    [0, -slideDistance]
+  );
+
+  // Layer 3: Supporting text reveals after lock-in
   const supportingTextOpacity = useTransform(
     scrollYProgress,
-    [0.2, 0.45],
+    [0.55, 0.70],
     [0, 1]
   );
   const supportingTextY = useTransform(
     scrollYProgress,
-    [0.2, 0.45],
-    [40, 0]
+    [0.55, 0.70],
+    [30, 0]
   );
 
-  // AI visibility - stays visible until near end, then fades
-  const aiOpacity = useTransform(
+  // Overall content visibility
+  const contentOpacity = useTransform(
     scrollYProgress,
-    [0, 0.1, 0.85, 0.95],
+    [0, 0.08, 0.88, 0.98],
     [0, 1, 1, 0]
   );
 
-  // Background opacity for canvas
-  const [canvasOpacity, setCanvasOpacity] = useState(0.5);
-  
+  // Background opacity
   const bgOpacity = useTransform(
     scrollYProgress,
     [0, 0.1, 0.85, 1],
     [0.3, 1, 1, 0]
   );
 
+  const [canvasOpacity, setCanvasOpacity] = useState(0.5);
   useEffect(() => {
     const unsubscribe = bgOpacity.on("change", (v) => {
       setCanvasOpacity(v);
     });
     return () => unsubscribe();
   }, [bgOpacity]);
+
+  // Font size for the main text
+  const mainFontSize = isMobile ? 'clamp(2.5rem, 12vw, 4rem)' : 'clamp(4rem, 10vw, 8rem)';
 
   return (
     <section
@@ -309,13 +343,12 @@ const AITransitionSection = () => {
         zIndex: 5,
       }}
     >
-      {/* Layer: Scrolling Background - NOT sticky, scrolls with section */}
-      <div className="absolute inset-0 w-full h-full">
+      {/* Scrolling Background Layer - NOT pinned */}
+      <div className="absolute inset-0 w-full h-full overflow-hidden">
         {!prefersReducedMotion && (
           <CircuitBackground isMobile={isMobile} opacity={canvasOpacity} />
         )}
         
-        {/* Static fallback for reduced motion */}
         {prefersReducedMotion && (
           <div 
             className="absolute inset-0 opacity-20"
@@ -328,103 +361,144 @@ const AITransitionSection = () => {
             }}
           />
         )}
-      </div>
 
-      {/* Layer A: Pinned "AI" - stays fixed in center */}
-      <div 
-        className="sticky top-0 h-screen w-full flex items-center justify-center pointer-events-none"
-        style={{ zIndex: 20 }}
-      >
-        {/* Light vignette overlay for readability */}
+        {/* Subtle scan lines */}
         <motion.div
           className="absolute inset-0 pointer-events-none"
-          style={{
-            opacity: bgOpacity,
-            background: `
-              radial-gradient(ellipse 60% 40% at 50% 50%, transparent 0%, hsl(220, 15%, 6%, 0.5) 70%)
-            `
-          }}
-        />
-
-        <motion.div
-          className="relative z-10 text-center"
-          style={{
-            opacity: aiOpacity,
-            transform: 'translateZ(0)',
-          }}
+          style={{ opacity: bgOpacity }}
         >
-          <h2 
-            className="font-serif text-primary font-bold tracking-tight"
+          <div 
+            className="absolute inset-0"
             style={{
-              fontSize: 'clamp(4rem, 15vw, 12rem)',
-              lineHeight: 1,
-              textShadow: '0 0 60px rgba(177, 145, 93, 0.3)',
+              background: "repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(177, 145, 93, 0.008) 2px, rgba(177, 145, 93, 0.008) 4px)",
             }}
-          >
-            AI
-          </h2>
+          />
         </motion.div>
       </div>
 
-      {/* Layer B: Scrolling supporting text - in normal flow, appears below pinned AI */}
-      <div 
-        className="absolute inset-0 w-full h-full flex items-center justify-center pointer-events-none"
-        style={{ zIndex: 15 }}
-      >
-        <div className="sticky top-0 h-screen w-full flex items-center justify-center">
-          <motion.div
-            className="text-center px-4 sm:px-6"
-            style={{
-              opacity: supportingTextOpacity,
-              y: supportingTextY,
-              marginTop: isMobile ? '8rem' : '10rem', // Position below pinned AI
-              willChange: 'transform, opacity',
-            }}
-          >
-            <span 
-              className="font-serif text-foreground/80 tracking-wide block"
-              style={{
-                fontSize: 'clamp(1rem, 3vw, 2rem)',
-              }}
-            >
-              -first branding and marketing agency
-            </span>
-          </motion.div>
-        </div>
-      </div>
-
-      {/* Subtle scan line effect */}
+      {/* Vignette overlay for text readability */}
       <motion.div
         className="absolute inset-0 pointer-events-none"
-        style={{ 
+        style={{
           opacity: bgOpacity,
-          zIndex: 10,
+          background: `
+            radial-gradient(ellipse 70% 50% at 50% 50%, transparent 0%, hsl(220, 15%, 6%, 0.6) 80%)
+          `,
+          zIndex: 5,
         }}
-      >
-        <div 
-          className="absolute inset-0"
-          style={{
-            background: "repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(177, 145, 93, 0.01) 2px, rgba(177, 145, 93, 0.01) 4px)",
-          }}
-        />
-      </motion.div>
+      />
 
-      {/* Reduced motion static fallback */}
-      {prefersReducedMotion && (
-        <div className="absolute inset-0 flex items-center justify-center" style={{ zIndex: 25 }}>
-          <div className="text-center">
+      {/* PINNED CONTENT CONTAINER - All text layers pinned together */}
+      <div 
+        className="sticky top-0 h-screen w-full flex items-center justify-center"
+        style={{ zIndex: 10 }}
+      >
+        {prefersReducedMotion ? (
+          // Static fallback for reduced motion
+          <div className="text-center px-4">
             <h2 
               className="font-serif text-primary font-bold"
-              style={{ fontSize: 'clamp(4rem, 15vw, 12rem)' }}
+              style={{ fontSize: mainFontSize, lineHeight: 1 }}
             >
               AI
             </h2>
-            <p className="font-serif text-foreground/80 text-[clamp(1rem,3vw,2rem)] mt-4">
+            <p 
+              className="font-serif text-foreground/80 mt-4"
+              style={{ fontSize: isMobile ? '1rem' : '1.5rem' }}
+            >
               -first branding and marketing agency
             </p>
           </div>
-        </div>
-      )}
+        ) : (
+          <motion.div
+            className="text-center px-4"
+            style={{ opacity: contentOpacity }}
+          >
+            {/* Main text container with all three layers */}
+            <div className="relative flex flex-col items-center">
+              
+              {/* Layer 1 + Layer 2: "Artificial Intelligence" with pinned A and I */}
+              <div 
+                className="flex items-baseline justify-center font-serif tracking-wide"
+                style={{ 
+                  fontSize: mainFontSize,
+                  lineHeight: 1,
+                  gap: isMobile ? '0.15em' : '0.2em',
+                }}
+              >
+                {/* "Artificial" - A is pinned, "rtificial" fades */}
+                <motion.span 
+                  className="relative inline-flex items-baseline"
+                  style={{ 
+                    x: aSlideX,
+                    willChange: 'transform',
+                  }}
+                >
+                  <span 
+                    className="text-primary font-semibold"
+                    style={{ textShadow: '0 0 40px rgba(177, 145, 93, 0.4)' }}
+                  >
+                    A
+                  </span>
+                  <motion.span 
+                    className="text-foreground/90"
+                    style={{ 
+                      opacity: rtificialOpacity,
+                      willChange: 'opacity',
+                    }}
+                  >
+                    rtificial
+                  </motion.span>
+                </motion.span>
+
+                {/* "Intelligence" - I is pinned, "ntelligence" fades */}
+                <motion.span 
+                  className="relative inline-flex items-baseline"
+                  style={{ 
+                    x: iSlideX,
+                    willChange: 'transform',
+                  }}
+                >
+                  <span 
+                    className="text-primary font-semibold"
+                    style={{ textShadow: '0 0 40px rgba(177, 145, 93, 0.4)' }}
+                  >
+                    I
+                  </span>
+                  <motion.span 
+                    className="text-foreground/90"
+                    style={{ 
+                      opacity: ntelligenceOpacity,
+                      willChange: 'opacity',
+                    }}
+                  >
+                    ntelligence
+                  </motion.span>
+                </motion.span>
+              </div>
+
+              {/* Layer 3: Supporting text - fades and slides in below */}
+              <motion.div
+                className="mt-4 sm:mt-6"
+                style={{
+                  opacity: supportingTextOpacity,
+                  y: supportingTextY,
+                  willChange: 'transform, opacity',
+                }}
+              >
+                <span 
+                  className="font-serif text-foreground/80 tracking-wide"
+                  style={{ 
+                    fontSize: isMobile ? 'clamp(0.9rem, 4vw, 1.25rem)' : 'clamp(1.25rem, 2.5vw, 2rem)',
+                  }}
+                >
+                  -first branding and marketing agency
+                </span>
+              </motion.div>
+            </div>
+          </motion.div>
+        )}
+      </div>
     </section>
   );
 };
