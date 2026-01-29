@@ -177,23 +177,13 @@ const UnifiedTransitionSection = () => {
   const aiEntryY = useTransform(scrollYProgress, [0, 0.08], ["100vh", "0vh"]);
   const aiEntryOpacity = useTransform(scrollYProgress, [0, 0.06], [0, 1]);
 
-  // === SUBTRACTIVE FADE ===
-  // Only "rtificial " and "ntelligence" fade out - letters A and I stay fully visible
+  // === WIDTH-BASED COLLAPSE (No transforms - preserves A before I in document flow) ===
+  // Middle letters collapse their width to 0, bringing A and I together naturally
   const extraLettersOpacity = useTransform(scrollYProgress, [0.10, 0.22], [1, 0]);
-  
-  // === POSITIONAL LOCK-IN ===
-  // After faded text is invisible, A and I slide subtly to close the gap
-  // The motion is minimal - just enough to center the remaining "AI"
-  // A moves slightly RIGHT, I moves slightly LEFT - they converge but NEVER cross
-  // Using em units for tight, logo-like spacing - letters should feel unified
-  const letterAX = useTransform(scrollYProgress, [0.22, 0.35], [0, 320]);  // A slides right to +320px
-  const letterIX = useTransform(scrollYProgress, [0.22, 0.35], [0, 60]);   // I slides right
+  const extraLettersWidth = useTransform(scrollYProgress, [0.10, 0.22], ['100%', '0%']);
   
   // Subtle scale increase as AI locks in - gives a "settling" emphasis
-  const aiScale = useTransform(scrollYProgress, [0.30, 0.42], [1, 1.15]);
-  
-  // Hide the faded text containers completely after they're invisible (cleanup)
-  const fadedTextVisibility = useTransform(scrollYProgress, (value) => value > 0.24 ? 'hidden' : 'visible');
+  const aiScale = useTransform(scrollYProgress, [0.22, 0.35], [1, 1.15]);
 
   // Reveal supporting line
   const taglineOpacity = useTransform(scrollYProgress, [0.35, 0.42], [0, 1]);
@@ -251,54 +241,41 @@ const UnifiedTransitionSection = () => {
               - NO duplicate "AI" layer - this IS the final AI
             */}
             <motion.div 
-              className="relative font-serif tracking-tight flex items-baseline justify-center whitespace-nowrap w-full text-center"
+              className="font-serif tracking-tight flex flex-row items-baseline justify-center whitespace-nowrap w-full gap-1"
               style={{
                 scale: prefersReducedMotion ? 1.15 : aiScale,
-                fontSize: 'clamp(1.8rem, 5vw, 6rem)',
-                transition: 'transform 1.5s ease-in-out',
+                fontSize: 'clamp(2rem, 5vw, 6rem)',
               }}
             >
               
-              {/* "A" - primary letter, slides right after fade completes */}
-              <motion.span 
-                className="text-primary inline-block relative z-10"
-                style={{ 
-                  x: prefersReducedMotion ? 80 : letterAX,
-                  transition: 'transform 1.5s ease-in-out',
-                }}
-              >
+              {/* "A" - primary letter, stays in document flow position */}
+              <span className="text-primary inline-block">
                 A
-              </motion.span>
+              </span>
               
-              {/* "rtificial " - fades out with overflow hidden for clean collapse */}
+              {/* "rtificial " - width collapses to 0, opacity fades */}
               <motion.span 
-                className="text-foreground inline-block overflow-hidden"
+                className="text-foreground inline-block overflow-hidden whitespace-nowrap"
                 style={{ 
                   opacity: prefersReducedMotion ? 0 : extraLettersOpacity,
-                  visibility: prefersReducedMotion ? 'hidden' : fadedTextVisibility,
+                  width: prefersReducedMotion ? 0 : extraLettersWidth,
                   transition: 'opacity 1.5s ease-in-out, width 1.5s ease-in-out',
                 }}
               >
-                rtificial{' '}
+                rtificial
               </motion.span>
               
-              {/* "I" - primary letter, slides left after fade completes */}
-              <motion.span 
-                className="text-primary inline-block relative z-10"
-                style={{ 
-                  x: prefersReducedMotion ? -120 : letterIX,
-                  transition: 'transform 1.5s ease-in-out',
-                }}
-              >
+              {/* "I" - primary letter, stays in document flow position */}
+              <span className="text-primary inline-block">
                 I
-              </motion.span>
+              </span>
               
-              {/* "ntelligence" - fades out with overflow hidden for clean collapse */}
+              {/* "ntelligence" - width collapses to 0, opacity fades */}
               <motion.span 
-                className="text-foreground inline-block overflow-hidden"
+                className="text-foreground inline-block overflow-hidden whitespace-nowrap"
                 style={{ 
                   opacity: prefersReducedMotion ? 0 : extraLettersOpacity,
-                  visibility: prefersReducedMotion ? 'hidden' : fadedTextVisibility,
+                  width: prefersReducedMotion ? 0 : extraLettersWidth,
                   transition: 'opacity 1.5s ease-in-out, width 1.5s ease-in-out',
                 }}
               >
