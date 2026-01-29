@@ -180,11 +180,12 @@ const UnifiedTransitionSection = () => {
   // Subtractive fade - "rtificial " and "ntelligence" fade out (no movement)
   const extraLettersOpacity = useTransform(scrollYProgress, [0.12, 0.25], [1, 0]);
   
-  // Letter shift - Both A and I move RIGHT toward the centered "AI" position
-  // "A" starts on the left, needs to move right to reach center
-  // "I" is after "rtificial ", also needs to move slightly right to overlay final position
-  const letterAShift = useTransform(scrollYProgress, [0.25, 0.40], ["0em", "4.2em"]);
-  const letterIShift = useTransform(scrollYProgress, [0.25, 0.40], ["0em", "0.4em"]);
+  // Letter shift - converge toward centered "AI" position
+  // "A" starts left, moves right toward center (small movement)
+  // "I" starts right (after invisible "rtificial "), moves left to close the gap
+  // ORDER GUARANTEE: I always stays to the right of A (gap shrinks, never inverts)
+  const letterAShift = useTransform(scrollYProgress, [0.25, 0.40], ["0em", "1.8em"]);
+  const letterIShift = useTransform(scrollYProgress, [0.25, 0.40], ["0em", "-2.8em"]);
   
   // Hide faded text containers after letters merge (cleanup)
   const fadedTextDisplay = useTransform(scrollYProgress, (value) => value > 0.40 ? 0 : 1);
@@ -243,7 +244,7 @@ const UnifiedTransitionSection = () => {
               <motion.span 
                 className="text-primary inline-block"
                 style={{ 
-                  x: prefersReducedMotion ? "4.2em" : letterAShift,
+                  x: prefersReducedMotion ? "1.8em" : letterAShift,
                 }}
               >
                 A
@@ -264,7 +265,7 @@ const UnifiedTransitionSection = () => {
               <motion.span 
                 className="text-primary inline-block"
                 style={{ 
-                  x: prefersReducedMotion ? "0.4em" : letterIShift,
+                  x: prefersReducedMotion ? "-2.8em" : letterIShift,
                 }}
               >
                 I
