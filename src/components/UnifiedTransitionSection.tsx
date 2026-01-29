@@ -290,15 +290,15 @@ const UnifiedTransitionSection = () => {
               </motion.div>
             </div>
 
-            {/* Supporting Line */}
+            {/* Supporting Line - Premium brand typography */}
             <motion.p 
-              className="mt-4 md:mt-6 font-serif text-xl sm:text-2xl md:text-3xl lg:text-5xl text-foreground/80 tracking-wide"
+              className="mt-4 md:mt-6 font-serif italic text-lg sm:text-xl md:text-2xl text-foreground/70 tracking-wide"
               style={{ 
                 opacity: prefersReducedMotion ? 1 : taglineOpacity,
                 y: prefersReducedMotion ? 0 : taglineY,
               }}
             >
-              - first branding and marketing agency
+              — first branding and marketing agency
             </motion.p>
           </motion.div>
         </motion.div>
