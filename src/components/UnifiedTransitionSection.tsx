@@ -251,9 +251,11 @@ const UnifiedTransitionSection = () => {
               - NO duplicate "AI" layer - this IS the final AI
             */}
             <motion.div 
-              className="relative font-serif text-3xl sm:text-4xl md:text-6xl lg:text-8xl tracking-tight flex items-baseline justify-center whitespace-nowrap"
+              className="relative font-serif tracking-tight flex items-baseline justify-center whitespace-nowrap w-full text-center"
               style={{
                 scale: prefersReducedMotion ? 1.15 : aiScale,
+                fontSize: 'clamp(1.8rem, 5vw, 6rem)',
+                transition: 'transform 1.5s ease-in-out',
               }}
             >
               
@@ -262,17 +264,19 @@ const UnifiedTransitionSection = () => {
                 className="text-primary inline-block relative z-10"
                 style={{ 
                   x: prefersReducedMotion ? 80 : letterAX,
+                  transition: 'transform 1.5s ease-in-out',
                 }}
               >
                 A
               </motion.span>
               
-              {/* "rtificial " - fades out, no movement, hidden after fade */}
+              {/* "rtificial " - fades out with overflow hidden for clean collapse */}
               <motion.span 
-                className="text-foreground inline-block"
+                className="text-foreground inline-block overflow-hidden"
                 style={{ 
                   opacity: prefersReducedMotion ? 0 : extraLettersOpacity,
                   visibility: prefersReducedMotion ? 'hidden' : fadedTextVisibility,
+                  transition: 'opacity 1.5s ease-in-out, width 1.5s ease-in-out',
                 }}
               >
                 rtificial{' '}
@@ -283,17 +287,19 @@ const UnifiedTransitionSection = () => {
                 className="text-primary inline-block relative z-10"
                 style={{ 
                   x: prefersReducedMotion ? -120 : letterIX,
+                  transition: 'transform 1.5s ease-in-out',
                 }}
               >
                 I
               </motion.span>
               
-              {/* "ntelligence" - fades out, no movement, hidden after fade */}
+              {/* "ntelligence" - fades out with overflow hidden for clean collapse */}
               <motion.span 
-                className="text-foreground inline-block"
+                className="text-foreground inline-block overflow-hidden"
                 style={{ 
                   opacity: prefersReducedMotion ? 0 : extraLettersOpacity,
                   visibility: prefersReducedMotion ? 'hidden' : fadedTextVisibility,
+                  transition: 'opacity 1.5s ease-in-out, width 1.5s ease-in-out',
                 }}
               >
                 ntelligence
