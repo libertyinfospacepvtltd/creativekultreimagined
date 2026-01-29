@@ -189,6 +189,9 @@ const UnifiedTransitionSection = () => {
   const letterAX = useTransform(scrollYProgress, [0.22, 0.35], [0, 320]);  // A slides right to +320px
   const letterIX = useTransform(scrollYProgress, [0.22, 0.35], [0, 60]);   // I slides right
   
+  // Subtle scale increase as AI locks in - gives a "settling" emphasis
+  const aiScale = useTransform(scrollYProgress, [0.30, 0.42], [1, 1.15]);
+  
   // Hide the faded text containers completely after they're invisible (cleanup)
   const fadedTextVisibility = useTransform(scrollYProgress, (value) => value > 0.24 ? 'hidden' : 'visible');
 
@@ -247,7 +250,12 @@ const UnifiedTransitionSection = () => {
               - After fade, A and I slide to close the gap
               - NO duplicate "AI" layer - this IS the final AI
             */}
-            <div className="relative font-serif text-3xl sm:text-4xl md:text-6xl lg:text-8xl tracking-tight flex items-baseline justify-center whitespace-nowrap">
+            <motion.div 
+              className="relative font-serif text-3xl sm:text-4xl md:text-6xl lg:text-8xl tracking-tight flex items-baseline justify-center whitespace-nowrap"
+              style={{
+                scale: prefersReducedMotion ? 1.15 : aiScale,
+              }}
+            >
               
               {/* "A" - primary letter, slides right after fade completes */}
               <motion.span 
@@ -290,7 +298,7 @@ const UnifiedTransitionSection = () => {
               >
                 ntelligence
               </motion.span>
-            </div>
+            </motion.div>
 
             {/* Supporting Line */}
             <motion.p 
