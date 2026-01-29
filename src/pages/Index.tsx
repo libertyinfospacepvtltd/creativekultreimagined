@@ -1,6 +1,5 @@
 import Layout from "@/components/Layout";
 import HeroSection from "@/components/HeroSection";
-import AITransitionSection from "@/components/AITransitionSection";
 import StatsSection from "@/components/StatsSection";
 import MarqueeSection from "@/components/MarqueeSection";
 import ServicesPreview from "@/components/ServicesPreview";
@@ -11,7 +10,6 @@ const Index = () => {
   return (
     <Layout>
       <HeroSection />
-      <AITransitionSection />
       <StatsSection />
       <MarqueeSection />
       <ServicesPreview />

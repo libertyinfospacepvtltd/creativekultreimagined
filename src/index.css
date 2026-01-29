@@ -261,26 +261,6 @@
   .btn-touch {
     @apply min-h-[44px] min-w-[44px] px-6 py-3;
   }
-
-  /* Brand Legacy Text - Premium layered typography */
-  .brand-legacy-text {
-    position: relative;
-    transform: translateZ(0);
-    backface-visibility: hidden;
-    will-change: transform, opacity;
-  }
-
-  .brand-legacy-text h1 {
-    text-shadow: 0 2px 20px hsl(0 0% 0% / 0.5);
-  }
-
-  /* Subtle glow/stroke for legibility */
-  .brand-legacy-text--accent h1 {
-    text-shadow: 
-      0 2px 20px hsl(37 35% 53% / 0.3),
-      0 0 40px hsl(37 35% 53% / 0.15);
-  }
-
 }
 
 @layer utilities {

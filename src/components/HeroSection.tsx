@@ -4,7 +4,6 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import heroImage from "@/assets/hero-background.png";
 import heroImageMobile from "@/assets/hero-background-mobile.png";
 
-
 // Preload hero images immediately
 const preloadImage = new Image();
 preloadImage.src = heroImage;
@@ -19,20 +18,13 @@ const HeroSection = ({ preloaderComplete = true }: HeroSectionProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isMobile, setIsMobile] = useState(false);
-  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
 
-  // Check if mobile and reduced motion preference
+  // Check if mobile
   useEffect(() => {
     const checkMobile = () => {
       setIsMobile(window.innerWidth < 768);
     };
-    const checkReducedMotion = () => {
-      setPrefersReducedMotion(
-        window.matchMedia("(prefers-reduced-motion: reduce)").matches
-      );
-    };
     checkMobile();
-    checkReducedMotion();
     window.addEventListener("resize", checkMobile);
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
@@ -43,27 +35,20 @@ const HeroSection = ({ preloaderComplete = true }: HeroSectionProps) => {
     offset: ["start start", "end start"],
   });
 
-  // Phase A (0-25%): Normal hero
-  // Phase B (25-70%): Image fade in + text merge
-  // Phase C (70-100%): Exit scroll
-
-  // Hero background transforms
+  // Transform values based on scroll progress
   const backgroundScale = useTransform(scrollYProgress, [0, 0.5], [1.1, 1.8]);
-  const heroBackgroundOpacity = useTransform(scrollYProgress, [0.2, 0.4], [1, 0.3]);
   
-  // Tagline opacity - fades out early
+  // Tagline opacity - fades out as scroll begins
   const taglineOpacity = useTransform(scrollYProgress, [0, 0.1], [1, 0]);
   
-  // CTAs and radar fade out
+  // Reveal text - only appears AFTER logo has docked (scroll > 0.15)
+  const textOpacity = useTransform(scrollYProgress, [0.22, 0.35], [0, 1]);
+  const textY = useTransform(scrollYProgress, [0.22, 0.35], ["50px", "0px"]);
+  const textScale = useTransform(scrollYProgress, [0.22, 0.35], [0.9, 1]);
+  
+  // CTAs and radar
   const ctaOpacity = useTransform(scrollYProgress, [0, 0.05], [1, 0]);
   const radarOpacity = useTransform(scrollYProgress, [0, 0.1], [1, 0]);
-
-  // Text merge effect - Phase B
-  const mergeTextOpacity = useTransform(scrollYProgress, [0.22, 0.35], [0, 1]);
-  const textY = useTransform(scrollYProgress, [0.22, 0.35], [40, 0]);
-  
-  // Exit phase - Phase C (70-100%)
-  const exitY = useTransform(scrollYProgress, [0.7, 1], [0, -100]);
 
   useEffect(() => {
     // Disable parallax on mobile for performance
@@ -89,21 +74,17 @@ const HeroSection = ({ preloaderComplete = true }: HeroSectionProps) => {
   return (
     <section 
       ref={containerRef}
-      className="relative h-[220vh] w-full bg-[hsl(220,15%,8%)] z-10"
+      className="relative h-[200vh] w-full bg-[hsl(220,15%,8%)] z-10"
     >
       {/* Sticky Container */}
-      <motion.div 
-        className="sticky top-0 h-screen h-[100dvh] w-full overflow-hidden z-10"
-        style={{ y: prefersReducedMotion ? 0 : exitY }}
-      >
-        {/* Original Hero Background with Parallax + Scroll Zoom */}
+      <div className="sticky top-0 h-screen h-[100dvh] w-full overflow-hidden z-10">
+        {/* Background Image with Parallax + Scroll Zoom */}
         <motion.div 
           className="absolute inset-0 transition-transform duration-300 ease-out origin-center"
           style={{
-            scale: prefersReducedMotion ? 1.1 : backgroundScale,
+            scale: backgroundScale,
             x: isMobile ? 0 : mousePosition.x * -20,
             y: isMobile ? 0 : mousePosition.y * -20,
-            opacity: prefersReducedMotion ? 1 : heroBackgroundOpacity,
           }}
         >
           {/* Mobile Image */}
@@ -120,10 +101,9 @@ const HeroSection = ({ preloaderComplete = true }: HeroSectionProps) => {
             className="hidden md:block w-full h-full object-cover object-center"
             loading="eager"
           />
-          {/* Dark Overlay */}
+          {/* Dark Overlay - consistent dark style in both modes */}
           <div className="absolute inset-0 bg-background/80" style={{ background: 'hsla(220, 15%, 8%, 0.8)' }} />
         </motion.div>
-
 
         {/* Rotating Radar Circles - smaller on mobile */}
         <motion.div 
@@ -169,49 +149,40 @@ const HeroSection = ({ preloaderComplete = true }: HeroSectionProps) => {
           style={{ opacity: taglineOpacity }}
         >
           <div className="text-center mt-16 sm:mt-40 md:mt-48 lg:mt-56">
-            <p className="text-foreground/90 font-serif text-lg sm:text-xl md:text-2xl lg:text-3xl italic tracking-wide">
+            <p className="text-white/90 font-serif text-lg sm:text-xl md:text-2xl lg:text-3xl italic tracking-wide">
               Where Insight Meets Impact.
             </p>
-            <p className="text-muted-foreground font-sans text-xs sm:text-sm md:text-base tracking-widest uppercase mt-2 sm:mt-3">
+            <p className="text-gray-400 font-sans text-xs sm:text-sm md:text-base tracking-widest uppercase mt-2 sm:mt-3">
               Strategy • Clarity • Results
             </p>
           </div>
         </motion.div>
 
-        {/* Sculpting Brand Legacies - Clean Single Wrapper */}
+        {/* Reveal Text - "Cultivating Digital Legacies" - appears AFTER logo docks */}
         <motion.div 
           className="absolute inset-0 flex items-center justify-center pointer-events-none z-30"
-          style={{ opacity: mergeTextOpacity }}
+          style={{
+            opacity: textOpacity,
+          }}
         >
-          {/* Subtle background overlay */}
+          {/* Solid background layer that covers hero content */}
           <motion.div 
-            className="absolute inset-0 bg-background/60"
-            style={{ opacity: mergeTextOpacity }}
+            className="absolute inset-0 bg-background"
+            style={{ opacity: textOpacity }}
           />
-          
-          {/* Text Lockup - Single wrapper with GPU acceleration */}
           <motion.div 
-            className="relative text-center md:text-left md:ml-[5%] lg:ml-[10%] px-4"
+            className="relative text-center px-4"
             style={{ 
-              y: prefersReducedMotion ? 0 : textY,
-              transform: 'translateZ(0)',
-              backfaceVisibility: 'hidden',
-              willChange: 'transform, opacity',
+              y: textY,
+              scale: textScale,
             }}
           >
-            {/* Line 1: Sculpting */}
-            <div className="brand-legacy-text relative">
-              <h1 className="font-serif text-[clamp(2rem,8vw,6rem)] font-medium leading-[0.95] tracking-[0.02em] text-foreground">
-                Sculpting
-              </h1>
-            </div>
-            
-            {/* Line 2: Brand Legacies */}
-            <div className="brand-legacy-text brand-legacy-text--accent relative mt-2 md:mt-3 md:ml-8 lg:ml-16">
-              <h1 className="font-serif text-[clamp(1.75rem,7vw,5.5rem)] font-medium italic leading-[0.95] tracking-[0.02em] text-primary">
-                Brand Legacies.
-              </h1>
-            </div>
+            <h1 className="font-serif text-3xl sm:text-4xl md:text-6xl lg:text-8xl text-foreground tracking-tight">
+              Sculpting Brand
+            </h1>
+            <h1 className="font-serif text-3xl sm:text-4xl md:text-6xl lg:text-8xl text-primary italic mt-1 sm:mt-2">
+              Legacies.
+            </h1>
           </motion.div>
         </motion.div>
 
@@ -235,13 +206,13 @@ const HeroSection = ({ preloaderComplete = true }: HeroSectionProps) => {
             </Link>
           </div>
           
-          {/* Scroll Indicator */}
+          {/* Scroll Indicator - hide on very small screens */}
           <div className="hidden sm:flex flex-col items-center gap-2 text-muted-foreground/50">
             <span className="text-xs font-sans uppercase tracking-widest">Scroll</span>
             <div className="w-px h-6 md:h-8 bg-gradient-to-b from-muted-foreground/50 to-transparent animate-pulse" />
           </div>
         </motion.div>
-      </motion.div>
+      </div>
     </section>
   );
 };
