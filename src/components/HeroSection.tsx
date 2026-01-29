@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { motion, useScroll, useTransform } from "framer-motion";
 import heroImage from "@/assets/hero-background.png";
 import heroImageMobile from "@/assets/hero-background-mobile.png";
-import brandLegacyHead from "@/assets/brand-legacy-head.png";
+
 
 // Preload hero images immediately
 const preloadImage = new Image();
@@ -58,10 +58,6 @@ const HeroSection = ({ preloaderComplete = true }: HeroSectionProps) => {
   const ctaOpacity = useTransform(scrollYProgress, [0, 0.05], [1, 0]);
   const radarOpacity = useTransform(scrollYProgress, [0, 0.1], [1, 0]);
 
-  // Brand Legacy Image - Phase B (25-70%)
-  const brandImageOpacity = useTransform(scrollYProgress, [0.2, 0.35, 0.75, 0.9], [0, 1, 1, 0]);
-  const brandImageScale = useTransform(scrollYProgress, [0.2, 0.5], [1.08, 1.0]);
-  
   // Text merge effect - Phase B
   const mergeTextOpacity = useTransform(scrollYProgress, [0.22, 0.35], [0, 1]);
   const textY = useTransform(scrollYProgress, [0.22, 0.35], [40, 0]);
@@ -128,23 +124,6 @@ const HeroSection = ({ preloaderComplete = true }: HeroSectionProps) => {
           <div className="absolute inset-0 bg-background/80" style={{ background: 'hsla(220, 15%, 8%, 0.8)' }} />
         </motion.div>
 
-        {/* Brand Legacy Head Image - Fades in during Phase B */}
-        <motion.div 
-          className="absolute inset-0 flex items-center justify-center"
-          style={{ 
-            opacity: prefersReducedMotion ? 0.8 : brandImageOpacity,
-            scale: prefersReducedMotion ? 1 : brandImageScale,
-          }}
-        >
-          <img
-            src={brandLegacyHead}
-            alt="Brand legacy visualization"
-            className="w-full h-full object-cover object-center md:object-[center_30%]"
-            loading="eager"
-          />
-          {/* Gradient overlay for text readability */}
-          <div className="absolute inset-0 bg-gradient-to-t from-[hsl(220,15%,8%)] via-transparent to-[hsl(220,15%,8%)/50]" />
-        </motion.div>
 
         {/* Rotating Radar Circles - smaller on mobile */}
         <motion.div 
