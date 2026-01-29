@@ -239,11 +239,12 @@ const UnifiedTransitionSection = () => {
               - items-center ensures vertical alignment on same line
               - Responsive font clamp to prevent overflow on mobile
             */}
+            {/* 
+              Font size matches "Sculpting Brand Legacies" exactly on desktop.
+              Mobile uses clamp() to ensure text fits on one line without wrapping.
+            */}
             <div 
-              className="font-serif tracking-tight flex flex-row items-center justify-center whitespace-nowrap w-full text-center"
-              style={{
-                fontSize: 'clamp(1.5rem, 4vw, 6rem)',
-              }}
+              className="font-serif tracking-tight flex flex-row items-center justify-center whitespace-nowrap w-full text-center text-[clamp(1.75rem,5vw,6rem)] sm:text-4xl md:text-6xl lg:text-8xl"
             >
               <motion.div
                 className="flex flex-row items-center justify-center"
