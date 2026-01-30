@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform, useInView } from "framer-motion";
 
 // PCB / Circuit Background Component
 const CircuitBackground = () => {
@@ -154,17 +154,23 @@ const CircuitBackground = () => {
 
 const UnifiedTransitionSection = () => {
   const containerRef = useRef<HTMLDivElement>(null);
+  const subtitleRef = useRef<HTMLParagraphElement>(null);
   
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start end", "end start"],
   });
 
+  // === SUBTITLE-DRIVEN COLLAPSE ===
+  // The AI collapse is triggered by the subtitle's visibility in the viewport
+  const isSubtitleInView = useInView(subtitleRef, { 
+    amount: 0.5, // Trigger when 50% of subtitle is visible
+    margin: "-10% 0px -10% 0px" // Add some margin for smoother triggering
+  });
+
   // Phase breakdown (normalized 0-1):
   // 0.00 - 0.08: Entry - "Artificial Intelligence" slides up into view
-  // 0.08 - 0.22: Subtractive fade - "rtificial " and "ntelligence" fade out (NO movement)
-  // 0.22 - 0.35: Positional lock-in - A and I slide subtly to close the gap
-  // 0.35 - 0.42: Reveal tagline
+  // 0.35 - 0.42: Reveal tagline (subtitle visibility triggers collapse)
   // 0.42 - 0.50: Hold AI + tagline pinned
   // 0.50 - 0.62: Handoff - AI moves up, Sculpting enters from bottom
   // 0.62 - 0.82: EXTENDED HOLD - Sculpting stays centered
@@ -176,12 +182,6 @@ const UnifiedTransitionSection = () => {
   // AI Text Entry - slide up from bottom
   const aiEntryY = useTransform(scrollYProgress, [0, 0.08], ["100vh", "0vh"]);
   const aiEntryOpacity = useTransform(scrollYProgress, [0, 0.06], [0, 1]);
-
-  // === MAX-WIDTH-BASED COLLAPSE (Smooth bidirectional animation) ===
-  // Middle letters collapse their max-width to 0, bringing A and I together naturally
-  // Using max-width instead of width for smoother CSS transitions in both directions
-  const extraLettersOpacity = useTransform(scrollYProgress, [0.10, 0.22], [1, 0]);
-  const extraLettersMaxWidth = useTransform(scrollYProgress, [0.10, 0.22], ['500px', '0px']);
   
   // Subtle scale increase as AI locks in - gives a "settling" emphasis
   const aiScale = useTransform(scrollYProgress, [0.22, 0.35], [1, 1.15]);
@@ -202,13 +202,16 @@ const UnifiedTransitionSection = () => {
     ? window.matchMedia('(prefers-reduced-motion: reduce)').matches 
     : false;
 
+  // Collapse state driven by subtitle visibility
+  const isCollapsed = isSubtitleInView;
+
   return (
     <section 
       ref={containerRef}
-      className="relative h-[260vh] w-full bg-background z-20"
+      className="relative h-[260vh] w-full bg-background z-20 overflow-x-clip"
     >
-      {/* Sticky Container - no overflow-hidden to prevent text cut-off */}
-      <div className="sticky top-0 h-screen w-full flex items-center justify-center">
+      {/* Sticky Container - overflow-visible on inner elements for text */}
+      <div className="sticky top-0 h-screen w-full flex items-center justify-center overflow-visible">
         
         {/* PCB Circuit Background */}
         <motion.div 
@@ -218,9 +221,9 @@ const UnifiedTransitionSection = () => {
           <CircuitBackground />
         </motion.div>
 
-        {/* AI Text Container */}
+        {/* AI Text Container - max-w-[95vw] and px-8 to prevent edge clipping */}
         <motion.div 
-          className="absolute inset-0 flex items-center justify-center z-10 px-4"
+          className="absolute inset-0 flex items-center justify-center z-10 px-8"
           style={{ 
             y: prefersReducedMotion ? 0 : aiGroupY,
             opacity: prefersReducedMotion ? 0 : aiGroupOpacity,
@@ -228,7 +231,7 @@ const UnifiedTransitionSection = () => {
         >
           {/* Entry wrapper - centers everything */}
           <motion.div 
-            className="flex flex-col items-center justify-center w-full"
+            className="flex flex-col items-center justify-center w-full max-w-[95vw]"
             style={{ 
               y: prefersReducedMotion ? 0 : aiEntryY,
               opacity: prefersReducedMotion ? 1 : aiEntryOpacity,
@@ -236,16 +239,11 @@ const UnifiedTransitionSection = () => {
           >
             {/* 
               SINGLE TEXT LAYER: "Artificial Intelligence"
-              - Tight layout with no gap - width collapse creates the merge
-              - items-center ensures vertical alignment on same line
-              - Responsive font clamp to prevent overflow on mobile
-            */}
-            {/* 
-              Font size matches "Sculpting Brand Legacies" exactly on desktop.
-              Mobile uses clamp() to ensure text fits on one line without wrapping.
+              - Tight layout with no gap - max-width collapse creates the merge
+              - Collapse is synced to subtitle visibility via useInView
             */}
             <div 
-              className="font-serif tracking-tight flex flex-row items-center justify-center whitespace-nowrap w-full text-center text-[clamp(1.5rem,4.5vw,6rem)] sm:text-4xl md:text-6xl lg:text-8xl px-6"
+              className="font-serif tracking-tight flex flex-row items-center justify-center whitespace-nowrap w-full max-w-[95vw] text-center text-[clamp(1.5rem,4.5vw,6rem)] sm:text-4xl md:text-6xl lg:text-8xl overflow-visible"
             >
               <motion.div
                 className="flex flex-row items-center justify-center"
@@ -258,16 +256,16 @@ const UnifiedTransitionSection = () => {
                   A
                 </span>
                 
-                {/* "rtificial " - max-width collapses to 0, opacity fades - smooth bidirectional */}
-                <motion.span 
+                {/* "rtificial " - max-width collapses to 0 when subtitle is visible */}
+                <span 
                   className="text-foreground inline-block overflow-hidden whitespace-nowrap transition-[max-width,opacity] duration-1000 ease-in-out"
                   style={{ 
-                    opacity: prefersReducedMotion ? 0 : extraLettersOpacity,
-                    maxWidth: prefersReducedMotion ? '0px' : extraLettersMaxWidth,
+                    opacity: prefersReducedMotion ? 0 : (isCollapsed ? 0 : 1),
+                    maxWidth: prefersReducedMotion ? '0px' : (isCollapsed ? '0px' : '500px'),
                   }}
                 >
                   rtificial
-                </motion.span>
+                </span>
                 
                 {/* Small gap between A and I when collapsed */}
                 <span className="inline-block w-1 md:w-2" />
@@ -277,21 +275,22 @@ const UnifiedTransitionSection = () => {
                   I
                 </span>
                 
-                {/* "ntelligence" - max-width collapses to 0, opacity fades - smooth bidirectional */}
-                <motion.span 
+                {/* "ntelligence" - max-width collapses to 0 when subtitle is visible */}
+                <span 
                   className="text-foreground inline-block overflow-hidden whitespace-nowrap transition-[max-width,opacity] duration-1000 ease-in-out"
                   style={{ 
-                    opacity: prefersReducedMotion ? 0 : extraLettersOpacity,
-                    maxWidth: prefersReducedMotion ? '0px' : extraLettersMaxWidth,
+                    opacity: prefersReducedMotion ? 0 : (isCollapsed ? 0 : 1),
+                    maxWidth: prefersReducedMotion ? '0px' : (isCollapsed ? '0px' : '500px'),
                   }}
                 >
                   ntelligence
-                </motion.span>
+                </span>
               </motion.div>
             </div>
 
-            {/* Supporting Line - Premium brand typography */}
+            {/* Supporting Line - Premium brand typography - THIS DRIVES THE COLLAPSE */}
             <motion.p 
+              ref={subtitleRef}
               className="mt-4 md:mt-6 font-serif italic text-lg sm:text-xl md:text-2xl text-foreground/70 tracking-wide"
               style={{ 
                 opacity: prefersReducedMotion ? 1 : taglineOpacity,
