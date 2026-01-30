@@ -7,13 +7,18 @@ import Layout from "@/components/Layout";
 const CaseStudy12thPass = () => {
   const horizontalScrollRef = useRef<HTMLDivElement>(null);
   
+  // Track scroll progress through the 400vh container
+  // offset: ["start start", "end end"] means:
+  // - 0% when the TOP of the section reaches the TOP of viewport
+  // - 100% when the BOTTOM of the section reaches the BOTTOM of viewport
   const { scrollYProgress } = useScroll({
     target: horizontalScrollRef,
     offset: ["start start", "end end"]
   });
 
-  // Calculate the transform to show all 10 slides
-  // Each slide is ~40vw + 8px gap, total ~410vw, minus viewport (100vw) = ~310vw to scroll
+  // Transform vertical scroll (0-100%) to horizontal translation
+  // We need to move from 0% to -(totalWidth - viewportWidth)
+  // With 10 slides at ~40vw each + gaps, we need roughly 85% translation
   const x = useTransform(scrollYProgress, [0, 1], ["0%", "-85%"]);
 
   const slides = [
@@ -375,8 +380,18 @@ const CaseStudy12thPass = () => {
         </section>
 
         {/* Section 7: Horizontal Scroll Finale */}
-        <section ref={horizontalScrollRef} className="relative h-[400vh]">
-          <div className="sticky top-0 h-screen flex items-center overflow-hidden bg-[#050505]">
+        {/* Container A: The Scroll Track - creates vertical scroll space */}
+        <div 
+          ref={horizontalScrollRef} 
+          className="relative"
+          style={{ height: '400vh' }}
+        >
+          {/* Container B: The Sticky Viewport - pins to screen */}
+          <div 
+            className="sticky top-0 left-0 w-full h-screen flex items-center bg-[#050505]"
+            style={{ overflow: 'hidden' }}
+          >
+            {/* The sliding content */}
             <motion.div 
               style={{ x }}
               className="flex gap-8 pl-[10vw] pr-[10vw]"
@@ -384,7 +399,8 @@ const CaseStudy12thPass = () => {
               {slides.map((slide) => (
                 <motion.div
                   key={slide.id}
-                  className="relative flex-shrink-0 w-[70vw] md:w-[50vw] lg:w-[40vw] h-[60vh] rounded-3xl overflow-hidden"
+                  className="relative flex-shrink-0 w-[70vw] md:w-[50vw] lg:w-[40vw] h-[60vh] rounded-3xl"
+                  style={{ overflow: 'hidden' }}
                 >
                   <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-white/5 border border-white/10 hover:border-primary/30 transition-colors duration-300">
                     <div className="absolute inset-0 flex flex-col items-center justify-center p-8">
@@ -400,7 +416,7 @@ const CaseStudy12thPass = () => {
               ))}
             </motion.div>
           </div>
-        </section>
+        </div>
 
         {/* Footer CTA */}
         <section className="py-24 px-6 md:px-12 lg:px-24 text-center">
