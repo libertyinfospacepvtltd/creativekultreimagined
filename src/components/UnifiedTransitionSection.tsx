@@ -177,10 +177,11 @@ const UnifiedTransitionSection = () => {
   const aiEntryY = useTransform(scrollYProgress, [0, 0.08], ["100vh", "0vh"]);
   const aiEntryOpacity = useTransform(scrollYProgress, [0, 0.06], [0, 1]);
 
-  // === WIDTH-BASED COLLAPSE (No transforms - preserves A before I in document flow) ===
-  // Middle letters collapse their width to 0, bringing A and I together naturally
+  // === MAX-WIDTH-BASED COLLAPSE (Smooth bidirectional animation) ===
+  // Middle letters collapse their max-width to 0, bringing A and I together naturally
+  // Using max-width instead of width for smoother CSS transitions in both directions
   const extraLettersOpacity = useTransform(scrollYProgress, [0.10, 0.22], [1, 0]);
-  const extraLettersWidth = useTransform(scrollYProgress, [0.10, 0.22], ['100%', '0%']);
+  const extraLettersMaxWidth = useTransform(scrollYProgress, [0.10, 0.22], ['500px', '0px']);
   
   // Subtle scale increase as AI locks in - gives a "settling" emphasis
   const aiScale = useTransform(scrollYProgress, [0.22, 0.35], [1, 1.15]);
@@ -244,7 +245,7 @@ const UnifiedTransitionSection = () => {
               Mobile uses clamp() to ensure text fits on one line without wrapping.
             */}
             <div 
-              className="font-serif tracking-tight flex flex-row items-center justify-center whitespace-nowrap w-full text-center text-[clamp(1.75rem,5vw,6rem)] sm:text-4xl md:text-6xl lg:text-8xl"
+              className="font-serif tracking-tight flex flex-row items-center justify-center whitespace-nowrap w-full text-center text-[clamp(1.5rem,4.5vw,6rem)] sm:text-4xl md:text-6xl lg:text-8xl px-6"
             >
               <motion.div
                 className="flex flex-row items-center justify-center"
@@ -257,13 +258,12 @@ const UnifiedTransitionSection = () => {
                   A
                 </span>
                 
-                {/* "rtificial " - width collapses to 0, opacity fades */}
+                {/* "rtificial " - max-width collapses to 0, opacity fades - smooth bidirectional */}
                 <motion.span 
-                  className="text-foreground inline-block overflow-hidden whitespace-nowrap"
+                  className="text-foreground inline-block overflow-hidden whitespace-nowrap transition-[max-width,opacity] duration-1000 ease-in-out"
                   style={{ 
                     opacity: prefersReducedMotion ? 0 : extraLettersOpacity,
-                    maxWidth: prefersReducedMotion ? 0 : extraLettersWidth,
-                    transition: 'max-width 1s ease-in-out, opacity 1s ease-in-out',
+                    maxWidth: prefersReducedMotion ? '0px' : extraLettersMaxWidth,
                   }}
                 >
                   rtificial
@@ -277,13 +277,12 @@ const UnifiedTransitionSection = () => {
                   I
                 </span>
                 
-                {/* "ntelligence" - width collapses to 0, opacity fades */}
+                {/* "ntelligence" - max-width collapses to 0, opacity fades - smooth bidirectional */}
                 <motion.span 
-                  className="text-foreground inline-block overflow-hidden whitespace-nowrap"
+                  className="text-foreground inline-block overflow-hidden whitespace-nowrap transition-[max-width,opacity] duration-1000 ease-in-out"
                   style={{ 
                     opacity: prefersReducedMotion ? 0 : extraLettersOpacity,
-                    maxWidth: prefersReducedMotion ? 0 : extraLettersWidth,
-                    transition: 'max-width 1s ease-in-out, opacity 1s ease-in-out',
+                    maxWidth: prefersReducedMotion ? '0px' : extraLettersMaxWidth,
                   }}
                 >
                   ntelligence
