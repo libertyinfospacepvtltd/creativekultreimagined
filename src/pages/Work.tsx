@@ -109,7 +109,7 @@ const Work = () => {
                         target="_blank"
                         rel="noopener noreferrer"
                         onClick={(e) => e.stopPropagation()}
-                        className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-primary hover:text-primary-foreground transition-all duration-300"
+                        className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-primary hover:text-white hover:bg-primary transition-all duration-300"
                       >
                         <Globe size={18} />
                       </a>
@@ -120,7 +120,7 @@ const Work = () => {
                         target="_blank"
                         rel="noopener noreferrer"
                         onClick={(e) => e.stopPropagation()}
-                        className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-primary hover:text-primary-foreground transition-all duration-300"
+                        className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-primary hover:text-white hover:bg-primary transition-all duration-300"
                       >
                         <Instagram size={18} />
                       </a>
@@ -131,7 +131,7 @@ const Work = () => {
                         target="_blank"
                         rel="noopener noreferrer"
                         onClick={(e) => e.stopPropagation()}
-                        className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-primary hover:text-primary-foreground transition-all duration-300"
+                        className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-primary hover:text-white hover:bg-primary transition-all duration-300"
                       >
                         <Facebook size={18} />
                       </a>
@@ -141,7 +141,7 @@ const Work = () => {
                   {/* View Case Study Button */}
                   <Link
                     to={`/work/${project.id}`}
-                    className="inline-flex items-center gap-2 px-6 py-3 rounded-full border-2 border-white bg-transparent text-white font-sans text-sm uppercase tracking-widest hover:bg-white hover:text-black transition-all duration-300"
+                    className="inline-flex items-center gap-2 px-6 py-3 rounded-full border-2 border-primary bg-transparent text-primary font-sans text-sm uppercase tracking-widest hover:bg-primary hover:text-primary-foreground transition-all duration-300"
                   >
                     View Case Study
                     <ArrowRight size={16} />
