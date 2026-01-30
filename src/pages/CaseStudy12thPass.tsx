@@ -1,8 +1,72 @@
 import { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform, MotionValue } from "framer-motion";
 import { ArrowLeft } from "lucide-react";
 import { Link } from "react-router-dom";
 import Layout from "@/components/Layout";
+
+// Extracted slide component to properly use hooks
+interface SlideProps {
+  slide: { id: number; label: string };
+  index: number;
+  totalSlides: number;
+  scrollYProgress: MotionValue<number>;
+}
+
+const GallerySlide = ({ slide, index, totalSlides, scrollYProgress }: SlideProps) => {
+  const slideProgress = useTransform(
+    scrollYProgress,
+    [
+      Math.max(0, (index - 1) / totalSlides),
+      index / totalSlides,
+      Math.min(1, (index + 1) / totalSlides)
+    ],
+    [0.4, 1, 0.4]
+  );
+  
+  const slideScale = useTransform(
+    scrollYProgress,
+    [
+      Math.max(0, (index - 1) / totalSlides),
+      index / totalSlides,
+      Math.min(1, (index + 1) / totalSlides)
+    ],
+    [0.9, 1, 0.9]
+  );
+
+  const slideBlur = useTransform(
+    scrollYProgress,
+    [
+      Math.max(0, (index - 1) / totalSlides),
+      index / totalSlides,
+      Math.min(1, (index + 1) / totalSlides)
+    ],
+    [4, 0, 4]
+  );
+
+  const blurFilter = useTransform(slideBlur, (v) => `blur(${v}px)`);
+
+  return (
+    <motion.div
+      style={{ 
+        opacity: slideProgress, 
+        scale: slideScale,
+        filter: blurFilter
+      }}
+      className="relative flex-shrink-0 w-[70vw] md:w-[50vw] lg:w-[40vw] h-[60vh] rounded-3xl overflow-hidden"
+    >
+      <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-white/5 border border-white/10">
+        <div className="absolute inset-0 flex flex-col items-center justify-center p-8">
+          <span className="text-primary font-sans text-8xl font-bold mb-4">
+            {String(slide.id).padStart(2, '0')}
+          </span>
+          <p className="font-sans text-white/60 text-center text-lg">
+            {slide.label}
+          </p>
+        </div>
+      </div>
+    </motion.div>
+  );
+};
 
 const CaseStudy12thPass = () => {
   const horizontalScrollRef = useRef<HTMLDivElement>(null);
@@ -12,7 +76,9 @@ const CaseStudy12thPass = () => {
     offset: ["start start", "end end"]
   });
 
-  const x = useTransform(scrollYProgress, [0, 1], ["0%", "-90%"]);
+  // Calculate the transform to show all 10 slides
+  // Each slide is ~40vw + 8px gap, total ~410vw, minus viewport (100vw) = ~310vw to scroll
+  const x = useTransform(scrollYProgress, [0, 1], ["0%", "-85%"]);
 
   const slides = [
     { id: 1, label: "Billboard Campaign - Allen Kota" },
@@ -373,32 +439,21 @@ const CaseStudy12thPass = () => {
         </section>
 
         {/* Section 7: Horizontal Scroll Finale */}
-        <section ref={horizontalScrollRef} className="relative h-[500vh]">
-          <div className="sticky top-0 h-screen flex items-center overflow-hidden">
+        <section ref={horizontalScrollRef} className="relative h-[400vh]">
+          <div className="sticky top-0 h-screen flex items-center overflow-hidden bg-[#050505]">
             <motion.div 
               style={{ x }}
-              className="flex gap-8 pl-[10vw]"
+              className="flex gap-8 pl-[10vw] pr-[10vw]"
             >
-              {slides.map((slide, index) => {
-                return (
-                  <motion.div
-                    key={slide.id}
-                    className="relative flex-shrink-0 w-[70vw] md:w-[50vw] lg:w-[40vw] h-[60vh] rounded-3xl overflow-hidden"
-                  >
-                    {/* Placeholder Image */}
-                    <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-white/5 border border-white/10">
-                      <div className="absolute inset-0 flex flex-col items-center justify-center p-8">
-                        <span className="text-primary font-sans text-8xl font-bold mb-4">
-                          {String(slide.id).padStart(2, '0')}
-                        </span>
-                        <p className="font-sans text-white/60 text-center text-lg">
-                          {slide.label}
-                        </p>
-                      </div>
-                    </div>
-                  </motion.div>
-                );
-              })}
+              {slides.map((slide, index) => (
+                <GallerySlide
+                  key={slide.id}
+                  slide={slide}
+                  index={index}
+                  totalSlides={slides.length}
+                  scrollYProgress={scrollYProgress}
+                />
+              ))}
             </motion.div>
           </div>
         </section>
