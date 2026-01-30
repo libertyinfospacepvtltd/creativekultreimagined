@@ -1,72 +1,8 @@
 import { useRef } from "react";
-import { motion, useScroll, useTransform, MotionValue } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { ArrowLeft } from "lucide-react";
 import { Link } from "react-router-dom";
 import Layout from "@/components/Layout";
-
-// Extracted slide component to properly use hooks
-interface SlideProps {
-  slide: { id: number; label: string };
-  index: number;
-  totalSlides: number;
-  scrollYProgress: MotionValue<number>;
-}
-
-const GallerySlide = ({ slide, index, totalSlides, scrollYProgress }: SlideProps) => {
-  const slideProgress = useTransform(
-    scrollYProgress,
-    [
-      Math.max(0, (index - 1) / totalSlides),
-      index / totalSlides,
-      Math.min(1, (index + 1) / totalSlides)
-    ],
-    [0.4, 1, 0.4]
-  );
-  
-  const slideScale = useTransform(
-    scrollYProgress,
-    [
-      Math.max(0, (index - 1) / totalSlides),
-      index / totalSlides,
-      Math.min(1, (index + 1) / totalSlides)
-    ],
-    [0.9, 1, 0.9]
-  );
-
-  const slideBlur = useTransform(
-    scrollYProgress,
-    [
-      Math.max(0, (index - 1) / totalSlides),
-      index / totalSlides,
-      Math.min(1, (index + 1) / totalSlides)
-    ],
-    [4, 0, 4]
-  );
-
-  const blurFilter = useTransform(slideBlur, (v) => `blur(${v}px)`);
-
-  return (
-    <motion.div
-      style={{ 
-        opacity: slideProgress, 
-        scale: slideScale,
-        filter: blurFilter
-      }}
-      className="relative flex-shrink-0 w-[70vw] md:w-[50vw] lg:w-[40vw] h-[60vh] rounded-3xl overflow-hidden"
-    >
-      <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-white/5 border border-white/10">
-        <div className="absolute inset-0 flex flex-col items-center justify-center p-8">
-          <span className="text-primary font-sans text-8xl font-bold mb-4">
-            {String(slide.id).padStart(2, '0')}
-          </span>
-          <p className="font-sans text-white/60 text-center text-lg">
-            {slide.label}
-          </p>
-        </div>
-      </div>
-    </motion.div>
-  );
-};
 
 const CaseStudy12thPass = () => {
   const horizontalScrollRef = useRef<HTMLDivElement>(null);
@@ -445,14 +381,22 @@ const CaseStudy12thPass = () => {
               style={{ x }}
               className="flex gap-8 pl-[10vw] pr-[10vw]"
             >
-              {slides.map((slide, index) => (
-                <GallerySlide
+              {slides.map((slide) => (
+                <motion.div
                   key={slide.id}
-                  slide={slide}
-                  index={index}
-                  totalSlides={slides.length}
-                  scrollYProgress={scrollYProgress}
-                />
+                  className="relative flex-shrink-0 w-[70vw] md:w-[50vw] lg:w-[40vw] h-[60vh] rounded-3xl overflow-hidden"
+                >
+                  <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-white/5 border border-white/10 hover:border-primary/30 transition-colors duration-300">
+                    <div className="absolute inset-0 flex flex-col items-center justify-center p-8">
+                      <span className="text-primary font-sans text-8xl font-bold mb-4">
+                        {String(slide.id).padStart(2, '0')}
+                      </span>
+                      <p className="font-sans text-white/60 text-center text-lg">
+                        {slide.label}
+                      </p>
+                    </div>
+                  </div>
+                </motion.div>
               ))}
             </motion.div>
           </div>
