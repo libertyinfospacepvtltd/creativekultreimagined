@@ -23,15 +23,6 @@ const projects = [{
   website: "https://www.12thpass.ai/",
   instagram: "https://www.instagram.com/12thpass.ai/",
   facebook: "https://www.facebook.com/12thPassAI"
-}, {
-  id: "majorcolours",
-  name: "Major Colours",
-  category: "Design Studio",
-  description: "Brand positioning and digital presence for a premium design solutions company, establishing thought leadership in the creative industry.",
-  tags: ["Brand Strategy", "Digital Presence", "Content Marketing"],
-  results: ["Premium brand positioning", "Industry recognition", "High-value client acquisition"],
-  logo: "https://canvas-kolkata-vibe.lovable.app/assets/majorcolours-logo-C9dMwmvs.png",
-  website: "https://majorcolors.com/"
 }];
 const trustedBy = [{
   name: "Liberty Infospace",
@@ -42,9 +33,6 @@ const trustedBy = [{
 }, {
   name: "EasyDo 365",
   url: "https://easydo365.com/"
-}, {
-  name: "Major Colours",
-  url: "https://majorcolors.com/"
 }];
 const Work = () => {
   return <Layout>
@@ -66,7 +54,7 @@ const Work = () => {
       {/* Project Grid */}
       <section className="section-padding bg-background my-0">
         <div className="container-luxury">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 max-w-4xl mx-auto">
             {projects.map(project => <div key={project.id} className="group relative h-80 lg:h-96 rounded-3xl bg-white/5 dark:bg-white/5 bg-card border border-border/30 overflow-hidden cursor-pointer transition-all duration-500 hover:scale-[1.02] hover:shadow-2xl">
                 {/* Logo - Centered */}
                 <div className="absolute inset-0 flex items-center justify-center p-8">
