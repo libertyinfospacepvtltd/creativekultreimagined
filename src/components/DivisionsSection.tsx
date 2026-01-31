@@ -17,12 +17,6 @@ const divisions = [
     facebook: "https://www.facebook.com/12thPassAI",
     logo: "https://canvas-kolkata-vibe.lovable.app/assets/12thpass-logo-DhXy1KrN.png",
   },
-  {
-    name: "Major Colours",
-    description: "Premium design solutions",
-    website: "https://majorcolors.com/",
-    logo: "https://canvas-kolkata-vibe.lovable.app/assets/majorcolours-logo-C9dMwmvs.png",
-  },
 ];
 
 const DivisionsSection = () => {
@@ -43,7 +37,7 @@ const DivisionsSection = () => {
         </div>
 
         {/* Desktop Grid - unchanged */}
-        <div className="hidden md:grid grid-cols-3 gap-8">
+        <div className="hidden md:grid grid-cols-2 gap-8 max-w-3xl mx-auto">
           {divisions.map((division, index) => (
             <div 
               key={index}
