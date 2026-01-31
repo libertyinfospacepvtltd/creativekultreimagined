@@ -128,7 +128,7 @@ const ServiceCard = ({ service, isExpanded, onToggle, delay = 0 }: {
         y: -4,
         boxShadow: "0 25px 50px -12px rgba(0,0,0,0.5)",
       }}
-      className={`group relative flex flex-col border border-foreground/10 bg-background overflow-hidden cursor-pointer h-48 sm:h-32 md:h-36 w-full rounded-2xl
+      className={`group relative flex flex-col border border-foreground/10 bg-background overflow-hidden cursor-pointer h-48 sm:h-32 md:h-36 lg:h-40 xl:h-48 2xl:h-56 w-full rounded-2xl
         ${isExpanded ? 'border-primary bg-foreground/5' : ''}
       `}
       style={{
@@ -144,8 +144,8 @@ const ServiceCard = ({ service, isExpanded, onToggle, delay = 0 }: {
         transition: 'all 0.7s cubic-bezier(0.25, 0.1, 0.25, 1)'
       }}
       >
-        <Icon className="w-5 h-5 sm:w-6 sm:h-6 text-muted-foreground group-hover:text-primary mb-1 sm:mb-2" strokeWidth={1.5} style={{ transition: 'color 0.7s cubic-bezier(0.25, 0.1, 0.25, 1)' }} />
-        <h3 className="text-foreground text-center font-serif text-[11px] sm:text-xs md:text-sm font-medium group-hover:text-primary leading-tight px-1" style={{ transition: 'color 0.7s cubic-bezier(0.25, 0.1, 0.25, 1)' }}>
+        <Icon className="w-5 h-5 sm:w-6 sm:h-6 lg:w-8 lg:h-8 xl:w-10 xl:h-10 text-muted-foreground group-hover:text-primary mb-1 sm:mb-2 lg:mb-3" strokeWidth={1.5} style={{ transition: 'color 0.7s cubic-bezier(0.25, 0.1, 0.25, 1)' }} />
+        <h3 className="text-foreground text-center font-serif text-[11px] sm:text-xs md:text-sm lg:text-base xl:text-lg 2xl:text-xl font-medium group-hover:text-primary leading-tight px-1 lg:px-2" style={{ transition: 'color 0.7s cubic-bezier(0.25, 0.1, 0.25, 1)' }}>
           {service.title}
         </h3>
       </div>
@@ -158,18 +158,18 @@ const ServiceCard = ({ service, isExpanded, onToggle, delay = 0 }: {
         transition: 'all 0.7s cubic-bezier(0.25, 0.1, 0.25, 1)'
       }}
       >
-        <div className="flex items-center gap-1 sm:gap-1.5 mb-1 sm:mb-2">
-          <Icon className="w-3 h-3 sm:w-4 sm:h-4 text-primary flex-shrink-0" strokeWidth={1.5} />
-          <h3 className="text-primary font-serif text-[9px] sm:text-[10px] md:text-xs font-medium leading-tight">{service.title}</h3>
+        <div className="flex items-center gap-1 sm:gap-1.5 lg:gap-2 mb-1 sm:mb-2 lg:mb-3">
+          <Icon className="w-3 h-3 sm:w-4 sm:h-4 lg:w-5 lg:h-5 xl:w-6 xl:h-6 text-primary flex-shrink-0" strokeWidth={1.5} />
+          <h3 className="text-primary font-serif text-[9px] sm:text-[10px] md:text-xs lg:text-sm xl:text-base font-medium leading-tight">{service.title}</h3>
         </div>
-        <p className="text-muted-foreground font-sans text-[8px] sm:text-[9px] md:text-[10px] leading-relaxed mb-1 sm:mb-2 line-clamp-2">
+        <p className="text-muted-foreground font-sans text-[8px] sm:text-[9px] md:text-[10px] lg:text-xs xl:text-sm leading-relaxed mb-1 sm:mb-2 lg:mb-3 line-clamp-2">
           {service.description}
         </p>
-        <ul className="space-y-0.5 sm:space-y-1 mt-auto">
+        <ul className="space-y-0.5 sm:space-y-1 lg:space-y-1.5 mt-auto">
           {service.features.map((feature, index) => (
-            <li key={index} className="flex items-start gap-0.5 sm:gap-1">
-              <Check className="w-2 h-2 sm:w-2.5 sm:h-2.5 text-primary flex-shrink-0 mt-0.5" strokeWidth={2.5} />
-              <span className="text-foreground font-sans text-[8px] sm:text-[9px] leading-tight">{feature}</span>
+            <li key={index} className="flex items-start gap-0.5 sm:gap-1 lg:gap-1.5">
+              <Check className="w-2 h-2 sm:w-2.5 sm:h-2.5 lg:w-3 lg:h-3 xl:w-3.5 xl:h-3.5 text-primary flex-shrink-0 mt-0.5" strokeWidth={2.5} />
+              <span className="text-foreground font-sans text-[8px] sm:text-[9px] lg:text-[10px] xl:text-xs leading-tight">{feature}</span>
             </li>
           ))}
         </ul>
@@ -223,10 +223,10 @@ const ServicesPreview = () => {
               <span className="text-primary font-sans text-sm uppercase tracking-widest mb-4 block">
                 Our Services
               </span>
-              <h2 className="text-4xl lg:text-5xl font-serif text-foreground mb-4">
+              <h2 className="text-4xl lg:text-5xl xl:text-6xl 2xl:text-7xl font-serif text-foreground mb-4">
                 From Strategy to Execution
               </h2>
-              <p className="text-muted-foreground font-sans max-w-2xl mx-auto text-sm">
+              <p className="text-muted-foreground font-sans max-w-2xl mx-auto text-sm lg:text-base xl:text-lg">
                 Scroll to discover our comprehensive creative solutions
               </p>
             </div>
@@ -242,8 +242,8 @@ const ServicesPreview = () => {
                 scale: gridScale,
               }}
             >
-              <div className="w-full max-w-4xl mx-auto px-4">
-                <div className="grid grid-cols-4 gap-3">
+              <div className="w-full max-w-4xl xl:max-w-5xl 2xl:max-w-6xl mx-auto px-4">
+                <div className="grid grid-cols-4 gap-3 lg:gap-4 xl:gap-5 2xl:gap-6">
                   {services.map((service, index) => (
                     <ServiceCard 
                       key={service.id} 
