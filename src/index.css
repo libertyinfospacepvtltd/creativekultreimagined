@@ -50,9 +50,9 @@
     /* Glass card opacity */
     --glass-bg: 0 0% 100% / 0.05;
     
-    /* Typography */
+    /* Typography - Neue Haas Grotesk style with Inter fallback */
     --font-serif: 'Cormorant Garamond', Georgia, serif;
-    --font-sans: 'Manrope', system-ui, sans-serif;
+    --font-sans: 'Inter', 'Helvetica Neue', Helvetica, Arial, system-ui, sans-serif;
     --font-numbers: 'Space Grotesk', system-ui, sans-serif;
     
     /* Gradients */
