@@ -60,7 +60,7 @@ const DivisionsSection = () => {
                   />
                 </a>
               </div>
-              <h3 className="text-xl font-serif text-foreground mb-2">
+              <h3 className="text-xl font-sans font-semibold text-foreground mb-2">
                 {division.name}
               </h3>
               <p className="text-muted-foreground font-sans text-sm mb-6">
@@ -130,7 +130,7 @@ const DivisionsSection = () => {
                 </a>
               </div>
               <div className="flex-1 min-w-0">
-                <h3 className="text-base font-serif text-foreground mb-1">
+                <h3 className="text-base font-sans font-semibold text-foreground mb-1">
                   {division.name}
                 </h3>
                 <p className="text-muted-foreground font-sans text-xs mb-2">

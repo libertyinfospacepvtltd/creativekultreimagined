@@ -73,7 +73,7 @@ const Work = () => {
                 {/* Hover Overlay */}
                 <div className="absolute inset-0 bg-black/70 backdrop-blur-md opacity-0 group-hover:opacity-100 transition-all duration-500 flex flex-col items-center justify-center p-6">
                   {/* Project Name */}
-                  <h3 className="text-white font-serif text-2xl lg:text-3xl mb-2 text-center">
+                  <h3 className="text-white font-sans text-2xl lg:text-3xl font-semibold mb-2 text-center">
                     {project.name}
                   </h3>
                   <p className="text-white/60 font-sans text-sm mb-6 text-center">
@@ -111,7 +111,7 @@ const Work = () => {
             Trusted By
           </h3>
           <div className="flex flex-wrap items-center justify-center gap-8 md:gap-12">
-            {trustedBy.map((brand, index) => <a key={index} href={brand.url} target="_blank" rel="noopener noreferrer" className="text-foreground/60 hover:text-primary font-serif text-lg transition-colors">
+            {trustedBy.map((brand, index) => <a key={index} href={brand.url} target="_blank" rel="noopener noreferrer" className="text-foreground/60 hover:text-primary font-sans text-lg font-medium transition-colors">
                 {brand.name}
               </a>)}
           </div>
