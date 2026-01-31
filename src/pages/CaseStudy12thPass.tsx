@@ -320,7 +320,7 @@ const CaseStudy12thPass = () => {
               transition={{ duration: 0.6, delay: 0 }}
               className="text-center"
             >
-              <p className="font-serif text-6xl md:text-7xl lg:text-8xl font-bold text-primary mb-4">
+              <p className="font-numbers text-6xl md:text-7xl lg:text-8xl font-bold text-primary mb-4">
                 15M
               </p>
               <p className="font-sans text-white/60 uppercase tracking-widest text-sm">
@@ -336,7 +336,7 @@ const CaseStudy12thPass = () => {
               transition={{ duration: 0.6, delay: 0.15 }}
               className="text-center"
             >
-              <p className="font-serif text-6xl md:text-7xl lg:text-8xl font-bold text-primary mb-4">
+              <p className="font-numbers text-6xl md:text-7xl lg:text-8xl font-bold text-primary mb-4">
                 1.14M
               </p>
               <p className="font-sans text-white/60 uppercase tracking-widest text-sm">
@@ -352,7 +352,7 @@ const CaseStudy12thPass = () => {
               transition={{ duration: 0.6, delay: 0.3 }}
               className="text-center"
             >
-              <p className="font-serif text-6xl md:text-7xl lg:text-8xl font-bold text-primary mb-4">
+              <p className="font-numbers text-6xl md:text-7xl lg:text-8xl font-bold text-primary mb-4">
                 15K+
               </p>
               <p className="font-sans text-white/60 uppercase tracking-widest text-sm">
