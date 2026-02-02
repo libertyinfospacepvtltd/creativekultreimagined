@@ -18,6 +18,16 @@ import thePark from "@/assets/clients/the-park.png";
 import clubKolkataMixtape from "@/assets/clients/club-kolkata-mixtape.png";
 import norlingRetreat from "@/assets/clients/norling-retreat.png";
 import lenskart from "@/assets/clients/lenskart.png";
+import dollarManBigboss from "@/assets/clients/dollar-man-bigboss.png";
+import experienceBengal from "@/assets/clients/experience-bengal.png";
+import sylvanPly from "@/assets/clients/sylvan-ply.png";
+import tonik from "@/assets/clients/tonik.png";
+import mixtapeBoozeFest from "@/assets/clients/mixtape-booze-fest.png";
+import greyHorse from "@/assets/clients/grey-horse.jpg";
+import jewelCraft from "@/assets/clients/jewel-craft.png";
+import theBlackCat from "@/assets/clients/the-black-cat.png";
+import goldenRetreat from "@/assets/clients/golden-retreat.png";
+import threeDots from "@/assets/clients/3-dots.png";
 
 const ClientLogosMarquee = () => {
   const clientLogos = [
@@ -41,6 +51,16 @@ const ClientLogosMarquee = () => {
     { id: 18, name: "Club Kolkata Mixtape", logo: clubKolkataMixtape },
     { id: 19, name: "Norling Retreat Hotel", logo: norlingRetreat },
     { id: 20, name: "Lenskart", logo: lenskart },
+    { id: 21, name: "Dollar Man Bigboss", logo: dollarManBigboss },
+    { id: 22, name: "Experience Bengal", logo: experienceBengal },
+    { id: 23, name: "Sylvan Ply", logo: sylvanPly },
+    { id: 24, name: "Tonik Brewery", logo: tonik },
+    { id: 25, name: "Mixtape Booze Fest", logo: mixtapeBoozeFest },
+    { id: 26, name: "Grey Horse", logo: greyHorse },
+    { id: 27, name: "Jewel Craft", logo: jewelCraft },
+    { id: 28, name: "The Black Cat", logo: theBlackCat },
+    { id: 29, name: "Golden Retreat", logo: goldenRetreat },
+    { id: 30, name: "3 Dots", logo: threeDots },
   ];
 
   // Duplicate the list for seamless infinite scroll
