@@ -56,10 +56,10 @@ const About = () => {
   return <Layout>
 
       {/* Origin Section */}
-      <section className="section-padding bg-card border-t border-border/30 py-[50px]">
+      <section className="section-padding bg-card border-t border-border/30 pt-32 sm:pt-40 pb-12 sm:pb-16">
         <div className="container-luxury">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-20 items-center my-[50px]">
-            <div>
+          <div className="flex flex-col md:flex-row items-center justify-between gap-10 lg:gap-20">
+            <div className="flex-1">
               <span className="text-primary font-sans text-xs uppercase tracking-widest mb-3 sm:mb-4 block sm:text-base">Origin</span>
               <h2 className="text-2xl sm:text-3xl font-serif text-foreground mb-4 sm:mb-6 md:text-xl">Creative Kult began as Creative Cult.</h2>
               <div className="space-y-3 sm:space-y-4 text-muted-foreground font-sans text-sm sm:text-base leading-relaxed">
@@ -70,8 +70,8 @@ const About = () => {
                 <p>Creative Cult became <strong className="text-foreground">Creative Kult</strong> — Powered by Liberty Infospace, built as an AI-first branding and marketing agency focused on sculpting brand legacies, not short-term noise.</p>
               </div>
             </div>
-            <div className="flex justify-center lg:justify-end">
-              <img src={theme === 'dark' ? logoDark : logoLight} alt="Creative Kult Logo" className="w-48 sm:w-72 md:w-96 lg:w-[480px] h-auto opacity-90" />
+            <div className="flex-shrink-0">
+              <img src={theme === 'dark' ? logoDark : logoLight} alt="Creative Kult Logo" className="w-48 sm:w-64 md:w-80 lg:w-96 h-auto opacity-90" />
             </div>
           </div>
         </div>
