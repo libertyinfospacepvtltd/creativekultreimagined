@@ -9,6 +9,7 @@ import Work from "./pages/Work";
 import CaseStudy12thPass from "./pages/CaseStudy12thPass";
 import Services from "./pages/Services";
 import About from "./pages/About";
+import Events from "./pages/Events";
 import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
 
@@ -27,6 +28,7 @@ const App = () => (
             <Route path="/work/12thpass" element={<CaseStudy12thPass />} />
             <Route path="/services" element={<Services />} />
             <Route path="/about" element={<About />} />
+            <Route path="/events" element={<Events />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
