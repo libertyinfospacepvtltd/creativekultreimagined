@@ -58,7 +58,7 @@ const Events = () => {
                 
                 {/* Content */}
                 <div className="absolute inset-0 flex flex-col justify-end p-6 md:p-8">
-                  <h2 className="text-2xl md:text-3xl lg:text-4xl font-sans font-bold text-white drop-shadow-lg">
+                  <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif italic font-light text-white drop-shadow-lg tracking-wide">
                     {event.title}
                   </h2>
                 </div>
