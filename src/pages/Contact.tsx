@@ -2,12 +2,11 @@ import { useState } from "react";
 import { Mail, Phone, MapPin, Instagram, Facebook, Linkedin } from "lucide-react";
 import Layout from "@/components/Layout";
 import { useToast } from "@/hooks/use-toast";
-const serviceOptions = ["Social Media Marketing", "Performance Marketing", "Offline Branding", "Photoshoot & Videography", "Web Design", "Strategy"];
-const budgetOptions = ["₹25,000 - ₹50,000", "₹50,000 - ₹1,00,000", "₹1,00,000+", "Custom / Not sure"];
+
+const serviceOptions = ["Marketing", "Branding", "Media Buying", "Web Development", "Events", "Others"];
+
 const Contact = () => {
-  const {
-    toast
-  } = useToast();
+  const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
@@ -15,17 +14,36 @@ const Contact = () => {
     mobile: "",
     company: "",
     services: [] as string[],
-    budget: "",
+    othersSpecify: "",
     message: ""
   });
+
   const handleServiceToggle = (service: string) => {
     setFormData(prev => ({
       ...prev,
-      services: prev.services.includes(service) ? prev.services.filter(s => s !== service) : [...prev.services, service]
+      services: prev.services.includes(service) 
+        ? prev.services.filter(s => s !== service) 
+        : [...prev.services, service],
+      // Clear othersSpecify if "Others" is deselected
+      othersSpecify: service === "Others" && prev.services.includes("Others") ? "" : prev.othersSpecify
     }));
   };
+
+  const showOthersField = formData.services.includes("Others");
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    // Validate "Others" field if selected
+    if (showOthersField && !formData.othersSpecify.trim()) {
+      toast({
+        title: "Please specify",
+        description: "Please provide details for 'Others' service.",
+        variant: "destructive"
+      });
+      return;
+    }
+
     setIsSubmitting(true);
 
     // Simulate form submission
@@ -40,12 +58,14 @@ const Contact = () => {
       mobile: "",
       company: "",
       services: [],
-      budget: "",
+      othersSpecify: "",
       message: ""
     });
     setIsSubmitting(false);
   };
-  return <Layout>
+
+  return (
+    <Layout>
       {/* Page Header */}
       <section className="pt-16 pb-8 md:pt-20 md:pb-12 bg-background">
         <div className="container-luxury">
@@ -76,19 +96,27 @@ const Contact = () => {
                     <label className="block text-sm font-sans text-muted-foreground mb-2">
                       Name
                     </label>
-                    <input type="text" required value={formData.name} onChange={e => setFormData({
-                    ...formData,
-                    name: e.target.value
-                  })} className="w-full bg-background border border-border/50 px-4 py-3 text-foreground font-sans text-sm focus:outline-none focus:border-primary transition-colors" placeholder="Your name" />
+                    <input
+                      type="text"
+                      required
+                      value={formData.name}
+                      onChange={e => setFormData({ ...formData, name: e.target.value })}
+                      className="w-full bg-background border border-border/50 px-4 py-3 text-foreground font-sans text-sm focus:outline-none focus:border-primary transition-colors"
+                      placeholder="Your name"
+                    />
                   </div>
                   <div>
                     <label className="block text-sm font-sans text-muted-foreground mb-2">
                       Email
                     </label>
-                    <input type="email" required value={formData.email} onChange={e => setFormData({
-                    ...formData,
-                    email: e.target.value
-                  })} className="w-full bg-background border border-border/50 px-4 py-3 text-foreground font-sans text-sm focus:outline-none focus:border-primary transition-colors" placeholder="your@email.com" />
+                    <input
+                      type="email"
+                      required
+                      value={formData.email}
+                      onChange={e => setFormData({ ...formData, email: e.target.value })}
+                      className="w-full bg-background border border-border/50 px-4 py-3 text-foreground font-sans text-sm focus:outline-none focus:border-primary transition-colors"
+                      placeholder="your@email.com"
+                    />
                   </div>
                 </div>
 
@@ -97,19 +125,25 @@ const Contact = () => {
                     <label className="block text-sm font-sans text-muted-foreground mb-2">
                       Mobile Number
                     </label>
-                    <input type="tel" value={formData.mobile} onChange={e => setFormData({
-                    ...formData,
-                    mobile: e.target.value
-                  })} className="w-full bg-background border border-border/50 px-4 py-3 text-foreground font-sans text-sm focus:outline-none focus:border-primary transition-colors" placeholder="Your Number" />
+                    <input
+                      type="tel"
+                      value={formData.mobile}
+                      onChange={e => setFormData({ ...formData, mobile: e.target.value })}
+                      className="w-full bg-background border border-border/50 px-4 py-3 text-foreground font-sans text-sm focus:outline-none focus:border-primary transition-colors"
+                      placeholder="Your Number"
+                    />
                   </div>
                   <div>
                     <label className="block text-sm font-sans text-muted-foreground mb-2">
                       Company
                     </label>
-                    <input type="text" value={formData.company} onChange={e => setFormData({
-                    ...formData,
-                    company: e.target.value
-                  })} className="w-full bg-background border border-border/50 px-4 py-3 text-foreground font-sans text-sm focus:outline-none focus:border-primary transition-colors" placeholder="Your company" />
+                    <input
+                      type="text"
+                      value={formData.company}
+                      onChange={e => setFormData({ ...formData, company: e.target.value })}
+                      className="w-full bg-background border border-border/50 px-4 py-3 text-foreground font-sans text-sm focus:outline-none focus:border-primary transition-colors"
+                      placeholder="Your company"
+                    />
                   </div>
                 </div>
 
@@ -118,38 +152,58 @@ const Contact = () => {
                     Services Interested In
                   </label>
                   <div className="flex flex-wrap gap-2">
-                    {serviceOptions.map(service => <button key={service} type="button" onClick={() => handleServiceToggle(service)} className={`px-4 py-2 rounded-full text-xs font-sans transition-all duration-300 ${formData.services.includes(service) ? "bg-primary text-primary-foreground" : "bg-background border border-border/50 text-muted-foreground hover:border-primary hover:text-primary"}`}>
+                    {serviceOptions.map(service => (
+                      <button
+                        key={service}
+                        type="button"
+                        onClick={() => handleServiceToggle(service)}
+                        className={`px-4 py-2 rounded-full text-xs font-sans transition-all duration-300 ${
+                          formData.services.includes(service)
+                            ? "bg-primary text-primary-foreground"
+                            : "bg-background border border-border/50 text-muted-foreground hover:border-primary hover:text-primary"
+                        }`}
+                      >
                         {service}
-                      </button>)}
+                      </button>
+                    ))}
                   </div>
                 </div>
 
-                <div>
-                  <label className="block text-sm font-sans text-muted-foreground mb-2">
-                    Budget Range
-                  </label>
-                  <select value={formData.budget} onChange={e => setFormData({
-                  ...formData,
-                  budget: e.target.value
-                })} className="w-full bg-background border border-border/50 px-4 py-3 font-sans text-sm focus:outline-none focus:border-primary transition-colors appearance-none cursor-pointer text-gray-400">
-                    <option value="">Select budget range</option>
-                    {budgetOptions.map(option => <option key={option} value={option}>
-                        {option}
-                      </option>)}
-                  </select>
-                </div>
+                {/* Conditional "Others" Specification Field */}
+                {showOthersField && (
+                  <div className="animate-in fade-in slide-in-from-top-2 duration-300">
+                    <label className="block text-sm font-sans text-muted-foreground mb-2">
+                      Please specify <span className="text-primary">*</span>
+                    </label>
+                    <input
+                      type="text"
+                      required
+                      value={formData.othersSpecify}
+                      onChange={e => setFormData({ ...formData, othersSpecify: e.target.value })}
+                      className="w-full bg-background border border-border/50 px-4 py-3 text-foreground font-sans text-sm focus:outline-none focus:border-primary transition-colors"
+                      placeholder="Describe the service you need..."
+                    />
+                  </div>
+                )}
 
                 <div>
                   <label className="block text-sm font-sans text-muted-foreground mb-2">
                     Project Details
                   </label>
-                  <textarea rows={5} value={formData.message} onChange={e => setFormData({
-                  ...formData,
-                  message: e.target.value
-                })} className="w-full bg-background border border-border/50 px-4 py-3 text-foreground font-sans text-sm focus:outline-none focus:border-primary transition-colors resize-none" placeholder="Tell us about your project..." />
+                  <textarea
+                    rows={5}
+                    value={formData.message}
+                    onChange={e => setFormData({ ...formData, message: e.target.value })}
+                    className="w-full bg-background border border-border/50 px-4 py-3 text-foreground font-sans text-sm focus:outline-none focus:border-primary transition-colors resize-none"
+                    placeholder="Tell us about your project..."
+                  />
                 </div>
 
-                <button type="submit" disabled={isSubmitting} className="w-full px-8 py-4 rounded-full border-2 border-primary bg-transparent text-primary font-sans text-sm uppercase tracking-widest hover:bg-primary hover:text-primary-foreground transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed">
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="w-full px-8 py-4 rounded-full border-2 border-primary bg-transparent text-primary font-sans text-sm uppercase tracking-widest hover:bg-primary hover:text-primary-foreground transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                >
                   {isSubmitting ? "Sending..." : "Send Message"}
                 </button>
               </form>
@@ -162,7 +216,12 @@ const Contact = () => {
               </h2>
               <div className="space-y-8">
                 {/* Office Location */}
-                <a href="https://maps.google.com/?cid=1054655378822672764" target="_blank" rel="noopener noreferrer" className="flex items-start gap-4 group">
+                <a
+                  href="https://maps.google.com/?cid=1054655378822672764"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-start gap-4 group"
+                >
                   <MapPin size={24} className="text-primary flex-shrink-0 mt-1" />
                   <div>
                     <h3 className="text-foreground font-sans font-medium mb-2 group-hover:text-primary transition-colors">
@@ -177,7 +236,10 @@ const Contact = () => {
                 </a>
 
                 {/* Email */}
-                <a href="mailto:contact@creativekult.com" className="flex items-start gap-4 group">
+                <a
+                  href="mailto:contact@creativekult.com"
+                  className="flex items-start gap-4 group"
+                >
                   <Mail size={24} className="text-primary flex-shrink-0 mt-1" />
                   <div>
                     <h3 className="text-foreground font-sans font-medium mb-2 group-hover:text-primary transition-colors">
@@ -190,7 +252,12 @@ const Contact = () => {
                 </a>
 
                 {/* WhatsApp */}
-                <a href="https://wa.me/919831670284" target="_blank" rel="noopener noreferrer" className="flex items-start gap-4 group">
+                <a
+                  href="https://wa.me/919831670284"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-start gap-4 group"
+                >
                   <Phone size={24} className="text-primary flex-shrink-0 mt-1" />
                   <div>
                     <h3 className="text-foreground font-sans font-medium mb-2 group-hover:text-primary transition-colors">
@@ -208,13 +275,31 @@ const Contact = () => {
                     Follow Us
                   </h3>
                   <div className="flex items-center gap-4">
-                    <a href="https://www.instagram.com/creativekult.agency/" target="_blank" rel="noopener noreferrer" className="w-12 h-12 flex items-center justify-center border border-border/50 text-muted-foreground hover:bg-primary hover:border-primary hover:text-primary-foreground transition-all duration-300" aria-label="Instagram">
+                    <a
+                      href="https://www.instagram.com/creativekult.agency/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-12 h-12 rounded-full flex items-center justify-center border border-border/50 text-muted-foreground hover:bg-primary hover:border-primary hover:text-primary-foreground transition-all duration-300"
+                      aria-label="Instagram"
+                    >
                       <Instagram size={20} />
                     </a>
-                    <a href="https://www.facebook.com/creativekult.agency" target="_blank" rel="noopener noreferrer" className="w-12 h-12 flex items-center justify-center border border-border/50 text-muted-foreground hover:bg-primary hover:border-primary hover:text-primary-foreground transition-all duration-300" aria-label="Facebook">
+                    <a
+                      href="https://www.facebook.com/creativekult.agency"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-12 h-12 rounded-full flex items-center justify-center border border-border/50 text-muted-foreground hover:bg-primary hover:border-primary hover:text-primary-foreground transition-all duration-300"
+                      aria-label="Facebook"
+                    >
                       <Facebook size={20} />
                     </a>
-                    <a href="https://www.linkedin.com/company/102707935/admin/dashboard/" target="_blank" rel="noopener noreferrer" className="w-12 h-12 flex items-center justify-center border border-border/50 text-muted-foreground hover:bg-primary hover:border-primary hover:text-primary-foreground transition-all duration-300" aria-label="LinkedIn">
+                    <a
+                      href="https://www.linkedin.com/company/102707935/admin/dashboard/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-12 h-12 rounded-full flex items-center justify-center border border-border/50 text-muted-foreground hover:bg-primary hover:border-primary hover:text-primary-foreground transition-all duration-300"
+                      aria-label="LinkedIn"
+                    >
                       <Linkedin size={20} />
                     </a>
                   </div>
@@ -227,9 +312,15 @@ const Contact = () => {
                   Our Location
                 </h2>
                 <div className="w-full min-h-[300px] sm:min-h-[350px] lg:min-h-[400px] bg-card border border-border/30 overflow-hidden relative">
-                  <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3685.8247772568364!2d88.33875!3d22.517897!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a0277c8a4a45c2f%3A0xe9e6e9e9e9e9e9e9!2sSagar%20Trade%20Cube!5e0!3m2!1sen!2sin!4v1234567890" className="absolute inset-0 w-full h-full" style={{
-                  border: 0
-                }} allowFullScreen loading="lazy" referrerPolicy="no-referrer-when-downgrade" title="Creative Kult Office Location" />
+                  <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3685.8247772568364!2d88.33875!3d22.517897!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a0277c8a4a45c2f%3A0xe9e6e9e9e9e9e9e9!2sSagar%20Trade%20Cube!5e0!3m2!1sen!2sin!4v1234567890"
+                    className="absolute inset-0 w-full h-full"
+                    style={{ border: 0 }}
+                    allowFullScreen
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                    title="Creative Kult Office Location"
+                  />
                   {/* Transparent overlay to capture mouse events for custom cursor */}
                   <div className="absolute inset-0 bg-transparent z-10" />
                 </div>
@@ -238,6 +329,8 @@ const Contact = () => {
           </div>
         </div>
       </section>
-    </Layout>;
+    </Layout>
+  );
 };
+
 export default Contact;
