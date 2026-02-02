@@ -1,10 +1,21 @@
 import { useState, useCallback, useEffect } from "react";
 import Layout from "@/components/Layout";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, Play, ChevronLeft, ChevronRight } from "lucide-react";
+import { X, ChevronLeft, ChevronRight } from "lucide-react";
 import useEmblaCarousel from "embla-carousel-react";
 import taylorSwiftNight from "@/assets/events/taylor-swift-night.jpg";
 import aiburobhaat from "@/assets/events/aiburobhaat.jpg";
+
+// Taylor Swift Night media imports
+import taylorSwiftVideo from "@/assets/events/taylor-swift-video.mp4";
+import carousel1 from "@/assets/events/carousel-1.png";
+import carousel2 from "@/assets/events/carousel-2.png";
+import carousel3 from "@/assets/events/carousel-3.png";
+import carousel4 from "@/assets/events/carousel-4.png";
+import carousel5 from "@/assets/events/carousel-5.png";
+import carousel6 from "@/assets/events/carousel-6.png";
+import posterSaif from "@/assets/events/taylor-swift-poster-saif.jpg";
+import poster23Jun from "@/assets/events/taylor-swift-poster-23jun.jpg";
 
 interface MediaItem {
   id: number;
@@ -20,7 +31,7 @@ interface Event {
   gallery: MediaItem[];
   // Bento-specific layout for Taylor Swift Night
   bentoLayout?: {
-    verticalVideo: { src: string; thumbnail: string };
+    verticalVideo: string;
     carouselImages: string[];
     squarePhotos: string[];
   };
@@ -33,16 +44,16 @@ const events: Event[] = [
     image: taylorSwiftNight,
     gallery: [],
     bentoLayout: {
-      verticalVideo: { src: "", thumbnail: "/placeholder.svg" },
+      verticalVideo: taylorSwiftVideo,
       carouselImages: [
-        "/placeholder.svg",
-        "/placeholder.svg",
-        "/placeholder.svg",
-        "/placeholder.svg",
-        "/placeholder.svg",
-        "/placeholder.svg",
+        carousel1,
+        carousel2,
+        carousel3,
+        carousel4,
+        carousel5,
+        carousel6,
       ],
-      squarePhotos: ["/placeholder.svg", "/placeholder.svg"],
+      squarePhotos: [posterSaif, poster23Jun],
     },
   },
   {
@@ -96,7 +107,7 @@ const PhotoCarousel = ({ images }: { images: string[] }) => {
               <img
                 src={src}
                 alt={`Gallery image ${index + 1}`}
-                className="w-full h-full object-cover"
+                className="w-full h-full object-contain bg-black"
               />
             </div>
           ))}
@@ -143,38 +154,27 @@ const TaylorSwiftBentoGrid = ({ layout }: { layout: NonNullable<Event["bentoLayo
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
       {/* Column 1: Vertical Video (9:16, row-span-2) */}
-      <div className="md:row-span-2 aspect-[9/16] md:aspect-auto rounded-2xl overflow-hidden bg-muted relative group/video">
-        <img
-          src={layout.verticalVideo.thumbnail}
-          alt="Video thumbnail"
+      <div className="md:row-span-2 aspect-[9/16] md:aspect-auto rounded-2xl overflow-hidden bg-black">
+        <video
+          src={layout.verticalVideo}
+          autoPlay
+          loop
+          muted
+          playsInline
           className="w-full h-full object-cover"
         />
-        {/* Video Play Overlay */}
-        <div className="absolute inset-0 flex items-center justify-center bg-black/40 group-hover/video:bg-black/50 transition-colors cursor-pointer">
-          <div className="w-16 h-16 rounded-full bg-primary/90 flex items-center justify-center group-hover/video:scale-110 transition-transform">
-            <Play className="w-7 h-7 text-primary-foreground ml-1" />
-          </div>
-        </div>
-        {/* Placeholder text */}
-        <div className="absolute bottom-3 left-3 text-xs text-white/60 bg-black/40 px-2 py-1 rounded">
-          9:16 Video
-        </div>
       </div>
 
       {/* Column 2: Photo Carousel (3:4, row-span-2) */}
-      <div className="md:row-span-2 aspect-[3/4] md:aspect-auto rounded-2xl overflow-hidden bg-muted">
+      <div className="md:row-span-2 aspect-[3/4] md:aspect-auto rounded-2xl overflow-hidden bg-black relative">
         <PhotoCarousel images={layout.carouselImages} />
-        {/* Placeholder label */}
-        <div className="absolute bottom-3 left-3 text-xs text-white/60 bg-black/40 px-2 py-1 rounded pointer-events-none">
-          3:4 Carousel
-        </div>
       </div>
 
       {/* Column 3: Two stacked square photos */}
       <div className="aspect-square rounded-2xl overflow-hidden bg-muted relative group/square">
         <img
           src={layout.squarePhotos[0]}
-          alt="Square photo 1"
+          alt="Taylor Swift Event Poster - Saif Ahmed"
           className="w-full h-full object-cover transition-transform duration-500 group-hover/square:scale-110"
         />
         <div className="absolute inset-0 bg-primary/0 group-hover/square:bg-primary/10 transition-colors" />
@@ -183,7 +183,7 @@ const TaylorSwiftBentoGrid = ({ layout }: { layout: NonNullable<Event["bentoLayo
       <div className="aspect-square rounded-2xl overflow-hidden bg-muted relative group/square">
         <img
           src={layout.squarePhotos[1]}
-          alt="Square photo 2"
+          alt="Taylor Swift Event Poster - 23 Jun"
           className="w-full h-full object-cover transition-transform duration-500 group-hover/square:scale-110"
         />
         <div className="absolute inset-0 bg-primary/0 group-hover/square:bg-primary/10 transition-colors" />
@@ -217,7 +217,9 @@ const StandardGalleryGrid = ({ gallery }: { gallery: MediaItem[] }) => {
               {/* Video Play Overlay */}
               <div className="absolute inset-0 flex items-center justify-center bg-black/40 group-hover/item:bg-black/50 transition-colors">
                 <div className="w-14 h-14 rounded-full bg-primary/90 flex items-center justify-center group-hover/item:scale-110 transition-transform">
-                  <Play className="w-6 h-6 text-primary-foreground ml-1" />
+                  <svg className="w-6 h-6 text-primary-foreground ml-1" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M8 5v14l11-7z" />
+                  </svg>
                 </div>
               </div>
             </div>
@@ -340,11 +342,6 @@ const Events = () => {
                 ) : (
                   <StandardGalleryGrid gallery={selectedEvent.gallery} />
                 )}
-
-                {/* Placeholder Notice */}
-                <p className="text-center text-muted-foreground/60 text-sm mt-8 italic">
-                  Gallery photos coming soon...
-                </p>
               </div>
             </motion.div>
           </motion.div>
