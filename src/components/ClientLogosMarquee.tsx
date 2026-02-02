@@ -23,7 +23,7 @@ import experienceBengal from "@/assets/clients/experience-bengal.png";
 import sylvanPly from "@/assets/clients/sylvan-ply.png";
 import tonik from "@/assets/clients/tonik.png";
 import mixtapeBoozeFest from "@/assets/clients/mixtape-booze-fest.png";
-import greyHorse from "@/assets/clients/grey-horse.jpg";
+import greyHorse from "@/assets/clients/grey-horse.png";
 import jewelCraft from "@/assets/clients/jewel-craft.png";
 import theBlackCat from "@/assets/clients/the-black-cat.png";
 import goldenRetreat from "@/assets/clients/golden-retreat.png";
