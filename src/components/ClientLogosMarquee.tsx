@@ -8,6 +8,15 @@ import ogByTheLake from "@/assets/clients/og-by-the-lake.png";
 import carLogo from "@/assets/clients/car-logo.png";
 import poach from "@/assets/clients/poach.png";
 import debaarun from "@/assets/clients/debaarun.png";
+import lightroom from "@/assets/clients/lightroom.png";
+import rawat from "@/assets/clients/rawat.png";
+import parnicaa from "@/assets/clients/parnicaa.png";
+import mBar from "@/assets/clients/m-bar.jpg";
+import thatPlace from "@/assets/clients/that-place.png";
+import thePark from "@/assets/clients/the-park.png";
+import clubKolkataMixtape from "@/assets/clients/club-kolkata-mixtape.png";
+import norlingRetreat from "@/assets/clients/norling-retreat.png";
+import lenskart from "@/assets/clients/lenskart.png";
 
 const ClientLogosMarquee = () => {
   const clientLogos = [
@@ -21,6 +30,15 @@ const ClientLogosMarquee = () => {
     { id: 8, name: "Car Service", logo: carLogo },
     { id: 9, name: "Poach", logo: poach },
     { id: 10, name: "Debaarun", logo: debaarun },
+    { id: 11, name: "Lightroom", logo: lightroom },
+    { id: 12, name: "Rawat", logo: rawat },
+    { id: 13, name: "Parnicaa", logo: parnicaa },
+    { id: 14, name: "M Bar", logo: mBar },
+    { id: 15, name: "That Place", logo: thatPlace },
+    { id: 16, name: "The Park Kolkata", logo: thePark },
+    { id: 17, name: "Club Kolkata Mixtape", logo: clubKolkataMixtape },
+    { id: 18, name: "Norling Retreat Hotel", logo: norlingRetreat },
+    { id: 19, name: "Lenskart", logo: lenskart },
   ];
 
   // Duplicate the list for seamless infinite scroll
