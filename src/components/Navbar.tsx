@@ -8,9 +8,9 @@ import { useTheme } from "./ThemeProvider";
 import ThemeToggle from "./ThemeToggle";
 
 const navLinks = [
-  { href: "/", label: "Home" },
   { href: "/about", label: "About" },
   { href: "/work", label: "Our Work" },
+  { href: "/events", label: "Events" },
   { href: "/services", label: "Services" },
   { href: "/contact", label: "Contact" },
 ];
@@ -113,6 +113,7 @@ const MobileMenuOverlay = ({
 const Navbar = ({ showNavbar = true }: NavbarProps) => {
   const location = useLocation();
   const [isOpen, setIsOpen] = useState(false);
+  const [dockingComplete, setDockingComplete] = useState(false);
   const isHomePage = location.pathname === "/";
   const { theme } = useTheme();
   
@@ -147,6 +148,16 @@ const Navbar = ({ showNavbar = true }: NavbarProps) => {
       document.body.style.overflow = '';
     };
   }, [isOpen]);
+
+  // Listen for handshake event from DockingLogo
+  useEffect(() => {
+    const handleHandshake = (e: CustomEvent<{ complete: boolean }>) => {
+      setDockingComplete(e.detail.complete);
+    };
+    
+    window.addEventListener('docking-handshake', handleHandshake as EventListener);
+    return () => window.removeEventListener('docking-handshake', handleHandshake as EventListener);
+  }, []);
 
   const handleClose = useCallback(() => {
     setIsOpen(false);
@@ -218,17 +229,6 @@ const Navbar = ({ showNavbar = true }: NavbarProps) => {
     );
   }
 
-  // Listen for handshake event from DockingLogo
-  const [dockingComplete, setDockingComplete] = useState(false);
-  
-  useEffect(() => {
-    const handleHandshake = (e: CustomEvent<{ complete: boolean }>) => {
-      setDockingComplete(e.detail.complete);
-    };
-    
-    window.addEventListener('docking-handshake', handleHandshake as EventListener);
-    return () => window.removeEventListener('docking-handshake', handleHandshake as EventListener);
-  }, []);
 
   // Chameleon navbar logo: white during hero view, switches to black after docking (in light mode)
   // During hero view (before docking), navbar bg is transparent over dark hero, so use white logo
