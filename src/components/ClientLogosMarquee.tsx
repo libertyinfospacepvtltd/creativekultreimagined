@@ -11,7 +11,6 @@ import debaarun from "@/assets/clients/debaarun.png";
 import lightroom from "@/assets/clients/lightroom.png";
 import rawat from "@/assets/clients/rawat.png";
 import parnicaa from "@/assets/clients/parnicaa.png";
-import theAstor from "@/assets/clients/the-astor.png";
 import mBar from "@/assets/clients/m-bar.jpg";
 import thatPlace from "@/assets/clients/that-place.png";
 import thePark from "@/assets/clients/the-park.png";
@@ -34,13 +33,12 @@ const ClientLogosMarquee = () => {
     { id: 11, name: "Lightroom", logo: lightroom },
     { id: 12, name: "Rawat", logo: rawat },
     { id: 13, name: "Parnicaa", logo: parnicaa },
-    { id: 14, name: "The Astor", logo: theAstor },
-    { id: 15, name: "M Bar", logo: mBar },
-    { id: 16, name: "That Place", logo: thatPlace },
-    { id: 17, name: "The Park Kolkata", logo: thePark },
-    { id: 18, name: "Club Kolkata Mixtape", logo: clubKolkataMixtape },
-    { id: 19, name: "Norling Retreat Hotel", logo: norlingRetreat },
-    { id: 20, name: "Lenskart", logo: lenskart },
+    { id: 14, name: "M Bar", logo: mBar },
+    { id: 15, name: "That Place", logo: thatPlace },
+    { id: 16, name: "The Park Kolkata", logo: thePark },
+    { id: 17, name: "Club Kolkata Mixtape", logo: clubKolkataMixtape },
+    { id: 18, name: "Norling Retreat Hotel", logo: norlingRetreat },
+    { id: 19, name: "Lenskart", logo: lenskart },
   ];
 
   // Duplicate the list for seamless infinite scroll
