@@ -35,7 +35,7 @@ import sevenUp from "@/assets/clients/7up.png";
 import njLogo from "@/assets/clients/nj-logo.png";
 
 const ClientLogosMarquee = () => {
-  const clientLogos = [
+  const allLogos = [
     { id: 1, name: "Sakshi Handloom", logo: sakshiHandloom },
     { id: 2, name: "Water View Residency", logo: waterViewResidency },
     { id: 3, name: "Royal Palace Puri", logo: royalPalacePuri },
@@ -73,8 +73,28 @@ const ClientLogosMarquee = () => {
     { id: 35, name: "NJ", logo: njLogo },
   ];
 
-  // Duplicate the list for seamless infinite scroll
-  const duplicatedLogos = [...clientLogos, ...clientLogos];
+  // Split into two rows: first 18 for row 1, remaining 17 for row 2
+  const row1Logos = allLogos.slice(0, 18);
+  const row2Logos = allLogos.slice(18);
+
+  // Duplicate for seamless infinite scroll
+  const duplicatedRow1 = [...row1Logos, ...row1Logos];
+  const duplicatedRow2 = [...row2Logos, ...row2Logos];
+
+  const LogoItem = ({ client, index }: { client: typeof allLogos[0]; index: number }) => (
+    <div
+      key={`${client.id}-${index}`}
+      className="flex-shrink-0 mx-3 sm:mx-4"
+    >
+      <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full aspect-square overflow-hidden bg-muted/50 border border-white/20 flex items-center justify-center p-2 transition-all duration-300 hover:border-primary/50 hover:shadow-lg hover:shadow-primary/10">
+        <img
+          src={client.logo}
+          alt={client.name}
+          className="max-w-full max-h-full object-contain opacity-80 hover:opacity-100 transition-opacity duration-300 rounded-full"
+        />
+      </div>
+    </div>
+  );
 
   return (
     <section className="py-12 sm:py-16 bg-card border-y border-border/30 overflow-hidden">
@@ -84,21 +104,20 @@ const ClientLogosMarquee = () => {
         </h3>
       </div>
       
-      <div className="relative group">
+      {/* Row 1 - Scrolls Left */}
+      <div className="relative group mb-4">
         <div className="flex animate-scroll-logos group-hover:[animation-play-state:paused]">
-          {duplicatedLogos.map((client, index) => (
-            <div
-              key={`${client.id}-${index}`}
-              className="flex-shrink-0 mx-4 sm:mx-6"
-            >
-              <div className="w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 rounded-full aspect-square overflow-hidden bg-muted/50 border border-white/20 flex items-center justify-center p-2 transition-all duration-300 hover:border-primary/50 hover:shadow-lg hover:shadow-primary/10">
-                <img
-                  src={client.logo}
-                  alt={client.name}
-                  className="max-w-full max-h-full object-contain opacity-80 hover:opacity-100 transition-opacity duration-300 rounded-full"
-                />
-              </div>
-            </div>
+          {duplicatedRow1.map((client, index) => (
+            <LogoItem key={`row1-${client.id}-${index}`} client={client} index={index} />
+          ))}
+        </div>
+      </div>
+
+      {/* Row 2 - Scrolls Right (Reverse) */}
+      <div className="relative group">
+        <div className="flex animate-scroll-logos-reverse group-hover:[animation-play-state:paused]">
+          {duplicatedRow2.map((client, index) => (
+            <LogoItem key={`row2-${client.id}-${index}`} client={client} index={index} />
           ))}
         </div>
       </div>
