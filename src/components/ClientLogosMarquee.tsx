@@ -28,6 +28,11 @@ import jewelCraft from "@/assets/clients/jewel-craft.png";
 import theBlackCat from "@/assets/clients/the-black-cat.png";
 import goldenRetreat from "@/assets/clients/golden-retreat.png";
 import threeDots from "@/assets/clients/3-dots.png";
+import stockKnocks from "@/assets/clients/stock-knocks.png";
+import trendsSajoParbon from "@/assets/clients/trends-sajo-parbon.png";
+import selTiger from "@/assets/clients/sel-tiger.png";
+import sevenUp from "@/assets/clients/7up.png";
+import njLogo from "@/assets/clients/nj-logo.png";
 
 const ClientLogosMarquee = () => {
   const clientLogos = [
@@ -61,6 +66,11 @@ const ClientLogosMarquee = () => {
     { id: 28, name: "The Black Cat", logo: theBlackCat },
     { id: 29, name: "Golden Retreat", logo: goldenRetreat },
     { id: 30, name: "3 Dots", logo: threeDots },
+    { id: 31, name: "Stock Knocks", logo: stockKnocks },
+    { id: 32, name: "Trends Sajo Parbon", logo: trendsSajoParbon },
+    { id: 33, name: "SEL Tiger", logo: selTiger },
+    { id: 34, name: "7up", logo: sevenUp },
+    { id: 35, name: "NJ", logo: njLogo },
   ];
 
   // Duplicate the list for seamless infinite scroll
