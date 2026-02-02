@@ -17,7 +17,7 @@ const StatCard = ({ value, label }: StatCardProps) => (
 const StatsSection = () => {
   const stats = [
     { value: "50+", label: "Projects Delivered" },
-    { value: "2", label: "Divisions Powered" },
+    { value: "3", label: "Divisions Powered" },
     { value: "100%", label: "Client Satisfaction" },
     { value: "∞", label: "Creative Ideas" },
   ];
