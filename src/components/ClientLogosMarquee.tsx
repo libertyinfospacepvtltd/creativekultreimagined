@@ -31,7 +31,7 @@ const ClientLogosMarquee = () => {
               key={`${client.id}-${index}`}
               className="flex-shrink-0 mx-4 sm:mx-6"
             >
-              <div className="h-24 w-24 sm:h-28 sm:w-28 md:h-32 md:w-32 rounded-full bg-background border border-border/30 flex items-center justify-center p-4 transition-all duration-300 hover:border-primary/50 hover:shadow-lg hover:shadow-primary/10">
+              <div className="h-24 w-24 sm:h-28 sm:w-28 md:h-32 md:w-32 aspect-square rounded-full bg-background border border-border/30 flex items-center justify-center p-4 transition-all duration-300 hover:border-primary/50 hover:shadow-lg hover:shadow-primary/10 overflow-hidden">
                 <img
                   src={client.logo}
                   alt={client.name}
