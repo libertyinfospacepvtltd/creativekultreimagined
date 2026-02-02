@@ -113,7 +113,7 @@ export default {
         "scale-in": "scale-in 0.5s ease-out forwards",
         "slide-in-right": "slide-in-right 0.3s ease-out",
         marquee: "marquee 30s linear infinite",
-        "scroll-logos": "scroll-logos 15s linear infinite",
+        "scroll-logos": "scroll-logos 40s linear infinite",
         float: "float 6s ease-in-out infinite",
         pulse: "pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite",
         "spin-slow-3d": "spin-slow-3d 7s ease-in-out infinite",
