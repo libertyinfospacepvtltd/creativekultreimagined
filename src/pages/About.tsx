@@ -58,7 +58,7 @@ const About = () => {
       {/* Origin Section */}
       <section className="section-padding bg-card border-t border-border/30 py-[50px]">
         <div className="container-luxury">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-20 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-20 items-center my-[50px]">
             <div>
               <span className="text-primary font-sans text-xs uppercase tracking-widest mb-3 sm:mb-4 block sm:text-base">Origin</span>
               <h2 className="text-2xl sm:text-3xl font-serif text-foreground mb-4 sm:mb-6 md:text-xl">Creative Kult began as Creative Cult.</h2>
