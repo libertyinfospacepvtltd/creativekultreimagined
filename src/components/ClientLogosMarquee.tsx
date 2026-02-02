@@ -1,16 +1,26 @@
+import sakshiHandloom from "@/assets/clients/sakshi-handloom.png";
+import waterViewResidency from "@/assets/clients/water-view-residency.png";
+import royalPalacePuri from "@/assets/clients/royal-palace-puri.png";
+import emptyHead from "@/assets/clients/empty-head.png";
+import straightUpWithShree from "@/assets/clients/straight-up-with-shree.png";
+import clubPavilion from "@/assets/clients/club-pavilion.png";
+import ogByTheLake from "@/assets/clients/og-by-the-lake.png";
+import carLogo from "@/assets/clients/car-logo.png";
+import poach from "@/assets/clients/poach.png";
+import debaarun from "@/assets/clients/debaarun.png";
+
 const ClientLogosMarquee = () => {
-  // Placeholder logos - will be replaced with actual client logos
   const clientLogos = [
-    { id: 1, name: "Client 1", logo: "/placeholder.svg" },
-    { id: 2, name: "Client 2", logo: "/placeholder.svg" },
-    { id: 3, name: "Client 3", logo: "/placeholder.svg" },
-    { id: 4, name: "Client 4", logo: "/placeholder.svg" },
-    { id: 5, name: "Client 5", logo: "/placeholder.svg" },
-    { id: 6, name: "Client 6", logo: "/placeholder.svg" },
-    { id: 7, name: "Client 7", logo: "/placeholder.svg" },
-    { id: 8, name: "Client 8", logo: "/placeholder.svg" },
-    { id: 9, name: "Client 9", logo: "/placeholder.svg" },
-    { id: 10, name: "Client 10", logo: "/placeholder.svg" },
+    { id: 1, name: "Sakshi Handloom", logo: sakshiHandloom },
+    { id: 2, name: "Water View Residency", logo: waterViewResidency },
+    { id: 3, name: "Royal Palace Puri", logo: royalPalacePuri },
+    { id: 4, name: "Empty Head", logo: emptyHead },
+    { id: 5, name: "Straight Up With Shree", logo: straightUpWithShree },
+    { id: 6, name: "Club Pavilion", logo: clubPavilion },
+    { id: 7, name: "OG By The Lake", logo: ogByTheLake },
+    { id: 8, name: "Car Service", logo: carLogo },
+    { id: 9, name: "Poach", logo: poach },
+    { id: 10, name: "Debaarun", logo: debaarun },
   ];
 
   // Duplicate the list for seamless infinite scroll
@@ -31,11 +41,11 @@ const ClientLogosMarquee = () => {
               key={`${client.id}-${index}`}
               className="flex-shrink-0 mx-4 sm:mx-6"
             >
-              <div className="h-24 w-24 sm:h-28 sm:w-28 md:h-32 md:w-32 aspect-square rounded-full bg-background border border-border/30 flex items-center justify-center p-4 transition-all duration-300 hover:border-primary/50 hover:shadow-lg hover:shadow-primary/10 overflow-hidden">
+              <div className="h-24 w-24 sm:h-28 sm:w-28 md:h-32 md:w-32 aspect-square rounded-full bg-background border border-border/30 flex items-center justify-center p-3 transition-all duration-300 hover:border-primary/50 hover:shadow-lg hover:shadow-primary/10 overflow-hidden">
                 <img
                   src={client.logo}
                   alt={client.name}
-                  className="w-full h-full object-contain opacity-60 hover:opacity-100 transition-opacity duration-300"
+                  className="w-full h-full object-contain opacity-80 hover:opacity-100 transition-opacity duration-300"
                 />
               </div>
             </div>
