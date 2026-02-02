@@ -1,16 +1,18 @@
 import Layout from "@/components/Layout";
 import { motion } from "framer-motion";
+import taylorSwiftNight from "@/assets/events/taylor-swift-night.jpg";
+import aiburobhaat from "@/assets/events/aiburobhaat.jpg";
 
 const events = [
   {
     id: 1,
     title: "Taylor Swift Night x Lightroom",
-    image: "/placeholder.svg",
+    image: taylorSwiftNight,
   },
   {
     id: 2,
     title: "Aiburobhaat",
-    image: "/placeholder.svg",
+    image: aiburobhaat,
   },
 ];
 
@@ -45,17 +47,18 @@ const Events = () => {
                 className="group relative overflow-hidden rounded-3xl aspect-[4/3] cursor-pointer"
               >
                 {/* Background Image */}
-                <div
-                  className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
-                  style={{ backgroundImage: `url(${event.image})` }}
+                <img
+                  src={event.image}
+                  alt={event.title}
+                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                 />
                 
                 {/* Dark Gradient Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/50 to-black/20" />
                 
                 {/* Content */}
                 <div className="absolute inset-0 flex flex-col justify-end p-6 md:p-8">
-                  <h2 className="text-2xl md:text-3xl lg:text-4xl font-sans font-bold text-white">
+                  <h2 className="text-2xl md:text-3xl lg:text-4xl font-sans font-bold text-white drop-shadow-lg">
                     {event.title}
                   </h2>
                 </div>
