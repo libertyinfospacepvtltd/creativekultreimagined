@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useState, useCallback, useEffect } from "react";
 import Layout from "@/components/Layout";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, Play } from "lucide-react";
+import { X, Play, ChevronLeft, ChevronRight } from "lucide-react";
+import useEmblaCarousel from "embla-carousel-react";
 import taylorSwiftNight from "@/assets/events/taylor-swift-night.jpg";
 import aiburobhaat from "@/assets/events/aiburobhaat.jpg";
 
@@ -17,6 +18,12 @@ interface Event {
   title: string;
   image: string;
   gallery: MediaItem[];
+  // Bento-specific layout for Taylor Swift Night
+  bentoLayout?: {
+    verticalVideo: { src: string; thumbnail: string };
+    carouselImages: string[];
+    squarePhotos: string[];
+  };
 }
 
 const events: Event[] = [
@@ -24,14 +31,19 @@ const events: Event[] = [
     id: 1,
     title: "Taylor Swift Night x Lightroom",
     image: taylorSwiftNight,
-    gallery: [
-      { id: 1, type: "image", src: "/placeholder.svg" },
-      { id: 2, type: "video", src: "", thumbnail: "/placeholder.svg" },
-      { id: 3, type: "image", src: "/placeholder.svg" },
-      { id: 4, type: "image", src: "/placeholder.svg" },
-      { id: 5, type: "video", src: "", thumbnail: "/placeholder.svg" },
-      { id: 6, type: "image", src: "/placeholder.svg" },
-    ],
+    gallery: [],
+    bentoLayout: {
+      verticalVideo: { src: "", thumbnail: "/placeholder.svg" },
+      carouselImages: [
+        "/placeholder.svg",
+        "/placeholder.svg",
+        "/placeholder.svg",
+        "/placeholder.svg",
+        "/placeholder.svg",
+        "/placeholder.svg",
+      ],
+      squarePhotos: ["/placeholder.svg", "/placeholder.svg"],
+    },
   },
   {
     id: 2,
@@ -47,6 +59,177 @@ const events: Event[] = [
     ],
   },
 ];
+
+// Carousel component for the photo carousel
+const PhotoCarousel = ({ images }: { images: string[] }) => {
+  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true });
+  const [selectedIndex, setSelectedIndex] = useState(0);
+
+  const scrollPrev = useCallback(() => {
+    if (emblaApi) emblaApi.scrollPrev();
+  }, [emblaApi]);
+
+  const scrollNext = useCallback(() => {
+    if (emblaApi) emblaApi.scrollNext();
+  }, [emblaApi]);
+
+  const onSelect = useCallback(() => {
+    if (!emblaApi) return;
+    setSelectedIndex(emblaApi.selectedScrollSnap());
+  }, [emblaApi]);
+
+  useEffect(() => {
+    if (!emblaApi) return;
+    onSelect();
+    emblaApi.on("select", onSelect);
+    return () => {
+      emblaApi.off("select", onSelect);
+    };
+  }, [emblaApi, onSelect]);
+
+  return (
+    <div className="relative h-full w-full group/carousel">
+      <div className="overflow-hidden h-full rounded-2xl" ref={emblaRef}>
+        <div className="flex h-full">
+          {images.map((src, index) => (
+            <div key={index} className="flex-[0_0_100%] min-w-0 h-full">
+              <img
+                src={src}
+                alt={`Gallery image ${index + 1}`}
+                className="w-full h-full object-cover"
+              />
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Navigation arrows */}
+      <button
+        onClick={scrollPrev}
+        className="absolute left-2 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black/50 text-white opacity-0 group-hover/carousel:opacity-100 transition-opacity hover:bg-black/70"
+        aria-label="Previous image"
+      >
+        <ChevronLeft className="w-5 h-5" />
+      </button>
+      <button
+        onClick={scrollNext}
+        className="absolute right-2 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black/50 text-white opacity-0 group-hover/carousel:opacity-100 transition-opacity hover:bg-black/70"
+        aria-label="Next image"
+      >
+        <ChevronRight className="w-5 h-5" />
+      </button>
+
+      {/* Dot indicators */}
+      <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1.5">
+        {images.map((_, index) => (
+          <button
+            key={index}
+            onClick={() => emblaApi?.scrollTo(index)}
+            className={`w-2 h-2 rounded-full transition-all ${
+              index === selectedIndex
+                ? "bg-primary w-4"
+                : "bg-white/50 hover:bg-white/70"
+            }`}
+            aria-label={`Go to image ${index + 1}`}
+          />
+        ))}
+      </div>
+    </div>
+  );
+};
+
+// Bento Grid layout for Taylor Swift Night
+const TaylorSwiftBentoGrid = ({ layout }: { layout: NonNullable<Event["bentoLayout"]> }) => {
+  return (
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+      {/* Column 1: Vertical Video (9:16, row-span-2) */}
+      <div className="md:row-span-2 aspect-[9/16] md:aspect-auto rounded-2xl overflow-hidden bg-muted relative group/video">
+        <img
+          src={layout.verticalVideo.thumbnail}
+          alt="Video thumbnail"
+          className="w-full h-full object-cover"
+        />
+        {/* Video Play Overlay */}
+        <div className="absolute inset-0 flex items-center justify-center bg-black/40 group-hover/video:bg-black/50 transition-colors cursor-pointer">
+          <div className="w-16 h-16 rounded-full bg-primary/90 flex items-center justify-center group-hover/video:scale-110 transition-transform">
+            <Play className="w-7 h-7 text-primary-foreground ml-1" />
+          </div>
+        </div>
+        {/* Placeholder text */}
+        <div className="absolute bottom-3 left-3 text-xs text-white/60 bg-black/40 px-2 py-1 rounded">
+          9:16 Video
+        </div>
+      </div>
+
+      {/* Column 2: Photo Carousel (3:4, row-span-2) */}
+      <div className="md:row-span-2 aspect-[3/4] md:aspect-auto rounded-2xl overflow-hidden bg-muted">
+        <PhotoCarousel images={layout.carouselImages} />
+        {/* Placeholder label */}
+        <div className="absolute bottom-3 left-3 text-xs text-white/60 bg-black/40 px-2 py-1 rounded pointer-events-none">
+          3:4 Carousel
+        </div>
+      </div>
+
+      {/* Column 3: Two stacked square photos */}
+      <div className="aspect-square rounded-2xl overflow-hidden bg-muted relative group/square">
+        <img
+          src={layout.squarePhotos[0]}
+          alt="Square photo 1"
+          className="w-full h-full object-cover transition-transform duration-500 group-hover/square:scale-110"
+        />
+        <div className="absolute inset-0 bg-primary/0 group-hover/square:bg-primary/10 transition-colors" />
+      </div>
+
+      <div className="aspect-square rounded-2xl overflow-hidden bg-muted relative group/square">
+        <img
+          src={layout.squarePhotos[1]}
+          alt="Square photo 2"
+          className="w-full h-full object-cover transition-transform duration-500 group-hover/square:scale-110"
+        />
+        <div className="absolute inset-0 bg-primary/0 group-hover/square:bg-primary/10 transition-colors" />
+      </div>
+    </div>
+  );
+};
+
+// Standard grid layout for other events
+const StandardGalleryGrid = ({ gallery }: { gallery: MediaItem[] }) => {
+  return (
+    <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+      {gallery.map((item) => (
+        <div
+          key={item.id}
+          className="relative aspect-square rounded-xl overflow-hidden bg-muted group/item cursor-pointer"
+        >
+          {item.type === "image" ? (
+            <img
+              src={item.src}
+              alt={`Gallery item ${item.id}`}
+              className="w-full h-full object-cover transition-transform duration-500 group-hover/item:scale-110"
+            />
+          ) : (
+            <div className="relative w-full h-full">
+              <img
+                src={item.thumbnail || "/placeholder.svg"}
+                alt={`Video thumbnail ${item.id}`}
+                className="w-full h-full object-cover"
+              />
+              {/* Video Play Overlay */}
+              <div className="absolute inset-0 flex items-center justify-center bg-black/40 group-hover/item:bg-black/50 transition-colors">
+                <div className="w-14 h-14 rounded-full bg-primary/90 flex items-center justify-center group-hover/item:scale-110 transition-transform">
+                  <Play className="w-6 h-6 text-primary-foreground ml-1" />
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Hover Overlay */}
+          <div className="absolute inset-0 bg-primary/0 group-hover/item:bg-primary/10 transition-colors duration-300" />
+        </div>
+      ))}
+    </div>
+  );
+};
 
 const Events = () => {
   const [selectedEvent, setSelectedEvent] = useState<Event | null>(null);
@@ -87,10 +270,10 @@ const Events = () => {
                   alt={event.title}
                   className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                 />
-                
+
                 {/* Dark Gradient Overlay */}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/50 to-black/20" />
-                
+
                 {/* Content */}
                 <div className="absolute inset-0 flex flex-col justify-end p-6 md:p-8">
                   <h2 className="text-2xl md:text-3xl lg:text-4xl font-sans font-bold text-white drop-shadow-lg">
@@ -144,45 +327,19 @@ const Events = () => {
                   {selectedEvent.title}
                 </h2>
                 <p className="text-muted-foreground mt-2">
-                  Gallery • {selectedEvent.gallery.length} items
+                  {selectedEvent.bentoLayout
+                    ? `Gallery • ${selectedEvent.bentoLayout.carouselImages.length + selectedEvent.bentoLayout.squarePhotos.length + 1} items`
+                    : `Gallery • ${selectedEvent.gallery.length} items`}
                 </p>
               </div>
 
-              {/* Media Grid */}
+              {/* Media Grid - Bento or Standard */}
               <div className="p-6 md:p-8">
-                <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                  {selectedEvent.gallery.map((item) => (
-                    <div
-                      key={item.id}
-                      className="relative aspect-square rounded-xl overflow-hidden bg-muted group/item cursor-pointer"
-                    >
-                      {item.type === "image" ? (
-                        <img
-                          src={item.src}
-                          alt={`Gallery item ${item.id}`}
-                          className="w-full h-full object-cover transition-transform duration-500 group-hover/item:scale-110"
-                        />
-                      ) : (
-                        <div className="relative w-full h-full">
-                          <img
-                            src={item.thumbnail || "/placeholder.svg"}
-                            alt={`Video thumbnail ${item.id}`}
-                            className="w-full h-full object-cover"
-                          />
-                          {/* Video Play Overlay */}
-                          <div className="absolute inset-0 flex items-center justify-center bg-black/40 group-hover/item:bg-black/50 transition-colors">
-                            <div className="w-14 h-14 rounded-full bg-primary/90 flex items-center justify-center group-hover/item:scale-110 transition-transform">
-                              <Play className="w-6 h-6 text-primary-foreground ml-1" />
-                            </div>
-                          </div>
-                        </div>
-                      )}
-
-                      {/* Hover Overlay */}
-                      <div className="absolute inset-0 bg-primary/0 group-hover/item:bg-primary/10 transition-colors duration-300" />
-                    </div>
-                  ))}
-                </div>
+                {selectedEvent.bentoLayout ? (
+                  <TaylorSwiftBentoGrid layout={selectedEvent.bentoLayout} />
+                ) : (
+                  <StandardGalleryGrid gallery={selectedEvent.gallery} />
+                )}
 
                 {/* Placeholder Notice */}
                 <p className="text-center text-muted-foreground/60 text-sm mt-8 italic">
