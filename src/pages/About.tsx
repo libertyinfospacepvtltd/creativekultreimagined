@@ -54,13 +54,6 @@ const About = () => {
     theme
   } = useTheme();
   return <Layout>
-      <section className="pt-12 sm:pt-16 pb-8 sm:pb-12 md:pt-20 md:pb-16 bg-background py-[30px]">
-        <div className="container-luxury">
-          <span className="text-primary font-sans text-xs sm:text-sm uppercase tracking-widest mb-3 sm:mb-4 block">Our Story</span>
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif text-foreground mb-4 sm:mb-6">Born in Kolkata,<br />Built for the World</h1>
-          <p className="text-muted-foreground font-sans max-w-2xl text-base sm:text-lg">Creative Kult is the creative powerhouse behind Liberty Infospace's digital ventures.</p>
-        </div>
-      </section>
 
       {/* Origin Section */}
       <section className="section-padding bg-card border-t border-border/30 py-[50px]">
