@@ -116,9 +116,6 @@ const Navbar = ({ showNavbar = true }: NavbarProps) => {
   const [dockingComplete, setDockingComplete] = useState(false);
   const isHomePage = location.pathname === "/";
   const { theme } = useTheme();
-  
-  // For non-home pages, use theme-appropriate logo
-  const logo = theme === "dark" ? logoDark : logoLight;
 
   // Close mobile menu on route change
   useEffect(() => {
@@ -176,12 +173,17 @@ const Navbar = ({ showNavbar = true }: NavbarProps) => {
       <>
         <header className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-md border-b border-border/20" style={{ paddingTop: 'env(safe-area-inset-top)' }}>
           <nav className="container-luxury flex items-center justify-between h-14 sm:h-16">
-            {/* Logo - persistent */}
-            <Link to="/" className="relative z-10">
+            {/* Logo - cross-fade between dark/light versions */}
+            <Link to="/" className="relative z-10 h-8 sm:h-10 md:h-12">
               <img 
-                src={logo} 
+                src={logoDark} 
                 alt="Creative Kult" 
-                className="h-8 sm:h-10 md:h-12 w-auto"
+                className={`h-8 sm:h-10 md:h-12 w-auto transition-opacity duration-300 ${theme === 'dark' ? 'opacity-100' : 'opacity-0'}`}
+              />
+              <img 
+                src={logoLight} 
+                alt="Creative Kult" 
+                className={`h-8 sm:h-10 md:h-12 w-auto absolute top-0 left-0 transition-opacity duration-300 ${theme === 'light' ? 'opacity-100' : 'opacity-0'}`}
               />
             </Link>
 
@@ -230,13 +232,6 @@ const Navbar = ({ showNavbar = true }: NavbarProps) => {
   }
 
 
-  // Chameleon navbar logo: white during hero view, switches to black after docking (in light mode)
-  // During hero view (before docking), navbar bg is transparent over dark hero, so use white logo
-  // After docking, navbar has its own bg, so use theme-appropriate logo
-  const homeNavbarLogo = dockingComplete 
-    ? (theme === "dark" ? logoDark : logoLight)
-    : logoDark; // Always white before docking since hero is dark-styled
-
   // Home page - animated navbar that reveals after hero scroll
   return (
     <>
@@ -259,21 +254,32 @@ const Navbar = ({ showNavbar = true }: NavbarProps) => {
         />
         
         <nav className="container-luxury flex items-center justify-between h-14 sm:h-16 relative">
-          {/* Invisible Anchor Logo - opacity 0 by default, shows ONLY after handshake */}
+          {/* Anchor Logo - cross-fade between versions, only visible after docking */}
           <Link 
             to="/" 
             id="navbar-logo-anchor"
-            className="relative z-10"
+            className="relative z-10 h-8 sm:h-10 md:h-12"
             style={{ 
               opacity: dockingComplete ? 1 : 0, 
               pointerEvents: dockingComplete ? 'auto' : 'none',
               transition: 'opacity 0.05s ease-out'
             }}
           >
+            {/* Dark mode logo (gold/white) - also used before docking since hero is dark */}
             <img 
-              src={homeNavbarLogo} 
+              src={logoDark} 
               alt="Creative Kult" 
-              className="h-8 sm:h-10 md:h-12 w-auto"
+              className={`h-8 sm:h-10 md:h-12 w-auto transition-opacity duration-300 ${
+                !dockingComplete || theme === 'dark' ? 'opacity-100' : 'opacity-0'
+              }`}
+            />
+            {/* Light mode logo (brown) - only after docking in light mode */}
+            <img 
+              src={logoLight} 
+              alt="Creative Kult" 
+              className={`h-8 sm:h-10 md:h-12 w-auto absolute top-0 left-0 transition-opacity duration-300 ${
+                dockingComplete && theme === 'light' ? 'opacity-100' : 'opacity-0'
+              }`}
             />
           </Link>
 
