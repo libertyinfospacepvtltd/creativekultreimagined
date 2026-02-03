@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import kolkataIsCooking from "@/assets/campaigns/kolkata-is-cooking.png";
 import cadburyMishti from "@/assets/campaigns/cadbury-mishti.png";
+import timesParaGames from "@/assets/campaigns/times-para-games.png";
 
 interface SpotlightCampaign {
   id: string;
@@ -28,9 +29,9 @@ const spotlightCampaigns: SpotlightCampaign[] = [{
   backgroundImage: cadburyMishti
 }, {
   id: "campaign-03",
-  title: "Campaign 03 Name",
-  subtitle: "Strategy • Branding • Social Media",
-  backgroundImage: "/placeholder.svg"
+  title: "Times Para Games 2023",
+  subtitle: "Event Branding • PR • Social Media",
+  backgroundImage: timesParaGames
 }];
 const deepDiveCampaigns: DeepDiveCampaign[] = [{
   id: "campaign-04",
