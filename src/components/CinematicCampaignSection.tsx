@@ -1,4 +1,6 @@
 import { motion } from "framer-motion";
+import kolkataIsCooking from "@/assets/campaigns/kolkata-is-cooking.png";
+
 interface SpotlightCampaign {
   id: string;
   title: string;
@@ -15,9 +17,9 @@ interface DeepDiveCampaign {
 }
 const spotlightCampaigns: SpotlightCampaign[] = [{
   id: "campaign-01",
-  title: "Campaign 01 Name",
-  subtitle: "Strategy • Branding • Social Media",
-  backgroundImage: "/placeholder.svg"
+  title: "Kolkata Is Cooking",
+  subtitle: "Event Marketing • Social Media • Brand Activation",
+  backgroundImage: kolkataIsCooking
 }, {
   id: "campaign-02",
   title: "Campaign 02 Name",
