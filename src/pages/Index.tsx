@@ -3,10 +3,10 @@ import HeroSection from "@/components/HeroSection";
 import UnifiedTransitionSection from "@/components/UnifiedTransitionSection";
 import StatsSection from "@/components/StatsSection";
 import MarqueeSection from "@/components/MarqueeSection";
+import FeaturedCampaignsSection from "@/components/FeaturedCampaignsSection";
 import ServicesPreview from "@/components/ServicesPreview";
 import DivisionsSection from "@/components/DivisionsSection";
 import CTASection from "@/components/CTASection";
-
 const Index = () => {
   return (
     <Layout>
@@ -14,6 +14,7 @@ const Index = () => {
       <UnifiedTransitionSection />
       <StatsSection />
       <MarqueeSection />
+      <FeaturedCampaignsSection />
       <ServicesPreview />
       <DivisionsSection />
       <CTASection />
