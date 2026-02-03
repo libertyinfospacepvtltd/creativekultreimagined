@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { Instagram, Facebook, Globe, ArrowRight } from "lucide-react";
 import Layout from "@/components/Layout";
 import ClientLogosMarquee from "@/components/ClientLogosMarquee";
+import FeaturedCampaignsSection from "@/components/FeaturedCampaignsSection";
 
 const projects = [{
   id: "easydo365",
@@ -108,6 +109,9 @@ const Work = () => {
 
       {/* Client Logos Marquee */}
       <ClientLogosMarquee />
+
+      {/* Featured Campaigns */}
+      <FeaturedCampaignsSection />
 
       {/* Trusted By */}
       <section className="py-16 bg-card border-t border-border/30">
