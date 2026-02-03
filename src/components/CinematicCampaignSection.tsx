@@ -69,7 +69,7 @@ const CinematicCampaignSection = () => {
         }} viewport={{
           once: true,
           margin: "-100px"
-        }} className="relative w-full h-[80vh] min-h-[600px] rounded-3xl overflow-hidden group cursor-pointer">
+        }} className="relative w-full aspect-video md:aspect-[3240/1350] rounded-3xl overflow-hidden group cursor-pointer">
               {/* Background Image */}
               <img src={campaign.backgroundImage} alt={campaign.title} className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
 
