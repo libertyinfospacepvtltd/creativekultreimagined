@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import kolkataIsCooking from "@/assets/campaigns/kolkata-is-cooking.png";
+import cadburyMishti from "@/assets/campaigns/cadbury-mishti.png";
 
 interface SpotlightCampaign {
   id: string;
@@ -22,9 +23,9 @@ const spotlightCampaigns: SpotlightCampaign[] = [{
   backgroundImage: kolkataIsCooking
 }, {
   id: "campaign-02",
-  title: "Campaign 02 Name",
-  subtitle: "Strategy • Branding • Social Media",
-  backgroundImage: "/placeholder.svg"
+  title: "Cadbury Mishti Shera Shrishti",
+  subtitle: "Brand Campaign • Influencer Marketing • Social Media",
+  backgroundImage: cadburyMishti
 }, {
   id: "campaign-03",
   title: "Campaign 03 Name",
