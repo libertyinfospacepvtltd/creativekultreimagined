@@ -3,7 +3,7 @@ import { Instagram, Facebook, Globe } from "lucide-react";
 const divisions = [
   {
     name: "EasyDo 365",
-    description: "Productivity app",
+    description: "HRMS app",
     website: "https://easydo365.com/",
     instagram: "https://www.instagram.com/easydo_365/",
     facebook: "https://www.facebook.com/Easydo365app",
