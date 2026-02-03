@@ -50,9 +50,6 @@ const CinematicCampaignSection = () => {
         {/* Section Header */}
         <div className="mb-16 lg:mb-24">
           <span className="text-primary font-sans text-xs sm:text-sm uppercase tracking-widest mb-2 sm:mb-4 block">CAMPAIGNS</span>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif text-foreground">
-            Selected Works
-          </h2>
         </div>
 
         {/* Part A: Spotlight Trio - Full Width Cards */}
