@@ -1,12 +1,10 @@
 import { motion } from "framer-motion";
-
 interface SpotlightCampaign {
   id: string;
   title: string;
   subtitle: string;
   backgroundImage: string;
 }
-
 interface DeepDiveCampaign {
   id: string;
   title: string;
@@ -15,80 +13,43 @@ interface DeepDiveCampaign {
   gallery: string[];
   results: string[];
 }
-
-const spotlightCampaigns: SpotlightCampaign[] = [
-  {
-    id: "campaign-01",
-    title: "Campaign 01 Name",
-    subtitle: "Strategy • Branding • Social Media",
-    backgroundImage: "/placeholder.svg",
-  },
-  {
-    id: "campaign-02",
-    title: "Campaign 02 Name",
-    subtitle: "Strategy • Branding • Social Media",
-    backgroundImage: "/placeholder.svg",
-  },
-  {
-    id: "campaign-03",
-    title: "Campaign 03 Name",
-    subtitle: "Strategy • Branding • Social Media",
-    backgroundImage: "/placeholder.svg",
-  },
-];
-
-const deepDiveCampaigns: DeepDiveCampaign[] = [
-  {
-    id: "campaign-04",
-    title: "Campaign 04 Name",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
-    heroImage: "/placeholder.svg",
-    gallery: [
-      "/placeholder.svg",
-      "/placeholder.svg",
-      "/placeholder.svg",
-      "/placeholder.svg",
-      "/placeholder.svg",
-      "/placeholder.svg",
-    ],
-    results: [
-      "Placeholder result metric #1",
-      "Placeholder result metric #2",
-      "Placeholder result metric #3",
-    ],
-  },
-  {
-    id: "campaign-05",
-    title: "Campaign 05 Name",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
-    heroImage: "/placeholder.svg",
-    gallery: [
-      "/placeholder.svg",
-      "/placeholder.svg",
-      "/placeholder.svg",
-      "/placeholder.svg",
-      "/placeholder.svg",
-      "/placeholder.svg",
-    ],
-    results: [
-      "Placeholder result metric #1",
-      "Placeholder result metric #2",
-      "Placeholder result metric #3",
-    ],
-  },
-];
-
+const spotlightCampaigns: SpotlightCampaign[] = [{
+  id: "campaign-01",
+  title: "Campaign 01 Name",
+  subtitle: "Strategy • Branding • Social Media",
+  backgroundImage: "/placeholder.svg"
+}, {
+  id: "campaign-02",
+  title: "Campaign 02 Name",
+  subtitle: "Strategy • Branding • Social Media",
+  backgroundImage: "/placeholder.svg"
+}, {
+  id: "campaign-03",
+  title: "Campaign 03 Name",
+  subtitle: "Strategy • Branding • Social Media",
+  backgroundImage: "/placeholder.svg"
+}];
+const deepDiveCampaigns: DeepDiveCampaign[] = [{
+  id: "campaign-04",
+  title: "Campaign 04 Name",
+  description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+  heroImage: "/placeholder.svg",
+  gallery: ["/placeholder.svg", "/placeholder.svg", "/placeholder.svg", "/placeholder.svg", "/placeholder.svg", "/placeholder.svg"],
+  results: ["Placeholder result metric #1", "Placeholder result metric #2", "Placeholder result metric #3"]
+}, {
+  id: "campaign-05",
+  title: "Campaign 05 Name",
+  description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+  heroImage: "/placeholder.svg",
+  gallery: ["/placeholder.svg", "/placeholder.svg", "/placeholder.svg", "/placeholder.svg", "/placeholder.svg", "/placeholder.svg"],
+  results: ["Placeholder result metric #1", "Placeholder result metric #2", "Placeholder result metric #3"]
+}];
 const CinematicCampaignSection = () => {
-  return (
-    <section className="bg-background py-16 lg:py-24">
+  return <section className="bg-background py-16 lg:py-24">
       <div className="container-luxury">
         {/* Section Header */}
         <div className="mb-16 lg:mb-24">
-          <span className="text-primary font-sans text-xs sm:text-sm uppercase tracking-widest mb-2 sm:mb-4 block">
-            Case Studies
-          </span>
+          <span className="text-primary font-sans text-xs sm:text-sm uppercase tracking-widest mb-2 sm:mb-4 block">CAMPAIGNS</span>
           <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif text-foreground">
             Selected Works
           </h2>
@@ -99,21 +60,21 @@ const CinematicCampaignSection = () => {
           <h3 className="text-sm font-sans uppercase tracking-widest text-muted-foreground">
             Spotlight
           </h3>
-          {spotlightCampaigns.map((campaign, index) => (
-            <motion.div
-              key={campaign.id}
-              initial={{ opacity: 0, y: 60 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: index * 0.1 }}
-              viewport={{ once: true, margin: "-100px" }}
-              className="relative w-full h-[80vh] min-h-[600px] rounded-3xl overflow-hidden group cursor-pointer"
-            >
+          {spotlightCampaigns.map((campaign, index) => <motion.div key={campaign.id} initial={{
+          opacity: 0,
+          y: 60
+        }} whileInView={{
+          opacity: 1,
+          y: 0
+        }} transition={{
+          duration: 0.7,
+          delay: index * 0.1
+        }} viewport={{
+          once: true,
+          margin: "-100px"
+        }} className="relative w-full h-[80vh] min-h-[600px] rounded-3xl overflow-hidden group cursor-pointer">
               {/* Background Image */}
-              <img
-                src={campaign.backgroundImage}
-                alt={campaign.title}
-                className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-              />
+              <img src={campaign.backgroundImage} alt={campaign.title} className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
 
               {/* Gradient Overlay */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
@@ -130,8 +91,7 @@ const CinematicCampaignSection = () => {
                   {campaign.subtitle}
                 </p>
               </div>
-            </motion.div>
-          ))}
+            </motion.div>)}
         </div>
 
         {/* Part B: Deep Dives - Sticky Split Layouts */}
@@ -139,18 +99,10 @@ const CinematicCampaignSection = () => {
           <h3 className="text-sm font-sans uppercase tracking-widest text-muted-foreground">
             Deep Dives
           </h3>
-          {deepDiveCampaigns.map((campaign, index) => (
-            <div
-              key={campaign.id}
-              className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12"
-            >
+          {deepDiveCampaigns.map((campaign, index) => <div key={campaign.id} className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
               {/* Left Column - Sticky Visual (desktop only) */}
               <div className="h-[50vh] lg:sticky lg:top-24 lg:h-[calc(100vh-6rem)]">
-                <img
-                  src={campaign.heroImage}
-                  alt={campaign.title}
-                  className="w-full h-full object-cover rounded-3xl border border-border/30"
-                />
+                <img src={campaign.heroImage} alt={campaign.title} className="w-full h-full object-cover rounded-3xl border border-border/30" />
               </div>
 
               {/* Right Column - The Story (Scrollable) */}
@@ -174,22 +126,21 @@ const CinematicCampaignSection = () => {
                     Creative Gallery
                   </h4>
                   <div className="grid grid-cols-2 gap-4">
-                    {campaign.gallery.map((image, imgIndex) => (
-                      <motion.div
-                        key={imgIndex}
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.5, delay: imgIndex * 0.08 }}
-                        viewport={{ once: true, margin: "-50px" }}
-                        className="aspect-[4/5] rounded-2xl overflow-hidden border border-border/30"
-                      >
-                        <img
-                          src={image}
-                          alt={`${campaign.title} creative ${imgIndex + 1}`}
-                          className="w-full h-full object-cover"
-                        />
-                      </motion.div>
-                    ))}
+                    {campaign.gallery.map((image, imgIndex) => <motion.div key={imgIndex} initial={{
+                  opacity: 0,
+                  y: 20
+                }} whileInView={{
+                  opacity: 1,
+                  y: 0
+                }} transition={{
+                  duration: 0.5,
+                  delay: imgIndex * 0.08
+                }} viewport={{
+                  once: true,
+                  margin: "-50px"
+                }} className="aspect-[4/5] rounded-2xl overflow-hidden border border-border/30">
+                        <img src={image} alt={`${campaign.title} creative ${imgIndex + 1}`} className="w-full h-full object-cover" />
+                      </motion.div>)}
                   </div>
                 </div>
 
@@ -199,26 +150,21 @@ const CinematicCampaignSection = () => {
                     Results
                   </h4>
                   <ul className="space-y-4">
-                    {campaign.results.map((result, resultIndex) => (
-                      <li key={resultIndex} className="flex items-start gap-3">
+                    {campaign.results.map((result, resultIndex) => <li key={resultIndex} className="flex items-start gap-3">
                         <span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" />
                         <span className="text-foreground font-sans">
                           {result}
                         </span>
-                      </li>
-                    ))}
+                      </li>)}
                   </ul>
                 </div>
 
                 {/* Extra Spacer for Sticky Effect */}
                 <div className="h-24 lg:h-32" />
               </div>
-            </div>
-          ))}
+            </div>)}
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default CinematicCampaignSection;
