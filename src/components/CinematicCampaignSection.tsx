@@ -98,7 +98,7 @@ const CinematicCampaignSection = () => {
         {/* Part B: Deep Dives - Sticky Split Layouts */}
         <div className="space-y-24 lg:space-y-32">
           <h3 className="text-sm font-sans uppercase tracking-widest text-muted-foreground">
-            Deep Dives
+            Other Campaigns
           </h3>
           {deepDiveCampaigns.map((campaign, index) => <div key={campaign.id} className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
               {/* Left Column - Sticky Visual (desktop only) */}
