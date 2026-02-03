@@ -6,7 +6,7 @@ import ClientLogosMarquee from "@/components/ClientLogosMarquee";
 const projects = [{
   id: "easydo365",
   name: "EasyDo 365",
-  category: "Productivity App",
+  category: "HRMS App",
   description: "End-to-end creative strategy and content production for a productivity app, focusing on user engagement and app downloads.",
   tags: ["Content Production", "Social Media", "Video Marketing"],
   results: ["200% increase in app downloads", "4.5 star rating maintained", "Viral content reaching 1M+ views"],
