@@ -6,6 +6,7 @@ import MarqueeSection from "@/components/MarqueeSection";
 import ServicesPreview from "@/components/ServicesPreview";
 import DivisionsSection from "@/components/DivisionsSection";
 import CTASection from "@/components/CTASection";
+
 const Index = () => {
   return (
     <Layout>
