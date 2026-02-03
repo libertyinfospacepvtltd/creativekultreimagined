@@ -215,7 +215,7 @@ const ServicesPreview = () => {
   return (
     <section ref={containerRef} className={`relative ${sectionHeight} bg-background`}>
       {/* Desktop Layout - Sticky with scatter animation */}
-      <div className="hidden md:block sticky top-0 h-screen w-full pb-40 overflow-visible">
+      <div className="hidden md:block sticky top-0 h-screen w-full overflow-hidden">
         <div className="h-full w-full flex flex-col">
           {/* Static Header */}
           <div className="relative z-50 bg-background pt-24 pb-6 flex-shrink-0">
@@ -223,14 +223,17 @@ const ServicesPreview = () => {
               <span className="text-primary font-sans text-sm uppercase tracking-widest mb-4 block">
                 Our Services
               </span>
-              <h2 className="text-4xl lg:text-5xl xl:text-6xl 2xl:text-7xl font-serif text-foreground">
+              <h2 className="text-4xl lg:text-5xl xl:text-6xl 2xl:text-7xl font-serif text-foreground mb-4">
                 From Strategy to Execution
               </h2>
+              <p className="text-muted-foreground font-sans max-w-2xl mx-auto text-sm lg:text-base xl:text-lg">
+                Scroll to discover our comprehensive creative solutions
+              </p>
             </div>
           </div>
 
           {/* Animation Area */}
-          <div className="relative flex-1 w-full flex items-center justify-center overflow-visible">
+          <div className="relative flex-1 w-full flex items-center justify-center">
             {/* Layer A: Services Grid - z-30 */}
             <motion.div 
               className="absolute inset-0 flex items-center justify-center z-30 pt-4"
@@ -306,9 +309,12 @@ const ServicesPreview = () => {
           <span className="text-primary font-sans text-xs uppercase tracking-widest mb-2 block">
             Our Services
           </span>
-          <h2 className="text-2xl sm:text-3xl font-serif text-foreground">
+          <h2 className="text-2xl sm:text-3xl font-serif text-foreground mb-2">
             From Strategy to Execution
           </h2>
+          <p className="text-muted-foreground font-sans text-xs max-w-sm mx-auto">
+            Comprehensive creative solutions for your brand
+          </p>
         </div>
 
         {/* Mobile Services Grid - Compact 2x4 with diagonal float animation */}
