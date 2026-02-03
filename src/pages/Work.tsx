@@ -107,11 +107,11 @@ const Work = () => {
         </div>
       </section>
 
-      {/* Cinematic Campaign Journey */}
-      <CinematicCampaignSection />
-
       {/* Client Logos Marquee */}
       <ClientLogosMarquee />
+
+      {/* Cinematic Campaign Journey */}
+      <CinematicCampaignSection />
 
       {/* Trusted By */}
       <section className="py-16 bg-card border-t border-border/30">
