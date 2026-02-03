@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { Instagram, Facebook, Globe, ArrowRight } from "lucide-react";
 import Layout from "@/components/Layout";
 import ClientLogosMarquee from "@/components/ClientLogosMarquee";
+import CinematicCampaignSection from "@/components/CinematicCampaignSection";
 
 const projects = [{
   id: "easydo365",
@@ -105,6 +106,9 @@ const Work = () => {
           </div>
         </div>
       </section>
+
+      {/* Cinematic Campaign Journey */}
+      <CinematicCampaignSection />
 
       {/* Client Logos Marquee */}
       <ClientLogosMarquee />
