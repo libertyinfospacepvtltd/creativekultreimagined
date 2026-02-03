@@ -215,7 +215,7 @@ const ServicesPreview = () => {
   return (
     <section ref={containerRef} className={`relative ${sectionHeight} bg-background`}>
       {/* Desktop Layout - Sticky with scatter animation */}
-      <div className="hidden md:block sticky top-0 h-screen w-full pb-40">
+      <div className="hidden md:block sticky top-0 h-screen w-full pb-40 overflow-visible">
         <div className="h-full w-full flex flex-col">
           {/* Static Header */}
           <div className="relative z-50 bg-background pt-24 pb-6 flex-shrink-0">
@@ -230,7 +230,7 @@ const ServicesPreview = () => {
           </div>
 
           {/* Animation Area */}
-          <div className="relative flex-1 w-full flex items-center justify-center">
+          <div className="relative flex-1 w-full flex items-center justify-center overflow-visible">
             {/* Layer A: Services Grid - z-30 */}
             <motion.div 
               className="absolute inset-0 flex items-center justify-center z-30 pt-4"
