@@ -1,67 +1,82 @@
 import { motion } from "framer-motion";
 
-interface Campaign {
-  id: string;
-  title: string;
-  description: string;
-  heroImage: string;
-  variations: string[];
-}
-
-interface FullWidthCampaign {
+interface SpotlightCampaign {
   id: string;
   title: string;
   subtitle: string;
   backgroundImage: string;
 }
 
-const stickyCampaigns: Campaign[] = [
+interface DeepDiveCampaign {
+  id: string;
+  title: string;
+  description: string;
+  heroImage: string;
+  gallery: string[];
+  results: string[];
+}
+
+const spotlightCampaigns: SpotlightCampaign[] = [
   {
     id: "campaign-01",
     title: "Campaign 01 Name",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
-    heroImage: "/placeholder.svg",
-    variations: [
-      "/placeholder.svg",
-      "/placeholder.svg",
-      "/placeholder.svg",
-      "/placeholder.svg",
-    ],
+    subtitle: "Strategy • Branding • Social Media",
+    backgroundImage: "/placeholder.svg",
   },
   {
     id: "campaign-02",
     title: "Campaign 02 Name",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
-    heroImage: "/placeholder.svg",
-    variations: [
-      "/placeholder.svg",
-      "/placeholder.svg",
-      "/placeholder.svg",
-      "/placeholder.svg",
-    ],
+    subtitle: "Strategy • Branding • Social Media",
+    backgroundImage: "/placeholder.svg",
   },
-];
-
-const fullWidthCampaigns: FullWidthCampaign[] = [
   {
     id: "campaign-03",
     title: "Campaign 03 Name",
     subtitle: "Strategy • Branding • Social Media",
     backgroundImage: "/placeholder.svg",
   },
+];
+
+const deepDiveCampaigns: DeepDiveCampaign[] = [
   {
     id: "campaign-04",
     title: "Campaign 04 Name",
-    subtitle: "Strategy • Branding • Social Media",
-    backgroundImage: "/placeholder.svg",
+    description:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+    heroImage: "/placeholder.svg",
+    gallery: [
+      "/placeholder.svg",
+      "/placeholder.svg",
+      "/placeholder.svg",
+      "/placeholder.svg",
+      "/placeholder.svg",
+      "/placeholder.svg",
+    ],
+    results: [
+      "Placeholder result metric #1",
+      "Placeholder result metric #2",
+      "Placeholder result metric #3",
+    ],
   },
   {
     id: "campaign-05",
     title: "Campaign 05 Name",
-    subtitle: "Strategy • Branding • Social Media",
-    backgroundImage: "/placeholder.svg",
+    description:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+    heroImage: "/placeholder.svg",
+    gallery: [
+      "/placeholder.svg",
+      "/placeholder.svg",
+      "/placeholder.svg",
+      "/placeholder.svg",
+      "/placeholder.svg",
+      "/placeholder.svg",
+    ],
+    results: [
+      "Placeholder result metric #1",
+      "Placeholder result metric #2",
+      "Placeholder result metric #3",
+    ],
   },
 ];
 
@@ -79,106 +94,19 @@ const CinematicCampaignSection = () => {
           </h2>
         </div>
 
-        {/* Part A & B: Sticky Split Layouts */}
-        {stickyCampaigns.map((campaign, index) => (
-          <div
-            key={campaign.id}
-            className={`grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 ${
-              index < stickyCampaigns.length - 1 ? "mb-24 lg:mb-32" : "mb-16 lg:mb-24"
-            }`}
-          >
-            {/* Left Column - Sticky Visual */}
-            <div className="lg:sticky lg:top-24 lg:h-[80vh] h-[50vh]">
-              <img
-                src={campaign.heroImage}
-                alt={campaign.title}
-                className="w-full h-full object-cover rounded-3xl border border-border/30"
-              />
-            </div>
-
-            {/* Right Column - The Story (Scrollable) */}
-            <div className="space-y-8 lg:space-y-12">
-              {/* Title & Description */}
-              <div className="space-y-6">
-                <span className="text-primary font-sans text-xs uppercase tracking-widest">
-                  Campaign {String(index + 1).padStart(2, "0")}
-                </span>
-                <h3 className="text-2xl sm:text-3xl lg:text-4xl font-serif text-foreground">
-                  {campaign.title}
-                </h3>
-                <p className="text-muted-foreground font-sans text-base lg:text-lg leading-relaxed">
-                  {campaign.description}
-                </p>
-              </div>
-
-              {/* Creative Variations */}
-              <div className="space-y-6">
-                <h4 className="text-sm font-sans uppercase tracking-widest text-muted-foreground">
-                  Creative Variations
-                </h4>
-                <div className="grid grid-cols-2 gap-4">
-                  {campaign.variations.map((image, imgIndex) => (
-                    <motion.div
-                      key={imgIndex}
-                      initial={{ opacity: 0, y: 20 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.5, delay: imgIndex * 0.1 }}
-                      viewport={{ once: true, margin: "-50px" }}
-                      className="aspect-[4/5] rounded-2xl overflow-hidden border border-border/30"
-                    >
-                      <img
-                        src={image}
-                        alt={`${campaign.title} variation ${imgIndex + 1}`}
-                        className="w-full h-full object-cover"
-                      />
-                    </motion.div>
-                  ))}
-                </div>
-              </div>
-
-              {/* Extra content to make column taller for sticky effect */}
-              <div className="space-y-6 pt-8">
-                <h4 className="text-sm font-sans uppercase tracking-widest text-muted-foreground">
-                  Results
-                </h4>
-                <ul className="space-y-4">
-                  <li className="flex items-start gap-3">
-                    <span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" />
-                    <span className="text-foreground font-sans">
-                      Placeholder result metric #1
-                    </span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" />
-                    <span className="text-foreground font-sans">
-                      Placeholder result metric #2
-                    </span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" />
-                    <span className="text-foreground font-sans">
-                      Placeholder result metric #3
-                    </span>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        ))}
-
-        {/* Part C: Full-Width Reveals */}
-        <div className="space-y-8 lg:space-y-12 mt-8">
-          <h3 className="text-sm font-sans uppercase tracking-widest text-muted-foreground mb-8">
-            More Campaigns
+        {/* Part A: Spotlight Trio - Full Width Cards */}
+        <div className="space-y-8 lg:space-y-12 mb-24 lg:mb-32">
+          <h3 className="text-sm font-sans uppercase tracking-widest text-muted-foreground">
+            Spotlight
           </h3>
-          {fullWidthCampaigns.map((campaign, index) => (
+          {spotlightCampaigns.map((campaign, index) => (
             <motion.div
               key={campaign.id}
               initial={{ opacity: 0, y: 60 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: index * 0.1 }}
               viewport={{ once: true, margin: "-100px" }}
-              className="relative w-full h-[60vh] rounded-3xl overflow-hidden group cursor-pointer"
+              className="relative w-full h-[80vh] min-h-[600px] rounded-3xl overflow-hidden group cursor-pointer"
             >
               {/* Background Image */}
               <img
@@ -193,16 +121,99 @@ const CinematicCampaignSection = () => {
               {/* Text Overlay */}
               <div className="absolute bottom-10 left-10 right-10">
                 <span className="text-primary font-sans text-xs uppercase tracking-widest mb-2 block">
-                  Campaign {String(index + 3).padStart(2, "0")}
+                  Campaign {String(index + 1).padStart(2, "0")}
                 </span>
-                <h4 className="text-2xl sm:text-3xl lg:text-4xl font-serif text-white mb-2">
+                <h4 className="text-2xl sm:text-3xl lg:text-5xl font-serif text-white mb-2">
                   {campaign.title}
                 </h4>
-                <p className="text-white/70 font-sans text-sm">
+                <p className="text-white/70 font-sans text-sm lg:text-base">
                   {campaign.subtitle}
                 </p>
               </div>
             </motion.div>
+          ))}
+        </div>
+
+        {/* Part B: Deep Dives - Sticky Split Layouts */}
+        <div className="space-y-24 lg:space-y-32">
+          <h3 className="text-sm font-sans uppercase tracking-widest text-muted-foreground">
+            Deep Dives
+          </h3>
+          {deepDiveCampaigns.map((campaign, index) => (
+            <div
+              key={campaign.id}
+              className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12"
+            >
+              {/* Left Column - Sticky Visual (desktop only) */}
+              <div className="h-[50vh] lg:sticky lg:top-24 lg:h-[calc(100vh-6rem)]">
+                <img
+                  src={campaign.heroImage}
+                  alt={campaign.title}
+                  className="w-full h-full object-cover rounded-3xl border border-border/30"
+                />
+              </div>
+
+              {/* Right Column - The Story (Scrollable) */}
+              <div className="space-y-8 lg:space-y-12">
+                {/* Title & Description */}
+                <div className="space-y-6">
+                  <span className="text-primary font-sans text-xs uppercase tracking-widest">
+                    Campaign {String(index + 4).padStart(2, "0")}
+                  </span>
+                  <h3 className="text-2xl sm:text-3xl lg:text-4xl font-serif text-foreground">
+                    {campaign.title}
+                  </h3>
+                  <p className="text-muted-foreground font-sans text-base lg:text-lg leading-relaxed">
+                    {campaign.description}
+                  </p>
+                </div>
+
+                {/* Gallery Grid */}
+                <div className="space-y-6">
+                  <h4 className="text-sm font-sans uppercase tracking-widest text-muted-foreground">
+                    Creative Gallery
+                  </h4>
+                  <div className="grid grid-cols-2 gap-4">
+                    {campaign.gallery.map((image, imgIndex) => (
+                      <motion.div
+                        key={imgIndex}
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.5, delay: imgIndex * 0.08 }}
+                        viewport={{ once: true, margin: "-50px" }}
+                        className="aspect-[4/5] rounded-2xl overflow-hidden border border-border/30"
+                      >
+                        <img
+                          src={image}
+                          alt={`${campaign.title} creative ${imgIndex + 1}`}
+                          className="w-full h-full object-cover"
+                        />
+                      </motion.div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Results */}
+                <div className="space-y-6 pt-8">
+                  <h4 className="text-sm font-sans uppercase tracking-widest text-muted-foreground">
+                    Results
+                  </h4>
+                  <ul className="space-y-4">
+                    {campaign.results.map((result, resultIndex) => (
+                      <li key={resultIndex} className="flex items-start gap-3">
+                        <span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" />
+                        <span className="text-foreground font-sans">
+                          {result}
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                {/* Extra Spacer for Sticky Effect */}
+                <div className="h-24 lg:h-32" />
+              </div>
+            </div>
           ))}
         </div>
       </div>
