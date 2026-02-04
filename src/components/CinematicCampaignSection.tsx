@@ -19,6 +19,7 @@ import debaarun6 from "@/assets/campaigns/debaarun/debaarun-6.webp";
 import chowringheeBanner from "@/assets/campaigns/debaarun/chowringhee-banner.jpg";
 import chowringheeGrid from "@/assets/campaigns/debaarun/chowringhee-grid.png";
 import sylvanHero from "@/assets/campaigns/sylvan-ply/sylvan-hero.png";
+import sylvanBrandLaunch from "@/assets/campaigns/sylvan-ply/sylvan-brand-launch.png";
 import sylvanPinned1 from "@/assets/campaigns/sylvan-ply/sylvan-pinned-1.png";
 import sylvanPinned2 from "@/assets/campaigns/sylvan-ply/sylvan-pinned-2.png";
 import sylvanPinned3 from "@/assets/campaigns/sylvan-ply/sylvan-pinned-3.png";
@@ -39,7 +40,7 @@ interface DeepDiveCampaign {
   pinnedImages?: string[];
   gallery: string[];
   galleryTitle?: string;
-  galleryLayout?: 'grid' | 'carousel' | 'placeholder';
+  galleryLayout?: 'grid' | 'carousel' | 'placeholder' | 'single';
   galleryPlaceholderRatio?: string;
   results: string[];
 }
@@ -66,10 +67,9 @@ const deepDiveCampaigns: DeepDiveCampaign[] = [{
   heroImage: sylvanHero,
   heroAspectRatio: "1920 / 600",
   pinnedImages: [sylvanPinned1, sylvanPinned2, sylvanPinned3, sylvanPinned4],
-  gallery: [],
+  gallery: [sylvanBrandLaunch],
   galleryTitle: "Brand Launch Campaign",
-  galleryLayout: 'placeholder',
-  galleryPlaceholderRatio: "1380 / 929",
+  galleryLayout: 'single',
   results: ["Successful brand launch campaign", "Established brand identity in market", "Creative concept development and execution"]
 }, {
   id: "campaign-05",
@@ -193,6 +193,17 @@ const CinematicCampaignSection = () => {
                       style={{ aspectRatio: campaign.galleryPlaceholderRatio || '16 / 9' }}
                     >
                       <span className="text-muted-foreground/40 text-sm font-sans">Coming Soon</span>
+                    </motion.div>
+                  ) : campaign.galleryLayout === 'single' && campaign.gallery[0] ? (
+                    // Single full-width image
+                    <motion.div 
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.5 }}
+                      viewport={{ once: true, margin: "-50px" }}
+                      className="w-full rounded-2xl overflow-hidden border border-border/30"
+                    >
+                      <img src={campaign.gallery[0]} alt={`${campaign.title} creative`} className="w-full h-auto object-cover" />
                     </motion.div>
                   ) : (
                     // Default grid layout
