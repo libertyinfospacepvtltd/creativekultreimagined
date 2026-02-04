@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import easydo365 from "@/assets/campaigns/easydo365.png";
+import easydo365 from "@/assets/campaigns/easydo365-logo.png";
 import easydo365Detail from "@/assets/campaigns/easydo365-detail.jpg";
 import twelfthpassSpotlight from "@/assets/campaigns/12thpass-spotlight.png";
 import kolkataIsCooking from "@/assets/campaigns/kolkata-is-cooking.png";
