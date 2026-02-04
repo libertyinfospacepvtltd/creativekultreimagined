@@ -57,7 +57,7 @@ interface DeepDiveCampaign {
 }
 const spotlightCampaigns: SpotlightCampaign[] = [{
   id: "campaign-00b",
-  title: "12thPass.ai",
+  title: "12thPass AI",
   subtitle: "EdTech • Brand Identity • Performance Marketing • Social Media Strategy",
   backgroundImage: twelfthpassSpotlight
 }, {
