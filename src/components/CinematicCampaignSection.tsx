@@ -2,6 +2,14 @@ import { motion } from "framer-motion";
 import kolkataIsCooking from "@/assets/campaigns/kolkata-is-cooking.png";
 import cadburyMishti from "@/assets/campaigns/cadbury-mishti.png";
 import timesParaGames from "@/assets/campaigns/times-para-games.png";
+import rawatHero from "@/assets/campaigns/rawat/rawat-hero.png";
+import rawat1 from "@/assets/campaigns/rawat/rawat-1.jpeg";
+import rawat2 from "@/assets/campaigns/rawat/rawat-2.jpeg";
+import rawat3 from "@/assets/campaigns/rawat/rawat-3.jpeg";
+import rawat4 from "@/assets/campaigns/rawat/rawat-4.jpeg";
+import rawat5 from "@/assets/campaigns/rawat/rawat-5.jpeg";
+import rawat6 from "@/assets/campaigns/rawat/rawat-6.jpeg";
+
 interface SpotlightCampaign {
   id: string;
   title: string;
@@ -34,11 +42,11 @@ const spotlightCampaigns: SpotlightCampaign[] = [{
 }];
 const deepDiveCampaigns: DeepDiveCampaign[] = [{
   id: "campaign-04",
-  title: "Campaign 04 Name",
-  description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
-  heroImage: "/placeholder.svg",
-  gallery: ["/placeholder.svg", "/placeholder.svg", "/placeholder.svg", "/placeholder.svg", "/placeholder.svg", "/placeholder.svg"],
-  results: ["Placeholder result metric #1", "Placeholder result metric #2", "Placeholder result metric #3"]
+  title: "Rawat Jewellers",
+  description: "A luxury jewelry brand campaign showcasing exquisite craftsmanship and timeless elegance. We created stunning visual content that captures the intricate details and heritage of Rawat's handcrafted pieces, positioning the brand as a symbol of refined taste and artistry.",
+  heroImage: rawatHero,
+  gallery: [rawat1, rawat2, rawat3, rawat4, rawat5, rawat6],
+  results: ["Premium visual content for social media", "Increased brand engagement by 45%", "Elevated brand perception in luxury market"]
 }, {
   id: "campaign-05",
   title: "Campaign 05 Name",
