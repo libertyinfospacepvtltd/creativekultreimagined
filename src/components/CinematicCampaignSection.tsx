@@ -56,15 +56,15 @@ interface DeepDiveCampaign {
   results: string[];
 }
 const spotlightCampaigns: SpotlightCampaign[] = [{
-  id: "campaign-00",
-  title: "EasyDo 365",
-  subtitle: "HRMS App • Brand Identity • Digital Marketing • Content Strategy",
-  backgroundImage: easydo365
-}, {
   id: "campaign-00b",
   title: "12thPass.ai",
   subtitle: "EdTech • Brand Identity • Performance Marketing • Social Media Strategy",
   backgroundImage: twelfthpassSpotlight
+}, {
+  id: "campaign-00",
+  title: "EasyDo 365",
+  subtitle: "HRMS App • Brand Identity • Digital Marketing • Content Strategy",
+  backgroundImage: easydo365
 }, {
   id: "campaign-01",
   title: "Coca Cola - Kolkata Is Cooking",
