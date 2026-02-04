@@ -61,7 +61,7 @@ const deepDiveCampaigns: DeepDiveCampaign[] = [{
   title: "House of Debaarun",
   description: "A high-fashion campaign for House of Debaarun, showcasing the designer's signature blend of traditional craftsmanship and contemporary elegance. We created a series of stunning editorial visuals that capture the essence of Kolkata's luxury fashion scene, from the iconic Chowringhee backdrop to intimate studio portraits.",
   heroImage: debaarunHero,
-  gallery: [debaarun1, debaarun2, debaarun3, debaarun4, debaarun5, debaarun6],
+  gallery: [debaarun1, debaarun2, debaarun3, debaarun4, debaarun5, debaarun6, chowringheeBanner, chowringheeGrid],
   results: ["Editorial content for seasonal collections", "Social media engagement increased by 60%", "Brand visibility in luxury fashion segment"]
 }];
 const CinematicCampaignSection = () => {
@@ -138,22 +138,52 @@ const CinematicCampaignSection = () => {
                   <h4 className="text-sm font-sans uppercase tracking-widest text-muted-foreground">
                     Creative Gallery
                   </h4>
-                  <div className="grid grid-cols-2 gap-4">
-                    {campaign.gallery.map((image, imgIndex) => <motion.div key={imgIndex} initial={{
-                  opacity: 0,
-                  y: 20
-                }} whileInView={{
-                  opacity: 1,
-                  y: 0
-                }} transition={{
-                  duration: 0.5,
-                  delay: imgIndex * 0.08
-                }} viewport={{
-                  once: true,
-                  margin: "-50px"
-                }} className="aspect-[4/5] rounded-2xl overflow-hidden border border-border/30">
+                  <div className="space-y-4">
+                    {/* Regular 2-column grid for first 6 images */}
+                    <div className="grid grid-cols-2 gap-4">
+                      {campaign.gallery.slice(0, 6).map((image, imgIndex) => <motion.div key={imgIndex} initial={{
+                        opacity: 0,
+                        y: 20
+                      }} whileInView={{
+                        opacity: 1,
+                        y: 0
+                      }} transition={{
+                        duration: 0.5,
+                        delay: imgIndex * 0.08
+                      }} viewport={{
+                        once: true,
+                        margin: "-50px"
+                      }} className="aspect-[4/5] rounded-2xl overflow-hidden border border-border/30">
                         <img src={image} alt={`${campaign.title} creative ${imgIndex + 1}`} className="w-full h-full object-cover" />
                       </motion.div>)}
+                    </div>
+                    
+                    {/* Banner image - full width with 1500:788 aspect ratio */}
+                    {campaign.gallery[6] && (
+                      <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.5, delay: 0.48 }}
+                        viewport={{ once: true, margin: "-50px" }}
+                        className="rounded-2xl overflow-hidden border border-border/30"
+                        style={{ aspectRatio: '1500 / 788' }}
+                      >
+                        <img src={campaign.gallery[6]} alt={`${campaign.title} creative 7`} className="w-full h-full object-cover" />
+                      </motion.div>
+                    )}
+                    
+                    {/* Square grid image - 1:1 aspect ratio */}
+                    {campaign.gallery[7] && (
+                      <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.5, delay: 0.56 }}
+                        viewport={{ once: true, margin: "-50px" }}
+                        className="aspect-square rounded-2xl overflow-hidden border border-border/30"
+                      >
+                        <img src={campaign.gallery[7]} alt={`${campaign.title} creative 8`} className="w-full h-full object-cover" />
+                      </motion.div>
+                    )}
                   </div>
                 </div>
 
@@ -178,46 +208,6 @@ const CinematicCampaignSection = () => {
             </div>)}
         </div>
 
-        {/* Part C: Additional Creatives Section */}
-        <div className="mt-24 lg:mt-32 space-y-12 lg:space-y-16">
-          <h3 className="text-sm font-sans uppercase tracking-widest text-muted-foreground text-center">
-            Chowringhee Collection
-          </h3>
-          
-          {/* Banner Creative - 1500:788 aspect ratio (~1.9:1) */}
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true, margin: "-50px" }}
-            className="w-full"
-          >
-            <div className="w-full" style={{ aspectRatio: '1500 / 788' }}>
-              <img
-                src={chowringheeBanner}
-                alt="Chowringhee - An Ivory Trail Banner"
-                className="w-full h-full object-cover rounded-3xl border border-border/30"
-              />
-            </div>
-          </motion.div>
-
-          {/* Grid Creative - 1:1 aspect ratio */}
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            viewport={{ once: true, margin: "-50px" }}
-            className="w-full max-w-3xl mx-auto"
-          >
-            <div className="w-full aspect-square">
-              <img
-                src={chowringheeGrid}
-                alt="Chowringhee Collection Grid"
-                className="w-full h-full object-cover rounded-3xl border border-border/30"
-              />
-            </div>
-          </motion.div>
-        </div>
       </div>
     </section>;
 };
