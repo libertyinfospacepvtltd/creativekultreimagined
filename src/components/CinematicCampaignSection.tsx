@@ -117,7 +117,7 @@ const CinematicCampaignSection = () => {
               {/* Left Column - Sticky Visual (desktop only) */}
               <div className="lg:sticky lg:top-24 lg:self-start">
                 <div className="aspect-square w-full max-w-[500px] mx-auto">
-                  <img src={campaign.heroImage} alt={campaign.title} className="w-full h-full object-contain rounded-3xl border border-border/30" />
+                  <img src={campaign.heroImage} alt={campaign.title} className="w-full h-full object-cover rounded-3xl border border-border/30" />
                 </div>
               </div>
 
