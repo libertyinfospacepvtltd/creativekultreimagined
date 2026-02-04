@@ -16,6 +16,9 @@ import debaarun3 from "@/assets/campaigns/debaarun/debaarun-3.jpg";
 import debaarun4 from "@/assets/campaigns/debaarun/debaarun-4.jpg";
 import debaarun5 from "@/assets/campaigns/debaarun/debaarun-5.jpg";
 import debaarun6 from "@/assets/campaigns/debaarun/debaarun-6.webp";
+import chowringheeBanner from "@/assets/campaigns/debaarun/chowringhee-banner.jpg";
+import chowringheeGrid from "@/assets/campaigns/debaarun/chowringhee-grid.png";
+
 interface SpotlightCampaign {
   id: string;
   title: string;
@@ -173,6 +176,47 @@ const CinematicCampaignSection = () => {
                 <div className="h-24 lg:h-32" />
               </div>
             </div>)}
+        </div>
+
+        {/* Part C: Additional Creatives Section */}
+        <div className="mt-24 lg:mt-32 space-y-12 lg:space-y-16">
+          <h3 className="text-sm font-sans uppercase tracking-widest text-muted-foreground text-center">
+            Chowringhee Collection
+          </h3>
+          
+          {/* Banner Creative - 1500:788 aspect ratio (~1.9:1) */}
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true, margin: "-50px" }}
+            className="w-full"
+          >
+            <div className="w-full" style={{ aspectRatio: '1500 / 788' }}>
+              <img
+                src={chowringheeBanner}
+                alt="Chowringhee - An Ivory Trail Banner"
+                className="w-full h-full object-cover rounded-3xl border border-border/30"
+              />
+            </div>
+          </motion.div>
+
+          {/* Grid Creative - 1:1 aspect ratio */}
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            viewport={{ once: true, margin: "-50px" }}
+            className="w-full max-w-3xl mx-auto"
+          >
+            <div className="w-full aspect-square">
+              <img
+                src={chowringheeGrid}
+                alt="Chowringhee Collection Grid"
+                className="w-full h-full object-cover rounded-3xl border border-border/30"
+              />
+            </div>
+          </motion.div>
         </div>
       </div>
     </section>;
