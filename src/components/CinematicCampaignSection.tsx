@@ -24,7 +24,7 @@ const spotlightCampaigns: SpotlightCampaign[] = [{
 }, {
   id: "campaign-02",
   title: "Cadbury Mishti Shera Shrishti",
-  subtitle: "Brand Campaign • Influencer Marketing • Social Media",
+  subtitle: "Influencer Marketing • Conceptualised Digital Ideas • Copy Writing • On-Ground Execution",
   backgroundImage: cadburyMishti
 }, {
   id: "campaign-03",
