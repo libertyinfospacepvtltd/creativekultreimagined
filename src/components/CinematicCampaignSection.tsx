@@ -25,6 +25,10 @@ import sylvan3 from "@/assets/campaigns/sylvan-ply/sylvan-3.png";
 import sylvan4 from "@/assets/campaigns/sylvan-ply/sylvan-4.png";
 import sylvan5 from "@/assets/campaigns/sylvan-ply/sylvan-5.png";
 import sylvan6 from "@/assets/campaigns/sylvan-ply/sylvan-6.png";
+import sylvanPinned1 from "@/assets/campaigns/sylvan-ply/sylvan-pinned-1.png";
+import sylvanPinned2 from "@/assets/campaigns/sylvan-ply/sylvan-pinned-2.png";
+import sylvanPinned3 from "@/assets/campaigns/sylvan-ply/sylvan-pinned-3.png";
+import sylvanPinned4 from "@/assets/campaigns/sylvan-ply/sylvan-pinned-4.png";
 
 interface SpotlightCampaign {
   id: string;
@@ -38,6 +42,7 @@ interface DeepDiveCampaign {
   description: string;
   heroImage: string;
   heroAspectRatio?: string;
+  pinnedImages?: string[];
   gallery: string[];
   galleryTitle?: string;
   galleryLayout?: 'grid' | 'carousel';
@@ -65,6 +70,7 @@ const deepDiveCampaigns: DeepDiveCampaign[] = [{
   description: "A brand launch campaign for Sylvan Ply, showcasing their commitment to quality and craftsmanship. The 'Kuch Bhi Socho, Sylvan Ply Se Banalo' campaign captures the versatility and strength of their premium plywood products through creative visual storytelling.",
   heroImage: sylvanHero,
   heroAspectRatio: "1920 / 600",
+  pinnedImages: [sylvanPinned1, sylvanPinned2, sylvanPinned3, sylvanPinned4],
   gallery: [sylvan1, sylvan2, sylvan3, sylvan4, sylvan5, sylvan6],
   galleryTitle: "Brand Launch Campaign",
   galleryLayout: 'carousel',
@@ -135,13 +141,31 @@ const CinematicCampaignSection = () => {
           </h3>
           {deepDiveCampaigns.map((campaign, index) => <div key={campaign.id} className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
               {/* Left Column - Sticky Visual (desktop only) */}
-              <div className="lg:sticky lg:top-24 lg:self-start">
+              <div className="lg:sticky lg:top-24 lg:self-start space-y-6">
                 <div 
                   className="w-full max-w-[500px] mx-auto"
                   style={{ aspectRatio: campaign.heroAspectRatio || '1 / 1' }}
                 >
                   <img src={campaign.heroImage} alt={campaign.title} className="w-full h-full object-cover rounded-3xl border border-border/30" />
                 </div>
+                
+                {/* Additional Pinned Images */}
+                {campaign.pinnedImages && campaign.pinnedImages.length > 0 && (
+                  <div className="grid grid-cols-2 gap-4 max-w-[500px] mx-auto">
+                    {campaign.pinnedImages.map((pinnedImg, pinnedIndex) => (
+                      <motion.div
+                        key={pinnedIndex}
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.5, delay: pinnedIndex * 0.1 }}
+                        viewport={{ once: true, margin: "-50px" }}
+                        className="aspect-square rounded-2xl overflow-hidden border border-border/30"
+                      >
+                        <img src={pinnedImg} alt={`${campaign.title} pinned ${pinnedIndex + 1}`} className="w-full h-full object-cover" />
+                      </motion.div>
+                    ))}
+                  </div>
+                )}
               </div>
 
               {/* Right Column - The Story (Scrollable) */}
