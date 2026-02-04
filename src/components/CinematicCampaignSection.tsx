@@ -109,8 +109,10 @@ const CinematicCampaignSection = () => {
           </h3>
           {deepDiveCampaigns.map((campaign, index) => <div key={campaign.id} className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
               {/* Left Column - Sticky Visual (desktop only) */}
-              <div className="h-[50vh] lg:sticky lg:top-24 lg:h-[calc(100vh-6rem)]">
-                <img src={campaign.heroImage} alt={campaign.title} className="w-full h-full object-cover rounded-3xl border border-border/30" />
+              <div className="lg:sticky lg:top-24 flex items-start justify-center">
+                <div className="aspect-square w-full max-w-[500px] lg:max-w-none">
+                  <img src={campaign.heroImage} alt={campaign.title} className="w-full h-full object-contain rounded-3xl border border-border/30" />
+                </div>
               </div>
 
               {/* Right Column - The Story (Scrollable) */}
