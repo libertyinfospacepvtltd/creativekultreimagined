@@ -18,6 +18,7 @@ import debaarun5 from "@/assets/campaigns/debaarun/debaarun-5.jpg";
 import debaarun6 from "@/assets/campaigns/debaarun/debaarun-6.webp";
 import chowringheeBanner from "@/assets/campaigns/debaarun/chowringhee-banner.jpg";
 import chowringheeGrid from "@/assets/campaigns/debaarun/chowringhee-grid.png";
+import sylvanHero from "@/assets/campaigns/sylvan-ply/sylvan-hero.png";
 
 interface SpotlightCampaign {
   id: string;
@@ -30,7 +31,9 @@ interface DeepDiveCampaign {
   title: string;
   description: string;
   heroImage: string;
+  heroAspectRatio?: string;
   gallery: string[];
+  galleryTitle?: string;
   results: string[];
 }
 const spotlightCampaigns: SpotlightCampaign[] = [{
@@ -63,6 +66,15 @@ const deepDiveCampaigns: DeepDiveCampaign[] = [{
   heroImage: debaarunHero,
   gallery: [debaarun1, debaarun2, debaarun3, debaarun4, debaarun5, debaarun6, chowringheeBanner, chowringheeGrid],
   results: ["Editorial content for seasonal collections", "Social media engagement increased by 60%", "Brand visibility in luxury fashion segment"]
+}, {
+  id: "campaign-06",
+  title: "Sylvan Ply",
+  description: "A brand launch campaign for Sylvan Ply, showcasing their commitment to quality and craftsmanship. The 'Kuch Bhi Socho, Sylvan Ply Se Banalo' campaign captures the versatility and strength of their premium plywood products through creative visual storytelling.",
+  heroImage: sylvanHero,
+  heroAspectRatio: "1920 / 600",
+  gallery: [],
+  galleryTitle: "Brand Launch Campaign",
+  results: ["Successful brand launch campaign", "Established brand identity in market", "Creative concept development and execution"]
 }];
 const CinematicCampaignSection = () => {
   return <section className="bg-background py-16 lg:py-24">
@@ -116,7 +128,10 @@ const CinematicCampaignSection = () => {
           {deepDiveCampaigns.map((campaign, index) => <div key={campaign.id} className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
               {/* Left Column - Sticky Visual (desktop only) */}
               <div className="lg:sticky lg:top-24 lg:self-start">
-                <div className="aspect-square w-full max-w-[500px] mx-auto">
+                <div 
+                  className="w-full max-w-[500px] mx-auto"
+                  style={{ aspectRatio: campaign.heroAspectRatio || '1 / 1' }}
+                >
                   <img src={campaign.heroImage} alt={campaign.title} className="w-full h-full object-cover rounded-3xl border border-border/30" />
                 </div>
               </div>
@@ -136,26 +151,42 @@ const CinematicCampaignSection = () => {
                 {/* Gallery Grid */}
                 <div className="space-y-6">
                   <h4 className="text-sm font-sans uppercase tracking-widest text-muted-foreground">
-                    Creative Gallery
+                    {campaign.galleryTitle || "Creative Gallery"}
                   </h4>
                   <div className="space-y-4">
-                    {/* Regular 2-column grid for first 6 images */}
+                    {/* Regular 2-column grid for first 6 images or placeholders */}
                     <div className="grid grid-cols-2 gap-4">
-                      {campaign.gallery.slice(0, 6).map((image, imgIndex) => <motion.div key={imgIndex} initial={{
-                        opacity: 0,
-                        y: 20
-                      }} whileInView={{
-                        opacity: 1,
-                        y: 0
-                      }} transition={{
-                        duration: 0.5,
-                        delay: imgIndex * 0.08
-                      }} viewport={{
-                        once: true,
-                        margin: "-50px"
-                      }} className="aspect-[4/5] rounded-2xl overflow-hidden border border-border/30">
-                        <img src={image} alt={`${campaign.title} creative ${imgIndex + 1}`} className="w-full h-full object-cover" />
-                      </motion.div>)}
+                      {campaign.gallery.length > 0 ? (
+                        campaign.gallery.slice(0, 6).map((image, imgIndex) => <motion.div key={imgIndex} initial={{
+                          opacity: 0,
+                          y: 20
+                        }} whileInView={{
+                          opacity: 1,
+                          y: 0
+                        }} transition={{
+                          duration: 0.5,
+                          delay: imgIndex * 0.08
+                        }} viewport={{
+                          once: true,
+                          margin: "-50px"
+                        }} className="aspect-[4/5] rounded-2xl overflow-hidden border border-border/30">
+                          <img src={image} alt={`${campaign.title} creative ${imgIndex + 1}`} className="w-full h-full object-cover" />
+                        </motion.div>)
+                      ) : (
+                        // 6 placeholder slots
+                        Array.from({ length: 6 }).map((_, imgIndex) => (
+                          <motion.div 
+                            key={imgIndex} 
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.5, delay: imgIndex * 0.08 }}
+                            viewport={{ once: true, margin: "-50px" }}
+                            className="aspect-[4/5] rounded-2xl overflow-hidden border border-border/30 bg-muted/20 flex items-center justify-center"
+                          >
+                            <span className="text-muted-foreground/40 text-sm font-sans">Coming Soon</span>
+                          </motion.div>
+                        ))
+                      )}
                     </div>
                     
                     {/* Banner image - full width with 1500:788 aspect ratio */}
