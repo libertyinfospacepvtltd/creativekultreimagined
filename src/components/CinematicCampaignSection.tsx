@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import easydo365 from "@/assets/campaigns/easydo365.png";
+import easydo365Detail from "@/assets/campaigns/easydo365-detail.jpg";
 import kolkataIsCooking from "@/assets/campaigns/kolkata-is-cooking.png";
 import cadburyMishti from "@/assets/campaigns/cadbury-mishti.png";
 import timesParaGames from "@/assets/campaigns/times-para-games.png";
@@ -125,35 +126,75 @@ const CinematicCampaignSection = () => {
           <h3 className="text-sm font-sans uppercase tracking-widest text-muted-foreground text-center">
             Spotlight
           </h3>
-          {spotlightCampaigns.map((campaign, index) => <motion.div key={campaign.id} initial={{
-          opacity: 0,
-          y: 60
-        }} whileInView={{
-          opacity: 1,
-          y: 0
-        }} transition={{
-          duration: 0.7,
-          delay: index * 0.1
-        }} viewport={{
-          once: true,
-          margin: "-100px"
-        }} className="relative w-full aspect-video md:aspect-[3240/1350] rounded-3xl overflow-hidden group cursor-pointer">
-              {/* Background Image */}
-              <img src={campaign.backgroundImage} alt={campaign.title} className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+          {spotlightCampaigns.map((campaign, index) => (
+            <div key={campaign.id}>
+              <motion.div 
+                initial={{ opacity: 0, y: 60 }} 
+                whileInView={{ opacity: 1, y: 0 }} 
+                transition={{ duration: 0.7, delay: index * 0.1 }} 
+                viewport={{ once: true, margin: "-100px" }} 
+                className="relative w-full aspect-video md:aspect-[3240/1350] rounded-3xl overflow-hidden group cursor-pointer"
+              >
+                {/* Background Image */}
+                <img src={campaign.backgroundImage} alt={campaign.title} className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
 
-              {/* Gradient Overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                {/* Gradient Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
 
-              {/* Text Overlay */}
-              <div className="absolute bottom-10 left-10 right-10">
-                <h4 className="text-2xl sm:text-3xl text-white mb-2 font-sans lg:text-4xl">
-                  {campaign.title}
-                </h4>
-                <p className="text-white/70 font-sans text-sm lg:text-base">
-                  {campaign.subtitle}
-                </p>
-              </div>
-            </motion.div>)}
+                {/* Text Overlay */}
+                <div className="absolute bottom-10 left-10 right-10">
+                  <h4 className="text-2xl sm:text-3xl text-white mb-2 font-sans lg:text-4xl">
+                    {campaign.title}
+                  </h4>
+                  <p className="text-white/70 font-sans text-sm lg:text-base">
+                    {campaign.subtitle}
+                  </p>
+                </div>
+              </motion.div>
+
+              {/* EasyDo 365 Detail Section - appears after EasyDo spotlight card */}
+              {campaign.id === "campaign-00" && (
+                <motion.div 
+                  initial={{ opacity: 0, y: 40 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6 }}
+                  viewport={{ once: true, margin: "-50px" }}
+                  className="mt-8 lg:mt-12 grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center"
+                >
+                  {/* Left Column - Creative Image */}
+                  <div className="w-full rounded-3xl overflow-hidden border border-border/30">
+                    <img 
+                      src={easydo365Detail} 
+                      alt="EasyDo 365 Campaign Creative" 
+                      className="w-full h-auto object-cover"
+                    />
+                  </div>
+
+                  {/* Right Column - Results */}
+                  <div className="space-y-6">
+                    <h4 className="text-sm font-sans uppercase tracking-widest text-muted-foreground">
+                      Results
+                    </h4>
+                    <ul className="space-y-4">
+                      {[
+                        "Complete brand identity and visual language development",
+                        "HRMS app marketing strategy and execution",
+                        "Digital-first content for MSME audience",
+                        "Increased app downloads and user engagement"
+                      ].map((result, resultIndex) => (
+                        <li key={resultIndex} className="flex items-start gap-3">
+                          <span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" />
+                          <span className="text-foreground font-sans">
+                            {result}
+                          </span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </motion.div>
+              )}
+            </div>
+          ))}
         </div>
 
         {/* Part B: Deep Dives - Sticky Split Layouts */}
