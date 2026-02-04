@@ -57,6 +57,16 @@ interface DeepDiveCampaign {
   results: string[];
 }
 const spotlightCampaigns: SpotlightCampaign[] = [{
+  id: "campaign-00b",
+  title: "12thPass AI",
+  subtitle: "EdTech • Brand Identity • Performance Marketing • Social Media Strategy",
+  backgroundImage: twelfthpassSpotlight
+}, {
+  id: "campaign-00",
+  title: "EasyDo 365",
+  subtitle: "HRMS App • Brand Identity • Digital Marketing • Content Strategy",
+  backgroundImage: easydo365
+}, {
   id: "campaign-01",
   title: "Coca Cola - Kolkata Is Cooking",
   subtitle: "Influencer Onboarding • Copy Writing • Content Comms • On-Ground Support",
@@ -72,26 +82,6 @@ const spotlightCampaigns: SpotlightCampaign[] = [{
   subtitle: "Shoots • Ideation • Copywriting • On-Ground Execution",
   backgroundImage: timesParaGames
 }];
-const featuredCampaigns: DeepDiveCampaign[] = [{
-  id: "campaign-00b",
-  title: "12thPass AI",
-  description: "Complete brand identity, social media management, and performance marketing for an AI-powered education platform targeting students across India. We positioned the student as a high-performance athlete, creating a bold visual language that resonates with ambitious learners.",
-  heroImage: twelfthpassSpotlight,
-  gallery: [twelfthpassDetail],
-  galleryTitle: "Campaign Creatives",
-  galleryLayout: 'single',
-  results: ["300% increase in social engagement", "50K+ organic followers across platforms", "2x lead generation improvement", "Complete brand identity development", "Performance marketing strategy execution"]
-}, {
-  id: "campaign-00",
-  title: "EasyDo 365",
-  description: "End-to-end creative strategy and content production for a productivity HRMS app, focusing on user engagement and app downloads. We developed a comprehensive digital marketing approach targeting the MSME audience.",
-  heroImage: easydo365,
-  gallery: [easydo365Detail],
-  galleryTitle: "Campaign Creatives",
-  galleryLayout: 'single',
-  results: ["Complete brand identity and visual language development", "HRMS app marketing strategy and execution", "Digital-first content for MSME audience", "Increased app downloads and user engagement"]
-}];
-
 const deepDiveCampaigns: DeepDiveCampaign[] = [{
   id: "campaign-04",
   title: "Sylvan Ply",
@@ -144,101 +134,120 @@ const CinematicCampaignSection = () => {
             Spotlight
           </h3>
           {spotlightCampaigns.map((campaign, index) => (
-            <motion.div 
-              key={campaign.id}
-              initial={{ opacity: 0, y: 60 }} 
-              whileInView={{ opacity: 1, y: 0 }} 
-              transition={{ duration: 0.7, delay: index * 0.1 }} 
-              viewport={{ once: true, margin: "-100px" }} 
-              className="relative w-full aspect-video md:aspect-[3240/1350] rounded-3xl overflow-hidden group cursor-pointer"
-            >
-              {/* Background Image */}
-              <img src={campaign.backgroundImage} alt={campaign.title} className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+            <div key={campaign.id}>
+              <motion.div 
+                initial={{ opacity: 0, y: 60 }} 
+                whileInView={{ opacity: 1, y: 0 }} 
+                transition={{ duration: 0.7, delay: index * 0.1 }} 
+                viewport={{ once: true, margin: "-100px" }} 
+                className="relative w-full aspect-video md:aspect-[3240/1350] rounded-3xl overflow-hidden group cursor-pointer"
+              >
+                {/* Background Image */}
+                <img src={campaign.backgroundImage} alt={campaign.title} className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
 
-              {/* Gradient Overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                {/* Gradient Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
 
-              {/* Text Overlay */}
-              <div className="absolute bottom-10 left-10 right-10">
-                <h4 className="text-2xl sm:text-3xl text-white mb-2 font-sans lg:text-4xl">
-                  {campaign.title}
-                </h4>
-                <p className="text-white/70 font-sans text-sm lg:text-base">
-                  {campaign.subtitle}
-                </p>
-              </div>
-            </motion.div>
+                {/* Text Overlay */}
+                <div className="absolute bottom-10 left-10 right-10">
+                  <h4 className="text-2xl sm:text-3xl text-white mb-2 font-sans lg:text-4xl">
+                    {campaign.title}
+                  </h4>
+                  <p className="text-white/70 font-sans text-sm lg:text-base">
+                    {campaign.subtitle}
+                  </p>
+                </div>
+              </motion.div>
+
+              {/* 12thPass AI Detail Section - appears after 12thPass spotlight card */}
+              {campaign.id === "campaign-00b" && (
+                <motion.div 
+                  initial={{ opacity: 0, y: 40 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6 }}
+                  viewport={{ once: true, margin: "-50px" }}
+                  className="mt-8 lg:mt-12 grid grid-cols-1 lg:grid-cols-[auto_1fr] gap-8 lg:gap-12 items-start"
+                >
+                  {/* Left Column - Creative Image */}
+                  <div className="w-full max-w-[280px] lg:max-w-[320px] mx-auto lg:mx-0 rounded-2xl overflow-hidden border border-border/30">
+                    <img 
+                      src={twelfthpassDetail} 
+                      alt="12thPass AI Campaign Creative" 
+                      className="w-full h-auto object-cover"
+                    />
+                  </div>
+
+                  {/* Right Column - Results */}
+                  <div className="space-y-6">
+                    <h4 className="text-sm font-sans uppercase tracking-widest text-muted-foreground">
+                      Results
+                    </h4>
+                    <ul className="space-y-4">
+                      {[
+                        "300% increase in social engagement",
+                        "50K+ organic followers across platforms",
+                        "2x lead generation improvement",
+                        "Complete brand identity development",
+                        "Performance marketing strategy execution"
+                      ].map((result, resultIndex) => (
+                        <li key={resultIndex} className="flex items-start gap-3">
+                          <span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" />
+                          <span className="text-foreground font-sans">
+                            {result}
+                          </span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </motion.div>
+              )}
+
+              {/* EasyDo 365 Detail Section - appears after EasyDo spotlight card */}
+              {campaign.id === "campaign-00" && (
+                <motion.div 
+                  initial={{ opacity: 0, y: 40 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6 }}
+                  viewport={{ once: true, margin: "-50px" }}
+                  className="mt-8 lg:mt-12 grid grid-cols-1 lg:grid-cols-[auto_1fr] gap-8 lg:gap-12 items-start"
+                >
+                  {/* Left Column - Creative Image (scaled to match text height) */}
+                  <div className="w-full max-w-[200px] lg:max-w-[220px] mx-auto lg:mx-0 rounded-2xl overflow-hidden border border-border/30">
+                    <img 
+                      src={easydo365Detail} 
+                      alt="EasyDo 365 Campaign Creative" 
+                      className="w-full h-auto object-cover"
+                    />
+                  </div>
+
+                  {/* Right Column - Results */}
+                  <div className="space-y-6">
+                    <h4 className="text-sm font-sans uppercase tracking-widest text-muted-foreground">
+                      Results
+                    </h4>
+                    <ul className="space-y-4">
+                      {[
+                        "Complete brand identity and visual language development",
+                        "HRMS app marketing strategy and execution",
+                        "Digital-first content for MSME audience",
+                        "Increased app downloads and user engagement"
+                      ].map((result, resultIndex) => (
+                        <li key={resultIndex} className="flex items-start gap-3">
+                          <span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" />
+                          <span className="text-foreground font-sans">
+                            {result}
+                          </span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </motion.div>
+              )}
+            </div>
           ))}
         </div>
 
-        {/* Part B: Featured Campaigns - 12thPass AI & EasyDo 365 */}
-        <div className="space-y-24 lg:space-y-32 mb-24 lg:mb-32">
-          {featuredCampaigns.map((campaign, index) => <div key={campaign.id} className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
-              {/* Left Column - Sticky Visual (desktop only) */}
-              <div className="lg:sticky lg:top-24 lg:self-start space-y-6">
-                <div 
-                  className="w-full max-w-[500px] mx-auto"
-                  style={{ aspectRatio: campaign.heroAspectRatio || '1 / 1' }}
-                >
-                  <img src={campaign.heroImage} alt={campaign.title} className="w-full h-full object-cover rounded-3xl border border-border/30" />
-                </div>
-              </div>
-
-              {/* Right Column - The Story (Scrollable) */}
-              <div className="space-y-8 lg:space-y-12">
-                {/* Title & Description */}
-                <div className="space-y-6">
-                  <h3 className="text-2xl sm:text-3xl lg:text-4xl font-serif text-foreground">
-                    {campaign.title}
-                  </h3>
-                  <p className="text-muted-foreground font-sans text-base lg:text-lg leading-relaxed">
-                    {campaign.description}
-                  </p>
-                </div>
-
-                {/* Gallery */}
-                <div className="space-y-6">
-                  <h4 className="text-sm font-sans uppercase tracking-widest text-muted-foreground">
-                    {campaign.galleryTitle || "Creative Gallery"}
-                  </h4>
-                  <motion.div 
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5 }}
-                    viewport={{ once: true, margin: "-50px" }}
-                    className="w-full rounded-2xl overflow-hidden border border-border/30"
-                  >
-                    <img src={campaign.gallery[0]} alt={`${campaign.title} creative`} className="w-full h-auto object-cover" />
-                  </motion.div>
-                </div>
-
-                {/* Results */}
-                <div className="space-y-6">
-                  <h4 className="text-sm font-sans uppercase tracking-widest text-muted-foreground">
-                    Results
-                  </h4>
-                  <ul className="space-y-4">
-                    {campaign.results.map((result, resultIndex) => (
-                      <motion.li 
-                        key={resultIndex} 
-                        initial={{ opacity: 0, x: -10 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 0.4, delay: resultIndex * 0.1 }}
-                        viewport={{ once: true }}
-                        className="flex items-start gap-3"
-                      >
-                        <span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" />
-                        <span className="text-foreground font-sans">{result}</span>
-                      </motion.li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-            </div>
-          )}
-        </div>
-
-        {/* Part C: Deep Dives - Other Campaigns */}
+        {/* Part B: Deep Dives - Sticky Split Layouts */}
         <div className="space-y-24 lg:space-y-32">
           <h3 className="text-sm font-sans uppercase tracking-widest text-muted-foreground text-center">
             Other Campaigns
