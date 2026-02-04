@@ -159,10 +159,10 @@ const CinematicCampaignSection = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6 }}
                   viewport={{ once: true, margin: "-50px" }}
-                  className="mt-8 lg:mt-12 grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center"
+                  className="mt-8 lg:mt-12 grid grid-cols-1 lg:grid-cols-[auto_1fr] gap-8 lg:gap-12 items-start"
                 >
-                  {/* Left Column - Creative Image */}
-                  <div className="w-full max-w-sm mx-auto lg:mx-0 rounded-3xl overflow-hidden border border-border/30">
+                  {/* Left Column - Creative Image (scaled to match text height) */}
+                  <div className="w-full max-w-[200px] lg:max-w-[220px] mx-auto lg:mx-0 rounded-2xl overflow-hidden border border-border/30">
                     <img 
                       src={easydo365Detail} 
                       alt="EasyDo 365 Campaign Creative" 
