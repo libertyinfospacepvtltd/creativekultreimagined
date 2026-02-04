@@ -53,7 +53,7 @@ const CinematicCampaignSection = () => {
       <div className="container-luxury">
         {/* Section Header */}
         <div className="mb-16 lg:mb-24">
-          <span className="text-primary font-sans text-xs sm:text-sm uppercase tracking-widest mb-2 sm:mb-4 block">CAMPAIGNS</span>
+          <h2 className="text-primary font-sans text-2xl sm:text-3xl lg:text-4xl uppercase tracking-widest mb-2 sm:mb-4 block">CAMPAIGNS</h2>
         </div>
 
         {/* Part A: Spotlight Trio - Full Width Cards */}
