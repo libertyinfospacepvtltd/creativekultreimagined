@@ -20,6 +20,7 @@ import chowringheeBanner from "@/assets/campaigns/debaarun/chowringhee-banner.jp
 import chowringheeGrid from "@/assets/campaigns/debaarun/chowringhee-grid.png";
 import sylvanHero from "@/assets/campaigns/sylvan-ply/sylvan-hero.png";
 import sylvanWildCampaign from "@/assets/campaigns/sylvan-ply/sylvan-wild-campaign.png";
+import sylvanWishLab from "@/assets/campaigns/sylvan-ply/sylvan-wish-lab.png";
 import sylvanBrandLaunch from "@/assets/campaigns/sylvan-ply/sylvan-brand-launch.png";
 import sylvanPinned1 from "@/assets/campaigns/sylvan-ply/sylvan-pinned-1.png";
 import sylvanPinned2 from "@/assets/campaigns/sylvan-ply/sylvan-pinned-2.png";
@@ -43,12 +44,12 @@ interface DeepDiveCampaign {
   galleryTitle?: string;
   galleryLayout?: 'grid' | 'carousel' | 'placeholder' | 'single';
   galleryPlaceholderRatio?: string;
-  secondaryGallery?: {
+  additionalGalleries?: {
     title: string;
     image?: string;
     layout: 'single' | 'placeholder';
     placeholderRatio?: string;
-  };
+  }[];
   results: string[];
 }
 const spotlightCampaigns: SpotlightCampaign[] = [{
@@ -77,11 +78,18 @@ const deepDiveCampaigns: DeepDiveCampaign[] = [{
   gallery: [sylvanBrandLaunch],
   galleryTitle: "Brand Launch Campaign",
   galleryLayout: 'single',
-  secondaryGallery: {
-    title: "Plywood, But Make It Wild Campaign",
-    image: sylvanWildCampaign,
-    layout: 'single',
-  },
+  additionalGalleries: [
+    {
+      title: "Plywood, But Make It Wild Campaign",
+      image: sylvanWildCampaign,
+      layout: 'single',
+    },
+    {
+      title: "The Wish Lab Campaign",
+      image: sylvanWishLab,
+      layout: 'single',
+    }
+  ],
   results: ["Successful brand launch campaign", "Established brand identity in market", "Creative concept development and execution"]
 }, {
   id: "campaign-05",
@@ -266,14 +274,14 @@ const CinematicCampaignSection = () => {
                   )}
                 </div>
 
-                {/* Secondary Gallery */}
-                {campaign.secondaryGallery && (
-                  <div className="space-y-6">
+                {/* Additional Galleries */}
+                {campaign.additionalGalleries && campaign.additionalGalleries.map((gallery, galleryIndex) => (
+                  <div key={galleryIndex} className="space-y-6">
                     <h4 className="text-sm font-sans uppercase tracking-widest text-muted-foreground">
-                      {campaign.secondaryGallery.title}
+                      {gallery.title}
                     </h4>
                     
-                    {campaign.secondaryGallery.layout === 'single' && campaign.secondaryGallery.image ? (
+                    {gallery.layout === 'single' && gallery.image ? (
                       <motion.div 
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
@@ -281,7 +289,7 @@ const CinematicCampaignSection = () => {
                         viewport={{ once: true, margin: "-50px" }}
                         className="w-full rounded-2xl overflow-hidden border border-border/30"
                       >
-                        <img src={campaign.secondaryGallery.image} alt={`${campaign.title} - ${campaign.secondaryGallery.title}`} className="w-full h-auto object-cover" />
+                        <img src={gallery.image} alt={`${campaign.title} - ${gallery.title}`} className="w-full h-auto object-cover" />
                       </motion.div>
                     ) : (
                       <motion.div 
@@ -290,13 +298,13 @@ const CinematicCampaignSection = () => {
                         transition={{ duration: 0.5 }}
                         viewport={{ once: true, margin: "-50px" }}
                         className="w-full rounded-2xl overflow-hidden border border-border/30 bg-muted/20 flex items-center justify-center"
-                        style={{ aspectRatio: campaign.secondaryGallery.placeholderRatio || '16 / 9' }}
+                        style={{ aspectRatio: gallery.placeholderRatio || '16 / 9' }}
                       >
                         <span className="text-muted-foreground/40 text-sm font-sans">Coming Soon</span>
                       </motion.div>
                     )}
                   </div>
-                )}
+                ))}
 
                 {/* Results */}
                 <div className="space-y-6 pt-8">
