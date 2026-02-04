@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import easydo365 from "@/assets/campaigns/easydo365.png";
 import easydo365Detail from "@/assets/campaigns/easydo365-detail.jpg";
+import twelfthpassSpotlight from "@/assets/campaigns/12thpass-spotlight.png";
 import kolkataIsCooking from "@/assets/campaigns/kolkata-is-cooking.png";
 import cadburyMishti from "@/assets/campaigns/cadbury-mishti.png";
 import timesParaGames from "@/assets/campaigns/times-para-games.png";
@@ -59,6 +60,11 @@ const spotlightCampaigns: SpotlightCampaign[] = [{
   title: "EasyDo 365",
   subtitle: "HRMS App • Brand Identity • Digital Marketing • Content Strategy",
   backgroundImage: easydo365
+}, {
+  id: "campaign-00b",
+  title: "12thPass.ai",
+  subtitle: "EdTech • Brand Identity • Performance Marketing • Social Media Strategy",
+  backgroundImage: twelfthpassSpotlight
 }, {
   id: "campaign-01",
   title: "Coca Cola - Kolkata Is Cooking",
