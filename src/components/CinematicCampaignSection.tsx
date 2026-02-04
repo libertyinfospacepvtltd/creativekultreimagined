@@ -29,7 +29,7 @@ const spotlightCampaigns: SpotlightCampaign[] = [{
 }, {
   id: "campaign-03",
   title: "Times Para Games 2023",
-  subtitle: "Event Branding • PR • Social Media",
+  subtitle: "Shoots • Ideation • Copywriting • On-Ground Execution",
   backgroundImage: timesParaGames
 }];
 const deepDiveCampaigns: DeepDiveCampaign[] = [{
