@@ -18,7 +18,7 @@ interface DeepDiveCampaign {
 }
 const spotlightCampaigns: SpotlightCampaign[] = [{
   id: "campaign-01",
-  title: "Kolkata Is Cooking",
+  title: "Coca Cola - Kolkata Is Cooking",
   subtitle: "Influencer Onboarding • Copy Writing • Content Comms • On-Ground Support",
   backgroundImage: kolkataIsCooking
 }, {
