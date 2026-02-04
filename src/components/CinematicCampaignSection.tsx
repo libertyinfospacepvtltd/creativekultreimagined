@@ -65,7 +65,7 @@ const CinematicCampaignSection = () => {
 
         {/* Part A: Spotlight Trio - Full Width Cards */}
         <div className="space-y-8 lg:space-y-12 mb-24 lg:mb-32">
-          <h3 className="text-sm font-sans uppercase tracking-widest text-muted-foreground">
+          <h3 className="text-sm font-sans uppercase tracking-widest text-muted-foreground text-center">
             Spotlight
           </h3>
           {spotlightCampaigns.map((campaign, index) => <motion.div key={campaign.id} initial={{
