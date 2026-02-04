@@ -15,6 +15,7 @@ import debaarun2 from "@/assets/campaigns/debaarun/debaarun-2.webp";
 import debaarun3 from "@/assets/campaigns/debaarun/debaarun-3.jpg";
 import debaarun4 from "@/assets/campaigns/debaarun/debaarun-4.jpg";
 import debaarun5 from "@/assets/campaigns/debaarun/debaarun-5.jpg";
+import debaarun6 from "@/assets/campaigns/debaarun/debaarun-6.webp";
 
 interface SpotlightCampaign {
   id: string;
@@ -58,7 +59,7 @@ const deepDiveCampaigns: DeepDiveCampaign[] = [{
   title: "House of Debaarun",
   description: "A high-fashion campaign for House of Debaarun, showcasing the designer's signature blend of traditional craftsmanship and contemporary elegance. We created a series of stunning editorial visuals that capture the essence of Kolkata's luxury fashion scene, from the iconic Chowringhee backdrop to intimate studio portraits.",
   heroImage: debaarunHero,
-  gallery: [debaarun1, debaarun2, debaarun3, debaarun4, debaarun5, debaarunHero],
+  gallery: [debaarun1, debaarun2, debaarun3, debaarun4, debaarun5, debaarun6],
   results: ["Editorial content for seasonal collections", "Social media engagement increased by 60%", "Brand visibility in luxury fashion segment"]
 }];
 const CinematicCampaignSection = () => {
