@@ -95,9 +95,6 @@ const CinematicCampaignSection = () => {
 
               {/* Text Overlay */}
               <div className="absolute bottom-10 left-10 right-10">
-                <span className="text-primary font-sans text-xs uppercase tracking-widest mb-2 block">
-                  Campaign {String(index + 1).padStart(2, "0")}
-                </span>
                 <h4 className="text-2xl sm:text-3xl text-white mb-2 font-sans lg:text-4xl">
                   {campaign.title}
                 </h4>
@@ -125,9 +122,6 @@ const CinematicCampaignSection = () => {
               <div className="space-y-8 lg:space-y-12">
                 {/* Title & Description */}
                 <div className="space-y-6">
-                  <span className="text-primary font-sans text-xs uppercase tracking-widest">
-                    Campaign {String(index + 4).padStart(2, "0")}
-                  </span>
                   <h3 className="text-2xl sm:text-3xl lg:text-4xl font-serif text-foreground">
                     {campaign.title}
                   </h3>
