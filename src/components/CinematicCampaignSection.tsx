@@ -19,12 +19,6 @@ import debaarun6 from "@/assets/campaigns/debaarun/debaarun-6.webp";
 import chowringheeBanner from "@/assets/campaigns/debaarun/chowringhee-banner.jpg";
 import chowringheeGrid from "@/assets/campaigns/debaarun/chowringhee-grid.png";
 import sylvanHero from "@/assets/campaigns/sylvan-ply/sylvan-hero.png";
-import sylvan1 from "@/assets/campaigns/sylvan-ply/sylvan-1.png";
-import sylvan2 from "@/assets/campaigns/sylvan-ply/sylvan-2.png";
-import sylvan3 from "@/assets/campaigns/sylvan-ply/sylvan-3.png";
-import sylvan4 from "@/assets/campaigns/sylvan-ply/sylvan-4.png";
-import sylvan5 from "@/assets/campaigns/sylvan-ply/sylvan-5.png";
-import sylvan6 from "@/assets/campaigns/sylvan-ply/sylvan-6.png";
 import sylvanPinned1 from "@/assets/campaigns/sylvan-ply/sylvan-pinned-1.png";
 import sylvanPinned2 from "@/assets/campaigns/sylvan-ply/sylvan-pinned-2.png";
 import sylvanPinned3 from "@/assets/campaigns/sylvan-ply/sylvan-pinned-3.png";
@@ -45,7 +39,8 @@ interface DeepDiveCampaign {
   pinnedImages?: string[];
   gallery: string[];
   galleryTitle?: string;
-  galleryLayout?: 'grid' | 'carousel';
+  galleryLayout?: 'grid' | 'carousel' | 'placeholder';
+  galleryPlaceholderRatio?: string;
   results: string[];
 }
 const spotlightCampaigns: SpotlightCampaign[] = [{
@@ -71,9 +66,10 @@ const deepDiveCampaigns: DeepDiveCampaign[] = [{
   heroImage: sylvanHero,
   heroAspectRatio: "1920 / 600",
   pinnedImages: [sylvanPinned1, sylvanPinned2, sylvanPinned3, sylvanPinned4],
-  gallery: [sylvan1, sylvan2, sylvan3, sylvan4, sylvan5, sylvan6],
+  gallery: [],
   galleryTitle: "Brand Launch Campaign",
-  galleryLayout: 'carousel',
+  galleryLayout: 'placeholder',
+  galleryPlaceholderRatio: "1380 / 929",
   results: ["Successful brand launch campaign", "Established brand identity in market", "Creative concept development and execution"]
 }, {
   id: "campaign-05",
@@ -186,40 +182,18 @@ const CinematicCampaignSection = () => {
                     {campaign.galleryTitle || "Creative Gallery"}
                   </h4>
                   
-                  {campaign.galleryLayout === 'carousel' ? (
-                    // Horizontal carousel layout
-                    <div className="overflow-x-auto pb-4 -mx-4 px-4 scrollbar-hide">
-                      <div className="flex gap-4" style={{ width: 'max-content' }}>
-                        {campaign.gallery.length > 0 ? (
-                          campaign.gallery.slice(0, 6).map((image, imgIndex) => (
-                            <motion.div 
-                              key={imgIndex}
-                              initial={{ opacity: 0, x: 20 }}
-                              whileInView={{ opacity: 1, x: 0 }}
-                              transition={{ duration: 0.5, delay: imgIndex * 0.08 }}
-                              viewport={{ once: true, margin: "-50px" }}
-                              className="w-48 sm:w-56 flex-shrink-0 aspect-[4/5] rounded-2xl overflow-hidden border border-border/30"
-                            >
-                              <img src={image} alt={`${campaign.title} creative ${imgIndex + 1}`} className="w-full h-full object-cover" />
-                            </motion.div>
-                          ))
-                        ) : (
-                          // 6 placeholder slots in carousel
-                          Array.from({ length: 6 }).map((_, imgIndex) => (
-                            <motion.div 
-                              key={imgIndex}
-                              initial={{ opacity: 0, x: 20 }}
-                              whileInView={{ opacity: 1, x: 0 }}
-                              transition={{ duration: 0.5, delay: imgIndex * 0.08 }}
-                              viewport={{ once: true, margin: "-50px" }}
-                              className="w-48 sm:w-56 flex-shrink-0 aspect-[4/5] rounded-2xl overflow-hidden border border-border/30 bg-muted/20 flex items-center justify-center"
-                            >
-                              <span className="text-muted-foreground/40 text-sm font-sans">Coming Soon</span>
-                            </motion.div>
-                          ))
-                        )}
-                      </div>
-                    </div>
+                  {campaign.galleryLayout === 'placeholder' ? (
+                    // Single placeholder with exact dimensions
+                    <motion.div 
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.5 }}
+                      viewport={{ once: true, margin: "-50px" }}
+                      className="w-full rounded-2xl overflow-hidden border border-border/30 bg-muted/20 flex items-center justify-center"
+                      style={{ aspectRatio: campaign.galleryPlaceholderRatio || '16 / 9' }}
+                    >
+                      <span className="text-muted-foreground/40 text-sm font-sans">Coming Soon</span>
+                    </motion.div>
                   ) : (
                     // Default grid layout
                     <div className="space-y-4">
