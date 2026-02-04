@@ -19,6 +19,12 @@ import debaarun6 from "@/assets/campaigns/debaarun/debaarun-6.webp";
 import chowringheeBanner from "@/assets/campaigns/debaarun/chowringhee-banner.jpg";
 import chowringheeGrid from "@/assets/campaigns/debaarun/chowringhee-grid.png";
 import sylvanHero from "@/assets/campaigns/sylvan-ply/sylvan-hero.png";
+import sylvan1 from "@/assets/campaigns/sylvan-ply/sylvan-1.png";
+import sylvan2 from "@/assets/campaigns/sylvan-ply/sylvan-2.png";
+import sylvan3 from "@/assets/campaigns/sylvan-ply/sylvan-3.png";
+import sylvan4 from "@/assets/campaigns/sylvan-ply/sylvan-4.png";
+import sylvan5 from "@/assets/campaigns/sylvan-ply/sylvan-5.png";
+import sylvan6 from "@/assets/campaigns/sylvan-ply/sylvan-6.png";
 
 interface SpotlightCampaign {
   id: string;
