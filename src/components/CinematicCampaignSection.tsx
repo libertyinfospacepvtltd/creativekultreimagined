@@ -162,7 +162,7 @@ const CinematicCampaignSection = () => {
                   className="mt-8 lg:mt-12 grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center"
                 >
                   {/* Left Column - Creative Image */}
-                  <div className="w-full max-w-md mx-auto lg:mx-0 rounded-3xl overflow-hidden border border-border/30">
+                  <div className="w-full max-w-sm mx-auto lg:mx-0 rounded-3xl overflow-hidden border border-border/30">
                     <img 
                       src={easydo365Detail} 
                       alt="EasyDo 365 Campaign Creative" 
