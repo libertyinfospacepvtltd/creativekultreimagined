@@ -2,7 +2,6 @@ import { motion } from "framer-motion";
 import kolkataIsCooking from "@/assets/campaigns/kolkata-is-cooking.png";
 import cadburyMishti from "@/assets/campaigns/cadbury-mishti.png";
 import timesParaGames from "@/assets/campaigns/times-para-games.png";
-
 interface SpotlightCampaign {
   id: string;
   title: string;
@@ -53,7 +52,7 @@ const CinematicCampaignSection = () => {
       <div className="container-luxury">
         {/* Section Header */}
         <div className="mb-16 lg:mb-24">
-          <h2 className="text-primary font-sans text-2xl sm:text-3xl lg:text-4xl uppercase tracking-widest mb-2 sm:mb-4 block">CAMPAIGNS</h2>
+          <h2 className="text-primary font-sans text-2xl sm:text-3xl lg:text-4xl uppercase tracking-widest mb-2 sm:mb-4 block text-center">CAMPAIGNS</h2>
         </div>
 
         {/* Part A: Spotlight Trio - Full Width Cards */}
