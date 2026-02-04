@@ -1,37 +1,32 @@
-import { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 import { ArrowLeft } from "lucide-react";
 import { Link } from "react-router-dom";
 import Layout from "@/components/Layout";
 
+// Import campaign creatives
+import slide01 from "@/assets/campaigns/12thpass/slide-01.png";
+import slide02 from "@/assets/campaigns/12thpass/slide-02.png";
+import slide03 from "@/assets/campaigns/12thpass/slide-03.png";
+import slide04 from "@/assets/campaigns/12thpass/slide-04.png";
+import slide05 from "@/assets/campaigns/12thpass/slide-05.png";
+import slide06 from "@/assets/campaigns/12thpass/slide-06.png";
+import slide07 from "@/assets/campaigns/12thpass/slide-07.png";
+import slide08 from "@/assets/campaigns/12thpass/slide-08.png";
+import slide09 from "@/assets/campaigns/12thpass/slide-09.png";
+import slide10 from "@/assets/campaigns/12thpass/slide-10.png";
+
 const CaseStudy12thPass = () => {
-  const horizontalScrollRef = useRef<HTMLDivElement>(null);
-  
-  // Track scroll progress through the 400vh container
-  // offset: ["start start", "end end"] means:
-  // - 0% when the TOP of the section reaches the TOP of viewport
-  // - 100% when the BOTTOM of the section reaches the BOTTOM of viewport
-  const { scrollYProgress } = useScroll({
-    target: horizontalScrollRef,
-    offset: ["start start", "end end"]
-  });
-
-  // Transform vertical scroll (0-100%) to horizontal translation
-  // We need to move from 0% to -(totalWidth - viewportWidth)
-  // With 10 slides at ~40vw each + gaps, we need roughly 85% translation
-  const x = useTransform(scrollYProgress, [0, 1], ["0%", "-85%"]);
-
-  const slides = [
-    { id: 1, label: "Billboard Campaign - Allen Kota" },
-    { id: 2, label: "Social Media - Better Decisions Series" },
-    { id: 3, label: "App Interface - Dark Mode" },
-    { id: 4, label: "LinkedIn Thought Leadership" },
-    { id: 5, label: "Hoarding - Anti-Ad Campaign" },
-    { id: 6, label: "Student Testimonials" },
-    { id: 7, label: "App Dashboard - Analytics" },
-    { id: 8, label: "Brand Guidelines - Obsidian" },
-    { id: 9, label: "Performance Metrics" },
-    { id: 10, label: "The Team Behind It All" },
+  const campaignCreatives = [
+    { id: 1, image: slide01, alt: "Go To Market Case Study" },
+    { id: 2, image: slide02, alt: "The Context - Students Were Stuck" },
+    { id: 3, image: slide03, alt: "The Pattern - 120 Mark Ceiling" },
+    { id: 4, image: slide04, alt: "The Real Problem - Feedback" },
+    { id: 5, image: slide05, alt: "The Insight - Preparation Shatters" },
+    { id: 6, image: slide06, alt: "The Strategy - Serious Conversation" },
+    { id: 7, image: slide07, alt: "The Anti-Ad - Designed to Engage" },
+    { id: 8, image: slide08, alt: "On Social - Better Decisions" },
+    { id: 9, image: slide09, alt: "The Results - Momentum Measured" },
+    { id: 10, image: slide10, alt: "Beyond Visibility" },
   ];
 
   return (
@@ -379,44 +374,40 @@ const CaseStudy12thPass = () => {
           </motion.div>
         </section>
 
-        {/* Section 7: Horizontal Scroll Finale */}
-        {/* Container A: The Scroll Track - creates vertical scroll space */}
-        <div 
-          ref={horizontalScrollRef} 
-          className="relative"
-          style={{ height: '400vh' }}
-        >
-          {/* Container B: The Sticky Viewport - pins to screen */}
-          <div 
-            className="sticky top-0 left-0 w-full h-screen flex items-center bg-[#050505]"
-            style={{ overflow: 'hidden' }}
+        {/* Section 7: Campaign Creatives Gallery */}
+        <section className="py-24 px-6 md:px-12 lg:px-24">
+          <motion.h2 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="font-serif text-3xl md:text-5xl font-bold text-center mb-16"
           >
-            {/* The sliding content */}
-            <motion.div 
-              style={{ x }}
-              className="flex gap-8 pl-[10vw] pr-[10vw]"
-            >
-              {slides.map((slide) => (
-                <motion.div
-                  key={slide.id}
-                  className="relative flex-shrink-0 w-[70vw] md:w-[50vw] lg:w-[40vw] h-[60vh] rounded-3xl"
-                  style={{ overflow: 'hidden' }}
-                >
-                  <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-white/5 border border-white/10 hover:border-primary/30 transition-colors duration-300">
-                    <div className="absolute inset-0 flex flex-col items-center justify-center p-8">
-                      <span className="text-primary font-sans text-8xl font-bold mb-4">
-                        {String(slide.id).padStart(2, '0')}
-                      </span>
-                      <p className="font-sans text-white/60 text-center text-lg">
-                        {slide.label}
-                      </p>
-                    </div>
-                  </div>
-                </motion.div>
-              ))}
-            </motion.div>
+            The <span className="text-primary">Campaign Journey</span>
+          </motion.h2>
+
+          {/* 2-column grid for creatives */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 max-w-6xl mx-auto">
+            {campaignCreatives.map((creative, index) => (
+              <motion.div
+                key={creative.id}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ duration: 0.6, delay: index % 2 * 0.1 }}
+                className="rounded-2xl overflow-hidden border border-white/10 hover:border-primary/30 transition-all duration-300 group"
+              >
+                <div className="relative aspect-[4/5] overflow-hidden">
+                  <img 
+                    src={creative.image} 
+                    alt={creative.alt}
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+                  />
+                </div>
+              </motion.div>
+            ))}
           </div>
-        </div>
+        </section>
 
         {/* Footer CTA */}
         <section className="py-24 px-6 md:px-12 lg:px-24 text-center">
