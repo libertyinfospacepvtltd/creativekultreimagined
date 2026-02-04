@@ -9,6 +9,12 @@ import rawat3 from "@/assets/campaigns/rawat/rawat-3.jpeg";
 import rawat4 from "@/assets/campaigns/rawat/rawat-4.jpeg";
 import rawat5 from "@/assets/campaigns/rawat/rawat-5.jpeg";
 import rawat6 from "@/assets/campaigns/rawat/rawat-6.jpeg";
+import debaarunHero from "@/assets/campaigns/debaarun/debaarun-hero.webp";
+import debaarun1 from "@/assets/campaigns/debaarun/debaarun-1.webp";
+import debaarun2 from "@/assets/campaigns/debaarun/debaarun-2.webp";
+import debaarun3 from "@/assets/campaigns/debaarun/debaarun-3.jpg";
+import debaarun4 from "@/assets/campaigns/debaarun/debaarun-4.jpg";
+import debaarun5 from "@/assets/campaigns/debaarun/debaarun-5.jpg";
 
 interface SpotlightCampaign {
   id: string;
@@ -49,11 +55,11 @@ const deepDiveCampaigns: DeepDiveCampaign[] = [{
   results: ["Premium visual content for social media", "Increased brand engagement by 45%", "Elevated brand perception in luxury market"]
 }, {
   id: "campaign-05",
-  title: "Campaign 05 Name",
-  description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
-  heroImage: "/placeholder.svg",
-  gallery: ["/placeholder.svg", "/placeholder.svg", "/placeholder.svg", "/placeholder.svg", "/placeholder.svg", "/placeholder.svg"],
-  results: ["Placeholder result metric #1", "Placeholder result metric #2", "Placeholder result metric #3"]
+  title: "House of Debaarun",
+  description: "A high-fashion campaign for House of Debaarun, showcasing the designer's signature blend of traditional craftsmanship and contemporary elegance. We created a series of stunning editorial visuals that capture the essence of Kolkata's luxury fashion scene, from the iconic Chowringhee backdrop to intimate studio portraits.",
+  heroImage: debaarunHero,
+  gallery: [debaarun1, debaarun2, debaarun3, debaarun4, debaarun5, debaarunHero],
+  results: ["Editorial content for seasonal collections", "Social media engagement increased by 60%", "Brand visibility in luxury fashion segment"]
 }];
 const CinematicCampaignSection = () => {
   return <section className="bg-background py-16 lg:py-24">
