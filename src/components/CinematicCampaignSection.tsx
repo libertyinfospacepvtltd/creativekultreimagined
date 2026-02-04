@@ -65,7 +65,7 @@ const deepDiveCampaigns: DeepDiveCampaign[] = [{
   description: "A brand launch campaign for Sylvan Ply, showcasing their commitment to quality and craftsmanship. The 'Kuch Bhi Socho, Sylvan Ply Se Banalo' campaign captures the versatility and strength of their premium plywood products through creative visual storytelling.",
   heroImage: sylvanHero,
   heroAspectRatio: "1920 / 600",
-  gallery: [],
+  gallery: [sylvan1, sylvan2, sylvan3, sylvan4, sylvan5, sylvan6],
   galleryTitle: "Brand Launch Campaign",
   galleryLayout: 'carousel',
   results: ["Successful brand launch campaign", "Established brand identity in market", "Creative concept development and execution"]
