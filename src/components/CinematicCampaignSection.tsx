@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import easydo365 from "@/assets/campaigns/easydo365.png";
 import kolkataIsCooking from "@/assets/campaigns/kolkata-is-cooking.png";
 import cadburyMishti from "@/assets/campaigns/cadbury-mishti.png";
 import timesParaGames from "@/assets/campaigns/times-para-games.png";
@@ -53,6 +54,11 @@ interface DeepDiveCampaign {
   results: string[];
 }
 const spotlightCampaigns: SpotlightCampaign[] = [{
+  id: "campaign-00",
+  title: "EasyDo 365",
+  subtitle: "HRMS App • Brand Identity • Digital Marketing • Content Strategy",
+  backgroundImage: easydo365
+}, {
   id: "campaign-01",
   title: "Coca Cola - Kolkata Is Cooking",
   subtitle: "Influencer Onboarding • Copy Writing • Content Comms • On-Ground Support",
