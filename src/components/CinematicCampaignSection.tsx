@@ -16,7 +16,6 @@ import debaarun3 from "@/assets/campaigns/debaarun/debaarun-3.jpg";
 import debaarun4 from "@/assets/campaigns/debaarun/debaarun-4.jpg";
 import debaarun5 from "@/assets/campaigns/debaarun/debaarun-5.jpg";
 import debaarun6 from "@/assets/campaigns/debaarun/debaarun-6.webp";
-
 interface SpotlightCampaign {
   id: string;
   title: string;
@@ -99,7 +98,7 @@ const CinematicCampaignSection = () => {
                 <span className="text-primary font-sans text-xs uppercase tracking-widest mb-2 block">
                   Campaign {String(index + 1).padStart(2, "0")}
                 </span>
-                <h4 className="text-2xl sm:text-3xl lg:text-5xl font-serif text-white mb-2">
+                <h4 className="text-2xl sm:text-3xl text-white mb-2 font-sans lg:text-4xl">
                   {campaign.title}
                 </h4>
                 <p className="text-white/70 font-sans text-sm lg:text-base">
