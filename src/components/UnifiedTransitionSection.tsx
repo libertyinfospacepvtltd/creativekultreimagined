@@ -1,6 +1,5 @@
 import { useRef } from "react";
 import { motion, useScroll, useTransform, useInView } from "framer-motion";
-import Spline from '@splinetool/react-spline';
 
 // PCB / Circuit Background Component
 const CircuitBackground = () => {
@@ -220,9 +219,13 @@ const UnifiedTransitionSection = () => {
           className="absolute inset-0 z-0 pointer-events-none bg-black"
           style={{ opacity: prefersReducedMotion ? 0 : circuitOpacity }}
         >
-          <Spline 
-            scene="https://prod.spline.design/particles-SJt3xTTmBjP4Xa2UYp1HbpXV/scene.splinecode"
-            className="w-full h-full"
+          <iframe 
+            src="https://my.spline.design/particles-SJt3xTTmBjP4Xa2UYp1HbpXV/"
+            frameBorder="0"
+            width="100%"
+            height="100%"
+            title="Particles Background"
+            className="pointer-events-none"
           />
         </motion.div>
 
