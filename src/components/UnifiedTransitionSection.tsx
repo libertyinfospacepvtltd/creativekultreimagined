@@ -1,5 +1,6 @@
 import { useRef } from "react";
 import { motion, useScroll, useTransform, useInView } from "framer-motion";
+import Spline from '@splinetool/react-spline';
 
 // PCB / Circuit Background Component
 const CircuitBackground = () => {
@@ -214,8 +215,20 @@ const UnifiedTransitionSection = () => {
       <div className="sticky top-0 h-screen w-full flex items-center justify-center overflow-visible">
         
         {/* PCB Circuit Background */}
+        {/* Spline Particles Background - for AI-first branding section */}
         <motion.div 
-          className="absolute inset-0 pointer-events-none"
+          className="absolute inset-0 z-0 pointer-events-none bg-black"
+          style={{ opacity: prefersReducedMotion ? 0 : circuitOpacity }}
+        >
+          <Spline 
+            scene="https://prod.spline.design/particles-SJt3xTTmBjP4Xa2UYp1HbpXV/scene.splinecode"
+            className="w-full h-full"
+          />
+        </motion.div>
+
+        {/* PCB Circuit Background - kept as overlay */}
+        <motion.div 
+          className="absolute inset-0 pointer-events-none z-[1]"
           style={{ opacity: prefersReducedMotion ? 0.9 : circuitOpacity }}
         >
           <CircuitBackground />

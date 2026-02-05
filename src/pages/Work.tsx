@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import Spline from '@splinetool/react-spline';
 import { Instagram, Facebook, Globe, ArrowRight } from "lucide-react";
 import Layout from "@/components/Layout";
 import ClientLogosMarquee from "@/components/ClientLogosMarquee";
@@ -55,55 +56,74 @@ const Work = () => {
       </section>
 
       {/* Project Grid */}
-      <section className="section-padding bg-background my-0">
-        <div className="container-luxury">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 max-w-4xl mx-auto">
-            {projects.map(project => <div key={project.id} className="group relative h-80 lg:h-96 rounded-3xl bg-white/5 dark:bg-white/5 bg-card border border-border/30 overflow-hidden cursor-pointer transition-all duration-500 hover:scale-[1.02] hover:shadow-2xl">
-                {/* Logo - Centered */}
-                <div className="absolute inset-0 flex items-center justify-center p-8">
-                  <div className={`w-32 h-32 lg:w-40 lg:h-40 bg-white rounded-full flex items-center justify-center overflow-hidden transition-all duration-500 group-hover:scale-90 group-hover:opacity-30 ${project.id === "12thpass" ? "p-0" : "p-4 lg:p-6"}`}>
-                    <img src={project.logo} alt={project.name} className="w-full h-full object-contain" />
-                  </div>
+      {/* Portfolio Highlights Section with 3D Mannequin */}
+      <section className="relative min-h-[600px] h-[80vh] bg-black overflow-hidden">
+        {/* Spline 3D Mannequin Background */}
+        <div className="absolute inset-0 z-0">
+          <Spline 
+            scene="https://prod.spline.design/cybermannequin-DGYJK4d90PrwTQyrL6zUYHOk/scene.splinecode"
+            className="w-full h-full"
+          />
+        </div>
+
+        {/* Project Cards Container - pointer-events-none on container, auto on cards */}
+        <div className="relative z-10 h-full flex flex-col md:flex-row items-center justify-between px-6 md:px-12 lg:px-24 py-12 pointer-events-none">
+          {projects.map((project, index) => (
+            <div 
+              key={project.id} 
+              className={`pointer-events-auto group relative h-72 md:h-80 lg:h-96 w-full md:w-[320px] lg:w-[380px] rounded-3xl bg-black/60 backdrop-blur-md border border-white/20 overflow-hidden cursor-pointer transition-all duration-500 hover:scale-[1.02] hover:shadow-2xl hover:border-primary/50 ${index === 0 ? 'mb-6 md:mb-0' : ''}`}
+            >
+              {/* Logo - Centered */}
+              <div className="absolute inset-0 flex items-center justify-center p-8">
+                <div className={`w-28 h-28 lg:w-36 lg:h-36 bg-white rounded-full flex items-center justify-center overflow-hidden transition-all duration-500 group-hover:scale-90 group-hover:opacity-30 ${project.id === "12thpass" ? "p-0" : "p-4 lg:p-5"}`}>
+                  <img src={project.logo} alt={project.name} className="w-full h-full object-contain" />
+                </div>
+              </div>
+
+              {/* Category Badge */}
+              <div className="absolute top-4 left-4">
+                <span className="px-3 py-1 bg-primary/20 text-primary text-xs font-sans uppercase tracking-wider rounded-full">
+                  {project.category}
+                </span>
+              </div>
+
+              {/* Hover Overlay */}
+              <div className="absolute inset-0 bg-black/80 backdrop-blur-md opacity-0 group-hover:opacity-100 transition-all duration-500 flex flex-col items-center justify-center p-6">
+                {/* Project Name */}
+                <h3 className="text-white font-sans text-xl lg:text-2xl font-semibold mb-2 text-center">
+                  {project.name}
+                </h3>
+                <p className="text-white/60 font-sans text-sm mb-4 text-center">
+                  {project.category}
+                </p>
+
+                {/* Social Icons */}
+                <div className="flex items-center gap-3 mb-4">
+                  {project.website && (
+                    <a href={project.website} target="_blank" rel="noopener noreferrer" onClick={e => e.stopPropagation()} className="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center text-primary hover:text-white hover:bg-primary transition-all duration-300">
+                      <Globe size={16} />
+                    </a>
+                  )}
+                  {project.instagram && (
+                    <a href={project.instagram} target="_blank" rel="noopener noreferrer" onClick={e => e.stopPropagation()} className="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center text-primary hover:text-white hover:bg-primary transition-all duration-300">
+                      <Instagram size={16} />
+                    </a>
+                  )}
+                  {project.facebook && (
+                    <a href={project.facebook} target="_blank" rel="noopener noreferrer" onClick={e => e.stopPropagation()} className="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center text-primary hover:text-white hover:bg-primary transition-all duration-300">
+                      <Facebook size={16} />
+                    </a>
+                  )}
                 </div>
 
-                {/* Category Badge */}
-                <div className="absolute top-4 left-4">
-                  <span className="px-3 py-1 bg-primary/10 text-primary text-xs font-sans uppercase tracking-wider rounded-full">
-                    {project.category}
-                  </span>
-                </div>
-
-                {/* Hover Overlay */}
-                <div className="absolute inset-0 bg-black/70 backdrop-blur-md opacity-0 group-hover:opacity-100 transition-all duration-500 flex flex-col items-center justify-center p-6">
-                  {/* Project Name */}
-                  <h3 className="text-white font-sans text-2xl lg:text-3xl font-semibold mb-2 text-center">
-                    {project.name}
-                  </h3>
-                  <p className="text-white/60 font-sans text-sm mb-6 text-center">
-                    {project.category}
-                  </p>
-
-                  {/* Social Icons */}
-                  <div className="flex items-center gap-4 mb-6">
-                    {project.website && <a href={project.website} target="_blank" rel="noopener noreferrer" onClick={e => e.stopPropagation()} className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-primary hover:text-white hover:bg-primary transition-all duration-300">
-                        <Globe size={18} />
-                      </a>}
-                    {project.instagram && <a href={project.instagram} target="_blank" rel="noopener noreferrer" onClick={e => e.stopPropagation()} className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-primary hover:text-white hover:bg-primary transition-all duration-300">
-                        <Instagram size={18} />
-                      </a>}
-                    {project.facebook && <a href={project.facebook} target="_blank" rel="noopener noreferrer" onClick={e => e.stopPropagation()} className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-primary hover:text-white hover:bg-primary transition-all duration-300">
-                        <Facebook size={18} />
-                      </a>}
-                  </div>
-
-                  {/* View Case Study Button */}
-                  <Link to={`/work/${project.id}`} className="inline-flex items-center gap-2 px-6 py-3 rounded-full border-2 border-primary bg-transparent text-primary font-sans text-sm uppercase tracking-widest hover:bg-primary hover:text-primary-foreground transition-all duration-300">
-                    View Case Study
-                    <ArrowRight size={16} />
-                  </Link>
-                </div>
-              </div>)}
-          </div>
+                {/* View Case Study Button */}
+                <Link to={`/work/${project.id}`} className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border-2 border-primary bg-transparent text-primary font-sans text-xs uppercase tracking-widest hover:bg-primary hover:text-primary-foreground transition-all duration-300">
+                  View Case Study
+                  <ArrowRight size={14} />
+                </Link>
+              </div>
+            </div>
+          ))}
         </div>
       </section>
 
