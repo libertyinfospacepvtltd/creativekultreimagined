@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import Spline from '@splinetool/react-spline';
 import { Instagram, Facebook, Globe, ArrowRight } from "lucide-react";
 import Layout from "@/components/Layout";
 import ClientLogosMarquee from "@/components/ClientLogosMarquee";
@@ -60,9 +59,12 @@ const Work = () => {
       <section className="relative min-h-[600px] h-[80vh] bg-black overflow-hidden">
         {/* Spline 3D Mannequin Background */}
         <div className="absolute inset-0 z-0">
-          <Spline 
-            scene="https://prod.spline.design/cybermannequin-DGYJK4d90PrwTQyrL6zUYHOk/scene.splinecode"
-            className="w-full h-full"
+          <iframe 
+            src="https://my.spline.design/cybermannequin-DGYJK4d90PrwTQyrL6zUYHOk/"
+            frameBorder="0"
+            width="100%"
+            height="100%"
+            title="3D Mannequin"
           />
         </div>
 
