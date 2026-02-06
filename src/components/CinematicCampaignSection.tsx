@@ -208,7 +208,7 @@ const CinematicCampaignSection = () => {
                 }} className="rounded-2xl overflow-hidden border border-border/30" style={{
                   aspectRatio: '1920 / 737'
                 }}>
-                    <img src={twelfthpassCreative02} alt="12thPass AI Creative 2" className="w-full h-full object-cover" />
+                    <img alt="12thPass AI Creative 2" className="w-full h-full object-cover" src="/lovable-uploads/2a8fad10-5a0d-479f-8f8e-578dfe64ba6e.png" />
                   </motion.div>
                   
                   {/* Creative 03 - Wide 3-panel */}
