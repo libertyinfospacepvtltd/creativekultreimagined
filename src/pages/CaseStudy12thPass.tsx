@@ -54,7 +54,7 @@ const GoldText = ({
   children
 }: {
   children: React.ReactNode;
-}) => <span className="text-[#D4AF37]">{children}</span>;
+}) => <span className="text-primary">{children}</span>;
 
 // Sticky section component - alternating left/right
 interface StickySectionProps {
@@ -75,7 +75,7 @@ const StickySection = ({
             {/* Left sticky image */}
             <div className="relative lg:sticky lg:top-24 lg:self-start p-6 lg:p-12">
               <div className="w-full max-w-lg mx-auto">
-                <img src={image} alt={imageAlt} className="w-full h-auto rounded-3xl object-cover shadow-[0_0_80px_rgba(212,175,55,0.15)]" />
+                <img src={image} alt={imageAlt} className="w-full h-auto rounded-3xl object-cover shadow-[0_0_80px_hsl(var(--gold)/0.15)]" />
               </div>
             </div>
             {/* Right scrolling content */}
@@ -90,7 +90,7 @@ const StickySection = ({
             {/* Right sticky image */}
             <div className="relative lg:sticky lg:top-24 lg:self-start p-6 lg:p-12 order-1 lg:order-2">
               <div className="w-full max-w-lg mx-auto">
-                <img src={image} alt={imageAlt} className="w-full h-auto rounded-3xl object-cover shadow-[0_0_80px_rgba(212,175,55,0.15)]" />
+                <img src={image} alt={imageAlt} className="w-full h-auto rounded-3xl object-cover shadow-[0_0_80px_hsl(var(--gold)/0.15)]" />
               </div>
             </div>
           </>}
@@ -100,7 +100,7 @@ const StickySection = ({
 
 // LaTeX equation display
 const LatexEquation = () => <div className="my-12 py-8 flex justify-center">
-    <div className="text-[#D4AF37] font-serif text-5xl md:text-7xl lg:text-8xl tracking-wide italic font-light">
+    <div className="text-primary font-serif text-5xl md:text-7xl lg:text-8xl tracking-wide italic font-light">
       C<sub className="text-3xl md:text-5xl lg:text-6xl align-sub">p</sub> − C<sub className="text-3xl md:text-5xl lg:text-6xl align-sub">v</sub> = R
     </div>
   </div>;
@@ -108,15 +108,15 @@ const LatexEquation = () => <div className="my-12 py-8 flex justify-center">
 // Stats display component
 const StatsDisplay = () => <div className="grid grid-cols-1 md:grid-cols-3 gap-8 my-12">
     <div className="text-center p-6 rounded-2xl bg-white/5 border border-white/10">
-      <div className="font-numbers text-2xl md:text-3xl font-bold text-[#D4AF37]">15M</div>
+      <div className="font-numbers text-2xl md:text-3xl font-bold text-primary">15M</div>
       <div className="text-white/60 mt-3 text-sm uppercase tracking-widest">Impressions</div>
     </div>
     <div className="text-center p-6 rounded-2xl bg-white/5 border border-white/10">
-      <div className="font-numbers text-2xl md:text-3xl font-bold text-[#D4AF37]">1.14M</div>
+      <div className="font-numbers text-2xl md:text-3xl font-bold text-primary">1.14M</div>
       <div className="text-white/60 mt-3 text-sm uppercase tracking-widest">Clicks</div>
     </div>
     <div className="text-center p-6 rounded-2xl bg-white/5 border border-white/10">
-      <div className="font-numbers text-2xl md:text-3xl font-bold text-[#D4AF37]">15,000+</div>
+      <div className="font-numbers text-2xl md:text-3xl font-bold text-primary">15,000+</div>
       <div className="text-white/60 mt-3 text-sm uppercase tracking-widest">Aspirants</div>
     </div>
   </div>;
@@ -126,7 +126,7 @@ const SectionLabel = ({
   children
 }: {
   children: React.ReactNode;
-}) => <span className="inline-block px-5 py-2.5 rounded-full bg-gradient-to-r from-[#D4AF37]/20 to-[#D4AF37]/5 border border-[#D4AF37]/30 text-[#D4AF37] font-sans text-xs uppercase tracking-[0.2em] mb-8">
+}) => <span className="inline-block px-5 py-2.5 rounded-full bg-gradient-to-r from-primary/20 to-primary/5 border border-primary/30 text-primary font-sans text-xs uppercase tracking-[0.2em] mb-8">
     {children}
   </span>;
 const CaseStudy12thPass = () => {
@@ -134,7 +134,7 @@ const CaseStudy12thPass = () => {
       <div className="bg-[#000000] min-h-screen text-white">
         {/* Back Navigation */}
         <div className="fixed top-24 left-6 lg:left-12 z-50">
-          <Link to="/work" className="flex items-center gap-2 text-white/50 hover:text-[#D4AF37] transition-colors duration-300 font-sans text-xs uppercase tracking-widest">
+          <Link to="/work" className="flex items-center gap-2 text-white/50 hover:text-primary transition-colors duration-300 font-sans text-xs uppercase tracking-widest">
             <ArrowLeft size={14} />
             Back to Work
           </Link>
@@ -277,8 +277,8 @@ const CaseStudy12thPass = () => {
             </p>
           </AnimatedText>
           <AnimatedText delay={0.3}>
-            <blockquote className="border-l-4 border-[#D4AF37] pl-6 py-4">
-              <p className="text-2xl md:text-3xl lg:text-4xl font-serif italic text-[#D4AF37] leading-snug">
+            <blockquote className="border-l-4 border-primary pl-6 py-4">
+              <p className="text-2xl md:text-3xl lg:text-4xl font-serif italic text-primary leading-snug">
                 "Because textbooks don't text back."
               </p>
             </blockquote>
@@ -305,7 +305,7 @@ const CaseStudy12thPass = () => {
           </AnimatedText>
           <AnimatedText delay={0.3}>
             <div className="p-6 rounded-2xl bg-white/5 border border-white/10">
-              <h3 className="text-xl font-bold text-[#D4AF37] mb-4 font-sans">The Aesthetic: Obsidian Tech</h3>
+              <h3 className="text-xl font-bold text-primary mb-4 font-sans">The Aesthetic: Obsidian Tech</h3>
               <p className="text-white/60 text-base leading-relaxed font-sans">
                 A premium, dark-mode visual language built with charcoal gradients and restrained gold accents — signalling seriousness, depth, and precision.
               </p>
@@ -358,7 +358,7 @@ const CaseStudy12thPass = () => {
             </p>
           </AnimatedText>
           <AnimatedText delay={0.3}>
-            <blockquote className="border-l-4 border-[#D4AF37] pl-6 py-4">
+            <blockquote className="border-l-4 border-primary pl-6 py-4">
               <p className="text-xl md:text-2xl font-serif italic text-white/90 leading-relaxed">
                 "This hoarding won't help you crack JEE. But the QR code might."
               </p>
@@ -408,9 +408,9 @@ const CaseStudy12thPass = () => {
             </p>
           </AnimatedText>
           <AnimatedText delay={0.3}>
-            <blockquote className="border-l-4 border-[#D4AF37] pl-6 py-6">
+            <blockquote className="border-l-4 border-primary pl-6 py-6">
               <p className="text-2xl md:text-3xl lg:text-4xl font-serif italic text-white leading-relaxed">
-                "We didn't just build an app. We built an <span className="text-[#D4AF37]">unfair advantage</span> for the next generation of Indian engineers."
+                "We didn't just build an app. We built an <span className="text-primary">unfair advantage</span> for the next generation of Indian engineers."
               </p>
             </blockquote>
           </AnimatedText>
@@ -421,7 +421,7 @@ const CaseStudy12thPass = () => {
           <div className="flex justify-center">
             <Link 
               to="/contact" 
-              className="px-12 py-4 bg-transparent border border-[#D4AF37] text-[#D4AF37] font-sans text-sm uppercase tracking-[0.2em] rounded-full hover:bg-[#D4AF37] hover:text-black transition-all duration-300"
+              className="px-12 py-4 bg-transparent border border-primary text-primary font-sans text-sm uppercase tracking-[0.2em] rounded-full hover:bg-primary hover:text-black transition-all duration-300"
             >
               Join the Kult
             </Link>
