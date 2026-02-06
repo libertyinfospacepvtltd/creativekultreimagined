@@ -177,50 +177,76 @@ const CinematicCampaignSection = () => {
                 </h4>
                 <div className="space-y-3 max-w-[600px]">
                   {/* Creative 01 - 1:1 Square */}
-                  <motion.div 
-                    initial={{ opacity: 0, y: 20 }} 
-                    whileInView={{ opacity: 1, y: 0 }} 
-                    transition={{ duration: 0.5 }} 
-                    viewport={{ once: true, margin: "-50px" }} 
-                    className="aspect-square rounded-2xl overflow-hidden border border-border/30 max-w-[280px]"
-                  >
+                  <motion.div initial={{
+                  opacity: 0,
+                  y: 20
+                }} whileInView={{
+                  opacity: 1,
+                  y: 0
+                }} transition={{
+                  duration: 0.5
+                }} viewport={{
+                  once: true,
+                  margin: "-50px"
+                }} className="aspect-square rounded-2xl overflow-hidden border border-border/30 max-w-[280px]">
                     <img src={twelfthpassCreative01} alt="12thPass AI Creative 1" className="w-full h-full object-cover" />
                   </motion.div>
                   
                   {/* Creative 02 - Wide 3-panel */}
-                  <motion.div 
-                    initial={{ opacity: 0, y: 20 }} 
-                    whileInView={{ opacity: 1, y: 0 }} 
-                    transition={{ duration: 0.5, delay: 0.1 }} 
-                    viewport={{ once: true, margin: "-50px" }} 
-                    className="rounded-2xl overflow-hidden border border-border/30"
-                    style={{ aspectRatio: '1920 / 737' }}
-                  >
+                  <motion.div initial={{
+                  opacity: 0,
+                  y: 20
+                }} whileInView={{
+                  opacity: 1,
+                  y: 0
+                }} transition={{
+                  duration: 0.5,
+                  delay: 0.1
+                }} viewport={{
+                  once: true,
+                  margin: "-50px"
+                }} className="rounded-2xl overflow-hidden border border-border/30" style={{
+                  aspectRatio: '1920 / 737'
+                }}>
                     <img src={twelfthpassCreative02} alt="12thPass AI Creative 2" className="w-full h-full object-cover" />
                   </motion.div>
                   
                   {/* Creative 03 - Wide 3-panel */}
-                  <motion.div 
-                    initial={{ opacity: 0, y: 20 }} 
-                    whileInView={{ opacity: 1, y: 0 }} 
-                    transition={{ duration: 0.5, delay: 0.2 }} 
-                    viewport={{ once: true, margin: "-50px" }} 
-                    className="rounded-2xl overflow-hidden border border-border/30"
-                    style={{ aspectRatio: '1920 / 737' }}
-                  >
+                  <motion.div initial={{
+                  opacity: 0,
+                  y: 20
+                }} whileInView={{
+                  opacity: 1,
+                  y: 0
+                }} transition={{
+                  duration: 0.5,
+                  delay: 0.2
+                }} viewport={{
+                  once: true,
+                  margin: "-50px"
+                }} className="rounded-2xl overflow-hidden border border-border/30" style={{
+                  aspectRatio: '1920 / 737'
+                }}>
                     <img src={twelfthpassCreative03} alt="12thPass AI Creative 3" className="w-full h-full object-cover" />
                   </motion.div>
                   
                   {/* Creative 04 - Wide 3-panel (last) */}
-                  <motion.div 
-                    initial={{ opacity: 0, y: 20 }} 
-                    whileInView={{ opacity: 1, y: 0 }} 
-                    transition={{ duration: 0.5, delay: 0.3 }} 
-                    viewport={{ once: true, margin: "-50px" }} 
-                    className="rounded-2xl overflow-hidden border border-border/30"
-                    style={{ aspectRatio: '1920 / 737' }}
-                  >
-                    <img src={twelfthpassCreative04} alt="12thPass AI Creative 4" className="w-full h-full object-cover" />
+                  <motion.div initial={{
+                  opacity: 0,
+                  y: 20
+                }} whileInView={{
+                  opacity: 1,
+                  y: 0
+                }} transition={{
+                  duration: 0.5,
+                  delay: 0.3
+                }} viewport={{
+                  once: true,
+                  margin: "-50px"
+                }} className="rounded-2xl overflow-hidden border border-border/30" style={{
+                  aspectRatio: '1920 / 737'
+                }}>
+                    <img alt="12thPass AI Creative 4" className="w-full h-full object-cover" src="/lovable-uploads/d21a8206-15fc-48e6-9322-6f2ac5c5de91.png" />
                   </motion.div>
                 </div>
               </div>
@@ -309,38 +335,58 @@ const CinematicCampaignSection = () => {
                 </h4>
                 <div className="space-y-3 max-w-[600px]">
                   {/* Creative 01 - Wide 3-panel */}
-                  <motion.div 
-                    initial={{ opacity: 0, y: 20 }} 
-                    whileInView={{ opacity: 1, y: 0 }} 
-                    transition={{ duration: 0.5 }} 
-                    viewport={{ once: true, margin: "-50px" }} 
-                    className="rounded-2xl overflow-hidden border border-border/30"
-                    style={{ aspectRatio: '1920 / 737' }}
-                  >
+                  <motion.div initial={{
+                  opacity: 0,
+                  y: 20
+                }} whileInView={{
+                  opacity: 1,
+                  y: 0
+                }} transition={{
+                  duration: 0.5
+                }} viewport={{
+                  once: true,
+                  margin: "-50px"
+                }} className="rounded-2xl overflow-hidden border border-border/30" style={{
+                  aspectRatio: '1920 / 737'
+                }}>
                     <img src={easydo365Creative01} alt="EasyDo 365 Creative 1" className="w-full h-full object-cover" />
                   </motion.div>
                   
                   {/* Creative 02 - Wide panel */}
-                  <motion.div 
-                    initial={{ opacity: 0, y: 20 }} 
-                    whileInView={{ opacity: 1, y: 0 }} 
-                    transition={{ duration: 0.5, delay: 0.1 }} 
-                    viewport={{ once: true, margin: "-50px" }} 
-                    className="rounded-2xl overflow-hidden border border-border/30"
-                    style={{ aspectRatio: '1920 / 737' }}
-                  >
+                  <motion.div initial={{
+                  opacity: 0,
+                  y: 20
+                }} whileInView={{
+                  opacity: 1,
+                  y: 0
+                }} transition={{
+                  duration: 0.5,
+                  delay: 0.1
+                }} viewport={{
+                  once: true,
+                  margin: "-50px"
+                }} className="rounded-2xl overflow-hidden border border-border/30" style={{
+                  aspectRatio: '1920 / 737'
+                }}>
                     <img src={easydo365Creative02} alt="EasyDo 365 Creative 2" className="w-full h-full object-cover" />
                   </motion.div>
                   
                   {/* Creative 03 - Wide panel */}
-                  <motion.div 
-                    initial={{ opacity: 0, y: 20 }} 
-                    whileInView={{ opacity: 1, y: 0 }} 
-                    transition={{ duration: 0.5, delay: 0.2 }} 
-                    viewport={{ once: true, margin: "-50px" }} 
-                    className="rounded-2xl overflow-hidden border border-border/30"
-                    style={{ aspectRatio: '1920 / 737' }}
-                  >
+                  <motion.div initial={{
+                  opacity: 0,
+                  y: 20
+                }} whileInView={{
+                  opacity: 1,
+                  y: 0
+                }} transition={{
+                  duration: 0.5,
+                  delay: 0.2
+                }} viewport={{
+                  once: true,
+                  margin: "-50px"
+                }} className="rounded-2xl overflow-hidden border border-border/30" style={{
+                  aspectRatio: '1920 / 737'
+                }}>
                     <img src={easydo365Creative03} alt="EasyDo 365 Creative 3" className="w-full h-full object-cover" />
                   </motion.div>
                 </div>
