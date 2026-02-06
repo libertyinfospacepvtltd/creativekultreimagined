@@ -112,7 +112,7 @@ const StatsDisplay = () => (
       <div className="text-white/60 mt-3 text-sm uppercase tracking-widest">Clicks</div>
     </div>
     <div className="text-center p-6 rounded-2xl bg-white/5 border border-white/10">
-      <div className="font-numbers text-4xl md:text-5xl font-bold text-[#D4AF37]">15,000+</div>
+      <div className="font-numbers text-3xl md:text-4xl font-bold text-[#D4AF37]">15,000+</div>
       <div className="text-white/60 mt-3 text-sm uppercase tracking-widest">Aspirants</div>
     </div>
   </div>
