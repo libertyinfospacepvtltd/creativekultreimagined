@@ -126,7 +126,7 @@ const CinematicCampaignSection = () => {
           </h3>
           
           {/* 12thPass AI - Deep Dive Style in Spotlight */}
-          <div className="grid grid-cols-1 lg:grid-cols-[2fr_3fr] gap-8 lg:gap-12">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
             {/* Left Column - Pinned Creative (Sticky on desktop) */}
             <div className="lg:sticky lg:top-24 lg:self-start">
               <motion.div initial={{
@@ -140,7 +140,7 @@ const CinematicCampaignSection = () => {
             }} viewport={{
               once: true,
               margin: "-50px"
-            }} className="w-full max-w-[400px] mx-auto lg:mx-0">
+            }} className="w-full max-w-[500px] mx-auto">
                 <div className="aspect-square rounded-3xl overflow-hidden border border-border/30">
                   <img src={twelfthpassHeroPinned} alt="12thPass AI Campaign" className="w-full h-full object-cover" />
                 </div>
@@ -258,7 +258,7 @@ const CinematicCampaignSection = () => {
           <div className="pt-8 lg:pt-12" />
 
           {/* EasyDo 365 - Deep Dive Style in Spotlight */}
-          <div className="grid grid-cols-1 lg:grid-cols-[2fr_3fr] gap-8 lg:gap-12">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
             {/* Left Column - Pinned Creative (Sticky on desktop) */}
             <div className="lg:sticky lg:top-24 lg:self-start">
               <motion.div initial={{
@@ -272,7 +272,7 @@ const CinematicCampaignSection = () => {
             }} viewport={{
               once: true,
               margin: "-50px"
-            }} className="w-full max-w-[400px] mx-auto lg:mx-0">
+            }} className="w-full max-w-[500px] mx-auto">
                 <div className="aspect-square rounded-3xl overflow-hidden border border-border/30 bg-white p-8">
                   <img src={easydo365Hero} alt="EasyDo 365" className="w-full h-full object-contain" />
                 </div>
