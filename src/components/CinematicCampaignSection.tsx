@@ -27,7 +27,6 @@ import sylvanPinned1 from "@/assets/campaigns/sylvan-ply/sylvan-pinned-1.png";
 import sylvanPinned2 from "@/assets/campaigns/sylvan-ply/sylvan-pinned-2.png";
 import sylvanPinned3 from "@/assets/campaigns/sylvan-ply/sylvan-pinned-3.png";
 import sylvanPinned4 from "@/assets/campaigns/sylvan-ply/sylvan-pinned-4.png";
-
 interface SpotlightCampaign {
   id: string;
   title: string;
@@ -79,18 +78,15 @@ const deepDiveCampaigns: DeepDiveCampaign[] = [{
   gallery: [sylvanBrandLaunch],
   galleryTitle: "Brand Launch Campaign",
   galleryLayout: 'single',
-  additionalGalleries: [
-    {
-      title: "Plywood, But Make It Wild Campaign",
-      image: sylvanWildCampaign,
-      layout: 'single',
-    },
-    {
-      title: "The Wish Lab Campaign",
-      image: sylvanWishLab,
-      layout: 'single',
-    }
-  ],
+  additionalGalleries: [{
+    title: "Plywood, But Make It Wild Campaign",
+    image: sylvanWildCampaign,
+    layout: 'single'
+  }, {
+    title: "The Wish Lab Campaign",
+    image: sylvanWishLab,
+    layout: 'single'
+  }],
   results: ["Successful brand launch campaign", "Established brand identity in market", "Creative concept development and execution"]
 }, {
   id: "campaign-05",
@@ -125,19 +121,20 @@ const CinematicCampaignSection = () => {
           <div className="grid grid-cols-1 lg:grid-cols-[2fr_3fr] gap-8 lg:gap-12">
             {/* Left Column - Pinned Creative (Sticky on desktop) */}
             <div className="lg:sticky lg:top-24 lg:self-start">
-              <motion.div 
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6 }}
-                viewport={{ once: true, margin: "-50px" }}
-                className="w-full max-w-[400px] mx-auto lg:mx-0"
-              >
+              <motion.div initial={{
+              opacity: 0,
+              y: 40
+            }} whileInView={{
+              opacity: 1,
+              y: 0
+            }} transition={{
+              duration: 0.6
+            }} viewport={{
+              once: true,
+              margin: "-50px"
+            }} className="w-full max-w-[400px] mx-auto lg:mx-0">
                 <div className="aspect-square rounded-3xl overflow-hidden border border-border/30">
-                  <img 
-                    src={twelfthpassHeroPinned} 
-                    alt="12thPass AI Campaign" 
-                    className="w-full h-full object-cover"
-                  />
+                  <img src={twelfthpassHeroPinned} alt="12thPass AI Campaign" className="w-full h-full object-cover" />
                 </div>
               </motion.div>
             </div>
@@ -145,14 +142,19 @@ const CinematicCampaignSection = () => {
             {/* Right Column - Scrollable Content */}
             <div className="space-y-8 lg:space-y-12">
               {/* Title & Description */}
-              <motion.div 
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6 }}
-                viewport={{ once: true, margin: "-50px" }}
-                className="space-y-6"
-              >
-                <h3 className="text-2xl sm:text-3xl lg:text-4xl font-serif text-foreground">
+              <motion.div initial={{
+              opacity: 0,
+              y: 40
+            }} whileInView={{
+              opacity: 1,
+              y: 0
+            }} transition={{
+              duration: 0.6
+            }} viewport={{
+              once: true,
+              margin: "-50px"
+            }} className="space-y-6">
+                <h3 className="text-2xl sm:text-3xl lg:text-4xl text-foreground font-sans">
                   12thPass AI
                 </h3>
                 <p className="text-muted-foreground font-sans text-base lg:text-lg leading-relaxed">
@@ -166,47 +168,48 @@ const CinematicCampaignSection = () => {
                   Creative Gallery
                 </h4>
                 <div className="grid grid-cols-3 gap-4">
-                  {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((index) => (
-                    <motion.div 
-                      key={index}
-                      initial={{ opacity: 0, y: 20 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.5, delay: index * 0.05 }}
-                      viewport={{ once: true, margin: "-50px" }}
-                      className="aspect-square rounded-2xl overflow-hidden border border-border/30 bg-muted/20 flex items-center justify-center"
-                    >
+                  {[1, 2, 3, 4, 5, 6, 7, 8, 9].map(index => <motion.div key={index} initial={{
+                  opacity: 0,
+                  y: 20
+                }} whileInView={{
+                  opacity: 1,
+                  y: 0
+                }} transition={{
+                  duration: 0.5,
+                  delay: index * 0.05
+                }} viewport={{
+                  once: true,
+                  margin: "-50px"
+                }} className="aspect-square rounded-2xl overflow-hidden border border-border/30 bg-muted/20 flex items-center justify-center">
                       <span className="text-muted-foreground/40 text-xs font-sans">Frame {index}</span>
-                    </motion.div>
-                  ))}
+                    </motion.div>)}
                 </div>
               </div>
 
               {/* Results */}
-              <motion.div 
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.2 }}
-                viewport={{ once: true, margin: "-50px" }}
-                className="space-y-6"
-              >
+              <motion.div initial={{
+              opacity: 0,
+              y: 40
+            }} whileInView={{
+              opacity: 1,
+              y: 0
+            }} transition={{
+              duration: 0.6,
+              delay: 0.2
+            }} viewport={{
+              once: true,
+              margin: "-50px"
+            }} className="space-y-6">
                 <h4 className="text-sm font-sans uppercase tracking-widest text-muted-foreground">
                   Results
                 </h4>
                 <ul className="space-y-4">
-                  {[
-                    "300% increase in social engagement",
-                    "50K+ organic followers across platforms",
-                    "2x lead generation improvement",
-                    "Complete brand identity development",
-                    "Performance marketing strategy execution"
-                  ].map((result, resultIndex) => (
-                    <li key={resultIndex} className="flex items-start gap-3">
+                  {["300% increase in social engagement", "50K+ organic followers across platforms", "2x lead generation improvement", "Complete brand identity development", "Performance marketing strategy execution"].map((result, resultIndex) => <li key={resultIndex} className="flex items-start gap-3">
                       <span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" />
                       <span className="text-foreground font-sans">
                         {result}
                       </span>
-                    </li>
-                  ))}
+                    </li>)}
                 </ul>
               </motion.div>
             </div>
@@ -216,15 +219,20 @@ const CinematicCampaignSection = () => {
           <div className="pt-8 lg:pt-12" />
 
           {/* Other Spotlight Campaigns */}
-          {spotlightCampaigns.map((campaign, index) => (
-            <div key={campaign.id}>
-              <motion.div 
-                initial={{ opacity: 0, y: 60 }} 
-                whileInView={{ opacity: 1, y: 0 }} 
-                transition={{ duration: 0.7, delay: index * 0.1 }} 
-                viewport={{ once: true, margin: "-100px" }} 
-                className="relative w-full aspect-video md:aspect-[3240/1350] rounded-3xl overflow-hidden group cursor-pointer"
-              >
+          {spotlightCampaigns.map((campaign, index) => <div key={campaign.id}>
+              <motion.div initial={{
+            opacity: 0,
+            y: 60
+          }} whileInView={{
+            opacity: 1,
+            y: 0
+          }} transition={{
+            duration: 0.7,
+            delay: index * 0.1
+          }} viewport={{
+            once: true,
+            margin: "-100px"
+          }} className="relative w-full aspect-video md:aspect-[3240/1350] rounded-3xl overflow-hidden group cursor-pointer">
                 {/* Background Image */}
                 <img src={campaign.backgroundImage} alt={campaign.title} className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
 
@@ -241,8 +249,7 @@ const CinematicCampaignSection = () => {
                   </p>
                 </div>
               </motion.div>
-            </div>
-          ))}
+            </div>)}
         </div>
 
         {/* Part B: Deep Dives - Sticky Split Layouts */}
@@ -253,37 +260,37 @@ const CinematicCampaignSection = () => {
           {deepDiveCampaigns.map((campaign, index) => <div key={campaign.id} className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
               {/* Left Column - Sticky Visual (desktop only) */}
               <div className="lg:sticky lg:top-24 lg:self-start space-y-6">
-                <div 
-                  className="w-full max-w-[500px] mx-auto"
-                  style={{ aspectRatio: campaign.heroAspectRatio || '1 / 1' }}
-                >
+                <div className="w-full max-w-[500px] mx-auto" style={{
+              aspectRatio: campaign.heroAspectRatio || '1 / 1'
+            }}>
                   <img src={campaign.heroImage} alt={campaign.title} className="w-full h-full object-cover rounded-3xl border border-border/30" />
                 </div>
                 
                 {/* Additional Pinned Images */}
-                {campaign.pinnedImages && campaign.pinnedImages.length > 0 && (
-                  <div className="grid grid-cols-2 gap-4 max-w-[500px] mx-auto">
-                    {campaign.pinnedImages.map((pinnedImg, pinnedIndex) => (
-                      <motion.div
-                        key={pinnedIndex}
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.5, delay: pinnedIndex * 0.1 }}
-                        viewport={{ once: true, margin: "-50px" }}
-                        className="aspect-square rounded-2xl overflow-hidden border border-border/30"
-                      >
+                {campaign.pinnedImages && campaign.pinnedImages.length > 0 && <div className="grid grid-cols-2 gap-4 max-w-[500px] mx-auto">
+                    {campaign.pinnedImages.map((pinnedImg, pinnedIndex) => <motion.div key={pinnedIndex} initial={{
+                opacity: 0,
+                y: 20
+              }} whileInView={{
+                opacity: 1,
+                y: 0
+              }} transition={{
+                duration: 0.5,
+                delay: pinnedIndex * 0.1
+              }} viewport={{
+                once: true,
+                margin: "-50px"
+              }} className="aspect-square rounded-2xl overflow-hidden border border-border/30">
                         <img src={pinnedImg} alt={`${campaign.title} pinned ${pinnedIndex + 1}`} className="w-full h-full object-cover" />
-                      </motion.div>
-                    ))}
-                  </div>
-                )}
+                      </motion.div>)}
+                  </div>}
               </div>
 
               {/* Right Column - The Story (Scrollable) */}
               <div className="space-y-8 lg:space-y-12">
                 {/* Title & Description */}
                 <div className="space-y-6">
-                  <h3 className="text-2xl sm:text-3xl lg:text-4xl font-serif text-foreground">
+                  <h3 className="text-2xl sm:text-3xl lg:text-4xl text-foreground font-sans">
                     {campaign.title}
                   </h3>
                   <p className="text-muted-foreground font-sans text-base lg:text-lg leading-relaxed">
@@ -297,109 +304,134 @@ const CinematicCampaignSection = () => {
                     {campaign.galleryTitle || "Creative Gallery"}
                   </h4>
                   
-                  {campaign.galleryLayout === 'placeholder' ? (
-                    // Single placeholder with exact dimensions
-                    <motion.div 
-                      initial={{ opacity: 0, y: 20 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.5 }}
-                      viewport={{ once: true, margin: "-50px" }}
-                      className="w-full rounded-2xl overflow-hidden border border-border/30 bg-muted/20 flex items-center justify-center"
-                      style={{ aspectRatio: campaign.galleryPlaceholderRatio || '16 / 9' }}
-                    >
+                  {campaign.galleryLayout === 'placeholder' ?
+              // Single placeholder with exact dimensions
+              <motion.div initial={{
+                opacity: 0,
+                y: 20
+              }} whileInView={{
+                opacity: 1,
+                y: 0
+              }} transition={{
+                duration: 0.5
+              }} viewport={{
+                once: true,
+                margin: "-50px"
+              }} className="w-full rounded-2xl overflow-hidden border border-border/30 bg-muted/20 flex items-center justify-center" style={{
+                aspectRatio: campaign.galleryPlaceholderRatio || '16 / 9'
+              }}>
                       <span className="text-muted-foreground/40 text-sm font-sans">Coming Soon</span>
-                    </motion.div>
-                  ) : campaign.galleryLayout === 'single' && campaign.gallery[0] ? (
-                    // Single full-width image
-                    <motion.div 
-                      initial={{ opacity: 0, y: 20 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.5 }}
-                      viewport={{ once: true, margin: "-50px" }}
-                      className="w-full rounded-2xl overflow-hidden border border-border/30"
-                    >
+                    </motion.div> : campaign.galleryLayout === 'single' && campaign.gallery[0] ?
+              // Single full-width image
+              <motion.div initial={{
+                opacity: 0,
+                y: 20
+              }} whileInView={{
+                opacity: 1,
+                y: 0
+              }} transition={{
+                duration: 0.5
+              }} viewport={{
+                once: true,
+                margin: "-50px"
+              }} className="w-full rounded-2xl overflow-hidden border border-border/30">
                       <img src={campaign.gallery[0]} alt={`${campaign.title} creative`} className="w-full h-auto object-cover" />
-                    </motion.div>
-                  ) : (
-                    // Default grid layout
-                    <div className="space-y-4">
+                    </motion.div> :
+              // Default grid layout
+              <div className="space-y-4">
                       {/* Regular 2-column grid for first 6 images */}
                       <div className="grid grid-cols-2 gap-4">
-                        {campaign.gallery.slice(0, 6).map((image, imgIndex) => (
-                          <motion.div 
-                            key={imgIndex} 
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.5, delay: imgIndex * 0.08 }}
-                            viewport={{ once: true, margin: "-50px" }}
-                            className="aspect-[4/5] rounded-2xl overflow-hidden border border-border/30"
-                          >
+                        {campaign.gallery.slice(0, 6).map((image, imgIndex) => <motion.div key={imgIndex} initial={{
+                    opacity: 0,
+                    y: 20
+                  }} whileInView={{
+                    opacity: 1,
+                    y: 0
+                  }} transition={{
+                    duration: 0.5,
+                    delay: imgIndex * 0.08
+                  }} viewport={{
+                    once: true,
+                    margin: "-50px"
+                  }} className="aspect-[4/5] rounded-2xl overflow-hidden border border-border/30">
                             <img src={image} alt={`${campaign.title} creative ${imgIndex + 1}`} className="w-full h-full object-cover" />
-                          </motion.div>
-                        ))}
+                          </motion.div>)}
                       </div>
                       
                       {/* Banner image - full width with 1500:788 aspect ratio */}
-                      {campaign.gallery[6] && (
-                        <motion.div
-                          initial={{ opacity: 0, y: 20 }}
-                          whileInView={{ opacity: 1, y: 0 }}
-                          transition={{ duration: 0.5, delay: 0.48 }}
-                          viewport={{ once: true, margin: "-50px" }}
-                          className="rounded-2xl overflow-hidden border border-border/30"
-                          style={{ aspectRatio: '1500 / 788' }}
-                        >
+                      {campaign.gallery[6] && <motion.div initial={{
+                  opacity: 0,
+                  y: 20
+                }} whileInView={{
+                  opacity: 1,
+                  y: 0
+                }} transition={{
+                  duration: 0.5,
+                  delay: 0.48
+                }} viewport={{
+                  once: true,
+                  margin: "-50px"
+                }} className="rounded-2xl overflow-hidden border border-border/30" style={{
+                  aspectRatio: '1500 / 788'
+                }}>
                           <img src={campaign.gallery[6]} alt={`${campaign.title} creative 7`} className="w-full h-full object-cover" />
-                        </motion.div>
-                      )}
+                        </motion.div>}
                       
                       {/* Square grid image - 1:1 aspect ratio */}
-                      {campaign.gallery[7] && (
-                        <motion.div
-                          initial={{ opacity: 0, y: 20 }}
-                          whileInView={{ opacity: 1, y: 0 }}
-                          transition={{ duration: 0.5, delay: 0.56 }}
-                          viewport={{ once: true, margin: "-50px" }}
-                          className="aspect-square rounded-2xl overflow-hidden border border-border/30"
-                        >
+                      {campaign.gallery[7] && <motion.div initial={{
+                  opacity: 0,
+                  y: 20
+                }} whileInView={{
+                  opacity: 1,
+                  y: 0
+                }} transition={{
+                  duration: 0.5,
+                  delay: 0.56
+                }} viewport={{
+                  once: true,
+                  margin: "-50px"
+                }} className="aspect-square rounded-2xl overflow-hidden border border-border/30">
                           <img src={campaign.gallery[7]} alt={`${campaign.title} creative 8`} className="w-full h-full object-cover" />
-                        </motion.div>
-                      )}
-                    </div>
-                  )}
+                        </motion.div>}
+                    </div>}
                 </div>
 
                 {/* Additional Galleries */}
-                {campaign.additionalGalleries && campaign.additionalGalleries.map((gallery, galleryIndex) => (
-                  <div key={galleryIndex} className="space-y-6">
+                {campaign.additionalGalleries && campaign.additionalGalleries.map((gallery, galleryIndex) => <div key={galleryIndex} className="space-y-6">
                     <h4 className="text-sm font-sans uppercase tracking-widest text-muted-foreground">
                       {gallery.title}
                     </h4>
                     
-                    {gallery.layout === 'single' && gallery.image ? (
-                      <motion.div 
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.5 }}
-                        viewport={{ once: true, margin: "-50px" }}
-                        className="w-full rounded-2xl overflow-hidden border border-border/30"
-                      >
+                    {gallery.layout === 'single' && gallery.image ? <motion.div initial={{
+                opacity: 0,
+                y: 20
+              }} whileInView={{
+                opacity: 1,
+                y: 0
+              }} transition={{
+                duration: 0.5
+              }} viewport={{
+                once: true,
+                margin: "-50px"
+              }} className="w-full rounded-2xl overflow-hidden border border-border/30">
                         <img src={gallery.image} alt={`${campaign.title} - ${gallery.title}`} className="w-full h-auto object-cover" />
-                      </motion.div>
-                    ) : (
-                      <motion.div 
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.5 }}
-                        viewport={{ once: true, margin: "-50px" }}
-                        className="w-full rounded-2xl overflow-hidden border border-border/30 bg-muted/20 flex items-center justify-center"
-                        style={{ aspectRatio: gallery.placeholderRatio || '16 / 9' }}
-                      >
+                      </motion.div> : <motion.div initial={{
+                opacity: 0,
+                y: 20
+              }} whileInView={{
+                opacity: 1,
+                y: 0
+              }} transition={{
+                duration: 0.5
+              }} viewport={{
+                once: true,
+                margin: "-50px"
+              }} className="w-full rounded-2xl overflow-hidden border border-border/30 bg-muted/20 flex items-center justify-center" style={{
+                aspectRatio: gallery.placeholderRatio || '16 / 9'
+              }}>
                         <span className="text-muted-foreground/40 text-sm font-sans">Coming Soon</span>
-                      </motion.div>
-                    )}
-                  </div>
-                ))}
+                      </motion.div>}
+                  </div>)}
 
                 {/* Results */}
                 <div className="space-y-6 pt-8">
