@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import kolkataIsCooking from "@/assets/campaigns/kolkata-is-cooking.png";
 import cadburyMishti from "@/assets/campaigns/cadbury-mishti.png";
 import timesParaGames from "@/assets/campaigns/times-para-games.png";
+import twelfthpassHeroPinned from "@/assets/campaigns/12thpass/12thpass-hero-pinned.png";
 import rawatHero from "@/assets/campaigns/rawat/rawat-hero.png";
 import rawat1 from "@/assets/campaigns/rawat/rawat-1.jpeg";
 import rawat2 from "@/assets/campaigns/rawat/rawat-2.jpeg";
@@ -114,11 +115,107 @@ const CinematicCampaignSection = () => {
           <h2 className="text-primary font-sans text-2xl sm:text-3xl lg:text-4xl uppercase tracking-widest mb-2 sm:mb-4 block text-center">CAMPAIGNS</h2>
         </div>
 
-        {/* Part A: Spotlight Trio - Full Width Cards */}
+        {/* Part A: Spotlight Section */}
         <div className="space-y-8 lg:space-y-12 mb-24 lg:mb-32">
           <h3 className="text-sm font-sans uppercase tracking-widest text-muted-foreground text-center">
             Spotlight
           </h3>
+          
+          {/* 12thPass AI - Deep Dive Style in Spotlight */}
+          <div className="grid grid-cols-1 lg:grid-cols-[2fr_3fr] gap-8 lg:gap-12">
+            {/* Left Column - Pinned Creative (Sticky on desktop) */}
+            <div className="lg:sticky lg:top-24 lg:self-start">
+              <motion.div 
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6 }}
+                viewport={{ once: true, margin: "-50px" }}
+                className="w-full max-w-[400px] mx-auto lg:mx-0"
+              >
+                <div className="aspect-square rounded-3xl overflow-hidden border border-border/30">
+                  <img 
+                    src={twelfthpassHeroPinned} 
+                    alt="12thPass AI Campaign" 
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+              </motion.div>
+            </div>
+
+            {/* Right Column - Scrollable Content */}
+            <div className="space-y-8 lg:space-y-12">
+              {/* Title & Description */}
+              <motion.div 
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6 }}
+                viewport={{ once: true, margin: "-50px" }}
+                className="space-y-6"
+              >
+                <h3 className="text-2xl sm:text-3xl lg:text-4xl font-serif text-foreground">
+                  12thPass AI
+                </h3>
+                <p className="text-muted-foreground font-sans text-base lg:text-lg leading-relaxed">
+                  Complete brand identity, social media management, and performance marketing for an AI-powered education platform targeting students across India. "Because Textbooks Don't Text Back..."
+                </p>
+              </motion.div>
+
+              {/* 3x3 Grid Gallery Placeholders */}
+              <div className="space-y-6">
+                <h4 className="text-sm font-sans uppercase tracking-widest text-muted-foreground">
+                  Creative Gallery
+                </h4>
+                <div className="grid grid-cols-3 gap-4">
+                  {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((index) => (
+                    <motion.div 
+                      key={index}
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.5, delay: index * 0.05 }}
+                      viewport={{ once: true, margin: "-50px" }}
+                      className="aspect-square rounded-2xl overflow-hidden border border-border/30 bg-muted/20 flex items-center justify-center"
+                    >
+                      <span className="text-muted-foreground/40 text-xs font-sans">Frame {index}</span>
+                    </motion.div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Results */}
+              <motion.div 
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                viewport={{ once: true, margin: "-50px" }}
+                className="space-y-6"
+              >
+                <h4 className="text-sm font-sans uppercase tracking-widest text-muted-foreground">
+                  Results
+                </h4>
+                <ul className="space-y-4">
+                  {[
+                    "300% increase in social engagement",
+                    "50K+ organic followers across platforms",
+                    "2x lead generation improvement",
+                    "Complete brand identity development",
+                    "Performance marketing strategy execution"
+                  ].map((result, resultIndex) => (
+                    <li key={resultIndex} className="flex items-start gap-3">
+                      <span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" />
+                      <span className="text-foreground font-sans">
+                        {result}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              </motion.div>
+            </div>
+          </div>
+
+          {/* Separator */}
+          <div className="pt-8 lg:pt-12" />
+
+          {/* Other Spotlight Campaigns */}
           {spotlightCampaigns.map((campaign, index) => (
             <div key={campaign.id}>
               <motion.div 
@@ -144,7 +241,6 @@ const CinematicCampaignSection = () => {
                   </p>
                 </div>
               </motion.div>
-
             </div>
           ))}
         </div>
