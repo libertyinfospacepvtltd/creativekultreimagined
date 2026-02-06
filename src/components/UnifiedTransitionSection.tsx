@@ -214,24 +214,8 @@ const UnifiedTransitionSection = () => {
       <div className="sticky top-0 h-screen w-full flex items-center justify-center overflow-visible">
         
         {/* PCB Circuit Background */}
-        {/* Spline Particles Background - for AI-first branding section */}
         <motion.div 
-          className="absolute inset-0 z-0 pointer-events-none bg-black"
-          style={{ opacity: prefersReducedMotion ? 0 : circuitOpacity }}
-        >
-          <iframe 
-            src="https://my.spline.design/particles-SJt3xTTmBjP4Xa2UYp1HbpXV/"
-            frameBorder="0"
-            width="100%"
-            height="100%"
-            title="Particles Background"
-            className="pointer-events-none"
-          />
-        </motion.div>
-
-        {/* PCB Circuit Background - kept as overlay */}
-        <motion.div 
-          className="absolute inset-0 pointer-events-none z-[1]"
+          className="absolute inset-0 pointer-events-none"
           style={{ opacity: prefersReducedMotion ? 0.9 : circuitOpacity }}
         >
           <CircuitBackground />
