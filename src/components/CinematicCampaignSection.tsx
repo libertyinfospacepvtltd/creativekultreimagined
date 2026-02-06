@@ -7,6 +7,10 @@ import twelfthpassCreative01 from "@/assets/campaigns/12thpass/12thpass-creative
 import twelfthpassCreative02 from "@/assets/campaigns/12thpass/12thpass-creative-02.png";
 import twelfthpassCreative03 from "@/assets/campaigns/12thpass/12thpass-creative-03.png";
 import twelfthpassCreative04 from "@/assets/campaigns/12thpass/12thpass-creative-04.png";
+import easydo365Hero from "@/assets/campaigns/easydo365/easydo365-hero.png";
+import easydo365Creative01 from "@/assets/campaigns/easydo365/easydo365-creative-01.png";
+import easydo365Creative02 from "@/assets/campaigns/easydo365/easydo365-creative-02.png";
+import easydo365Creative03 from "@/assets/campaigns/easydo365/easydo365-creative-03.png";
 import rawatHero from "@/assets/campaigns/rawat/rawat-hero.png";
 import rawat1 from "@/assets/campaigns/rawat/rawat-1.jpeg";
 import rawat2 from "@/assets/campaigns/rawat/rawat-2.jpeg";
@@ -240,6 +244,127 @@ const CinematicCampaignSection = () => {
                 </h4>
                 <ul className="space-y-4">
                   {["300% increase in social engagement", "50K+ organic followers across platforms", "2x lead generation improvement", "Complete brand identity development", "Performance marketing strategy execution"].map((result, resultIndex) => <li key={resultIndex} className="flex items-start gap-3">
+                      <span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" />
+                      <span className="text-foreground font-sans">
+                        {result}
+                      </span>
+                    </li>)}
+                </ul>
+              </motion.div>
+            </div>
+          </div>
+
+          {/* Separator between 12thPass and EasyDo */}
+          <div className="pt-8 lg:pt-12" />
+
+          {/* EasyDo 365 - Deep Dive Style in Spotlight */}
+          <div className="grid grid-cols-1 lg:grid-cols-[2fr_3fr] gap-8 lg:gap-12">
+            {/* Left Column - Pinned Creative (Sticky on desktop) */}
+            <div className="lg:sticky lg:top-24 lg:self-start">
+              <motion.div initial={{
+              opacity: 0,
+              y: 40
+            }} whileInView={{
+              opacity: 1,
+              y: 0
+            }} transition={{
+              duration: 0.6
+            }} viewport={{
+              once: true,
+              margin: "-50px"
+            }} className="w-full max-w-[400px] mx-auto lg:mx-0">
+                <div className="aspect-square rounded-3xl overflow-hidden border border-border/30 bg-white p-8">
+                  <img src={easydo365Hero} alt="EasyDo 365" className="w-full h-full object-contain" />
+                </div>
+              </motion.div>
+            </div>
+
+            {/* Right Column - Scrollable Content */}
+            <div className="space-y-8 lg:space-y-12">
+              {/* Title & Description */}
+              <motion.div initial={{
+              opacity: 0,
+              y: 40
+            }} whileInView={{
+              opacity: 1,
+              y: 0
+            }} transition={{
+              duration: 0.6
+            }} viewport={{
+              once: true,
+              margin: "-50px"
+            }} className="space-y-6">
+                <h3 className="text-2xl sm:text-3xl lg:text-4xl text-foreground font-sans">
+                  EasyDo 365
+                </h3>
+                <p className="text-muted-foreground font-sans text-base lg:text-lg leading-relaxed">
+                  Complete brand identity and digital marketing for an innovative HRMS app designed for MSMEs. "Simplify Management, Amplify Results" — bringing enterprise-level task management to small and medium businesses without the complexity.
+                </p>
+              </motion.div>
+
+              {/* Creative Gallery */}
+              <div className="space-y-6">
+                <h4 className="text-sm font-sans uppercase tracking-widest text-muted-foreground">
+                  Creative Gallery
+                </h4>
+                <div className="space-y-3 max-w-[600px]">
+                  {/* Creative 01 - Wide 3-panel */}
+                  <motion.div 
+                    initial={{ opacity: 0, y: 20 }} 
+                    whileInView={{ opacity: 1, y: 0 }} 
+                    transition={{ duration: 0.5 }} 
+                    viewport={{ once: true, margin: "-50px" }} 
+                    className="rounded-2xl overflow-hidden border border-border/30"
+                    style={{ aspectRatio: '1920 / 737' }}
+                  >
+                    <img src={easydo365Creative01} alt="EasyDo 365 Creative 1" className="w-full h-full object-cover" />
+                  </motion.div>
+                  
+                  {/* Creative 02 - Wide panel */}
+                  <motion.div 
+                    initial={{ opacity: 0, y: 20 }} 
+                    whileInView={{ opacity: 1, y: 0 }} 
+                    transition={{ duration: 0.5, delay: 0.1 }} 
+                    viewport={{ once: true, margin: "-50px" }} 
+                    className="rounded-2xl overflow-hidden border border-border/30"
+                    style={{ aspectRatio: '1920 / 737' }}
+                  >
+                    <img src={easydo365Creative02} alt="EasyDo 365 Creative 2" className="w-full h-full object-cover" />
+                  </motion.div>
+                  
+                  {/* Creative 03 - Wide panel */}
+                  <motion.div 
+                    initial={{ opacity: 0, y: 20 }} 
+                    whileInView={{ opacity: 1, y: 0 }} 
+                    transition={{ duration: 0.5, delay: 0.2 }} 
+                    viewport={{ once: true, margin: "-50px" }} 
+                    className="rounded-2xl overflow-hidden border border-border/30"
+                    style={{ aspectRatio: '1920 / 737' }}
+                  >
+                    <img src={easydo365Creative03} alt="EasyDo 365 Creative 3" className="w-full h-full object-cover" />
+                  </motion.div>
+                </div>
+              </div>
+
+              {/* Results */}
+              <motion.div initial={{
+              opacity: 0,
+              y: 40
+            }} whileInView={{
+              opacity: 1,
+              y: 0
+            }} transition={{
+              duration: 0.6,
+              delay: 0.2
+            }} viewport={{
+              once: true,
+              margin: "-50px"
+            }} className="space-y-6">
+                <h4 className="text-sm font-sans uppercase tracking-widest text-muted-foreground">
+                  Results
+                </h4>
+                <ul className="space-y-4">
+                  {["Complete brand identity and visual language", "Mobile-first app interface design", "Social media campaign strategy", "MSME-focused messaging framework", "Task management workflow optimization"].map((result, resultIndex) => <li key={resultIndex} className="flex items-start gap-3">
                       <span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" />
                       <span className="text-foreground font-sans">
                         {result}
