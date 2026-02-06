@@ -122,7 +122,7 @@ const CinematicCampaignSection = () => {
           </h3>
           
           {/* 12thPass AI - Deep Dive Style in Spotlight */}
-          <div className="grid grid-cols-1 lg:grid-cols-[45%_55%] gap-8 lg:gap-x-16">
+          <div className="grid grid-cols-1 lg:grid-cols-[2fr_3fr] gap-8 lg:gap-12">
             {/* Left Column - Pinned Creative (Sticky on desktop) */}
             <div className="lg:sticky lg:top-24 lg:self-start">
               <motion.div initial={{
@@ -136,7 +136,7 @@ const CinematicCampaignSection = () => {
             }} viewport={{
               once: true,
               margin: "-50px"
-            }} className="w-full">
+            }} className="w-full max-w-[400px] mx-auto lg:mx-0">
                 <div className="aspect-square rounded-3xl overflow-hidden border border-border/30">
                   <img src={twelfthpassHeroPinned} alt="12thPass AI Campaign" className="w-full h-full object-cover" />
                 </div>
@@ -171,51 +171,50 @@ const CinematicCampaignSection = () => {
                 <h4 className="text-sm font-sans uppercase tracking-widest text-muted-foreground">
                   Creative Gallery
                 </h4>
-                <div className="space-y-6 flex flex-col items-center">
-                  {/* Creative 01 - 4:5 Portrait */}
+                <div className="space-y-4">
+                  {/* Creative 01 - 1:1 Square */}
                   <motion.div 
                     initial={{ opacity: 0, y: 20 }} 
                     whileInView={{ opacity: 1, y: 0 }} 
                     transition={{ duration: 0.5 }} 
                     viewport={{ once: true, margin: "-50px" }} 
-                    className="w-full lg:w-[80%] rounded-2xl overflow-hidden border border-border/30"
-                    style={{ aspectRatio: '4 / 5' }}
+                    className="aspect-square rounded-2xl overflow-hidden border border-border/30"
                   >
                     <img src={twelfthpassCreative01} alt="12thPass AI Creative 1" className="w-full h-full object-cover" />
                   </motion.div>
                   
-                  {/* Creative 02 - 16:9 Wide */}
+                  {/* Creative 02 - Wide 3-panel (~1500:577 based on image) */}
                   <motion.div 
                     initial={{ opacity: 0, y: 20 }} 
                     whileInView={{ opacity: 1, y: 0 }} 
                     transition={{ duration: 0.5, delay: 0.1 }} 
                     viewport={{ once: true, margin: "-50px" }} 
-                    className="w-full lg:w-[80%] rounded-2xl overflow-hidden border border-border/30"
-                    style={{ aspectRatio: '16 / 9' }}
+                    className="rounded-2xl overflow-hidden border border-border/30"
+                    style={{ aspectRatio: '1920 / 737' }}
                   >
                     <img src={twelfthpassCreative02} alt="12thPass AI Creative 2" className="w-full h-full object-cover" />
                   </motion.div>
                   
-                  {/* Creative 03 - 16:9 Wide */}
+                  {/* Creative 03 - Wide 3-panel */}
                   <motion.div 
                     initial={{ opacity: 0, y: 20 }} 
                     whileInView={{ opacity: 1, y: 0 }} 
                     transition={{ duration: 0.5, delay: 0.2 }} 
                     viewport={{ once: true, margin: "-50px" }} 
-                    className="w-full lg:w-[80%] rounded-2xl overflow-hidden border border-border/30"
-                    style={{ aspectRatio: '16 / 9' }}
+                    className="rounded-2xl overflow-hidden border border-border/30"
+                    style={{ aspectRatio: '1920 / 737' }}
                   >
                     <img src={twelfthpassCreative03} alt="12thPass AI Creative 3" className="w-full h-full object-cover" />
                   </motion.div>
                   
-                  {/* Creative 04 - 16:9 Wide (last) */}
+                  {/* Creative 04 - Wide 3-panel (last) */}
                   <motion.div 
                     initial={{ opacity: 0, y: 20 }} 
                     whileInView={{ opacity: 1, y: 0 }} 
                     transition={{ duration: 0.5, delay: 0.3 }} 
                     viewport={{ once: true, margin: "-50px" }} 
-                    className="w-full lg:w-[80%] rounded-2xl overflow-hidden border border-border/30"
-                    style={{ aspectRatio: '16 / 9' }}
+                    className="rounded-2xl overflow-hidden border border-border/30"
+                    style={{ aspectRatio: '1920 / 737' }}
                   >
                     <img src={twelfthpassCreative04} alt="12thPass AI Creative 4" className="w-full h-full object-cover" />
                   </motion.div>
