@@ -1,8 +1,4 @@
 import { motion } from "framer-motion";
-import easydo365 from "@/assets/campaigns/easydo365-logo.png";
-import easydo365Detail from "@/assets/campaigns/easydo365-detail.jpg";
-import twelfthpassSpotlight from "@/assets/campaigns/12thpass-spotlight.png";
-import twelfthpassDetail from "@/assets/campaigns/12thpass-detail.png";
 import kolkataIsCooking from "@/assets/campaigns/kolkata-is-cooking.png";
 import cadburyMishti from "@/assets/campaigns/cadbury-mishti.png";
 import timesParaGames from "@/assets/campaigns/times-para-games.png";
@@ -57,16 +53,6 @@ interface DeepDiveCampaign {
   results: string[];
 }
 const spotlightCampaigns: SpotlightCampaign[] = [{
-  id: "campaign-00b",
-  title: "12thPass AI",
-  subtitle: "EdTech • Brand Identity • Performance Marketing • Social Media Strategy",
-  backgroundImage: twelfthpassSpotlight
-}, {
-  id: "campaign-00",
-  title: "EasyDo 365",
-  subtitle: "HRMS App • Brand Identity • Digital Marketing • Content Strategy",
-  backgroundImage: easydo365
-}, {
   id: "campaign-01",
   title: "Coca Cola - Kolkata Is Cooking",
   subtitle: "Influencer Onboarding • Copy Writing • Content Comms • On-Ground Support",
@@ -159,92 +145,6 @@ const CinematicCampaignSection = () => {
                 </div>
               </motion.div>
 
-              {/* 12thPass AI Detail Section - appears after 12thPass spotlight card */}
-              {campaign.id === "campaign-00b" && (
-                <motion.div 
-                  initial={{ opacity: 0, y: 40 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6 }}
-                  viewport={{ once: true, margin: "-50px" }}
-                  className="mt-8 lg:mt-12 grid grid-cols-1 lg:grid-cols-[2fr_3fr] gap-8 lg:gap-12"
-                >
-                  {/* Left Column - Logo/Branding (Sticky on desktop) */}
-                  <div className="lg:sticky lg:top-24 lg:self-start">
-                    <div className="w-full max-w-[320px] mx-auto lg:mx-0 rounded-2xl overflow-hidden border border-border/30">
-                      <img 
-                        src={twelfthpassDetail} 
-                        alt="12thPass AI Campaign Creative" 
-                        className="w-full h-auto object-cover"
-                      />
-                    </div>
-                  </div>
-
-                  {/* Right Column - Results (Scrollable) */}
-                  <div className="space-y-6">
-                    <h4 className="text-sm font-sans uppercase tracking-widest text-muted-foreground">
-                      Results
-                    </h4>
-                    <ul className="space-y-4">
-                      {[
-                        "300% increase in social engagement",
-                        "50K+ organic followers across platforms",
-                        "2x lead generation improvement",
-                        "Complete brand identity development",
-                        "Performance marketing strategy execution"
-                      ].map((result, resultIndex) => (
-                        <li key={resultIndex} className="flex items-start gap-3">
-                          <span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" />
-                          <span className="text-foreground font-sans">
-                            {result}
-                          </span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </motion.div>
-              )}
-
-              {/* EasyDo 365 Detail Section - appears after EasyDo spotlight card */}
-              {campaign.id === "campaign-00" && (
-                <motion.div 
-                  initial={{ opacity: 0, y: 40 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6 }}
-                  viewport={{ once: true, margin: "-50px" }}
-                  className="mt-8 lg:mt-12 grid grid-cols-1 lg:grid-cols-[auto_1fr] gap-8 lg:gap-12 items-start"
-                >
-                  {/* Left Column - Creative Image (scaled to match text height) */}
-                  <div className="w-full max-w-[200px] lg:max-w-[220px] mx-auto lg:mx-0 rounded-2xl overflow-hidden border border-border/30">
-                    <img 
-                      src={easydo365Detail} 
-                      alt="EasyDo 365 Campaign Creative" 
-                      className="w-full h-auto object-cover"
-                    />
-                  </div>
-
-                  {/* Right Column - Results */}
-                  <div className="space-y-6">
-                    <h4 className="text-sm font-sans uppercase tracking-widest text-muted-foreground">
-                      Results
-                    </h4>
-                    <ul className="space-y-4">
-                      {[
-                        "Complete brand identity and visual language development",
-                        "HRMS app marketing strategy and execution",
-                        "Digital-first content for MSME audience",
-                        "Increased app downloads and user engagement"
-                      ].map((result, resultIndex) => (
-                        <li key={resultIndex} className="flex items-start gap-3">
-                          <span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" />
-                          <span className="text-foreground font-sans">
-                            {result}
-                          </span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </motion.div>
-              )}
             </div>
           ))}
         </div>
