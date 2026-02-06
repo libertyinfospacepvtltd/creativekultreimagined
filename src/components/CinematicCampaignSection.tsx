@@ -3,7 +3,7 @@ import kolkataIsCooking from "@/assets/campaigns/kolkata-is-cooking.png";
 import cadburyMishti from "@/assets/campaigns/cadbury-mishti.png";
 import timesParaGames from "@/assets/campaigns/times-para-games.png";
 import twelfthpassHeroPinned from "@/assets/campaigns/12thpass/12thpass-hero-pinned.png";
-import twelfthpassCreative01 from "@/assets/campaigns/12thpass/12thpass-creative-01.png";
+import twelfthpassCreative01 from "@/assets/campaigns/12thpass/12thpass-creative-05.png";
 import twelfthpassCreative02 from "@/assets/campaigns/12thpass/12thpass-creative-02.png";
 import twelfthpassCreative03 from "@/assets/campaigns/12thpass/12thpass-creative-03.png";
 import twelfthpassCreative04 from "@/assets/campaigns/12thpass/12thpass-chalkboard.png";
@@ -176,7 +176,7 @@ const CinematicCampaignSection = () => {
                   Creative Gallery
                 </h4>
                 <div className="space-y-3 max-w-[600px]">
-                  {/* Creative 01 - 1:1 Square */}
+                  {/* Creative 01 - Wide 3-panel */}
                   <motion.div initial={{
                   opacity: 0,
                   y: 20
@@ -188,7 +188,9 @@ const CinematicCampaignSection = () => {
                 }} viewport={{
                   once: true,
                   margin: "-50px"
-                }} className="aspect-square rounded-2xl overflow-hidden border border-border/30 max-w-[280px]">
+                }} className="rounded-2xl overflow-hidden border border-border/30" style={{
+                  aspectRatio: '1920 / 737'
+                }}>
                     <img src={twelfthpassCreative01} alt="12thPass AI Creative 1" className="w-full h-full object-cover" />
                   </motion.div>
                   
