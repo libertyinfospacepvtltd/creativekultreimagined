@@ -49,13 +49,13 @@ interface StickySectionProps {
 
 const StickySection = ({ image, imageAlt, children, imageOnLeft }: StickySectionProps) => {
   return (
-    <section className="relative min-h-[130vh] w-full">
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-0 min-h-[130vh]">
+    <section className="relative min-h-screen h-auto w-full">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-0">
         {imageOnLeft ? (
           <>
             {/* Left sticky image */}
-            <div className="relative lg:sticky lg:top-0 lg:h-screen flex items-center justify-center p-6 lg:p-12">
-              <div className="w-full max-w-lg">
+            <div className="relative lg:sticky lg:top-24 lg:self-start p-6 lg:p-12">
+              <div className="w-full max-w-lg mx-auto">
                 <img
                   src={image}
                   alt={imageAlt}
@@ -64,19 +64,19 @@ const StickySection = ({ image, imageAlt, children, imageOnLeft }: StickySection
               </div>
             </div>
             {/* Right scrolling content */}
-            <div className="flex flex-col justify-center px-6 lg:px-16 py-12 lg:py-32">
+            <div className="flex flex-col justify-start px-6 lg:px-16 py-12 lg:py-32 pb-24">
               {children}
             </div>
           </>
         ) : (
           <>
             {/* Left scrolling content */}
-            <div className="flex flex-col justify-center px-6 lg:px-16 py-12 lg:py-32 order-2 lg:order-1">
+            <div className="flex flex-col justify-start px-6 lg:px-16 py-12 lg:py-32 pb-24 order-2 lg:order-1">
               {children}
             </div>
             {/* Right sticky image */}
-            <div className="relative lg:sticky lg:top-0 lg:h-screen flex items-center justify-center p-6 lg:p-12 order-1 lg:order-2">
-              <div className="w-full max-w-lg">
+            <div className="relative lg:sticky lg:top-24 lg:self-start p-6 lg:p-12 order-1 lg:order-2">
+              <div className="w-full max-w-lg mx-auto">
                 <img
                   src={image}
                   alt={imageAlt}
