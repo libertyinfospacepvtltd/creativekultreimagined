@@ -142,7 +142,7 @@ const CinematicCampaignSection = () => {
               margin: "-50px"
             }} className="w-full max-w-[500px] mx-auto">
                 <div className="aspect-square rounded-3xl overflow-hidden border border-border/30">
-                  <img src={twelfthpassHeroPinned} alt="12thPass AI Campaign" className="w-full h-full object-cover" />
+                  <img alt="12thPass AI Campaign" className="w-full h-full object-cover" src="/lovable-uploads/5e8bb6dc-0471-4273-b7c0-4173452b50fa.png" />
                 </div>
               </motion.div>
             </div>
