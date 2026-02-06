@@ -104,11 +104,11 @@ const LatexEquation = () => (
 const StatsDisplay = () => (
   <div className="grid grid-cols-1 md:grid-cols-3 gap-8 my-12">
     <div className="text-center p-6 rounded-2xl bg-white/5 border border-white/10">
-      <div className="font-numbers text-4xl md:text-5xl font-bold text-[#D4AF37]">15M</div>
+      <div className="font-numbers text-3xl md:text-4xl font-bold text-[#D4AF37]">15M</div>
       <div className="text-white/60 mt-3 text-sm uppercase tracking-widest">Impressions</div>
     </div>
     <div className="text-center p-6 rounded-2xl bg-white/5 border border-white/10">
-      <div className="font-numbers text-4xl md:text-5xl font-bold text-[#D4AF37]">1.14M</div>
+      <div className="font-numbers text-3xl md:text-4xl font-bold text-[#D4AF37]">1.14M</div>
       <div className="text-white/60 mt-3 text-sm uppercase tracking-widest">Clicks</div>
     </div>
     <div className="text-center p-6 rounded-2xl bg-white/5 border border-white/10">
