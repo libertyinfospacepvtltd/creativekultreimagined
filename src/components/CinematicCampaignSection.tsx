@@ -171,19 +171,19 @@ const CinematicCampaignSection = () => {
                 <h4 className="text-sm font-sans uppercase tracking-widest text-muted-foreground">
                   Creative Gallery
                 </h4>
-                <div className="space-y-4">
+                <div className="space-y-3 max-w-[600px]">
                   {/* Creative 01 - 1:1 Square */}
                   <motion.div 
                     initial={{ opacity: 0, y: 20 }} 
                     whileInView={{ opacity: 1, y: 0 }} 
                     transition={{ duration: 0.5 }} 
                     viewport={{ once: true, margin: "-50px" }} 
-                    className="aspect-square rounded-2xl overflow-hidden border border-border/30"
+                    className="aspect-square rounded-2xl overflow-hidden border border-border/30 max-w-[280px]"
                   >
                     <img src={twelfthpassCreative01} alt="12thPass AI Creative 1" className="w-full h-full object-cover" />
                   </motion.div>
                   
-                  {/* Creative 02 - Wide 3-panel (~1500:577 based on image) */}
+                  {/* Creative 02 - Wide 3-panel */}
                   <motion.div 
                     initial={{ opacity: 0, y: 20 }} 
                     whileInView={{ opacity: 1, y: 0 }} 
