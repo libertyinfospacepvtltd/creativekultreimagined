@@ -6,7 +6,7 @@ import twelfthpassHeroPinned from "@/assets/campaigns/12thpass/12thpass-hero-pin
 import twelfthpassCreative01 from "@/assets/campaigns/12thpass/12thpass-creative-01.png";
 import twelfthpassCreative02 from "@/assets/campaigns/12thpass/12thpass-creative-02.png";
 import twelfthpassCreative03 from "@/assets/campaigns/12thpass/12thpass-creative-03.png";
-import twelfthpassCreative04 from "@/assets/campaigns/12thpass/12thpass-creative-04.png";
+import twelfthpassCreative04 from "@/assets/campaigns/12thpass/12thpass-chalkboard.png";
 import easydo365Hero from "@/assets/campaigns/easydo365/easydo365-hero.png";
 import easydo365Creative01 from "@/assets/campaigns/easydo365/easydo365-creative-01.png";
 import easydo365Creative02 from "@/assets/campaigns/easydo365/easydo365-creative-02.png";
