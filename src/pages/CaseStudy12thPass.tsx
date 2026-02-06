@@ -17,27 +17,44 @@ import slide09 from "@/assets/campaigns/12thpass/slide-09.png";
 import slide10 from "@/assets/campaigns/12thpass/slide-10.png";
 
 // Animated text component for fade-in effect
-const AnimatedText = ({ children, className = "", delay = 0 }: { children: React.ReactNode; className?: string; delay?: number }) => {
+const AnimatedText = ({
+  children,
+  className = "",
+  delay = 0
+}: {
+  children: React.ReactNode;
+  className?: string;
+  delay?: number;
+}) => {
   const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
-  
-  return (
-    <motion.div
-      ref={ref}
-      initial={{ opacity: 0, y: 40 }}
-      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
-      transition={{ duration: 0.8, delay, ease: [0.25, 0.46, 0.45, 0.94] }}
-      className={className}
-    >
+  const isInView = useInView(ref, {
+    once: true,
+    margin: "-100px"
+  });
+  return <motion.div ref={ref} initial={{
+    opacity: 0,
+    y: 40
+  }} animate={isInView ? {
+    opacity: 1,
+    y: 0
+  } : {
+    opacity: 0,
+    y: 40
+  }} transition={{
+    duration: 0.8,
+    delay,
+    ease: [0.25, 0.46, 0.45, 0.94]
+  }} className={className}>
       {children}
-    </motion.div>
-  );
+    </motion.div>;
 };
 
 // Gold accent text
-const GoldText = ({ children }: { children: React.ReactNode }) => (
-  <span className="text-[#D4AF37]">{children}</span>
-);
+const GoldText = ({
+  children
+}: {
+  children: React.ReactNode;
+}) => <span className="text-[#D4AF37]">{children}</span>;
 
 // Sticky section component - alternating left/right
 interface StickySectionProps {
@@ -46,30 +63,26 @@ interface StickySectionProps {
   children: React.ReactNode;
   imageOnLeft: boolean;
 }
-
-const StickySection = ({ image, imageAlt, children, imageOnLeft }: StickySectionProps) => {
-  return (
-    <section className="relative min-h-screen h-auto w-full">
+const StickySection = ({
+  image,
+  imageAlt,
+  children,
+  imageOnLeft
+}: StickySectionProps) => {
+  return <section className="relative min-h-screen h-auto w-full">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-0">
-        {imageOnLeft ? (
-          <>
+        {imageOnLeft ? <>
             {/* Left sticky image */}
             <div className="relative lg:sticky lg:top-24 lg:self-start p-6 lg:p-12">
               <div className="w-full max-w-lg mx-auto">
-                <img
-                  src={image}
-                  alt={imageAlt}
-                  className="w-full h-auto rounded-3xl object-cover shadow-[0_0_80px_rgba(212,175,55,0.15)]"
-                />
+                <img src={image} alt={imageAlt} className="w-full h-auto rounded-3xl object-cover shadow-[0_0_80px_rgba(212,175,55,0.15)]" />
               </div>
             </div>
             {/* Right scrolling content */}
             <div className="flex flex-col justify-start px-6 lg:px-16 py-12 lg:py-32 pb-24">
               {children}
             </div>
-          </>
-        ) : (
-          <>
+          </> : <>
             {/* Left scrolling content */}
             <div className="flex flex-col justify-start px-6 lg:px-16 py-12 lg:py-32 pb-24 order-2 lg:order-1">
               {children}
@@ -77,64 +90,51 @@ const StickySection = ({ image, imageAlt, children, imageOnLeft }: StickySection
             {/* Right sticky image */}
             <div className="relative lg:sticky lg:top-24 lg:self-start p-6 lg:p-12 order-1 lg:order-2">
               <div className="w-full max-w-lg mx-auto">
-                <img
-                  src={image}
-                  alt={imageAlt}
-                  className="w-full h-auto rounded-3xl object-cover shadow-[0_0_80px_rgba(212,175,55,0.15)]"
-                />
+                <img src={image} alt={imageAlt} className="w-full h-auto rounded-3xl object-cover shadow-[0_0_80px_rgba(212,175,55,0.15)]" />
               </div>
             </div>
-          </>
-        )}
+          </>}
       </div>
-    </section>
-  );
+    </section>;
 };
 
 // LaTeX equation display
-const LatexEquation = () => (
-  <div className="my-12 py-8 flex justify-center">
+const LatexEquation = () => <div className="my-12 py-8 flex justify-center">
     <div className="text-[#D4AF37] font-serif text-5xl md:text-7xl lg:text-8xl tracking-wide italic font-light">
       C<sub className="text-3xl md:text-5xl lg:text-6xl align-sub">p</sub> − C<sub className="text-3xl md:text-5xl lg:text-6xl align-sub">v</sub> = R
     </div>
-  </div>
-);
+  </div>;
 
 // Stats display component
-const StatsDisplay = () => (
-  <div className="grid grid-cols-1 md:grid-cols-3 gap-8 my-12">
+const StatsDisplay = () => <div className="grid grid-cols-1 md:grid-cols-3 gap-8 my-12">
     <div className="text-center p-6 rounded-2xl bg-white/5 border border-white/10">
-      <div className="font-numbers text-3xl md:text-4xl font-bold text-[#D4AF37]">15M</div>
+      <div className="font-numbers text-4xl md:text-5xl font-bold text-[#D4AF37]">15M</div>
       <div className="text-white/60 mt-3 text-sm uppercase tracking-widest">Impressions</div>
     </div>
     <div className="text-center p-6 rounded-2xl bg-white/5 border border-white/10">
-      <div className="font-numbers text-3xl md:text-4xl font-bold text-[#D4AF37]">1.14M</div>
+      <div className="font-numbers text-4xl md:text-5xl font-bold text-[#D4AF37]">1.14M</div>
       <div className="text-white/60 mt-3 text-sm uppercase tracking-widest">Clicks</div>
     </div>
     <div className="text-center p-6 rounded-2xl bg-white/5 border border-white/10">
-      <div className="font-numbers text-3xl md:text-4xl font-bold text-[#D4AF37]">15,000+</div>
+      <div className="font-numbers text-4xl md:text-5xl font-bold text-[#D4AF37]">15,000+</div>
       <div className="text-white/60 mt-3 text-sm uppercase tracking-widest">Aspirants</div>
     </div>
-  </div>
-);
+  </div>;
 
 // Section label pill component
-const SectionLabel = ({ children }: { children: React.ReactNode }) => (
-  <span className="inline-block px-5 py-2.5 rounded-full bg-gradient-to-r from-[#D4AF37]/20 to-[#D4AF37]/5 border border-[#D4AF37]/30 text-[#D4AF37] font-sans text-xs uppercase tracking-[0.2em] mb-8">
+const SectionLabel = ({
+  children
+}: {
+  children: React.ReactNode;
+}) => <span className="inline-block px-5 py-2.5 rounded-full bg-gradient-to-r from-[#D4AF37]/20 to-[#D4AF37]/5 border border-[#D4AF37]/30 text-[#D4AF37] font-sans text-xs uppercase tracking-[0.2em] mb-8">
     {children}
-  </span>
-);
-
+  </span>;
 const CaseStudy12thPass = () => {
-  return (
-    <Layout>
+  return <Layout>
       <div className="bg-[#000000] min-h-screen text-white">
         {/* Back Navigation */}
         <div className="fixed top-24 left-6 lg:left-12 z-50">
-          <Link 
-            to="/work" 
-            className="flex items-center gap-2 text-white/50 hover:text-[#D4AF37] transition-colors duration-300 font-sans text-xs uppercase tracking-widest"
-          >
+          <Link to="/work" className="flex items-center gap-2 text-white/50 hover:text-[#D4AF37] transition-colors duration-300 font-sans text-xs uppercase tracking-widest">
             <ArrowLeft size={14} />
             Back to Work
           </Link>
@@ -165,10 +165,13 @@ const CaseStudy12thPass = () => {
             <AnimatedText className="mt-16" delay={0.4}>
               <div className="flex flex-col items-center gap-2 text-white/30">
                 <span className="text-xs uppercase tracking-widest">Scroll to explore</span>
-                <motion.div
-                  animate={{ y: [0, 8, 0] }}
-                  transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-                >
+                <motion.div animate={{
+                y: [0, 8, 0]
+              }} transition={{
+                duration: 2,
+                repeat: Infinity,
+                ease: "easeInOut"
+              }}>
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
                   </svg>
@@ -418,10 +421,7 @@ const CaseStudy12thPass = () => {
           <div className="max-w-4xl mx-auto text-center">
             <AnimatedText>
               <p className="text-white/40 text-lg font-sans mb-10">Want to create an unfair advantage for your brand?</p>
-              <Link
-                to="/contact"
-                className="inline-flex items-center gap-4 px-10 py-5 bg-[#D4AF37] text-black font-bold font-sans text-sm uppercase tracking-widest rounded-full hover:bg-[#D4AF37]/90 transition-all duration-300 hover:scale-105"
-              >
+              <Link to="/contact" className="inline-flex items-center gap-4 px-10 py-5 bg-[#D4AF37] text-black font-bold font-sans text-sm uppercase tracking-widest rounded-full hover:bg-[#D4AF37]/90 transition-all duration-300 hover:scale-105">
                 Start a Conversation
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
@@ -431,8 +431,6 @@ const CaseStudy12thPass = () => {
           </div>
         </section>
       </div>
-    </Layout>
-  );
+    </Layout>;
 };
-
 export default CaseStudy12thPass;
