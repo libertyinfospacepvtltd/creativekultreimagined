@@ -3,6 +3,10 @@ import kolkataIsCooking from "@/assets/campaigns/kolkata-is-cooking.png";
 import cadburyMishti from "@/assets/campaigns/cadbury-mishti.png";
 import timesParaGames from "@/assets/campaigns/times-para-games.png";
 import twelfthpassHeroPinned from "@/assets/campaigns/12thpass/12thpass-hero-pinned.png";
+import twelfthpassCreative01 from "@/assets/campaigns/12thpass/12thpass-creative-01.png";
+import twelfthpassCreative02 from "@/assets/campaigns/12thpass/12thpass-creative-02.png";
+import twelfthpassCreative03 from "@/assets/campaigns/12thpass/12thpass-creative-03.png";
+import twelfthpassCreative04 from "@/assets/campaigns/12thpass/12thpass-creative-04.png";
 import rawatHero from "@/assets/campaigns/rawat/rawat-hero.png";
 import rawat1 from "@/assets/campaigns/rawat/rawat-1.jpeg";
 import rawat2 from "@/assets/campaigns/rawat/rawat-2.jpeg";
@@ -162,27 +166,58 @@ const CinematicCampaignSection = () => {
                 </p>
               </motion.div>
 
-              {/* 3x3 Grid Gallery Placeholders */}
+              {/* Creative Gallery */}
               <div className="space-y-6">
                 <h4 className="text-sm font-sans uppercase tracking-widest text-muted-foreground">
                   Creative Gallery
                 </h4>
-                <div className="grid grid-cols-3 gap-4">
-                  {[1, 2, 3, 4, 5, 6, 7, 8, 9].map(index => <motion.div key={index} initial={{
-                  opacity: 0,
-                  y: 20
-                }} whileInView={{
-                  opacity: 1,
-                  y: 0
-                }} transition={{
-                  duration: 0.5,
-                  delay: index * 0.05
-                }} viewport={{
-                  once: true,
-                  margin: "-50px"
-                }} className="aspect-square rounded-2xl overflow-hidden border border-border/30 bg-muted/20 flex items-center justify-center">
-                      <span className="text-muted-foreground/40 text-xs font-sans">Frame {index}</span>
-                    </motion.div>)}
+                <div className="space-y-4">
+                  {/* Creative 01 - 1:1 Square */}
+                  <motion.div 
+                    initial={{ opacity: 0, y: 20 }} 
+                    whileInView={{ opacity: 1, y: 0 }} 
+                    transition={{ duration: 0.5 }} 
+                    viewport={{ once: true, margin: "-50px" }} 
+                    className="aspect-square rounded-2xl overflow-hidden border border-border/30"
+                  >
+                    <img src={twelfthpassCreative01} alt="12thPass AI Creative 1" className="w-full h-full object-cover" />
+                  </motion.div>
+                  
+                  {/* Creative 02 - Wide 3-panel (~1500:577 based on image) */}
+                  <motion.div 
+                    initial={{ opacity: 0, y: 20 }} 
+                    whileInView={{ opacity: 1, y: 0 }} 
+                    transition={{ duration: 0.5, delay: 0.1 }} 
+                    viewport={{ once: true, margin: "-50px" }} 
+                    className="rounded-2xl overflow-hidden border border-border/30"
+                    style={{ aspectRatio: '1920 / 737' }}
+                  >
+                    <img src={twelfthpassCreative02} alt="12thPass AI Creative 2" className="w-full h-full object-cover" />
+                  </motion.div>
+                  
+                  {/* Creative 03 - Wide 3-panel */}
+                  <motion.div 
+                    initial={{ opacity: 0, y: 20 }} 
+                    whileInView={{ opacity: 1, y: 0 }} 
+                    transition={{ duration: 0.5, delay: 0.2 }} 
+                    viewport={{ once: true, margin: "-50px" }} 
+                    className="rounded-2xl overflow-hidden border border-border/30"
+                    style={{ aspectRatio: '1920 / 737' }}
+                  >
+                    <img src={twelfthpassCreative03} alt="12thPass AI Creative 3" className="w-full h-full object-cover" />
+                  </motion.div>
+                  
+                  {/* Creative 04 - Wide 3-panel (last) */}
+                  <motion.div 
+                    initial={{ opacity: 0, y: 20 }} 
+                    whileInView={{ opacity: 1, y: 0 }} 
+                    transition={{ duration: 0.5, delay: 0.3 }} 
+                    viewport={{ once: true, margin: "-50px" }} 
+                    className="rounded-2xl overflow-hidden border border-border/30"
+                    style={{ aspectRatio: '1920 / 737' }}
+                  >
+                    <img src={twelfthpassCreative04} alt="12thPass AI Creative 4" className="w-full h-full object-cover" />
+                  </motion.div>
                 </div>
               </div>
 
