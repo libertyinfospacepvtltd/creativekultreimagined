@@ -417,17 +417,14 @@ const CaseStudy12thPass = () => {
         </StickySection>
 
         {/* Footer CTA */}
-        <section className="py-32 px-6">
-          <div className="max-w-4xl mx-auto text-center">
-            <AnimatedText>
-              <p className="text-white/40 text-lg font-sans mb-10">Want to create an unfair advantage for your brand?</p>
-              <Link to="/contact" className="inline-flex items-center gap-4 px-10 py-5 bg-transparent border-2 border-[#D4AF37] text-[#D4AF37] font-bold font-sans text-sm uppercase tracking-widest rounded-full hover:bg-[#D4AF37] hover:text-black transition-all duration-300 hover:animate-glitch">
-                Join the Kult
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                </svg>
-              </Link>
-            </AnimatedText>
+        <section className="py-20 px-6">
+          <div className="flex justify-center">
+            <Link 
+              to="/contact" 
+              className="px-12 py-4 bg-transparent border border-[#D4AF37] text-[#D4AF37] font-sans text-sm uppercase tracking-[0.2em] rounded-full hover:bg-[#D4AF37] hover:text-black transition-all duration-300"
+            >
+              Join the Kult
+            </Link>
           </div>
         </section>
       </div>
