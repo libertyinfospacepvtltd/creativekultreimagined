@@ -58,7 +58,7 @@ const Work = () => {
       {/* Portfolio Highlights Section with 3D Mannequin */}
       <section className="relative min-h-[600px] h-[80vh] bg-black overflow-hidden">
         {/* Spline 3D Mannequin Background */}
-        <div className="absolute inset-0 z-0 w-full h-full">
+        <div className="absolute inset-0 z-0 w-full h-full" style={{ cursor: 'none' }}>
           <iframe 
             src="https://my.spline.design/cybermannequin-DGYJK4d90PrwTQyrL6zUYHOk/"
             frameBorder="0"
@@ -66,6 +66,7 @@ const Work = () => {
             height="100%"
             title="3D Mannequin"
             className="w-full h-full"
+            style={{ cursor: 'none' }}
           />
         </div>
 
