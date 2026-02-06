@@ -166,18 +166,20 @@ const CinematicCampaignSection = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6 }}
                   viewport={{ once: true, margin: "-50px" }}
-                  className="mt-8 lg:mt-12 grid grid-cols-1 lg:grid-cols-[auto_1fr] gap-8 lg:gap-12 items-start"
+                  className="mt-8 lg:mt-12 grid grid-cols-1 lg:grid-cols-[2fr_3fr] gap-8 lg:gap-12"
                 >
-                  {/* Left Column - Creative Image */}
-                  <div className="w-full max-w-[280px] lg:max-w-[320px] mx-auto lg:mx-0 rounded-2xl overflow-hidden border border-border/30">
-                    <img 
-                      src={twelfthpassDetail} 
-                      alt="12thPass AI Campaign Creative" 
-                      className="w-full h-auto object-cover"
-                    />
+                  {/* Left Column - Logo/Branding (Sticky on desktop) */}
+                  <div className="lg:sticky lg:top-24 lg:self-start">
+                    <div className="w-full max-w-[320px] mx-auto lg:mx-0 rounded-2xl overflow-hidden border border-border/30">
+                      <img 
+                        src={twelfthpassDetail} 
+                        alt="12thPass AI Campaign Creative" 
+                        className="w-full h-auto object-cover"
+                      />
+                    </div>
                   </div>
 
-                  {/* Right Column - Results */}
+                  {/* Right Column - Results (Scrollable) */}
                   <div className="space-y-6">
                     <h4 className="text-sm font-sans uppercase tracking-widest text-muted-foreground">
                       Results
