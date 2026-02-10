@@ -4,7 +4,10 @@ import Layout from "@/components/Layout";
 import ClientLogosMarquee from "@/components/ClientLogosMarquee";
 import CinematicCampaignSection from "@/components/CinematicCampaignSection";
 
-const projects = [{
+// Feature flag: set to true to re-enable 12thPass across this page
+const show12thPass = false;
+
+const allProjects = [{
   id: "easydo365",
   name: "EasyDo 365",
   category: "HRMS App",
@@ -27,7 +30,8 @@ const projects = [{
   instagram: "https://www.instagram.com/12thpass.ai/",
   facebook: "https://www.facebook.com/12thPassAI"
 }];
-const trustedBy = [{
+const projects = show12thPass ? allProjects : allProjects.filter(p => p.id !== "12thpass");
+const allTrustedBy = [{
   name: "Liberty Infospace",
   url: "https://libertyinfospace.com/"
 }, {
@@ -37,6 +41,7 @@ const trustedBy = [{
   name: "EasyDo 365",
   url: "https://easydo365.com/"
 }];
+const trustedBy = show12thPass ? allTrustedBy : allTrustedBy.filter(b => b.name !== "12thPass.ai");
 const Work = () => {
   return <Layout>
       {/* Page Header */}
