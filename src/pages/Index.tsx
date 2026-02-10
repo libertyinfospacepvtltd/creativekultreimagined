@@ -15,7 +15,7 @@ const Index = () => {
       <StatsSection />
       <MarqueeSection />
       <ServicesPreview />
-      <DivisionsSection />
+      {/* <DivisionsSection /> */}{/* Hidden: re-enable by uncommenting */}
       <CTASection />
     </Layout>
   );
