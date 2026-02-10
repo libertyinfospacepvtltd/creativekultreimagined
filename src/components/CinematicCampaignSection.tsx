@@ -111,6 +111,9 @@ const deepDiveCampaigns: DeepDiveCampaign[] = [{
   gallery: [debaarun1, debaarun2, debaarun3, debaarun4, debaarun5, debaarun6, chowringheeBanner, chowringheeGrid],
   results: ["Editorial content for seasonal collections", "Social media engagement increased by 60%", "Brand visibility in luxury fashion segment"]
 }];
+// Feature flag: set to true to re-enable 12thPass spotlight
+const show12thPass = false;
+
 const CinematicCampaignSection = () => {
   return <section className="bg-background py-16 lg:py-24">
       <div className="container-luxury">
@@ -125,8 +128,8 @@ const CinematicCampaignSection = () => {
             Spotlight
           </h3>
           
-          {/* 12thPass AI - Deep Dive Style in Spotlight */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
+          {/* 12thPass AI - Deep Dive Style in Spotlight (conditionally hidden) */}
+          {show12thPass && <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
             {/* Left Column - Pinned Creative (Sticky on desktop) */}
             <div className="lg:sticky lg:top-24 lg:self-start">
               <motion.div initial={{
@@ -280,10 +283,10 @@ const CinematicCampaignSection = () => {
                 </ul>
               </motion.div>
             </div>
-          </div>
+          </div>}
 
           {/* Separator between 12thPass and EasyDo */}
-          <div className="pt-8 lg:pt-12" />
+          {show12thPass && <div className="pt-8 lg:pt-12" />}
 
           {/* EasyDo 365 - Deep Dive Style in Spotlight */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">

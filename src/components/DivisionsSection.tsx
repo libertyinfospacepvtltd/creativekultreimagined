@@ -1,6 +1,9 @@
 import { Instagram, Facebook, Globe } from "lucide-react";
 
-const divisions = [
+// Feature flag: set to true to re-enable 12thPass
+const show12thPass = false;
+
+const allDivisions = [
   {
     name: "EasyDo 365",
     description: "HRMS app",
@@ -18,6 +21,8 @@ const divisions = [
     logo: "https://canvas-kolkata-vibe.lovable.app/assets/12thpass-logo-DhXy1KrN.png",
   },
 ];
+
+const divisions = show12thPass ? allDivisions : allDivisions.filter(d => d.name !== "12thPass.ai");
 
 const DivisionsSection = () => {
   return (
