@@ -33,6 +33,60 @@ const Contact = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setIsSubmitting(true);
+
+    // 1. Prepare the payload exactly as you want it to appear in Gmail/Google Sheets
+    const payload = {
+      name: formData.name,
+      email: formData.email,
+      phone: formData.phone,
+      company: formData.company,
+      service: formData.service,
+      message: formData.message,
+      submittedAt: new Date().toLocaleString("en-US", { timeZoneName: "short" }),
+      websiteSource: "Creative Kult - Contact Form"
+    };
+
+    try {
+      // 2. Send the data to your Make.com Webhook
+      const response = await fetch("https://hook.eu1.make.com/5kfx2ogps2er28tia1sjw5jik433st3j", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
+
+      if (!response.ok) throw new Error("Network response was not ok");
+
+      // 3. Success Feedback
+      toast({
+        title: "Inquiry Received",
+        description: "The Creative Kult team has been notified. We'll be in touch soon!",
+      });
+
+      // 4. Reset form fields to empty
+      setFormData({
+        name: "",
+        email: "",
+        phone: "",
+        company: "",
+        service: "Brand Strategy",
+        message: "",
+      });
+
+    } catch (error) {
+      // 5. Error Feedback
+      console.error("Submission error:", error);
+      toast({
+        variant: "destructive",
+        title: "Submission Error",
+        description: "We couldn't send your message. Please try again or email hello@creativekult.com",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
     
     // Validate "Others" field if selected
     if (showOthersField && !formData.othersSpecify.trim()) {
