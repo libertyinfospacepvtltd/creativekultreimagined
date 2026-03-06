@@ -52,7 +52,7 @@ const Contact = () => {
       phone: formData.mobile,
       company: formData.company,
       service: formData.services.join(", ") + (formData.othersSpecify ? ` (${formData.othersSpecify})` : ""),
-      OthersDetails: formData.Others,
+      OthersDetails: formData.othersSpecify,
       message: formData.message,
       submittedAt: new Date().toLocaleString("en-US", { timeZoneName: "short" }),
       websiteSource: "Creative Kult - Contact Form",
