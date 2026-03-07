@@ -65,7 +65,7 @@ const Work = () => {
           {projects.map((project, index) => (
             <div 
               key={project.id} 
-              className={`pointer-events-auto group relative h-72 md:h-80 lg:h-96 w-full md:w-[320px] lg:w-[380px] rounded-3xl bg-black/60 backdrop-blur-md border border-white/20 overflow-hidden cursor-pointer transition-all duration-500 hover:scale-[1.02] hover:shadow-2xl hover:border-primary/50 ${index === 0 ? 'mb-6 md:mb-0' : ''}`}
+              className={`group relative h-72 md:h-80 lg:h-96 w-full md:w-[320px] lg:w-[380px] rounded-3xl bg-black/60 backdrop-blur-md border border-white/20 overflow-hidden cursor-pointer transition-all duration-500 hover:scale-[1.02] hover:shadow-2xl hover:border-primary/50 ${index === 0 ? 'mb-6 md:mb-0' : ''}`}
             >
               {/* Logo - Centered */}
               <div className="absolute inset-0 flex items-center justify-center p-8">
