@@ -60,23 +60,8 @@ const Work = () => {
       </section>
 
       {/* Project Grid */}
-      {/* Portfolio Highlights Section with 3D Mannequin */}
-      <section className="relative min-h-[600px] h-[80vh] bg-black overflow-hidden">
-        {/* Spline 3D Mannequin Background */}
-        <div className="absolute inset-0 z-0 w-full h-full" style={{ cursor: 'none' }}>
-          <iframe 
-            src="https://my.spline.design/cybermannequin-DGYJK4d90PrwTQyrL6zUYHOk/"
-            frameBorder="0"
-            width="100%"
-            height="100%"
-            title="3D Mannequin"
-            className="w-full h-full"
-            style={{ cursor: 'none' }}
-          />
-        </div>
-
-        {/* Project Cards Container - pointer-events-none on container, auto on cards */}
-        <div className="relative z-10 h-full flex flex-col md:flex-row items-center justify-between px-6 md:px-12 lg:px-24 py-12 pointer-events-none">
+      <section className="relative bg-black overflow-hidden">
+        <div className="h-full flex flex-col md:flex-row items-center justify-center gap-6 px-6 md:px-12 lg:px-24 py-16">
           {projects.map((project, index) => (
             <div 
               key={project.id} 
