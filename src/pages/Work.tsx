@@ -60,12 +60,27 @@ const Work = () => {
       </section>
 
       {/* Project Grid */}
-      <section className="relative bg-black overflow-hidden">
-        <div className="h-full flex flex-col md:flex-row items-center justify-center gap-6 px-6 md:px-12 lg:px-24 py-16">
+      {/* Portfolio Highlights Section with 3D Mannequin */}
+      <section className="relative min-h-[600px] h-[80vh] bg-black overflow-hidden">
+        {/* Spline 3D Mannequin Background */}
+        <div className="absolute inset-0 z-0 w-full h-full" style={{ cursor: 'none' }}>
+          <iframe 
+            src="https://my.spline.design/cybermannequin-DGYJK4d90PrwTQyrL6zUYHOk/"
+            frameBorder="0"
+            width="100%"
+            height="100%"
+            title="3D Mannequin"
+            className="w-full h-full"
+            style={{ cursor: 'none' }}
+          />
+        </div>
+
+        {/* Project Cards Container - pointer-events-none on container, auto on cards */}
+        <div className="relative z-10 h-full flex flex-col md:flex-row items-center justify-between px-6 md:px-12 lg:px-24 py-12 pointer-events-none">
           {projects.map((project, index) => (
             <div 
               key={project.id} 
-              className={`group relative h-72 md:h-80 lg:h-96 w-full md:w-[320px] lg:w-[380px] rounded-3xl bg-black/60 backdrop-blur-md border border-white/20 overflow-hidden cursor-pointer transition-all duration-500 hover:scale-[1.02] hover:shadow-2xl hover:border-primary/50 ${index === 0 ? 'mb-6 md:mb-0' : ''}`}
+              className={`pointer-events-auto group relative h-72 md:h-80 lg:h-96 w-full md:w-[320px] lg:w-[380px] rounded-3xl bg-black/60 backdrop-blur-md border border-white/20 overflow-hidden cursor-pointer transition-all duration-500 hover:scale-[1.02] hover:shadow-2xl hover:border-primary/50 ${index === 0 ? 'mb-6 md:mb-0' : ''}`}
             >
               {/* Logo - Centered */}
               <div className="absolute inset-0 flex items-center justify-center p-8">
